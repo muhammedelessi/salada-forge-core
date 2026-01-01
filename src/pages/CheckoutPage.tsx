@@ -87,14 +87,13 @@ export default function CheckoutPage() {
   const handleShippingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Check if user is logged in
-    if (!user) {
+    // Validate email for guest checkout
+    if (!user && !shippingInfo.email) {
       toast.error(
         language === 'ar' 
-          ? 'يرجى تسجيل الدخول للمتابعة' 
-          : 'Please login to continue'
+          ? 'البريد الإلكتروني مطلوب' 
+          : 'Email is required'
       );
-      navigate('/auth');
       return;
     }
     
@@ -104,9 +103,9 @@ export default function CheckoutPage() {
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!user) {
-      toast.error(language === 'ar' ? 'يرجى تسجيل الدخول' : 'Please login');
-      navigate('/auth');
+    // Validate guest email
+    if (!user && !shippingInfo.email) {
+      toast.error(language === 'ar' ? 'البريد الإلكتروني مطلوب' : 'Email is required');
       return;
     }
 
@@ -115,8 +114,7 @@ export default function CheckoutPage() {
     try {
       const orderNumber = `SAL-${Date.now().toString(36).toUpperCase()}`;
       
-      const orderData = {
-        user_id: user.id,
+      const orderData: any = {
         order_number: orderNumber,
         status: paymentMethod === 'bank_transfer' ? 'pending' : 'processing',
         payment_method: paymentMethod,
@@ -149,12 +147,25 @@ export default function CheckoutPage() {
         })),
       };
 
+      // Add user_id for authenticated users or guest_email for guests
+      if (user) {
+        orderData.user_id = user.id;
+      } else {
+        orderData.guest_email = shippingInfo.email;
+      }
+
       const { error } = await supabase.from('orders').insert(orderData);
 
       if (error) throw error;
 
       clearCart();
-      navigate('/orders?success=true');
+      
+      // Redirect to orders page for logged in users, or show confirmation for guests
+      if (user) {
+        navigate('/orders?success=true');
+      } else {
+        navigate(`/orders?success=true&order=${orderNumber}&email=${encodeURIComponent(shippingInfo.email)}`);
+      }
     } catch (error: any) {
       console.error('Order error:', error);
       toast.error(language === 'ar' ? 'خطأ في إنشاء الطلب' : 'Error creating order');
@@ -261,16 +272,16 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Login Prompt */}
+              {/* Guest Checkout Info */}
               {!user && (
                 <div className="mb-6 p-4 bg-secondary border border-border">
                   <p className="text-sm text-muted-foreground mb-2">
                     {language === 'ar' 
-                      ? 'لديك حساب؟ سجل الدخول لتتبع طلباتك' 
-                      : 'Have an account? Login to track your orders'}
+                      ? 'يمكنك الطلب كضيف أو تسجيل الدخول لتتبع طلباتك بسهولة' 
+                      : 'You can checkout as guest or login to easily track your orders'}
                   </p>
                   <Link to="/auth" className="text-primary hover:underline font-medium text-sm">
-                    {language === 'ar' ? 'تسجيل الدخول' : 'Login'}
+                    {language === 'ar' ? 'تسجيل الدخول / إنشاء حساب' : 'Login / Create Account'}
                   </Link>
                 </div>
               )}

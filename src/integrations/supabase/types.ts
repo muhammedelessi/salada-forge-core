@@ -19,6 +19,7 @@ export type Database = {
           billing_address: Json | null
           created_at: string
           discount: number
+          guest_email: string | null
           id: string
           items: Json
           notes: string | null
@@ -31,12 +32,13 @@ export type Database = {
           tax: number
           total: number
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           billing_address?: Json | null
           created_at?: string
           discount?: number
+          guest_email?: string | null
           id?: string
           items: Json
           notes?: string | null
@@ -49,12 +51,13 @@ export type Database = {
           tax?: number
           total: number
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           billing_address?: Json | null
           created_at?: string
           discount?: number
+          guest_email?: string | null
           id?: string
           items?: Json
           notes?: string | null
@@ -67,7 +70,7 @@ export type Database = {
           tax?: number
           total?: number
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
