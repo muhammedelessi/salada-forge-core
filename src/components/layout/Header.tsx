@@ -2,17 +2,19 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useCartStore } from '@/store/cartStore';
-import { Button } from '@/components/ui/button';
+import { useLanguageStore } from '@/store/languageStore';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const itemCount = useCartStore((state) => state.getItemCount());
+  const { t, isRTL } = useLanguageStore();
 
   const navLinks = [
-    { label: 'Shop', href: '/shop' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'FAQ', href: '/faq' },
+    { label: t('nav.shop'), href: '/shop' },
+    { label: t('nav.about'), href: '/about' },
+    { label: t('nav.contact'), href: '/contact' },
+    { label: t('nav.faq'), href: '/faq' },
   ];
 
   return (
@@ -41,7 +43,9 @@ export function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
+            <LanguageSwitcher />
+            
             <button className="hidden md:flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-foreground transition-colors">
               <Search className="w-5 h-5" />
             </button>
@@ -59,7 +63,7 @@ export function Header() {
             >
               <ShoppingCart className="w-5 h-5" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center font-mono">
+                <span className={`absolute -top-1 ${isRTL() ? '-left-1' : '-right-1'} w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center font-mono`}>
                   {itemCount}
                 </span>
               )}
@@ -94,7 +98,7 @@ export function Header() {
                 className="text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Account
+                {t('nav.account')}
               </Link>
             </nav>
           </div>
