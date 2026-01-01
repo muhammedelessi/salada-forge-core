@@ -12,14 +12,19 @@ import {
   Shield,
   RotateCcw,
   ChevronRight,
+  ChevronLeft,
   Check,
 } from 'lucide-react';
 import { ProductVariant } from '@/types';
+import { useLanguageStore } from '@/store/languageStore';
+import { translations } from '@/i18n/translations';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = getProductBySlug(slug || '');
   const addItem = useCartStore((state) => state.addItem);
+  const { language, isRTL } = useLanguageStore();
+  const t = translations[language];
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(
@@ -28,13 +33,25 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'specs' | 'shipping' | 'bulk'>('specs');
 
+  const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
+
+  // Category translations
+  const categoryTranslations: Record<string, string> = {
+    'shipping-containers': t.categories.shippingContainers,
+    'storage-tanks': t.categories.storageTanks,
+    'ibc-containers': t.categories.ibcContainers,
+    'specialty-containers': t.categories.specialtyContainers,
+    'drums-barrels': t.categories.drumsBarrels,
+    'modular-buildings': t.categories.modularBuildings,
+  };
+
   if (!product) {
     return (
       <Layout>
         <div className="industrial-container py-24 text-center">
-          <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+          <h1 className="text-2xl font-bold mb-4">{t.product.notFound}</h1>
           <Link to="/shop" className="industrial-button">
-            Back to Shop
+            {t.product.backToShop}
           </Link>
         </div>
       </Layout>
@@ -42,9 +59,9 @@ export default function ProductDetailPage() {
   }
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: language === 'ar' ? 'SAR' : 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
@@ -66,22 +83,22 @@ export default function ProductDetailPage() {
       {/* Breadcrumb */}
       <div className="bg-secondary border-b border-border">
         <div className="industrial-container py-4">
-          <nav className="flex items-center gap-2 text-sm">
+          <nav className={`flex items-center gap-2 text-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
             <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              Home
+              {t.productDetail.home}
             </Link>
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
             <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
-              Shop
+              {t.productDetail.shop}
             </Link>
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
             <Link
               to={`/shop?category=${product.category}`}
-              className="text-muted-foreground hover:text-foreground transition-colors capitalize"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              {product.category.replace('-', ' ')}
+              {categoryTranslations[product.category] || product.category.replace('-', ' ')}
             </Link>
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
             <span className="text-foreground truncate max-w-[200px]">{product.title}</span>
           </nav>
         </div>
@@ -90,9 +107,9 @@ export default function ProductDetailPage() {
       {/* Product Section */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className={`grid lg:grid-cols-2 gap-12 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
             {/* Image Gallery */}
-            <div className="space-y-4">
+            <div className={`space-y-4 ${isRTL ? 'lg:col-start-2' : ''}`}>
               <div className="aspect-square bg-muted overflow-hidden border border-border">
                 <img
                   src={product.images[selectedImage]}
@@ -118,12 +135,12 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Product Info */}
-            <div>
+            <div className={isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}>
               <span className="industrial-label mb-2 block">{product.sku}</span>
               <h1 className="text-3xl md:text-4xl font-bold mb-4">{product.title}</h1>
 
               {/* Price */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className={`flex items-center gap-4 mb-6 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
                 <span className="text-3xl font-bold text-primary font-mono">
                   {formatPrice(currentPrice)}
                 </span>
@@ -140,7 +157,7 @@ export default function ProductDetailPage() {
               {product.variants.length > 1 && (
                 <div className="mb-6">
                   <label className="block text-sm uppercase tracking-wider font-semibold mb-3">
-                    Variant
+                    {t.productDetail.variant}
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {product.variants.map((variant) => (
@@ -155,7 +172,7 @@ export default function ProductDetailPage() {
                       >
                         {variant.name}
                         {variant.priceModifier !== 0 && (
-                          <span className="ml-2 font-mono">
+                          <span className={`${isRTL ? 'mr-2' : 'ml-2'} font-mono`}>
                             {variant.priceModifier > 0 ? '+' : ''}
                             {formatPrice(variant.priceModifier)}
                           </span>
@@ -169,9 +186,9 @@ export default function ProductDetailPage() {
               {/* Quantity */}
               <div className="mb-8">
                 <label className="block text-sm uppercase tracking-wider font-semibold mb-3">
-                  Quantity
+                  {t.productDetail.quantity}
                 </label>
-                <div className="flex items-center gap-4">
+                <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <div className="flex items-center border border-border">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -193,7 +210,7 @@ export default function ProductDetailPage() {
                     </button>
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    {product.stock} in stock
+                    {product.stock} {t.productDetail.inStock}
                   </span>
                 </div>
               </div>
@@ -204,26 +221,26 @@ export default function ProductDetailPage() {
                 disabled={product.status === 'out_of_stock'}
                 className="w-full industrial-button mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                {product.status === 'out_of_stock' ? 'Out of Stock' : 'Add to Cart'}
+                <ShoppingCart className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                {product.status === 'out_of_stock' ? t.product.outOfStock : t.product.addToCart}
               </button>
 
               {/* Trust Badges */}
               <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-border">
                 <div className="flex flex-col items-center text-center">
                   <Truck className="w-6 h-6 text-primary mb-2" />
-                  <span className="text-xs uppercase tracking-wider">Free Shipping</span>
-                  <span className="text-xs text-muted-foreground">Orders $10k+</span>
+                  <span className="text-xs uppercase tracking-wider">{t.productDetail.freeShipping}</span>
+                  <span className="text-xs text-muted-foreground">{t.productDetail.ordersOver}</span>
                 </div>
                 <div className="flex flex-col items-center text-center">
                   <Shield className="w-6 h-6 text-primary mb-2" />
-                  <span className="text-xs uppercase tracking-wider">Warranty</span>
-                  <span className="text-xs text-muted-foreground">2 Year Standard</span>
+                  <span className="text-xs uppercase tracking-wider">{t.productDetail.warranty}</span>
+                  <span className="text-xs text-muted-foreground">{t.productDetail.yearStandard}</span>
                 </div>
                 <div className="flex flex-col items-center text-center">
                   <RotateCcw className="w-6 h-6 text-primary mb-2" />
-                  <span className="text-xs uppercase tracking-wider">Returns</span>
-                  <span className="text-xs text-muted-foreground">30 Day Policy</span>
+                  <span className="text-xs uppercase tracking-wider">{t.productDetail.returnsTitle}</span>
+                  <span className="text-xs text-muted-foreground">{t.productDetail.dayPolicy}</span>
                 </div>
               </div>
             </div>
@@ -233,9 +250,9 @@ export default function ProductDetailPage() {
           <div className="mt-16">
             <div className="flex border-b border-border">
               {[
-                { id: 'specs', label: 'Specifications' },
-                { id: 'shipping', label: 'Shipping' },
-                { id: 'bulk', label: 'Bulk Pricing' },
+                { id: 'specs', label: t.productDetail.specifications },
+                { id: 'shipping', label: t.productDetail.shipping },
+                { id: 'bulk', label: t.productDetail.bulkPricing },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -257,7 +274,7 @@ export default function ProductDetailPage() {
                   {product.specifications.map((spec, index) => (
                     <div
                       key={index}
-                      className="flex justify-between py-3 px-4 bg-secondary even:bg-muted"
+                      className={`flex justify-between py-3 px-4 bg-secondary even:bg-muted ${isRTL ? 'flex-row-reverse' : ''}`}
                     >
                       <span className="text-muted-foreground">{spec.label}</span>
                       <span className="font-mono">{spec.value}</span>
@@ -268,30 +285,30 @@ export default function ProductDetailPage() {
 
               {activeTab === 'shipping' && (
                 <div className="max-w-2xl space-y-4">
-                  <div className="flex items-start gap-3">
+                  <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                     <Check className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Free Shipping on Orders Over $10,000</p>
+                      <p className="font-medium">{t.productDetail.freeShippingOver}</p>
                       <p className="text-sm text-muted-foreground">
-                        Standard ground shipping included for qualifying orders within continental US.
+                        {t.productDetail.freeShippingDesc}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
+                  <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                     <Check className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Worldwide Delivery Available</p>
+                      <p className="font-medium">{t.productDetail.worldwideDelivery}</p>
                       <p className="text-sm text-muted-foreground">
-                        We ship to over 120 countries. International rates calculated at checkout.
+                        {t.productDetail.worldwideDeliveryDesc}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
+                  <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                     <Check className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Estimated Delivery: 5-14 Business Days</p>
+                      <p className="font-medium">{t.productDetail.estimatedDelivery}</p>
                       <p className="text-sm text-muted-foreground">
-                        Delivery times vary based on location and product availability.
+                        {t.productDetail.estimatedDeliveryDesc}
                       </p>
                     </div>
                   </div>
@@ -303,33 +320,33 @@ export default function ProductDetailPage() {
                   {product.bulkPricing && product.bulkPricing.length > 0 ? (
                     <div className="max-w-md">
                       <p className="text-muted-foreground mb-6">
-                        Save more when you order in larger quantities.
+                        {t.productDetail.saveMore}
                       </p>
                       <table className="w-full">
                         <thead>
                           <tr className="border-b border-border">
-                            <th className="text-left py-3 text-sm uppercase tracking-wider">Quantity</th>
-                            <th className="text-right py-3 text-sm uppercase tracking-wider">Unit Price</th>
-                            <th className="text-right py-3 text-sm uppercase tracking-wider">Savings</th>
+                            <th className={`${isRTL ? 'text-right' : 'text-left'} py-3 text-sm uppercase tracking-wider`}>{t.productDetail.quantityLabel}</th>
+                            <th className={`${isRTL ? 'text-left' : 'text-right'} py-3 text-sm uppercase tracking-wider`}>{t.productDetail.unitPrice}</th>
+                            <th className={`${isRTL ? 'text-left' : 'text-right'} py-3 text-sm uppercase tracking-wider`}>{t.productDetail.savings}</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr className="border-b border-border">
-                            <td className="py-3 font-mono">1 - 4</td>
-                            <td className="py-3 text-right font-mono">{formatPrice(product.price)}</td>
-                            <td className="py-3 text-right text-muted-foreground">-</td>
+                            <td className={`py-3 font-mono ${isRTL ? 'text-right' : ''}`}>1 - 4</td>
+                            <td className={`py-3 ${isRTL ? 'text-left' : 'text-right'} font-mono`}>{formatPrice(product.price)}</td>
+                            <td className={`py-3 ${isRTL ? 'text-left' : 'text-right'} text-muted-foreground`}>-</td>
                           </tr>
                           {product.bulkPricing.map((tier, index) => (
                             <tr key={index} className="border-b border-border">
-                              <td className="py-3 font-mono">
+                              <td className={`py-3 font-mono ${isRTL ? 'text-right' : ''}`}>
                                 {tier.minQuantity}
                                 {tier.maxQuantity ? ` - ${tier.maxQuantity}` : '+'}
                               </td>
-                              <td className="py-3 text-right font-mono text-primary">
+                              <td className={`py-3 ${isRTL ? 'text-left' : 'text-right'} font-mono text-primary`}>
                                 {formatPrice(tier.price)}
                               </td>
-                              <td className="py-3 text-right font-mono text-accent">
-                                {Math.round(((product.price - tier.price) / product.price) * 100)}% off
+                              <td className={`py-3 ${isRTL ? 'text-left' : 'text-right'} font-mono text-accent`}>
+                                {Math.round(((product.price - tier.price) / product.price) * 100)}%
                               </td>
                             </tr>
                           ))}
@@ -338,7 +355,7 @@ export default function ProductDetailPage() {
                     </div>
                   ) : (
                     <p className="text-muted-foreground">
-                      Contact us for bulk pricing on this product.
+                      {t.productDetail.contactBulk}
                     </p>
                   )}
                 </div>
@@ -352,7 +369,7 @@ export default function ProductDetailPage() {
       {relatedProducts.length > 0 && (
         <section className="industrial-section bg-secondary border-t border-border">
           <div className="industrial-container">
-            <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+            <h2 className="text-2xl font-bold mb-8">{t.productDetail.relatedProducts}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
               {relatedProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />

@@ -1,19 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { useCartStore } from '@/store/cartStore';
-import { Minus, Plus, X, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Minus, Plus, X, ArrowRight, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { useLanguageStore } from '@/store/languageStore';
+import { translations } from '@/i18n/translations';
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getSubtotal, getShipping, getTax, getTotal, couponCode, couponDiscount, applyCoupon, removeCoupon } = useCartStore();
+  const { language, isRTL } = useLanguageStore();
+  const t = translations[language];
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: language === 'ar' ? 'SAR' : 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(price);
   };
+
+  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
 
   if (items.length === 0) {
     return (
@@ -22,13 +28,13 @@ export default function CartPage() {
           <div className="industrial-container">
             <div className="max-w-lg mx-auto text-center py-16">
               <ShoppingBag className="w-16 h-16 mx-auto text-muted-foreground mb-6" />
-              <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
+              <h1 className="text-3xl font-bold mb-4">{t.cart.empty}</h1>
               <p className="text-muted-foreground mb-8">
-                Looks like you haven't added any items to your cart yet.
+                {t.cart.emptyDesc}
               </p>
               <Link to="/shop" className="industrial-button">
-                Continue Shopping
-                <ArrowRight className="w-4 h-4 ml-2" />
+                {t.cart.continueShopping}
+                <ArrowIcon className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
               </Link>
             </div>
           </div>
@@ -41,16 +47,16 @@ export default function CartPage() {
     <Layout>
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">
-          <span className="industrial-label mb-4 block">Shopping</span>
-          <h1 className="text-4xl md:text-5xl font-bold">Your Cart</h1>
+          <span className="industrial-label mb-4 block">{t.cart.title}</span>
+          <h1 className="text-4xl md:text-5xl font-bold">{t.cart.yourCart}</h1>
         </div>
       </section>
 
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className={`grid lg:grid-cols-3 gap-8 ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
             {/* Cart Items */}
-            <div className="lg:col-span-2">
+            <div className={`lg:col-span-2 ${isRTL ? 'lg:col-start-2' : ''}`}>
               <div className="space-y-1">
                 {items.map((item) => {
                   const itemPrice = item.product.price + (item.selectedVariant?.priceModifier || 0);
@@ -61,7 +67,7 @@ export default function CartPage() {
                       key={`${item.product.id}-${item.selectedVariant?.id || 'default'}`}
                       className="bg-card border border-border p-4 md:p-6"
                     >
-                      <div className="flex gap-4 md:gap-6">
+                      <div className={`flex gap-4 md:gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                         {/* Image */}
                         <Link
                           to={`/product/${item.product.slug}`}
@@ -76,8 +82,8 @@ export default function CartPage() {
 
                         {/* Details */}
                         <div className="flex-1 min-w-0">
-                          <div className="flex justify-between gap-4">
-                            <div>
+                          <div className={`flex justify-between gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                            <div className={isRTL ? 'text-right' : ''}>
                               <Link
                                 to={`/product/${item.product.slug}`}
                                 className="font-semibold hover:text-primary transition-colors line-clamp-2"
@@ -101,7 +107,7 @@ export default function CartPage() {
                             </button>
                           </div>
 
-                          <div className="flex items-center justify-between mt-4">
+                          <div className={`flex items-center justify-between mt-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                             {/* Quantity Controls */}
                             <div className="flex items-center border border-border">
                               <button
@@ -134,10 +140,10 @@ export default function CartPage() {
                             </div>
 
                             {/* Price */}
-                            <div className="text-right">
+                            <div className={isRTL ? 'text-left' : 'text-right'}>
                               <p className="font-bold font-mono text-lg">{formatPrice(itemTotal)}</p>
                               <p className="text-sm text-muted-foreground font-mono">
-                                {formatPrice(itemPrice)} each
+                                {formatPrice(itemPrice)} {t.cart.each}
                               </p>
                             </div>
                           </div>
@@ -150,25 +156,25 @@ export default function CartPage() {
 
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 mt-6 text-muted-foreground hover:text-foreground transition-colors text-sm uppercase tracking-wider"
+                className={`inline-flex items-center gap-2 mt-6 text-muted-foreground hover:text-foreground transition-colors text-sm uppercase tracking-wider ${isRTL ? 'flex-row-reverse' : ''}`}
               >
-                <ArrowRight className="w-4 h-4 rotate-180" />
-                Continue Shopping
+                <ArrowIcon className={`w-4 h-4 ${isRTL ? '' : 'rotate-180'}`} />
+                {t.cart.continueShopping}
               </Link>
             </div>
 
             {/* Order Summary */}
-            <div className="lg:col-span-1">
+            <div className={`lg:col-span-1 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <div className="bg-card border border-border p-6 sticky top-24">
-                <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+                <h2 className="text-xl font-bold mb-6">{t.cart.orderSummary}</h2>
 
                 {/* Coupon */}
                 <div className="mb-6 pb-6 border-b border-border">
                   {couponCode ? (
-                    <div className="flex items-center justify-between bg-primary/10 p-3">
-                      <div>
+                    <div className={`flex items-center justify-between bg-primary/10 p-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                      <div className={isRTL ? 'text-right' : ''}>
                         <span className="text-sm font-mono text-primary">{couponCode}</span>
-                        <p className="text-xs text-muted-foreground">Applied</p>
+                        <p className="text-xs text-muted-foreground">{t.cart.applied}</p>
                       </div>
                       <button
                         onClick={removeCoupon}
@@ -191,11 +197,11 @@ export default function CartPage() {
                       <input
                         type="text"
                         name="coupon"
-                        placeholder="Coupon code"
+                        placeholder={t.cart.couponPlaceholder}
                         className="industrial-input flex-1"
                       />
                       <button type="submit" className="industrial-button px-4">
-                        Apply
+                        {t.cart.apply}
                       </button>
                     </form>
                   )}
@@ -203,43 +209,43 @@ export default function CartPage() {
 
                 {/* Totals */}
                 <div className="space-y-3 mb-6">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
+                  <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <span className="text-muted-foreground">{t.cart.subtotal}</span>
                     <span className="font-mono">{formatPrice(getSubtotal())}</span>
                   </div>
                   {couponDiscount > 0 && (
-                    <div className="flex justify-between text-primary">
-                      <span>Discount</span>
+                    <div className={`flex justify-between text-primary ${isRTL ? 'flex-row-reverse' : ''}`}>
+                      <span>{t.cart.discount}</span>
                       <span className="font-mono">-{formatPrice(couponDiscount)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
+                  <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <span className="text-muted-foreground">{t.cart.shippingLabel}</span>
                     <span className="font-mono">
-                      {getShipping() === 0 ? 'FREE' : formatPrice(getShipping())}
+                      {getShipping() === 0 ? t.cart.free : formatPrice(getShipping())}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Tax (8%)</span>
+                  <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <span className="text-muted-foreground">{t.cart.tax}</span>
                     <span className="font-mono">{formatPrice(getTax())}</span>
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center py-4 border-t border-border mb-6">
-                  <span className="text-lg font-bold">Total</span>
+                <div className={`flex justify-between items-center py-4 border-t border-border mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <span className="text-lg font-bold">{t.cart.total}</span>
                   <span className="text-2xl font-bold font-mono text-primary">
                     {formatPrice(getTotal())}
                   </span>
                 </div>
 
                 <Link to="/checkout" className="w-full industrial-button justify-center">
-                  Proceed to Checkout
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  {t.cart.proceedToCheckout}
+                  <ArrowIcon className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
                 </Link>
 
                 {getSubtotal() < 10000 && (
                   <p className="text-xs text-muted-foreground text-center mt-4">
-                    Add {formatPrice(10000 - getSubtotal())} more for free shipping
+                    {t.cart.addMoreForFree.replace('{amount}', formatPrice(10000 - getSubtotal()))}
                   </p>
                 )}
               </div>
