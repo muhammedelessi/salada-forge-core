@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { getProductBySlug, products } from '@/data/products';
@@ -33,6 +33,11 @@ export default function ProductDetailPage() {
   );
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'specs' | 'shipping' | 'bulk'>('specs');
+
+  // Scroll to top when product changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
 
