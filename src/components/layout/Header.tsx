@@ -6,6 +6,7 @@ import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { cn } from '@/lib/utils';
+import saladaLogo from '@/assets/SALADA_LOGO.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,11 +27,12 @@ export function Header() {
         <div className="industrial-container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 hover-lift">
-              <div className="w-10 h-10 bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">S</span>
-              </div>
-              <span className="text-xl md:text-2xl font-bold tracking-tight">SALADA</span>
+            <Link to="/" className="flex items-center hover-lift">
+              <img 
+                src={saladaLogo} 
+                alt="SALADA" 
+                className="h-12 md:h-14 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
