@@ -82,7 +82,7 @@ function DashboardOverview() {
   const { t } = useLanguageStore();
   
   const stats = [
-    { label: t('admin.totalRevenue'), value: '$125,430', change: '+12.5%', icon: DollarSign },
+    { label: t('admin.totalRevenue'), value: 'SAR 125,430', change: '+12.5%', icon: DollarSign },
     { label: t('admin.orders'), value: '156', change: '+8.2%', icon: ShoppingCart },
     { label: t('admin.products'), value: products.length.toString(), change: '0', icon: Box },
     { label: t('admin.customers'), value: '89', change: '+15.3%', icon: Users },
@@ -127,7 +127,7 @@ function DashboardOverview() {
                   <p className="text-sm text-muted-foreground">{order.customer}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-mono">${order.total.toLocaleString()}</p>
+                  <p className="font-mono">SAR {order.total.toLocaleString()}</p>
                   <span className={`text-xs uppercase px-2 py-1 ${
                     order.status === 'delivered' ? 'bg-green-500/20 text-green-500' :
                     order.status === 'shipped' ? 'bg-blue-500/20 text-blue-500' :
@@ -247,7 +247,7 @@ function ProductsAdmin() {
                     </div>
                   </td>
                   <td className="p-4 font-mono text-sm">{product.sku}</td>
-                  <td className="p-4 font-mono">${product.price.toLocaleString()}</td>
+                  <td className="p-4 font-mono">SAR {product.price.toLocaleString()}</td>
                   <td className="p-4 font-mono">{product.stock}</td>
                   <td className="p-4">
                     <span className={`text-xs uppercase px-2 py-1 ${
