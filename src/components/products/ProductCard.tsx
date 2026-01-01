@@ -91,15 +91,17 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           )}
 
           {/* Quick Actions - Appear on hover with smooth transition */}
-          <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <AddToCartButton
-              product={product}
-              variant={product.variants[0]}
-              size="icon"
-            />
+          <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="pointer-events-auto">
+              <AddToCartButton
+                product={product}
+                variant={product.variants[0]}
+                size="icon"
+              />
+            </div>
             <Link
               to={`/product/${product.slug}`}
-              className="flex items-center justify-center w-12 h-12 bg-foreground text-background hover:bg-muted-foreground transition-colors"
+              className="flex items-center justify-center w-12 h-12 bg-foreground text-background hover:bg-muted-foreground transition-colors pointer-events-auto"
             >
               <Eye className="w-5 h-5" />
             </Link>
