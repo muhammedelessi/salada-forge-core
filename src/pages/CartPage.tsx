@@ -11,9 +11,9 @@ export default function CartPage() {
   const t = translations[language];
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
+    return new Intl.NumberFormat('ar-SA', {
       style: 'currency',
-      currency: language === 'ar' ? 'SAR' : 'USD',
+      currency: 'SAR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(price);
