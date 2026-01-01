@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { Product } from '@/types';
 import { useCartStore } from '@/store/cartStore';
 import { ShoppingCart, Eye } from 'lucide-react';
+import { useLanguageStore } from '@/store/languageStore';
+import { translations } from '@/i18n/translations';
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +12,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, variant = 'default' }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
+  const { language, isRTL } = useLanguageStore();
+  const t = translations[language];
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -18,12 +22,22 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: language === 'ar' ? 'SAR' : 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
+  };
+
+  // Category translations
+  const categoryTranslations: Record<string, string> = {
+    'shipping-containers': t.categories.shippingContainers,
+    'storage-tanks': t.categories.storageTanks,
+    'ibc-containers': t.categories.ibcContainers,
+    'specialty-containers': t.categories.specialtyContainers,
+    'drums-barrels': t.categories.drumsBarrels,
+    'modular-buildings': t.categories.modularBuildings,
   };
 
   const hasDiscount = product.compareAtPrice && product.compareAtPrice > product.price;
@@ -67,14 +81,14 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
         
         {/* Status Badge */}
         {product.status === 'out_of_stock' && (
-          <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono">
-            Out of Stock
+          <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} bg-destructive text-destructive-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono`}>
+            {t.product.outOfStock}
           </div>
         )}
         
         {hasDiscount && (
-          <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono">
-            Sale
+          <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} bg-primary text-primary-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono`}>
+            {t.product.sale}
           </div>
         )}
 
@@ -95,13 +109,13 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
       <div className="p-6">
         <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
-          {product.category.replace('-', ' ')}
+          {categoryTranslations[product.category] || product.category.replace('-', ' ')}
         </span>
         <h3 className="font-semibold text-lg mt-2 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
           {product.title}
         </h3>
         
-        <div className="flex items-center gap-3">
+        <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
           <span className="text-xl font-bold text-primary font-mono">
             {formatPrice(product.price)}
           </span>
@@ -114,13 +128,13 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
 
         {product.stock <= 10 && product.stock > 0 && (
           <p className="text-xs text-accent mt-3 uppercase tracking-wider font-mono">
-            Only {product.stock} left
+            {t.product.onlyLeft.replace('{count}', product.stock.toString())}
           </p>
         )}
 
         {product.bulkPricing && product.bulkPricing.length > 0 && (
           <p className="text-xs text-muted-foreground mt-3 uppercase tracking-wider font-mono">
-            Bulk pricing available
+            {t.product.bulkPricing}
           </p>
         )}
       </div>
