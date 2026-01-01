@@ -59,9 +59,9 @@ export default function ProductDetailPage() {
   }
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
+    return new Intl.NumberFormat('ar-SA', {
       style: 'currency',
-      currency: language === 'ar' ? 'SAR' : 'USD',
+      currency: 'SAR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
