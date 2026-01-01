@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Product } from '@/types';
-import { useCartStore } from '@/store/cartStore';
-import { ShoppingCart, Eye } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
+import { AddToCartButton } from '@/components/ui/AddToCartButton';
+import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
@@ -11,15 +12,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, variant = 'default' }: ProductCardProps) {
-  const addItem = useCartStore((state) => state.addItem);
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addItem(product, 1, product.variants[0]);
-  };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('ar-SA', {
@@ -46,7 +40,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
     return (
       <Link
         to={`/product/${product.slug}`}
-        className="group bg-card border border-border hover:border-primary transition-all duration-300"
+        className="group bg-card border border-border hover:border-primary transition-all duration-300 hover-lift"
       >
         <div className="aspect-square bg-muted overflow-hidden">
           <img
@@ -68,54 +62,62 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
   }
 
   return (
-    <Link
-      to={`/product/${product.slug}`}
-      className="group bg-card border border-border hover:border-primary transition-all duration-300"
-    >
-      <div className="relative aspect-[4/3] bg-muted overflow-hidden">
-        <img
-          src={product.images[0]}
-          alt={product.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        
-        {/* Status Badge */}
-        {product.status === 'out_of_stock' && (
-          <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} bg-destructive text-destructive-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono`}>
-            {t.product.outOfStock}
-          </div>
-        )}
-        
-        {hasDiscount && (
-          <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} bg-primary text-primary-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono`}>
-            {t.product.sale}
-          </div>
-        )}
+    <div className="group bg-card border border-border hover:border-primary transition-all duration-300">
+      <Link to={`/product/${product.slug}`} className="block">
+        <div className="relative aspect-[4/3] bg-muted overflow-hidden">
+          <img
+            src={product.images[0]}
+            alt={product.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          
+          {/* Status Badge */}
+          {product.status === 'out_of_stock' && (
+            <div className={cn(
+              'absolute top-4 bg-destructive text-destructive-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono',
+              isRTL ? 'right-4' : 'left-4'
+            )}>
+              {t.product.outOfStock}
+            </div>
+          )}
+          
+          {hasDiscount && product.status !== 'out_of_stock' && (
+            <div className={cn(
+              'absolute top-4 bg-primary text-primary-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono',
+              isRTL ? 'right-4' : 'left-4'
+            )}>
+              {t.product.sale}
+            </div>
+          )}
 
-        {/* Quick Actions */}
-        <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button
-            onClick={handleAddToCart}
-            className="flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground hover:bg-accent transition-colors"
-            disabled={product.status === 'out_of_stock'}
-          >
-            <ShoppingCart className="w-5 h-5" />
-          </button>
-          <span className="flex items-center justify-center w-12 h-12 bg-foreground text-background hover:bg-muted-foreground transition-colors">
-            <Eye className="w-5 h-5" />
-          </span>
+          {/* Quick Actions - Appear on hover with smooth transition */}
+          <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <AddToCartButton
+              product={product}
+              variant={product.variants[0]}
+              size="icon"
+            />
+            <Link
+              to={`/product/${product.slug}`}
+              className="flex items-center justify-center w-12 h-12 bg-foreground text-background hover:bg-muted-foreground transition-colors"
+            >
+              <Eye className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
-      </div>
+      </Link>
 
       <div className="p-6">
         <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
           {categoryTranslations[product.category] || product.category.replace('-', ' ')}
         </span>
-        <h3 className="font-semibold text-lg mt-2 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-          {product.title}
-        </h3>
+        <Link to={`/product/${product.slug}`}>
+          <h3 className="font-semibold text-lg mt-2 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+            {product.title}
+          </h3>
+        </Link>
         
-        <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
+        <div className={cn('flex items-center gap-3', isRTL && 'flex-row-reverse justify-end')}>
           <span className="text-xl font-bold text-primary font-mono">
             {formatPrice(product.price)}
           </span>
@@ -127,7 +129,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
         </div>
 
         {product.stock <= 10 && product.stock > 0 && (
-          <p className="text-xs text-accent mt-3 uppercase tracking-wider font-mono">
+          <p className="text-xs text-accent mt-3 uppercase tracking-wider font-mono animate-pulse">
             {t.product.onlyLeft.replace('{count}', product.stock.toString())}
           </p>
         )}
@@ -138,6 +140,6 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           </p>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
