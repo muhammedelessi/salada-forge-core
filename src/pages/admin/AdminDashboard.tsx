@@ -21,6 +21,7 @@ import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { OrdersAdmin } from '@/components/admin/OrdersAdmin';
 import { CustomersAdmin } from '@/components/admin/CustomersAdmin';
+import { SettingsAdmin } from '@/components/admin/SettingsAdmin';
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const location = useLocation();
@@ -299,7 +300,7 @@ export default function AdminDashboard() {
             <Route path="/orders" element={<OrdersAdmin />} />
             <Route path="/customers" element={<CustomersAdmin />} />
             <Route path="/coupons" element={<PlaceholderPage title={t('admin.coupons')} />} />
-            <Route path="/settings" element={<PlaceholderPage title={t('admin.settings')} />} />
+            <Route path="/settings" element={<SettingsAdmin />} />
           </Routes>
         </main>
       </div>
