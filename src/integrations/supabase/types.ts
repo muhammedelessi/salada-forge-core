@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          parent_id: string | null
+          slug: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          parent_id?: string | null
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          parent_id?: string | null
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "categories_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       coupons: {
         Row: {
           code: string
@@ -119,6 +163,84 @@ export type Database = {
           total?: number
           updated_at?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          bulk_pricing: Json | null
+          category: string
+          compare_at_price: number | null
+          created_at: string
+          description: string | null
+          dimensions: Json | null
+          featured: boolean | null
+          id: string
+          images: string[] | null
+          price: number
+          seo_description: string | null
+          seo_title: string | null
+          sku: string
+          slug: string
+          specifications: Json | null
+          status: string
+          stock: number
+          subcategory: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+          variants: Json | null
+          weight: number | null
+        }
+        Insert: {
+          bulk_pricing?: Json | null
+          category: string
+          compare_at_price?: number | null
+          created_at?: string
+          description?: string | null
+          dimensions?: Json | null
+          featured?: boolean | null
+          id?: string
+          images?: string[] | null
+          price: number
+          seo_description?: string | null
+          seo_title?: string | null
+          sku: string
+          slug: string
+          specifications?: Json | null
+          status?: string
+          stock?: number
+          subcategory?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          variants?: Json | null
+          weight?: number | null
+        }
+        Update: {
+          bulk_pricing?: Json | null
+          category?: string
+          compare_at_price?: number | null
+          created_at?: string
+          description?: string | null
+          dimensions?: Json | null
+          featured?: boolean | null
+          id?: string
+          images?: string[] | null
+          price?: number
+          seo_description?: string | null
+          seo_title?: string | null
+          sku?: string
+          slug?: string
+          specifications?: Json | null
+          status?: string
+          stock?: number
+          subcategory?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          variants?: Json | null
+          weight?: number | null
         }
         Relationships: []
       }
