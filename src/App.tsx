@@ -12,6 +12,8 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import FAQPage from "./pages/FAQPage";
 import PolicyPage from "./pages/PolicyPage";
+import AuthPage from "./pages/AuthPage";
+import OrdersPage from "./pages/OrdersPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
@@ -35,6 +37,9 @@ const App = () => (
           <Route path="/privacy" element={<PolicyPage type="privacy" />} />
           <Route path="/terms" element={<PolicyPage type="terms" />} />
           <Route path="/returns" element={<PolicyPage type="returns" />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/account" element={<AuthPage />} />
           <Route path="/admin/*" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
