@@ -13,16 +13,15 @@ import {
   AlertTriangle,
   DollarSign,
   Box,
-  Plus,
 } from 'lucide-react';
 import { products } from '@/data/products';
-import { ImageUpload } from '@/components/admin/ImageUpload';
 import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { OrdersAdmin } from '@/components/admin/OrdersAdmin';
 import { CustomersAdmin } from '@/components/admin/CustomersAdmin';
 import { SettingsAdmin } from '@/components/admin/SettingsAdmin';
 import { CouponsAdmin } from '@/components/admin/CouponsAdmin';
+import { ProductsAdmin } from '@/components/admin/ProductsAdmin';
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const location = useLocation();
@@ -159,109 +158,6 @@ function DashboardOverview() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProductsAdmin() {
-  const { t } = useLanguageStore();
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">{t('admin.products')}</h1>
-        <button 
-          onClick={() => setShowAddForm(!showAddForm)}
-          className="industrial-button text-sm py-2 px-4"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          {t('admin.addProduct')}
-        </button>
-      </div>
-
-      {showAddForm && (
-        <div className="bg-card border border-border p-6 mb-8">
-          <h2 className="text-lg font-bold mb-6">{t('admin.addProduct')}</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm font-medium mb-2">Product Title *</label>
-              <input type="text" className="industrial-input" placeholder="Heavy-Duty Container" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">{t('admin.sku')} *</label>
-              <input type="text" className="industrial-input font-mono" placeholder="SAL-XXX-000" />
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <ImageUpload onUpload={setUploadedImages} existingImages={uploadedImages} />
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
-            <div>
-              <label className="block text-sm font-medium mb-2">{t('admin.price')} *</label>
-              <input type="number" className="industrial-input font-mono" placeholder="0.00" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">{t('admin.stock')} *</label>
-              <input type="number" className="industrial-input font-mono" placeholder="0" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">{t('admin.status')}</label>
-              <select className="industrial-input">
-                <option value="active">{t('admin.active')}</option>
-                <option value="draft">Draft</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <button className="industrial-button">{t('common.save')}</button>
-            <button onClick={() => setShowAddForm(false)} className="industrial-button-outline">{t('common.cancel')}</button>
-          </div>
-        </div>
-      )}
-
-      <div className="bg-card border border-border overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-secondary">
-              <tr>
-                <th className="text-left p-4 text-sm uppercase tracking-wider">{t('admin.products')}</th>
-                <th className="text-left p-4 text-sm uppercase tracking-wider">{t('admin.sku')}</th>
-                <th className="text-left p-4 text-sm uppercase tracking-wider">{t('admin.price')}</th>
-                <th className="text-left p-4 text-sm uppercase tracking-wider">{t('admin.stock')}</th>
-                <th className="text-left p-4 text-sm uppercase tracking-wider">{t('admin.status')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="border-t border-border hover:bg-muted/50">
-                  <td className="p-4">
-                    <div className="flex items-center gap-3">
-                      <img src={product.images[0]} alt="" className="w-10 h-10 object-cover" />
-                      <span className="font-medium line-clamp-1">{product.title}</span>
-                    </div>
-                  </td>
-                  <td className="p-4 font-mono text-sm">{product.sku}</td>
-                  <td className="p-4 font-mono">SAR {product.price.toLocaleString()}</td>
-                  <td className="p-4 font-mono">{product.stock}</td>
-                  <td className="p-4">
-                    <span className={`text-xs uppercase px-2 py-1 ${
-                      product.status === 'active' ? 'bg-green-500/20 text-green-500' : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {t(`admin.${product.status}`)}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
