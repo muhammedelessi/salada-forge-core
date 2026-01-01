@@ -1,32 +1,34 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useLanguageStore } from '@/store/languageStore';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t, isRTL } = useLanguageStore();
 
   const footerLinks = {
     products: [
-      { label: 'Shipping Containers', href: '/shop?category=shipping-containers' },
-      { label: 'Storage Tanks', href: '/shop?category=storage-tanks' },
-      { label: 'IBC Containers', href: '/shop?category=ibc-containers' },
-      { label: 'Modular Buildings', href: '/shop?category=modular-buildings' },
+      { label: t('footer.shippingContainers'), href: '/shop?category=shipping-containers' },
+      { label: t('footer.storageTanks'), href: '/shop?category=storage-tanks' },
+      { label: t('footer.ibcContainers'), href: '/shop?category=ibc-containers' },
+      { label: t('footer.modularBuildings'), href: '/shop?category=modular-buildings' },
     ],
     company: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Blog', href: '/blog' },
+      { label: t('footer.aboutUs'), href: '/about' },
+      { label: t('nav.contact'), href: '/contact' },
+      { label: t('footer.careers'), href: '/careers' },
+      { label: t('footer.blog'), href: '/blog' },
     ],
     support: [
-      { label: 'FAQ', href: '/faq' },
-      { label: 'Shipping Info', href: '/shipping' },
-      { label: 'Returns', href: '/returns' },
-      { label: 'Track Order', href: '/track' },
+      { label: t('nav.faq'), href: '/faq' },
+      { label: t('footer.shippingInfo'), href: '/shipping' },
+      { label: t('footer.returns'), href: '/returns' },
+      { label: t('footer.trackOrder'), href: '/track' },
     ],
     legal: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Cookie Policy', href: '/cookies' },
+      { label: t('footer.privacyPolicy'), href: '/privacy' },
+      { label: t('footer.termsOfService'), href: '/terms' },
+      { label: t('footer.cookiePolicy'), href: '/cookies' },
     ],
   };
 
@@ -37,21 +39,22 @@ export function Footer() {
         <div className="industrial-container py-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <span className="industrial-label mb-4 block">Newsletter</span>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">Stay Updated</h3>
+              <span className="industrial-label mb-4 block">{t('footer.newsletter')}</span>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">{t('footer.stayUpdated')}</h3>
               <p className="text-muted-foreground">
-                Get the latest industrial solutions and exclusive offers.
+                {t('footer.newsletterDesc')}
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className={`flex gap-2 ${isRTL() ? 'flex-row-reverse' : ''}`}>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('footer.emailPlaceholder')}
                 className="industrial-input flex-1"
+                dir={isRTL() ? 'rtl' : 'ltr'}
               />
               <button className="industrial-button whitespace-nowrap">
-                Subscribe
-                <ArrowRight className="w-4 h-4 ml-2" />
+                {t('footer.subscribe')}
+                <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
               </button>
             </div>
           </div>
@@ -70,13 +73,13 @@ export function Footer() {
               <span className="text-xl font-bold tracking-tight">SALADA</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Industrial-grade containers and storage solutions for global commerce.
+              {t('footer.tagline')}
             </p>
           </div>
 
           {/* Products */}
           <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">Products</h4>
+            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.products')}</h4>
             <ul className="space-y-3">
               {footerLinks.products.map((link) => (
                 <li key={link.href}>
@@ -93,7 +96,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">Company</h4>
+            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.company')}</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -110,7 +113,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">Support</h4>
+            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.support')}</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.href}>
@@ -127,7 +130,7 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">Legal</h4>
+            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
@@ -149,14 +152,14 @@ export function Footer() {
         <div className="industrial-container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} SALADA Industrial. All rights reserved.
+              © {currentYear} SALADA Industrial. {t('footer.rights')}
             </p>
             <div className="flex items-center gap-6">
               <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
-                ISO 9001:2015 Certified
+                {t('footer.isoCertified')}
               </span>
               <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
-                DNV Approved
+                {t('footer.dnvApproved')}
               </span>
             </div>
           </div>
