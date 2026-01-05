@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -13,8 +13,8 @@ import {
   AlertTriangle,
   DollarSign,
   Box,
+  Loader2,
 } from 'lucide-react';
-import { products } from '@/data/products';
 import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { OrdersAdmin } from '@/components/admin/OrdersAdmin';
@@ -22,6 +22,8 @@ import { CustomersAdmin } from '@/components/admin/CustomersAdmin';
 import { SettingsAdmin } from '@/components/admin/SettingsAdmin';
 import { CouponsAdmin } from '@/components/admin/CouponsAdmin';
 import { ProductsAdmin } from '@/components/admin/ProductsAdmin';
+import { supabase } from '@/integrations/supabase/client';
+import { useQuery } from '@tanstack/react-query';
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const location = useLocation();
@@ -82,19 +84,68 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 function DashboardOverview() {
   const { t } = useLanguageStore();
   
+  // Fetch products count and low stock products
+  const { data: productsData, isLoading: productsLoading } = useQuery({
+    queryKey: ['admin-products-stats'],
+    queryFn: async () => {
+      const { data, error, count } = await supabase
+        .from('products')
+        .select('*', { count: 'exact' });
+      if (error) throw error;
+      return { products: data || [], count: count || 0 };
+    },
+  });
+
+  // Fetch orders with stats
+  const { data: ordersData, isLoading: ordersLoading } = useQuery({
+    queryKey: ['admin-orders-stats'],
+    queryFn: async () => {
+      const { data, error, count } = await supabase
+        .from('orders')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      return { orders: data || [], count: count || 0 };
+    },
+  });
+
+  // Fetch customers count
+  const { data: customersData, isLoading: customersLoading } = useQuery({
+    queryKey: ['admin-customers-stats'],
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+      if (error) throw error;
+      return { count: count || 0 };
+    },
+  });
+
+  const isLoading = productsLoading || ordersLoading || customersLoading;
+
+  // Calculate total revenue from orders
+  const totalRevenue = ordersData?.orders.reduce((sum, order) => sum + Number(order.total), 0) || 0;
+  
+  // Get low stock products (stock <= 15)
+  const lowStockProducts = productsData?.products.filter(p => p.stock <= 15).slice(0, 4) || [];
+  
+  // Get recent orders (last 4)
+  const recentOrders = ordersData?.orders.slice(0, 4) || [];
+
   const stats = [
-    { label: t('admin.totalRevenue'), value: 'SAR 125,430', change: '+12.5%', icon: DollarSign },
-    { label: t('admin.orders'), value: '156', change: '+8.2%', icon: ShoppingCart },
-    { label: t('admin.products'), value: products.length.toString(), change: '0', icon: Box },
-    { label: t('admin.customers'), value: '89', change: '+15.3%', icon: Users },
+    { label: t('admin.totalRevenue'), value: `SAR ${totalRevenue.toLocaleString()}`, change: '', icon: DollarSign },
+    { label: t('admin.orders'), value: (ordersData?.count || 0).toString(), change: '', icon: ShoppingCart },
+    { label: t('admin.products'), value: (productsData?.count || 0).toString(), change: '', icon: Box },
+    { label: t('admin.customers'), value: (customersData?.count || 0).toString(), change: '', icon: Users },
   ];
 
-  const recentOrders = [
-    { id: 'SAL-001', customer: 'Acme Corp', total: 12500, status: 'processing' },
-    { id: 'SAL-002', customer: 'Global Industries', total: 8900, status: 'shipped' },
-    { id: 'SAL-003', customer: 'Tech Solutions', total: 4500, status: 'delivered' },
-    { id: 'SAL-004', customer: 'Maritime LLC', total: 25000, status: 'pending' },
-  ];
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -105,9 +156,6 @@ function DashboardOverview() {
           <div key={stat.label} className="bg-card border border-border p-6">
             <div className="flex items-center justify-between mb-4">
               <stat.icon className="w-8 h-8 text-primary" />
-              <span className={`text-sm font-mono ${stat.change.startsWith('+') ? 'text-green-500' : 'text-muted-foreground'}`}>
-                {stat.change}
-              </span>
             </div>
             <p className="text-2xl font-bold mb-1">{stat.value}</p>
             <p className="text-sm text-muted-foreground">{stat.label}</p>
@@ -121,25 +169,37 @@ function DashboardOverview() {
             <TrendingUp className="w-5 h-5 text-primary" /> {t('admin.recentOrders')}
           </h2>
           <div className="space-y-3">
-            {recentOrders.map((order) => (
-              <div key={order.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
-                <div>
-                  <p className="font-mono text-sm">{order.id}</p>
-                  <p className="text-sm text-muted-foreground">{order.customer}</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-mono">SAR {order.total.toLocaleString()}</p>
-                  <span className={`text-xs uppercase px-2 py-1 ${
-                    order.status === 'delivered' ? 'bg-green-500/20 text-green-500' :
-                    order.status === 'shipped' ? 'bg-blue-500/20 text-blue-500' :
-                    order.status === 'processing' ? 'bg-yellow-500/20 text-yellow-500' :
-                    'bg-muted text-muted-foreground'
-                  }`}>
-                    {t(`admin.${order.status}`)}
-                  </span>
-                </div>
-              </div>
-            ))}
+            {recentOrders.length === 0 ? (
+              <p className="text-muted-foreground text-sm py-4 text-center">No orders yet</p>
+            ) : (
+              recentOrders.map((order) => {
+                const shippingAddress = order.shipping_address as { firstName?: string; lastName?: string; company?: string } | null;
+                const customerName = shippingAddress?.company || 
+                  `${shippingAddress?.firstName || ''} ${shippingAddress?.lastName || ''}`.trim() || 
+                  order.guest_email || 
+                  'Customer';
+                
+                return (
+                  <div key={order.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
+                    <div>
+                      <p className="font-mono text-sm">{order.order_number}</p>
+                      <p className="text-sm text-muted-foreground">{customerName}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-mono">SAR {Number(order.total).toLocaleString()}</p>
+                      <span className={`text-xs uppercase px-2 py-1 ${
+                        order.status === 'delivered' ? 'bg-green-500/20 text-green-500' :
+                        order.status === 'shipped' ? 'bg-blue-500/20 text-blue-500' :
+                        order.status === 'processing' ? 'bg-yellow-500/20 text-yellow-500' :
+                        'bg-muted text-muted-foreground'
+                      }`}>
+                        {t(`admin.${order.status}`) || order.status}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
 
@@ -148,15 +208,19 @@ function DashboardOverview() {
             <AlertTriangle className="w-5 h-5 text-accent" /> {t('admin.lowStockAlert')}
           </h2>
           <div className="space-y-3">
-            {products.filter(p => p.stock <= 15).slice(0, 4).map((product) => (
-              <div key={product.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
-                <div>
-                  <p className="text-sm font-medium line-clamp-1">{product.title}</p>
-                  <p className="text-xs text-muted-foreground font-mono">{product.sku}</p>
+            {lowStockProducts.length === 0 ? (
+              <p className="text-muted-foreground text-sm py-4 text-center">All products have sufficient stock</p>
+            ) : (
+              lowStockProducts.map((product) => (
+                <div key={product.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
+                  <div>
+                    <p className="text-sm font-medium line-clamp-1">{product.title}</p>
+                    <p className="text-xs text-muted-foreground font-mono">{product.sku}</p>
+                  </div>
+                  <span className="text-sm font-mono text-accent">{product.stock} {t('admin.left')}</span>
                 </div>
-                <span className="text-sm font-mono text-accent">{product.stock} {t('admin.left')}</span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
