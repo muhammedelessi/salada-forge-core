@@ -109,7 +109,7 @@ export default function AuthPage() {
       loginTitle: 'مرحباً بعودتك',
       loginDesc: 'سجل الدخول لعرض طلباتك',
       signupTitle: 'إنشاء حساب',
-      signupDesc: 'انضم إلى سلادا لتتبع طلباتك',
+      signupDesc: 'انضم إلى صلادة لتتبع طلباتك',
       email: 'البريد الإلكتروني',
       password: 'كلمة المرور',
       fullName: 'الاسم الكامل',
