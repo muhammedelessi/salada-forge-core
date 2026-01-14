@@ -44,7 +44,7 @@ export function AddToCartButton({
       setIsSuccess(true);
 
       toast({
-        title: language === 'ar' ? 'تمت الإضافة' : 'Added to Cart',
+        title: t.product.addedToCart,
         description: product.title,
         duration: 2000,
       });
@@ -96,7 +96,7 @@ export function AddToCartButton({
       {isSuccess ? (
         <>
           <Check className={cn('w-5 h-5 animate-scale-in', isRTL ? 'ml-2' : 'mr-2')} />
-          {language === 'ar' ? 'تمت الإضافة' : 'Added'}
+          {t.product.added}
         </>
       ) : (
         <>
