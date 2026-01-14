@@ -166,6 +166,57 @@ export type Database = {
         }
         Relationships: []
       }
+      product_inquiries: {
+        Row: {
+          created_at: string
+          customer_company: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          message: string | null
+          notes: string | null
+          product_id: string
+          product_sku: string | null
+          product_title: string
+          quantity: number | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_company?: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          message?: string | null
+          notes?: string | null
+          product_id: string
+          product_sku?: string | null
+          product_title: string
+          quantity?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_company?: string | null
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          message?: string | null
+          notes?: string | null
+          product_id?: string
+          product_sku?: string | null
+          product_title?: string
+          quantity?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           bulk_pricing: Json | null

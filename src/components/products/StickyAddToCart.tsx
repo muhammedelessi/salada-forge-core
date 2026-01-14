@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Check } from 'lucide-react';
-import { useCartStore } from '@/store/cartStore';
+import { Link } from 'react-router-dom';
+import { MessageSquare } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
-import { translations } from '@/i18n/translations';
 import { Product, ProductVariant } from '@/types';
-import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
 interface StickyAddToCartProps {
@@ -21,11 +19,7 @@ export function StickyAddToCart({
   showAfterScroll = 400,
 }: StickyAddToCartProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const addItem = useCartStore((state) => state.addItem);
   const { language, isRTL } = useLanguageStore();
-  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,36 +30,7 @@ export function StickyAddToCart({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [showAfterScroll]);
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('ar-SA', {
-      style: 'currency',
-      currency: 'SAR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const currentPrice = product.price + (selectedVariant?.priceModifier || 0);
-
-  const handleAddToCart = () => {
-    if (product.status === 'out_of_stock') return;
-
-    setIsAdding(true);
-
-    setTimeout(() => {
-      addItem(product, quantity, selectedVariant);
-      setIsAdding(false);
-      setIsSuccess(true);
-
-      toast({
-        title: language === 'ar' ? 'تمت الإضافة' : 'Added to Cart',
-        description: product.title,
-        duration: 2000,
-      });
-
-      setTimeout(() => setIsSuccess(false), 1500);
-    }, 150);
-  };
+  const contactLabel = language === 'ar' ? 'تواصل معنا' : 'Contact Us';
 
   if (!isVisible) return null;
 
@@ -90,32 +55,18 @@ export function StickyAddToCart({
             </div>
             <div className="min-w-0">
               <p className="font-medium text-sm truncate">{product.title}</p>
-              <p className="text-primary font-mono font-bold">{formatPrice(currentPrice)}</p>
+              <p className="text-sm text-muted-foreground">{product.sku}</p>
             </div>
           </div>
 
-          {/* Add to Cart */}
-          <button
-            onClick={handleAddToCart}
-            disabled={product.status === 'out_of_stock' || isAdding}
-            className={cn(
-              'industrial-button flex-shrink-0 px-6 py-3',
-              isSuccess && 'bg-green-600 hover:bg-green-600',
-              (product.status === 'out_of_stock' || isAdding) && 'opacity-50 cursor-not-allowed'
-            )}
+          {/* Contact Us Button */}
+          <Link
+            to={`/inquiry/${product.slug}?quantity=${quantity}`}
+            className="industrial-button flex-shrink-0 px-6 py-3 inline-flex items-center"
           >
-            {isSuccess ? (
-              <>
-                <Check className={cn('w-5 h-5', isRTL ? 'ml-2' : 'mr-2')} />
-                {language === 'ar' ? 'تمت الإضافة' : 'Added'}
-              </>
-            ) : (
-              <>
-                <ShoppingCart className={cn('w-5 h-5', isRTL ? 'ml-2' : 'mr-2', isAdding && 'animate-pulse')} />
-                {product.status === 'out_of_stock' ? t.product.outOfStock : t.product.addToCart}
-              </>
-            )}
-          </button>
+            <MessageSquare className={cn('w-5 h-5', isRTL ? 'ml-2' : 'mr-2')} />
+            {contactLabel}
+          </Link>
         </div>
       </div>
     </div>

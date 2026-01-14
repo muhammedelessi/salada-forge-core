@@ -3,9 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { getProductBySlug, products } from '@/data/products';
 import { ProductCard } from '@/components/products/ProductCard';
-import { useCartStore } from '@/store/cartStore';
 import { StickyAddToCart } from '@/components/products/StickyAddToCart';
-import { AddToCartButton } from '@/components/ui/AddToCartButton';
 import {
   Minus,
   Plus,
@@ -15,6 +13,7 @@ import {
   ChevronRight,
   ChevronLeft,
   Check,
+  MessageSquare,
 } from 'lucide-react';
 import { ProductVariant } from '@/types';
 import { useLanguageStore } from '@/store/languageStore';
@@ -144,16 +143,11 @@ export default function ProductDetailPage() {
               <span className="industrial-label mb-2 block">{product.sku}</span>
               <h1 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">{product.title}</h1>
 
-              {/* Price */}
+              {/* Contact Us Section */}
               <div className={cn('flex items-center gap-4 mb-6', isRTL && 'flex-row-reverse justify-end')}>
-                <span className="text-3xl font-bold text-primary font-mono">
-                  {formatPrice(currentPrice)}
+                <span className="text-lg text-muted-foreground">
+                  {language === 'ar' ? 'للحصول على السعر، تواصل معنا' : 'Contact us for pricing'}
                 </span>
-                {hasDiscount && (
-                  <span className="text-xl text-muted-foreground line-through font-mono">
-                    {formatPrice(product.compareAtPrice!)}
-                  </span>
-                )}
               </div>
 
               <p className="text-muted-foreground mb-8 leading-relaxed">{product.description}</p>
@@ -177,12 +171,6 @@ export default function ProductDetailPage() {
                         )}
                       >
                         {variant.name}
-                        {variant.priceModifier !== 0 && (
-                          <span className={cn('font-mono', isRTL ? 'mr-2' : 'ml-2')}>
-                            {variant.priceModifier > 0 ? '+' : ''}
-                            {formatPrice(variant.priceModifier)}
-                          </span>
-                        )}
                       </button>
                     ))}
                   </div>
@@ -221,14 +209,14 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* Add to Cart */}
-              <AddToCartButton
-                product={product}
-                quantity={quantity}
-                variant={selectedVariant}
-                size="lg"
-                className="w-full mb-6"
-              />
+              {/* Contact Us Button */}
+              <Link
+                to={`/inquiry/${product.slug}?quantity=${quantity}`}
+                className="industrial-button w-full mb-6 inline-flex items-center justify-center py-5 text-base"
+              >
+                <MessageSquare className={cn('w-5 h-5', isRTL ? 'ml-2' : 'mr-2')} />
+                {language === 'ar' ? 'تواصل معنا للحصول على عرض سعر' : 'Contact Us for a Quote'}
+              </Link>
 
               {/* Trust Badges */}
               <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-border">
