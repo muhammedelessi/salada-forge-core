@@ -15,6 +15,7 @@ import FAQPage from "./pages/FAQPage";
 import PolicyPage from "./pages/PolicyPage";
 import AuthPage from "./pages/AuthPage";
 import OrdersPage from "./pages/OrdersPage";
+import ProductInquiryPage from "./pages/ProductInquiryPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/returns" element={<PolicyPage type="returns" />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/inquiry/:slug" element={<ProductInquiryPage />} />
           <Route path="/account" element={<AuthPage />} />
           <Route path="/admin/*" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />

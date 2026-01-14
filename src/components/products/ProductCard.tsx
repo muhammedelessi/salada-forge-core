@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Product } from '@/types';
-import { Eye } from 'lucide-react';
+import { Eye, MessageSquare } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
-import { AddToCartButton } from '@/components/ui/AddToCartButton';
 import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
@@ -15,15 +14,6 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('ar-SA', {
-      style: 'currency',
-      currency: 'SAR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
   // Category translations
   const categoryTranslations: Record<string, string> = {
     'shipping-containers': t.categories.shippingContainers,
@@ -34,7 +24,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
     'modular-buildings': t.categories.modularBuildings,
   };
 
-  const hasDiscount = product.compareAtPrice && product.compareAtPrice > product.price;
+  const contactLabel = language === 'ar' ? 'تواصل معنا' : 'Contact Us';
 
   if (variant === 'compact') {
     return (
@@ -53,9 +43,14 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           <h3 className="font-medium text-sm line-clamp-1 group-hover:text-primary transition-colors">
             {product.title}
           </h3>
-          <p className="text-primary font-mono text-sm mt-1">
-            {formatPrice(product.price)}
-          </p>
+          <Link
+            to={`/inquiry/${product.slug}`}
+            className="inline-flex items-center gap-1 text-primary text-sm mt-2 hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <MessageSquare className="w-3 h-3" />
+            {contactLabel}
+          </Link>
         </div>
       </Link>
     );
@@ -80,25 +75,16 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
               {t.product.outOfStock}
             </div>
           )}
-          
-          {hasDiscount && product.status !== 'out_of_stock' && (
-            <div className={cn(
-              'absolute top-4 bg-primary text-primary-foreground px-3 py-1 text-xs uppercase tracking-wider font-mono',
-              isRTL ? 'right-4' : 'left-4'
-            )}>
-              {t.product.sale}
-            </div>
-          )}
 
           {/* Quick Actions - Appear on hover with smooth transition */}
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="pointer-events-auto">
-              <AddToCartButton
-                product={product}
-                variant={product.variants[0]}
-                size="icon"
-              />
-            </div>
+            <Link
+              to={`/inquiry/${product.slug}`}
+              className="flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground hover:bg-accent transition-colors pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <MessageSquare className="w-5 h-5" />
+            </Link>
             <Link
               to={`/product/${product.slug}`}
               className="flex items-center justify-center w-12 h-12 bg-foreground text-background hover:bg-muted-foreground transition-colors pointer-events-auto"
@@ -119,28 +105,17 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           </h3>
         </Link>
         
-        <div className={cn('flex items-center gap-3', isRTL && 'flex-row-reverse justify-end')}>
-          <span className="text-xl font-bold text-primary font-mono">
-            {formatPrice(product.price)}
-          </span>
-          {hasDiscount && (
-            <span className="text-sm text-muted-foreground line-through font-mono">
-              {formatPrice(product.compareAtPrice!)}
-            </span>
+        {/* Contact Us Button */}
+        <Link
+          to={`/inquiry/${product.slug}`}
+          className={cn(
+            'inline-flex items-center gap-2 text-primary font-semibold hover:underline',
+            isRTL && 'flex-row-reverse'
           )}
-        </div>
-
-        {product.stock <= 10 && product.stock > 0 && (
-          <p className="text-xs text-accent mt-3 uppercase tracking-wider font-mono animate-pulse">
-            {t.product.onlyLeft.replace('{count}', product.stock.toString())}
-          </p>
-        )}
-
-        {product.bulkPricing && product.bulkPricing.length > 0 && (
-          <p className="text-xs text-muted-foreground mt-3 uppercase tracking-wider font-mono">
-            {t.product.bulkPricing}
-          </p>
-        )}
+        >
+          <MessageSquare className="w-4 h-4" />
+          {contactLabel}
+        </Link>
       </div>
     </div>
   );

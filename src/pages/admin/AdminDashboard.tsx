@@ -14,6 +14,7 @@ import {
   DollarSign,
   Box,
   Loader2,
+  MessageSquare,
 } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -22,6 +23,7 @@ import { CustomersAdmin } from '@/components/admin/CustomersAdmin';
 import { SettingsAdmin } from '@/components/admin/SettingsAdmin';
 import { CouponsAdmin } from '@/components/admin/CouponsAdmin';
 import { ProductsAdmin } from '@/components/admin/ProductsAdmin';
+import { InquiriesAdmin } from '@/components/admin/InquiriesAdmin';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery } from '@tanstack/react-query';
 
@@ -33,6 +35,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     { icon: LayoutDashboard, label: t('admin.dashboard'), path: '/admin' },
     { icon: Package, label: t('admin.products'), path: '/admin/products' },
     { icon: ShoppingCart, label: t('admin.orders'), path: '/admin/orders' },
+    { icon: MessageSquare, label: isRTL() ? 'طلبات الأسعار' : 'Inquiries', path: '/admin/inquiries' },
     { icon: Users, label: t('admin.customers'), path: '/admin/customers' },
     { icon: Tag, label: t('admin.coupons'), path: '/admin/coupons' },
     { icon: Settings, label: t('admin.settings'), path: '/admin/settings' },
@@ -259,6 +262,7 @@ export default function AdminDashboard() {
             <Route path="/" element={<DashboardOverview />} />
             <Route path="/products" element={<ProductsAdmin />} />
             <Route path="/orders" element={<OrdersAdmin />} />
+            <Route path="/inquiries" element={<InquiriesAdmin />} />
             <Route path="/customers" element={<CustomersAdmin />} />
             <Route path="/coupons" element={<CouponsAdmin />} />
             <Route path="/settings" element={<SettingsAdmin />} />
