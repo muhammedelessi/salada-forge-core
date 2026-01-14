@@ -19,6 +19,7 @@ export default function ShopPage() {
 
   const activeCategory = searchParams.get('category') || '';
   const searchQuery = searchParams.get('q') || '';
+  const priceRange = searchParams.get('price') || '';
 
   // Category name translations
   const categoryTranslations: Record<string, string> = {
@@ -29,6 +30,23 @@ export default function ShopPage() {
     'drums-barrels': t.categories.drumsBarrels,
     'modular-buildings': t.categories.modularBuildings,
   };
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('ar-SA', {
+      style: 'currency',
+      currency: 'SAR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const priceRanges = [
+    { id: 'under-500', label: `${t.shop.under} ${formatPrice(500)}`, min: 0, max: 500 },
+    { id: '500-2000', label: `${formatPrice(500)} - ${formatPrice(2000)}`, min: 500, max: 2000 },
+    { id: '2000-5000', label: `${formatPrice(2000)} - ${formatPrice(5000)}`, min: 2000, max: 5000 },
+    { id: '5000-10000', label: `${formatPrice(5000)} - ${formatPrice(10000)}`, min: 5000, max: 10000 },
+    { id: 'over-10000', label: `${t.shop.over} ${formatPrice(10000)}`, min: 10000, max: Infinity },
+  ];
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -49,6 +67,14 @@ export default function ShopPage() {
       );
     }
 
+    // Filter by price range
+    if (priceRange) {
+      const range = priceRanges.find(r => r.id === priceRange);
+      if (range) {
+        filtered = filtered.filter((p) => p.price >= range.min && p.price < range.max);
+      }
+    }
+
     // Sort
     switch (sortBy) {
       case 'price-asc':
@@ -66,7 +92,7 @@ export default function ShopPage() {
     }
 
     return filtered;
-  }, [activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, searchQuery, sortBy, priceRange]);
 
   const handleCategoryChange = (categoryId: string) => {
     if (categoryId) {
@@ -77,18 +103,19 @@ export default function ShopPage() {
     setSearchParams(searchParams);
   };
 
+  const handlePriceRangeChange = (rangeId: string) => {
+    if (rangeId && rangeId !== priceRange) {
+      searchParams.set('price', rangeId);
+    } else {
+      searchParams.delete('price');
+    }
+    setSearchParams(searchParams);
+  };
+
   const clearFilters = () => {
     setSearchParams({});
   };
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('ar-SA', {
-      style: 'currency',
-      currency: 'SAR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
 
   return (
     <Layout>
@@ -103,7 +130,7 @@ export default function ShopPage() {
           </h1>
           <p className="text-muted-foreground">
             {filteredProducts.length} {t.shop.products}
-            {activeCategory && (
+            {(activeCategory || priceRange) && (
               <button
                 onClick={clearFilters}
                 className={`${isRTL ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
@@ -153,13 +180,22 @@ export default function ShopPage() {
 
               <div className="mt-8 pt-8 border-t border-border">
                 <h3 className="text-sm uppercase tracking-wider font-semibold mb-4">{t.shop.priceRange}</h3>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <p>{t.shop.under} {formatPrice(500)}</p>
-                  <p>{formatPrice(500)} - {formatPrice(2000)}</p>
-                  <p>{formatPrice(2000)} - {formatPrice(5000)}</p>
-                  <p>{formatPrice(5000)} - {formatPrice(10000)}</p>
-                  <p>{t.shop.over} {formatPrice(10000)}</p>
-                </div>
+                <ul className="space-y-2">
+                  {priceRanges.map((range) => (
+                    <li key={range.id}>
+                      <button
+                        onClick={() => handlePriceRangeChange(range.id)}
+                        className={`w-full ${isRTL ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                          priceRange === range.id
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                        }`}
+                      >
+                        {range.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </aside>
