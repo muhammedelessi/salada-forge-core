@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
+import saladaLogo from '@/assets/SALADA_LOGO.png';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -66,11 +67,12 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">S</span>
-              </div>
-              <span className="text-xl font-bold tracking-tight">SALADA</span>
+            <Link to="/" className="flex items-center mb-6 hover-lift">
+              <img 
+                src={saladaLogo} 
+                alt="SALADA" 
+                className="h-20 md:h-28 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t('footer.tagline')}
