@@ -48,9 +48,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: t.contact.headquarters,
-      details: isRTL 
-        ? ['طريق الملك فهد', 'الرياض، المملكة العربية السعودية'] 
-        : ['1200 Industrial Blvd', 'Houston, TX 77001, USA'],
+      details: ['أحمد بن محمد العيالي', 'RNNA7850, Riyadh'],
     },
     {
       icon: Clock,
@@ -61,17 +59,11 @@ export default function ContactPage() {
     },
   ];
 
-  const globalOffices = isRTL 
-    ? [
-        { city: 'الرياض', country: 'السعودية (المقر الرئيسي)', address: 'طريق الملك فهد' },
-        { city: 'دبي', country: 'الإمارات', address: 'ميناء جبل علي' },
-        { city: 'جدة', country: 'السعودية', address: 'ميناء جدة الإسلامي' },
-      ]
-    : [
-        { city: 'Houston, TX', country: 'USA (HQ)', address: '1200 Industrial Blvd' },
-        { city: 'Rotterdam', country: 'Netherlands', address: 'Europort 450' },
-        { city: 'Singapore', country: 'Singapore', address: '88 Maritime Square' },
-      ];
+  const globalOffices = [
+    { city: isRTL ? 'الرياض' : 'Riyadh', country: isRTL ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)', address: 'أحمد بن محمد العيالي, RNNA7850' },
+    { city: isRTL ? 'دبي' : 'Dubai', country: isRTL ? 'الإمارات' : 'UAE', address: isRTL ? 'ميناء جبل علي' : 'Jebel Ali Port' },
+    { city: isRTL ? 'جدة' : 'Jeddah', country: isRTL ? 'السعودية' : 'Saudi Arabia', address: isRTL ? 'ميناء جدة الإسلامي' : 'Jeddah Islamic Port' },
+  ];
 
   return (
     <Layout>
@@ -221,7 +213,7 @@ export default function ContactPage() {
                 <div className="text-center text-muted-foreground">
                   <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
                   <p className="text-sm">{t.contact.interactiveMap}</p>
-                  <p className="text-xs">{isRTL ? 'الرياض، السعودية' : 'Houston, TX'}</p>
+                  <p className="text-xs">Riyadh, Saudi Arabia</p>
                 </div>
               </div>
             </div>
