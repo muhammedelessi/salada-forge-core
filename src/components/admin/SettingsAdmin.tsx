@@ -71,8 +71,8 @@ export function SettingsAdmin() {
 
   const [storeSettings, setStoreSettings] = useState<StoreSettings>({
     storeName: 'SALADA',
-    storeEmail: 'info@salada.com',
-    storePhone: '+966 50 123 4567',
+    storeEmail: 'Hello@salada.sa',
+    storePhone: '050 016 5914',
     storeAddress: 'King Fahd Road',
     city: 'Riyadh',
     country: 'Saudi Arabia',

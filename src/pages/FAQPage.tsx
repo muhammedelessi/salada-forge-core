@@ -80,7 +80,7 @@ export default function FAQPage() {
         },
         {
           q: 'How do I report a problem with my order?',
-          a: 'Contact our customer service team immediately at support@salada.com or call 920-000-000. Please have your order number ready and provide photos of any damage or issues. We aim to resolve all concerns within 48 hours.',
+          a: 'Contact our customer service team immediately at Hello@salada.sa or call 050 016 5914. Please have your order number ready and provide photos of any damage or issues. We aim to resolve all concerns within 48 hours.',
         },
         {
           q: 'Do you offer technical support?',
@@ -159,7 +159,7 @@ export default function FAQPage() {
         },
         {
           q: 'كيف أبلغ عن مشكلة في طلبي؟',
-          a: 'تواصل مع فريق خدمة العملاء فوراً على support@salada.com أو اتصل على 920-000-000. يرجى تجهيز رقم طلبك وتقديم صور لأي أضرار أو مشاكل. نهدف إلى حل جميع المخاوف خلال 48 ساعة.',
+          a: 'تواصل مع فريق خدمة العملاء فوراً على Hello@salada.sa أو اتصل على 050 016 5914. يرجى تجهيز رقم طلبك وتقديم صور لأي أضرار أو مشاكل. نهدف إلى حل جميع المخاوف خلال 48 ساعة.',
         },
         {
           q: 'هل تقدمون الدعم الفني؟',
