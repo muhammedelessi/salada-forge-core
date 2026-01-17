@@ -8,6 +8,13 @@ import { Package, Clock, CheckCircle, Truck, XCircle, LogOut, ChevronDown, Chevr
 import { toast } from 'sonner';
 import type { User } from '@supabase/supabase-js';
 import { cn } from '@/lib/utils';
+import { OrderTimeline } from '@/components/orders/OrderTimeline';
+
+interface ShippingUpdate {
+  status: string;
+  timestamp: string;
+  note?: string;
+}
 
 interface Order {
   id: string;
@@ -36,6 +43,7 @@ interface Order {
     price: number;
     image: string;
   }>;
+  shipping_updates?: ShippingUpdate[];
   created_at: string;
 }
 
@@ -459,6 +467,18 @@ export default function OrdersPage() {
                     {/* Order Details */}
                     {expandedOrder === order.id && (
                       <div className="border-t border-border p-6 animate-fade-in">
+                        {/* Order Timeline */}
+                        <div className="mb-8 p-4 bg-secondary/50 border border-border">
+                          <h4 className={cn('font-bold mb-4', isRTL() && 'text-right')}>
+                            {language === 'ar' ? 'تتبع الشحنة' : 'Tracking Status'}
+                          </h4>
+                          <OrderTimeline 
+                            currentStatus={order.status}
+                            shippingUpdates={order.shipping_updates || []}
+                            createdAt={order.created_at}
+                          />
+                        </div>
+
                         {/* Items */}
                         <div className="space-y-4 mb-6">
                           {order.items.map((item, idx) => (

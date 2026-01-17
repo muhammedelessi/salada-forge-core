@@ -161,6 +161,7 @@ export type Database = {
           payment_method: string
           shipping: number
           shipping_address: Json
+          shipping_updates: Json | null
           status: string
           subtotal: number
           tax: number
@@ -180,6 +181,7 @@ export type Database = {
           payment_method: string
           shipping?: number
           shipping_address: Json
+          shipping_updates?: Json | null
           status?: string
           subtotal: number
           tax?: number
@@ -199,6 +201,7 @@ export type Database = {
           payment_method?: string
           shipping?: number
           shipping_address?: Json
+          shipping_updates?: Json | null
           status?: string
           subtotal?: number
           tax?: number
