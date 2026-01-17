@@ -133,7 +133,7 @@ export default function ShopPage() {
             {(activeCategory || priceRange) && (
               <button
                 onClick={clearFilters}
-                className={`${isRTL ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
+                className={`${isRTL() ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
               >
                 {t.shop.clearFilters} <X className="w-4 h-4" />
               </button>
@@ -143,16 +143,16 @@ export default function ShopPage() {
       </section>
 
       <div className="industrial-container py-8">
-        <div className={`flex flex-col lg:flex-row gap-8 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+        <div className={`flex flex-col lg:flex-row gap-8 ${isRTL() ? 'lg:flex-row-reverse' : ''}`}>
           {/* Sidebar Filters - Desktop */}
-          <aside className={`hidden lg:block w-64 flex-shrink-0 ${isRTL ? 'order-last' : ''}`}>
+          <aside className={`hidden lg:block w-64 flex-shrink-0 ${isRTL() ? 'text-right' : ''}`}>
             <div className="sticky top-24">
               <h3 className="text-sm uppercase tracking-wider font-semibold mb-6">{t.shop.categories}</h3>
               <ul className="space-y-2">
                 <li>
                   <button
                     onClick={() => handleCategoryChange('')}
-                    className={`w-full ${isRTL ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                    className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
                       !activeCategory
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -165,14 +165,14 @@ export default function ShopPage() {
                   <li key={category.id}>
                     <button
                       onClick={() => handleCategoryChange(category.id)}
-                      className={`w-full ${isRTL ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                      className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
                         activeCategory === category.id
                           ? 'bg-primary text-primary-foreground'
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                       }`}
                     >
                       {categoryTranslations[category.id] || category.name}
-                      <span className={`${isRTL ? 'float-left' : 'float-right'} font-mono text-xs`}>({category.count})</span>
+                      <span className={`${isRTL() ? 'float-left' : 'float-right'} font-mono text-xs`}>({category.count})</span>
                     </button>
                   </li>
                 ))}
