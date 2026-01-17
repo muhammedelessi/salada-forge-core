@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 0 0% 9%;
-    --foreground: 0 0% 95%;
+    --background: 0 0% 100%;
+    --foreground: 38 74% 25%;
 
-    --card: 0 0% 11%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 98%;
+    --card-foreground: 38 74% 25%;
 
-    --popover: 0 0% 11%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 38 74% 25%;
 
     --primary: 38 74% 41%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 38 20% 95%;
+    --secondary-foreground: 38 74% 25%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 38 15% 92%;
+    --muted-foreground: 38 30% 45%;
 
     --accent: 35 71% 50%;
     --accent-foreground: 0 0% 100%;
@@ -28,28 +28,28 @@
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 38 20% 85%;
+    --input: 38 20% 90%;
     --ring: 38 74% 41%;
 
     --radius: 0rem;
 
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 0 0% 95%;
+    --sidebar-background: 38 20% 97%;
+    --sidebar-foreground: 38 74% 25%;
     --sidebar-primary: 38 74% 41%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
+    --sidebar-accent: 38 15% 92%;
+    --sidebar-accent-foreground: 38 74% 25%;
+    --sidebar-border: 38 20% 85%;
     --sidebar-ring: 38 74% 41%;
 
     /* Industrial Design Tokens */
     --industrial-gold: 38 74% 41%;
     --industrial-gold-light: 35 71% 50%;
-    --industrial-dark: 0 0% 9%;
-    --industrial-darker: 0 0% 6%;
-    --industrial-steel: 0 0% 25%;
-    --industrial-concrete: 0 0% 35%;
+    --industrial-dark: 38 74% 20%;
+    --industrial-darker: 38 74% 15%;
+    --industrial-steel: 38 15% 55%;
+    --industrial-concrete: 38 10% 65%;
 
     /* Typography - Bilingual */
     --font-display: 'IBM Plex Sans Arabic', 'Space Grotesk', sans-serif;
@@ -73,25 +73,25 @@
   --duration-slow: 400ms;
 
   .dark {
-    --background: 0 0% 9%;
+    --background: 38 74% 12%;
     --foreground: 0 0% 95%;
-    --card: 0 0% 11%;
+    --card: 38 50% 15%;
     --card-foreground: 0 0% 95%;
-    --popover: 0 0% 11%;
+    --popover: 38 50% 15%;
     --popover-foreground: 0 0% 95%;
-    --primary: 38 74% 41%;
+    --primary: 38 74% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 15%;
+    --secondary: 38 40% 20%;
     --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 35 71% 50%;
+    --muted: 38 30% 25%;
+    --muted-foreground: 38 20% 60%;
+    --accent: 35 71% 55%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 38 74% 41%;
+    --border: 38 30% 25%;
+    --input: 38 30% 25%;
+    --ring: 38 74% 50%;
   }
 }
 
