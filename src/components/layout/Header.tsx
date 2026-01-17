@@ -25,7 +25,7 @@ export function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="industrial-container">
-          <div className="flex items-center justify-between h-24 md:h-32">
+          <div className={`flex items-center justify-between h-24 md:h-32 ${isRTL() ? 'flex-row-reverse' : ''}`}>
             {/* Logo */}
             <Link to="/" className="flex items-center hover-lift">
               <img 
@@ -36,7 +36,7 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className={`hidden md:flex items-center gap-8 ${isRTL() ? 'flex-row-reverse' : ''}`}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -44,13 +44,13 @@ export function Header() {
                   className="relative text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-medium group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                  <span className={`absolute -bottom-1 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ${isRTL() ? 'right-0' : 'left-0'}`} />
                 </Link>
               ))}
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-2 md:gap-4">
+            <div className={`flex items-center gap-2 md:gap-4 ${isRTL() ? 'flex-row-reverse' : ''}`}>
               <LanguageSwitcher />
               
               <button className="hidden md:flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-foreground transition-colors focus-ring rounded">
@@ -102,7 +102,7 @@ export function Header() {
               isMenuOpen ? 'max-h-96 py-6' : 'max-h-0 py-0'
             )}
           >
-            <nav className="flex flex-col gap-4">
+            <nav className={`flex flex-col gap-4 ${isRTL() ? 'text-right' : ''}`}>
               {navLinks.map((link, index) => (
                 <Link
                   key={link.href}

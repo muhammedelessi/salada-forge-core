@@ -51,17 +51,17 @@ export default function HomePage() {
         <div className={`absolute top-1/2 ${isRTL() ? 'left-0' : 'right-0'} -translate-y-1/2 w-[60%] h-[120%] bg-gradient-to-${isRTL() ? 'r' : 'l'} from-primary/10 to-transparent`} />
         
         <div className="industrial-container relative z-10">
-          <div className="max-w-4xl">
+          <div className={`max-w-4xl ${isRTL() ? 'mr-0 text-right' : ''}`}>
             <span className="industrial-label animate-industrial-fade">{t('hero.label')}</span>
             <h1 className="industrial-heading mt-6 mb-8 animate-industrial-fade delay-100">
               {t('hero.title')}
               <span className="block text-gradient">{t('hero.titleHighlight')}</span>
             </h1>
-            <p className="industrial-subheading max-w-2xl mb-10 animate-industrial-fade delay-200">
+            <p className={`industrial-subheading max-w-2xl mb-10 animate-industrial-fade delay-200 ${isRTL() ? 'mr-0' : ''}`}>
               {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-industrial-fade delay-300">
-              <Link to="/shop" className="industrial-button">
+            <div className={`flex flex-col sm:flex-row gap-4 animate-industrial-fade delay-300 ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
+              <Link to="/shop" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
                 {t('hero.cta')}
                 <ArrowIcon />
               </Link>
@@ -102,14 +102,14 @@ export default function HomePage() {
       {/* Categories Section */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 ${isRTL() ? 'md:flex-row-reverse text-right' : ''}`}>
             <div>
               <span className="industrial-label mb-4 block">{t('categories.label')}</span>
               <h2 className="text-3xl md:text-4xl font-bold">{t('categories.title')}</h2>
             </div>
             <Link
               to="/shop"
-              className="text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium"
+              className={`text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium ${isRTL() ? 'flex-row-reverse' : ''}`}
             >
               {t('categories.viewAll')}
               <ArrowIcon />
@@ -123,8 +123,8 @@ export default function HomePage() {
                 to={`/shop?category=${category.id}`}
                 className="group relative bg-card border border-border p-8 md:p-12 hover:border-primary transition-all duration-300"
               >
-                <div className="flex items-center justify-between">
-                  <div>
+                <div className={`flex items-center justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                  <div className={isRTL() ? 'text-right' : ''}>
                     <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
                       {category.name}
                     </h3>
@@ -146,14 +146,14 @@ export default function HomePage() {
       {/* Featured Products */}
       <section className="industrial-section bg-secondary border-y border-border">
         <div className="industrial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 ${isRTL() ? 'md:flex-row-reverse text-right' : ''}`}>
             <div>
               <span className="industrial-label mb-4 block">{t('featured.label')}</span>
               <h2 className="text-3xl md:text-4xl font-bold">{t('featured.title')}</h2>
             </div>
             <Link
               to="/shop"
-              className="text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium"
+              className={`text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium ${isRTL() ? 'flex-row-reverse' : ''}`}
             >
               {t('featured.viewAll')}
               <ArrowIcon />
@@ -180,9 +180,9 @@ export default function HomePage() {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="bg-card border border-border p-8 hover:border-primary transition-all duration-300"
+                className={`bg-card border border-border p-8 hover:border-primary transition-all duration-300 ${isRTL() ? 'text-right' : ''}`}
               >
-                <feature.icon className="w-10 h-10 text-primary mb-6" />
+                <feature.icon className={`w-10 h-10 text-primary mb-6 ${isRTL() ? 'mr-auto' : ''}`} />
                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.description}
@@ -206,10 +206,10 @@ export default function HomePage() {
             <p className="text-lg text-primary-foreground/80 mb-10">
               {t('cta.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-background text-foreground font-semibold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-secondary"
+                className={`inline-flex items-center justify-center px-8 py-4 bg-background text-foreground font-semibold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-secondary ${isRTL() ? 'flex-row-reverse' : ''}`}
               >
                 {t('cta.getQuote')}
                 <ArrowIcon />
