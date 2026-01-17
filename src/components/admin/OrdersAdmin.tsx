@@ -142,15 +142,32 @@ export function OrdersAdmin() {
   const updateOrderStatus = async (orderId: string, newStatus: string) => {
     setUpdatingOrder(orderId);
     try {
+      // Get current order to append to shipping_updates
+      const currentOrder = orders.find(o => o.id === orderId);
+      const currentUpdates = (currentOrder as any)?.shipping_updates || [];
+      
+      // Add new status update with timestamp
+      const newUpdate = {
+        status: newStatus,
+        timestamp: new Date().toISOString(),
+      };
+      
+      const updatedShippingUpdates = [...currentUpdates, newUpdate];
+
       const { error } = await supabase
         .from('orders')
-        .update({ status: newStatus })
+        .update({ 
+          status: newStatus,
+          shipping_updates: updatedShippingUpdates,
+        })
         .eq('id', orderId);
 
       if (error) throw error;
 
       setOrders(orders.map(order => 
-        order.id === orderId ? { ...order, status: newStatus } : order
+        order.id === orderId 
+          ? { ...order, status: newStatus, shipping_updates: updatedShippingUpdates } as any
+          : order
       ));
       toast.success(c.statusUpdated);
     } catch (error: any) {
