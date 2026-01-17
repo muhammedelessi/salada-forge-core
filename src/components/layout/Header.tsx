@@ -23,7 +23,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-primary/30 shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.15)]">
         <div className="industrial-container">
           <div className={`flex items-center justify-between h-24 md:h-32 ${isRTL() ? 'flex-row-reverse' : ''}`}>
             {/* Logo */}

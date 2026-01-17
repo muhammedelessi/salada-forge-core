@@ -34,7 +34,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-secondary border-t border-border">
+    <footer className="bg-secondary border-t-2 border-primary/30 shadow-[0_-4px_20px_-4px_hsl(var(--primary)/0.15)]">
       {/* Newsletter Section */}
       <div className="border-b border-border">
         <div className="industrial-container py-16">
