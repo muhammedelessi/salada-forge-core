@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cartStore';
 import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -11,8 +11,18 @@ import saladaLogo from '@/assets/SALADA_LOGO.png';
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const itemCount = useCartStore((state) => state.getItemCount());
   const { t, isRTL } = useLanguageStore();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: t('nav.shop'), href: '/shop' },
@@ -23,7 +33,12 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-primary/30 shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.15)]">
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out",
+        isScrolled 
+          ? "bg-background/98 backdrop-blur-md border-b-2 border-primary/40 shadow-[0_4px_30px_-4px_hsl(var(--primary)/0.25)]" 
+          : "bg-background/80 backdrop-blur-sm border-b border-primary/20 shadow-[0_2px_10px_-4px_hsl(var(--primary)/0.1)]"
+      )}>
         <div className="industrial-container">
           <div className={`flex items-center justify-between h-24 md:h-32 ${isRTL() ? 'flex-row-reverse' : ''}`}>
             {/* Logo */}
