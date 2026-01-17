@@ -15,6 +15,7 @@ import {
   Box,
   Loader2,
   MessageSquare,
+  Inbox,
 } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -24,6 +25,7 @@ import { SettingsAdmin } from '@/components/admin/SettingsAdmin';
 import { CouponsAdmin } from '@/components/admin/CouponsAdmin';
 import { ProductsAdmin } from '@/components/admin/ProductsAdmin';
 import { InquiriesAdmin } from '@/components/admin/InquiriesAdmin';
+import { ContactInquiriesAdmin } from '@/components/admin/ContactInquiriesAdmin';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery } from '@tanstack/react-query';
 
@@ -35,7 +37,8 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     { icon: LayoutDashboard, label: t('admin.dashboard'), path: '/admin' },
     { icon: Package, label: t('admin.products'), path: '/admin/products' },
     { icon: ShoppingCart, label: t('admin.orders'), path: '/admin/orders' },
-    { icon: MessageSquare, label: isRTL() ? 'طلبات الأسعار' : 'Inquiries', path: '/admin/inquiries' },
+    { icon: MessageSquare, label: isRTL() ? 'طلبات الأسعار' : 'Product Inquiries', path: '/admin/inquiries' },
+    { icon: Inbox, label: isRTL() ? 'رسائل التواصل' : 'Contact Messages', path: '/admin/contact' },
     { icon: Users, label: t('admin.customers'), path: '/admin/customers' },
     { icon: Tag, label: t('admin.coupons'), path: '/admin/coupons' },
     { icon: Settings, label: t('admin.settings'), path: '/admin/settings' },
@@ -263,6 +266,7 @@ export default function AdminDashboard() {
             <Route path="/products" element={<ProductsAdmin />} />
             <Route path="/orders" element={<OrdersAdmin />} />
             <Route path="/inquiries" element={<InquiriesAdmin />} />
+            <Route path="/contact" element={<ContactInquiriesAdmin />} />
             <Route path="/customers" element={<CustomersAdmin />} />
             <Route path="/coupons" element={<CouponsAdmin />} />
             <Route path="/settings" element={<SettingsAdmin />} />
