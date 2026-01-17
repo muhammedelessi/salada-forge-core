@@ -53,14 +53,12 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: t.contact.emailLabel,
-      details: ['sales@salada.com', 'support@salada.com'],
+      details: ['Hello@salada.sa'],
     },
     {
       icon: Phone,
       title: t.contact.phoneLabel,
-      details: isRTL 
-        ? ['+966 11 234 5678', '+966 11 234 5679'] 
-        : ['+1 (800) 555-0123', '+1 (713) 555-0456'],
+      details: ['050 016 5914'],
     },
     {
       icon: MapPin,
