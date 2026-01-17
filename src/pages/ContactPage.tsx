@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function ContactPage() {
   const { language, isRTL } = useLanguageStore();
@@ -20,16 +21,32 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from('contact_inquiries')
+        .insert({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim() || null,
+          phone: formData.phone.trim() || null,
+          subject: formData.subject,
+          message: formData.message.trim(),
+        });
+
+      if (error) throw error;
+
       toast.success(t.contact.messageSent);
       setFormData({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast.error(isRTL() ? 'حدث خطأ. يرجى المحاولة مرة أخرى.' : 'An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
