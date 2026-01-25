@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { getProductBySlug, products } from '@/data/products';
+import { useProduct, useProducts } from '@/hooks/useProducts';
 import { ProductCard } from '@/components/products/ProductCard';
 import { StickyAddToCart } from '@/components/products/StickyAddToCart';
 import {
@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   Check,
   MessageSquare,
+  Loader2,
 } from 'lucide-react';
 import { ProductVariant } from '@/types';
 import { useLanguageStore } from '@/store/languageStore';
@@ -22,20 +23,27 @@ import { cn } from '@/lib/utils';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const product = getProductBySlug(slug || '');
+  const { data: product, isLoading } = useProduct(slug || '');
+  const { data: allProducts = [] } = useProducts();
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(
-    product?.variants[0]
-  );
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(undefined);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'specs' | 'shipping' | 'bulk'>('specs');
+
+  // Reset selected variant when product changes
+  useEffect(() => {
+    if (product?.variants?.length) {
+      setSelectedVariant(product.variants[0]);
+    }
+  }, [product]);
 
   // Scroll to top when product changes
   useEffect(() => {
     window.scrollTo(0, 0);
+    setSelectedImage(0);
   }, [slug]);
 
   const ChevronIcon = isRTL ? ChevronLeft : ChevronRight;
@@ -48,7 +56,21 @@ export default function ProductDetailPage() {
     'specialty-containers': t.categories.specialtyContainers,
     'drums-barrels': t.categories.drumsBarrels,
     'modular-buildings': t.categories.modularBuildings,
+    'spare-parts': language === 'ar' ? 'قطع الغيار' : 'Spare Parts',
+    'lashing-equipment': language === 'ar' ? 'معدات الربط' : 'Lashing Equipment',
+    'iso-shipping-containers': language === 'ar' ? 'حاويات شحن ISO' : 'ISO Shipping Containers',
+    'storage-containers': language === 'ar' ? 'حاويات التخزين' : 'Storage Containers',
   };
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="industrial-container py-24 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      </Layout>
+    );
+  }
 
   if (!product) {
     return (
@@ -75,7 +97,7 @@ export default function ProductDetailPage() {
   const currentPrice = product.price + (selectedVariant?.priceModifier || 0);
   const hasDiscount = product.compareAtPrice && product.compareAtPrice > product.price;
 
-  const relatedProducts = products
+  const relatedProducts = allProducts
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
@@ -97,7 +119,7 @@ export default function ProductDetailPage() {
               to={`/shop?category=${product.category}`}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              {categoryTranslations[product.category] || product.category.replace('-', ' ')}
+              {categoryTranslations[product.category] || product.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
             </Link>
             <ChevronIcon className="w-4 h-4 text-muted-foreground" />
             <span className="text-foreground truncate max-w-[200px]">{product.title}</span>
@@ -113,7 +135,7 @@ export default function ProductDetailPage() {
             <div className={cn('space-y-4', isRTL && 'lg:col-start-2')}>
               <div className="aspect-square bg-muted overflow-hidden border border-border relative group">
                 <img
-                  src={product.images[selectedImage]}
+                  src={product.images[selectedImage] || '/placeholder.svg'}
                   alt={product.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -153,7 +175,7 @@ export default function ProductDetailPage() {
               <p className="text-muted-foreground mb-8 leading-relaxed">{product.description}</p>
 
               {/* Variants */}
-              {product.variants.length > 1 && (
+              {product.variants && product.variants.length > 1 && (
                 <div className="mb-6">
                   <label className="block text-sm uppercase tracking-wider font-semibold mb-3">
                     {t.productDetail.variant}
@@ -268,18 +290,24 @@ export default function ProductDetailPage() {
             <div className="py-8 animate-fade-in" key={activeTab}>
               {activeTab === 'specs' && (
                 <div className="grid md:grid-cols-2 gap-1">
-                  {product.specifications.map((spec, index) => (
-                    <div
-                      key={index}
-                      className={cn(
-                        'flex justify-between py-3 px-4 bg-secondary even:bg-muted transition-colors hover:bg-muted/80',
-                        isRTL && 'flex-row-reverse'
-                      )}
-                    >
-                      <span className="text-muted-foreground">{spec.label}</span>
-                      <span className="font-mono">{spec.value}</span>
-                    </div>
-                  ))}
+                  {product.specifications && product.specifications.length > 0 ? (
+                    product.specifications.map((spec, index) => (
+                      <div
+                        key={index}
+                        className={cn(
+                          'flex justify-between py-3 px-4 bg-secondary even:bg-muted transition-colors hover:bg-muted/80',
+                          isRTL && 'flex-row-reverse'
+                        )}
+                      >
+                        <span className="text-muted-foreground">{spec.label}</span>
+                        <span className="font-mono">{spec.value}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-muted-foreground col-span-2">
+                      {language === 'ar' ? 'لا توجد مواصفات متاحة' : 'No specifications available'}
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -368,13 +396,13 @@ export default function ProductDetailPage() {
           <div className="industrial-container">
             <h2 className="text-2xl font-bold mb-8">{t.productDetail.relatedProducts}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
-              {relatedProducts.map((product, index) => (
+              {relatedProducts.map((relatedProduct, index) => (
                 <div 
-                  key={product.id} 
+                  key={relatedProduct.id} 
                   className="animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <ProductCard product={product} />
+                  <ProductCard product={relatedProduct} />
                 </div>
               ))}
             </div>

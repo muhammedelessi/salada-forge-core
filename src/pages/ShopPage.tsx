@@ -2,8 +2,8 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { ProductCard } from '@/components/products/ProductCard';
-import { products, categories } from '@/data/products';
-import { ChevronDown, Grid, List, SlidersHorizontal, X } from 'lucide-react';
+import { useProducts, useCategories } from '@/hooks/useProducts';
+import { ChevronDown, Grid, List, SlidersHorizontal, X, Loader2 } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 
@@ -17,6 +17,10 @@ export default function ShopPage() {
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
+  // Fetch products and categories from database
+  const { data: products = [], isLoading: productsLoading } = useProducts();
+  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
+
   const activeCategory = searchParams.get('category') || '';
   const searchQuery = searchParams.get('q') || '';
   const priceRange = searchParams.get('price') || '';
@@ -29,6 +33,10 @@ export default function ShopPage() {
     'specialty-containers': t.categories.specialtyContainers,
     'drums-barrels': t.categories.drumsBarrels,
     'modular-buildings': t.categories.modularBuildings,
+    'spare-parts': language === 'ar' ? 'قطع الغيار' : 'Spare Parts',
+    'lashing-equipment': language === 'ar' ? 'معدات الربط' : 'Lashing Equipment',
+    'iso-shipping-containers': language === 'ar' ? 'حاويات شحن ISO' : 'ISO Shipping Containers',
+    'storage-containers': language === 'ar' ? 'حاويات التخزين' : 'Storage Containers',
   };
 
   const formatPrice = (price: number) => {
@@ -92,7 +100,7 @@ export default function ShopPage() {
     }
 
     return filtered;
-  }, [activeCategory, searchQuery, sortBy, priceRange]);
+  }, [products, activeCategory, searchQuery, sortBy, priceRange]);
 
   const handleCategoryChange = (categoryId: string) => {
     if (categoryId) {
@@ -116,6 +124,7 @@ export default function ShopPage() {
     setSearchParams({});
   };
 
+  const isLoading = productsLoading || categoriesLoading;
 
   return (
     <Layout>
@@ -125,18 +134,27 @@ export default function ShopPage() {
           <span className="industrial-label mb-4 block">{t.shop.catalog}</span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {activeCategory
-              ? categoryTranslations[activeCategory] || t.shop.allProducts
+              ? categoryTranslations[activeCategory] || activeCategory.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
               : t.shop.allProducts}
           </h1>
           <p className="text-muted-foreground">
-            {filteredProducts.length} {t.shop.products}
-            {(activeCategory || priceRange) && (
-              <button
-                onClick={clearFilters}
-                className={`${isRTL() ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
-              >
-                {t.shop.clearFilters} <X className="w-4 h-4" />
-              </button>
+            {isLoading ? (
+              <span className="inline-flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {language === 'ar' ? 'جاري التحميل...' : 'Loading...'}
+              </span>
+            ) : (
+              <>
+                {filteredProducts.length} {t.shop.products}
+                {(activeCategory || priceRange) && (
+                  <button
+                    onClick={clearFilters}
+                    className={`${isRTL() ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
+                  >
+                    {t.shop.clearFilters} <X className="w-4 h-4" />
+                  </button>
+                )}
+              </>
             )}
           </p>
         </div>
@@ -185,7 +203,7 @@ export default function ShopPage() {
                     <li key={range.id}>
                       <button
                         onClick={() => handlePriceRangeChange(range.id)}
-                        className={`w-full ${isRTL ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                        className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
                           priceRange === range.id
                             ? 'bg-primary text-primary-foreground'
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -212,13 +230,13 @@ export default function ShopPage() {
                 {t.shop.filters}
               </button>
 
-              <div className={`flex items-center gap-4 ${isRTL ? 'mr-auto' : 'ml-auto'}`}>
+              <div className={`flex items-center gap-4 ${isRTL() ? 'mr-auto' : 'ml-auto'}`}>
                 {/* Sort Dropdown */}
                 <div className="relative">
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className={`appearance-none bg-secondary border border-border px-4 py-2 ${isRTL ? 'pl-10' : 'pr-10'} text-sm focus:outline-none focus:border-primary`}
+                    className={`appearance-none bg-secondary border border-border px-4 py-2 ${isRTL() ? 'pl-10' : 'pr-10'} text-sm focus:outline-none focus:border-primary`}
                   >
                     <option value="featured">{t.shop.featured}</option>
                     <option value="price-asc">{t.shop.priceLowHigh}</option>
@@ -226,7 +244,7 @@ export default function ShopPage() {
                     <option value="name-asc">{t.shop.nameAZ}</option>
                     <option value="name-desc">{t.shop.nameZA}</option>
                   </select>
-                  <ChevronDown className={`absolute ${isRTL ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none`} />
+                  <ChevronDown className={`absolute ${isRTL() ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none`} />
                 </div>
 
                 {/* View Toggle */}
@@ -282,7 +300,11 @@ export default function ShopPage() {
             )}
 
             {/* Products Grid */}
-            {filteredProducts.length > 0 ? (
+            {isLoading ? (
+              <div className="flex items-center justify-center py-16">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              </div>
+            ) : filteredProducts.length > 0 ? (
               <div
                 className={
                   viewMode === 'grid'
