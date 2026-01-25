@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { getProductBySlug } from '@/data/products';
-import { Send, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { useProduct } from '@/hooks/useProducts';
+import { Send, ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
@@ -23,7 +23,7 @@ export default function ProductInquiryPage() {
   const { slug } = useParams<{ slug: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const product = getProductBySlug(slug || '');
+  const { data: product, isLoading } = useProduct(slug || '');
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
@@ -44,6 +44,16 @@ export default function ProductInquiryPage() {
   }, [slug]);
 
   const ArrowIcon = isRTL ? ArrowRight : ArrowLeft;
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="industrial-container py-24 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      </Layout>
+    );
+  }
 
   if (!product) {
     return (
@@ -192,7 +202,7 @@ export default function ProductInquiryPage() {
                 </h2>
                 <div className="aspect-square bg-muted overflow-hidden mb-4">
                   <img
-                    src={product.images[0]}
+                    src={product.images[0] || '/placeholder.svg'}
                     alt={product.title}
                     className="w-full h-full object-cover"
                   />

@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Box, Truck, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Box, Truck, Shield, Zap, Loader2 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { ProductCard } from '@/components/products/ProductCard';
-import { getFeaturedProducts, categories } from '@/data/products';
+import { useProducts, useCategories } from '@/hooks/useProducts';
 import { useLanguageStore } from '@/store/languageStore';
 
 export default function HomePage() {
-  const featuredProducts = getFeaturedProducts();
+  const { data: products = [], isLoading: productsLoading } = useProducts();
+  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
   const { t, isRTL } = useLanguageStore();
+
+  // Get first 4 products as featured
+  const featuredProducts = products.slice(0, 4);
 
   const stats = [
     { value: '50K+', label: t('stats.unitsDelivered') },
@@ -38,6 +42,15 @@ export default function HomePage() {
       description: t('why.fastDeploymentDesc'),
     },
   ];
+
+  // Category translations
+  const categoryTranslations: Record<string, string> = {
+    'shipping-containers': isRTL() ? 'حاويات الشحن' : 'Shipping Containers',
+    'spare-parts': isRTL() ? 'قطع الغيار' : 'Spare Parts',
+    'lashing-equipment': isRTL() ? 'معدات الربط' : 'Lashing Equipment',
+    'iso-shipping-containers': isRTL() ? 'حاويات شحن ISO' : 'ISO Shipping Containers',
+    'storage-containers': isRTL() ? 'حاويات التخزين' : 'Storage Containers',
+  };
 
   const ArrowIcon = () => (
     <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
@@ -116,30 +129,36 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {categories.map((category, index) => (
-              <Link
-                key={category.id}
-                to={`/shop?category=${category.id}`}
-                className="group relative bg-card border border-border p-8 md:p-12 hover:border-primary transition-all duration-300"
-              >
-                <div className={`flex items-center justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
-                  <div className={isRTL() ? 'text-right' : ''}>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                      {category.name}
-                    </h3>
-                    <span className="text-sm text-muted-foreground font-mono">
-                      {category.count} {t('categories.products')}
-                    </span>
+          {categoriesLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+              {categories.slice(0, 6).map((category, index) => (
+                <Link
+                  key={category.id}
+                  to={`/shop?category=${category.id}`}
+                  className="group relative bg-card border border-border p-8 md:p-12 hover:border-primary transition-all duration-300"
+                >
+                  <div className={`flex items-center justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                    <div className={isRTL() ? 'text-right' : ''}>
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                        {categoryTranslations[category.id] || category.name}
+                      </h3>
+                      <span className="text-sm text-muted-foreground font-mono">
+                        {category.count} {t('categories.products')}
+                      </span>
+                    </div>
+                    <ArrowRight className={`w-6 h-6 text-muted-foreground group-hover:text-primary transition-all ${isRTL() ? 'group-hover:-translate-x-2 rotate-180' : 'group-hover:translate-x-2'}`} />
                   </div>
-                  <ArrowRight className={`w-6 h-6 text-muted-foreground group-hover:text-primary transition-all ${isRTL() ? 'group-hover:-translate-x-2 rotate-180' : 'group-hover:translate-x-2'}`} />
-                </div>
-                <div className={`absolute top-4 ${isRTL() ? 'left-4' : 'right-4'} text-6xl font-bold text-border/50 font-mono`}>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div className={`absolute top-4 ${isRTL() ? 'left-4' : 'right-4'} text-6xl font-bold text-border/50 font-mono`}>
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -160,11 +179,17 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {productsLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
