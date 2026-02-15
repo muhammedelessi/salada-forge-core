@@ -26,6 +26,7 @@ export function Header() {
 
   const navLinks = [
     { label: t('nav.solutions'), href: '/solutions' },
+    { label: t('nav.shop'), href: '/shop' },
     { label: t('nav.industries'), href: '/industries' },
     { label: t('nav.whySalada'), href: '/why-salada' },
     { label: t('nav.about'), href: '/about' },
