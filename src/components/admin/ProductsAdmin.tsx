@@ -268,12 +268,17 @@ export function ProductsAdmin() {
       };
 
       if (editingProduct) {
-        const { error } = await supabase
+        const { error, data, count } = await supabase
           .from('products')
           .update(productData)
-          .eq('id', editingProduct.id);
+          .eq('id', editingProduct.id)
+          .select();
 
         if (error) throw error;
+        if (!data || data.length === 0) {
+          toast.error(isArabic ? 'فشل التحديث - تحقق من صلاحيات المسؤول' : 'Update failed - check admin permissions');
+          return;
+        }
         toast.success(isArabic ? 'تم تحديث المنتج' : 'Product updated');
       } else {
         const { error } = await supabase
@@ -432,16 +437,26 @@ export function ProductsAdmin() {
     const uploadedUrls: string[] = [];
 
     try {
+      // Check auth first
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error(isArabic ? 'يجب تسجيل الدخول أولاً' : 'You must be logged in first');
+        return;
+      }
+
       for (const file of Array.from(files)) {
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
         const filePath = `products/${fileName}`;
 
-        const { error: uploadError } = await supabase.storage
+        const { error: uploadError, data: uploadData } = await supabase.storage
           .from('product-images')
           .upload(filePath, file);
 
-        if (uploadError) throw uploadError;
+        if (uploadError) {
+          console.error('Storage upload error:', uploadError);
+          throw uploadError;
+        }
 
         const { data: { publicUrl } } = supabase.storage
           .from('product-images')
@@ -454,12 +469,14 @@ export function ProductsAdmin() {
         ...prev,
         images: [...prev.images, ...uploadedUrls]
       }));
-      toast.success(isArabic ? 'تم رفع الصور' : 'Images uploaded');
+      toast.success(isArabic ? `تم رفع ${uploadedUrls.length} صورة` : `${uploadedUrls.length} image(s) uploaded`);
     } catch (error: any) {
       console.error('Error uploading images:', error);
-      toast.error(isArabic ? 'خطأ في رفع الصور' : 'Error uploading images');
+      toast.error(isArabic ? `خطأ في رفع الصور: ${error.message}` : `Error uploading images: ${error.message}`);
     } finally {
       setUploading(false);
+      // Reset file input so the same file can be selected again
+      e.target.value = '';
     }
   };
 
