@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Package,
@@ -248,6 +248,55 @@ function PlaceholderPage({ title }: { title: string }) {
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t, isRTL } = useLanguageStore();
+  const [authState, setAuthState] = useState<'loading' | 'unauthorized' | 'authorized'>('loading');
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setAuthState('unauthorized');
+        return;
+      }
+      const { data } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', session.user.id)
+        .eq('role', 'admin')
+        .maybeSingle();
+      
+      setAuthState(data ? 'authorized' : 'unauthorized');
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      checkAdmin();
+    });
+    checkAdmin();
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (authState === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (authState === 'unauthorized') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4 p-8">
+          <AlertTriangle className="w-12 h-12 text-destructive mx-auto" />
+          <h1 className="text-2xl font-bold">{isRTL() ? 'غير مصرح' : 'Unauthorized'}</h1>
+          <p className="text-muted-foreground">{isRTL() ? 'يجب تسجيل الدخول كمسؤول' : 'You must be logged in as an admin.'}</p>
+          <Link to="/auth" className="inline-block industrial-button mt-4">
+            {isRTL() ? 'تسجيل الدخول' : 'Sign In'}
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
