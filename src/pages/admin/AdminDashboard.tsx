@@ -248,44 +248,6 @@ function PlaceholderPage({ title }: { title: string }) {
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t, isRTL } = useLanguageStore();
-  const [authState, setAuthState] = useState<'loading' | 'unauthorized' | 'authorized'>('loading');
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setAuthState(session ? 'authorized' : 'unauthorized');
-    };
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-      checkAuth();
-    });
-    checkAuth();
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (authState === 'loading') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (authState === 'unauthorized') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4 p-8">
-          <AlertTriangle className="w-12 h-12 text-destructive mx-auto" />
-          <h1 className="text-2xl font-bold">{isRTL() ? 'غير مصرح' : 'Unauthorized'}</h1>
-          <p className="text-muted-foreground">{isRTL() ? 'يجب تسجيل الدخول' : 'You must be logged in.'}</p>
-          <Link to="/auth" className="inline-block industrial-button mt-4">
-            {isRTL() ? 'تسجيل الدخول' : 'Sign In'}
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background">
