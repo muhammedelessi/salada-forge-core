@@ -1,95 +1,88 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Anchor, Ship, Shield, Link2, Wrench, Container, Globe, CheckCircle, Loader2 } from 'lucide-react';
+import { ArrowRight, Truck, Ship, Plane, Warehouse, Wrench, Settings, Shield, Globe, CheckCircle, Zap, MapPin } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguageStore } from '@/store/languageStore';
-import heroImage from '@/assets/hero-port.jpg';
+import heroImage from '@/assets/hero-logistics.jpg';
+import seaImage from '@/assets/solutions-sea.jpg';
+import storageImage from '@/assets/solutions-storage.jpg';
 import lashingImage from '@/assets/divisions-lashing.jpg';
 
 export default function HomePage() {
   const { t, isRTL } = useLanguageStore();
 
-  const stats = [
-    { value: '50K+', label: t('stats.unitsDelivered') },
-    { value: '25+', label: t('stats.yearsExperience') },
-    { value: '120+', label: t('stats.countriesServed') },
-    { value: '99.8%', label: t('stats.onTimeDelivery') },
-  ];
+  const ArrowIcon = () => (
+    <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
+  );
 
-  const divisions = [
+  const solutions = [
     {
-      icon: Link2,
-      title: t('divisions.lashing'),
-      description: t('divisions.lashingDesc'),
-      href: '/shop?category=lashing-equipment',
-      label: '01',
-    },
-    {
-      icon: Container,
-      title: t('divisions.container'),
-      description: t('divisions.containerDesc'),
-      href: '/shop?category=land-shipping-container',
-      label: '02',
-    },
-    {
-      icon: Anchor,
-      title: t('divisions.port'),
-      description: t('divisions.portDesc'),
-      href: '/shop?category=spare-parts',
-      label: '03',
-    },
-    {
-      icon: Wrench,
-      title: t('divisions.hardware'),
-      description: t('divisions.hardwareDesc'),
-      href: '/shop?category=spare-parts',
-      label: '04',
+      icon: Truck,
+      title: t('solutions.landFreight'),
+      description: t('solutions.landFreightDesc'),
+      image: lashingImage,
+      href: '/solutions#land',
     },
     {
       icon: Ship,
-      title: t('divisions.logistics'),
-      description: t('divisions.logisticsDesc'),
-      href: '/shop?category=storage-containers',
-      label: '05',
+      title: t('solutions.seaFreight'),
+      description: t('solutions.seaFreightDesc'),
+      image: seaImage,
+      href: '/solutions#sea',
+    },
+    {
+      icon: Plane,
+      title: t('solutions.airFreight'),
+      description: t('solutions.airFreightDesc'),
+      image: heroImage,
+      href: '/solutions#air',
+    },
+    {
+      icon: Warehouse,
+      title: t('solutions.storage'),
+      description: t('solutions.storageDesc'),
+      image: storageImage,
+      href: '/solutions#storage',
+    },
+  ];
+
+  const stats = [
+    { value: '15+', label: t('stats.yearsExperience') },
+    { value: '500+', label: t('stats.projectsDelivered') },
+    { value: '50+', label: t('stats.clientsServed') },
+    { value: '99.5%', label: t('stats.onTimeDelivery') },
+  ];
+
+  const whySalada = [
+    {
+      icon: Shield,
+      title: t('why.onePartner'),
+      description: t('why.onePartnerDesc'),
+    },
+    {
+      icon: Zap,
+      title: t('why.rapidDeployment'),
+      description: t('why.rapidDeploymentDesc'),
+    },
+    {
+      icon: MapPin,
+      title: t('why.nationalCoverage'),
+      description: t('why.nationalCoverageDesc'),
+    },
+    {
+      icon: CheckCircle,
+      title: t('why.compliance'),
+      description: t('why.complianceDesc'),
     },
   ];
 
   const industries = [
-    t('industries.ports'),
-    t('industries.shippingLines'),
-    t('industries.freightForwarders'),
-    t('industries.offshore'),
-    t('industries.industrialLogistics'),
-    t('industries.maritimeContractors'),
-    t('industries.governmentTransport'),
-    t('industries.defenseLogistics'),
+    { name: t('industries.construction'), icon: '🏗️' },
+    { name: t('industries.oilGas'), icon: '🛢️' },
+    { name: t('industries.manufacturing'), icon: '🏭' },
+    { name: t('industries.logisticsPorts'), icon: '🚢' },
+    { name: t('industries.government'), icon: '🏛️' },
+    { name: t('industries.megaProjects'), icon: '📐' },
   ];
-
-  const strengths = [
-    {
-      icon: Shield,
-      title: t('why.certifiedQuality'),
-      description: t('why.certifiedQualityDesc'),
-    },
-    {
-      icon: Globe,
-      title: t('why.globalLogistics'),
-      description: t('why.globalLogisticsDesc'),
-    },
-    {
-      icon: Wrench,
-      title: t('why.industrialGrade'),
-      description: t('why.industrialGradeDesc'),
-    },
-    {
-      icon: CheckCircle,
-      title: t('why.fastDeployment'),
-      description: t('why.fastDeploymentDesc'),
-    },
-  ];
-
-  const ArrowIcon = () => (
-    <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
-  );
 
   return (
     <Layout>
@@ -97,8 +90,8 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20" />
         </div>
         
         <div className="industrial-container relative z-10">
@@ -112,7 +105,7 @@ export default function HomePage() {
               {t('hero.description')}
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 animate-industrial-fade delay-300 ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
-              <Link to="/shop" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
+              <Link to="/solutions" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
                 {t('hero.cta')}
                 <ArrowIcon />
               </Link>
@@ -126,8 +119,23 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       </section>
 
-      {/* Stats Section */}
+      {/* Vision 2030 Intro */}
       <section className="border-y border-border bg-secondary/50">
+        <div className="industrial-container py-16 md:py-20">
+          <div className={`max-w-4xl mx-auto text-center ${isRTL() ? 'text-center' : ''}`}>
+            <span className="industrial-label mb-4 block">{t('vision.label')}</span>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-snug">
+              {t('vision.title')}
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              {t('vision.description')}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="border-b border-border">
         <div className="industrial-container">
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (
@@ -149,54 +157,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Core Divisions */}
+      {/* Solutions — Land, Sea, Air, Storage */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className={`mb-16 ${isRTL() ? 'text-right' : ''}`}>
-            <span className="industrial-label mb-4 block">{t('divisions.label')}</span>
+            <span className="industrial-label mb-4 block">{t('solutions.label')}</span>
             <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight">
-              {t('divisions.title')}
+              {t('solutions.title')}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-            {divisions.map((division) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            {solutions.map((solution) => (
               <Link
-                key={division.label}
-                to={division.href}
-                className={`group relative bg-card p-8 md:p-10 hover:bg-secondary transition-all duration-500 ${isRTL() ? 'text-right' : ''}`}
+                key={solution.title}
+                to={solution.href}
+                className={`group relative bg-card overflow-hidden ${isRTL() ? 'text-right' : ''}`}
               >
-                <div className={`absolute top-6 ${isRTL() ? 'left-6' : 'right-6'} text-5xl font-bold text-border font-mono group-hover:text-primary/20 transition-colors`}>
-                  {division.label}
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={solution.image}
+                    alt={solution.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
                 </div>
-                <division.icon className={`w-10 h-10 text-primary mb-6 ${isRTL() ? 'mr-0' : ''}`} />
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {division.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  {division.description}
-                </p>
-                <span className={`inline-flex items-center text-xs uppercase tracking-wider text-primary font-mono opacity-0 group-hover:opacity-100 transition-opacity ${isRTL() ? 'flex-row-reverse' : ''}`}>
-                  {t('divisions.explore')}
-                  <ArrowIcon />
-                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+                  <solution.icon className="w-10 h-10 text-primary mb-4" />
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                    {solution.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-md">
+                    {solution.description}
+                  </p>
+                  <span className={`inline-flex items-center text-xs uppercase tracking-wider text-primary font-mono opacity-0 group-hover:opacity-100 transition-opacity ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                    {t('solutions.learnMore')}
+                    <ArrowIcon />
+                  </span>
+                </div>
               </Link>
             ))}
-            {/* Visual accent card */}
-            <div className="relative bg-card overflow-hidden hidden lg:block">
-              <img src={lashingImage} alt="" className="w-full h-full object-cover opacity-40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <p className="text-sm text-primary font-mono uppercase tracking-wider">
-                  {t('divisions.engineered')}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Industries Served */}
+      {/* Industries We Serve */}
       <section className="industrial-section bg-secondary/30 border-y border-border">
         <div className="industrial-container">
           <div className={`grid lg:grid-cols-2 gap-16 items-center ${isRTL() ? 'lg:grid-flow-dense' : ''}`}>
@@ -208,8 +213,8 @@ export default function HomePage() {
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                 {t('industries.description')}
               </p>
-              <Link to="/contact" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
-                {t('industries.partner')}
+              <Link to="/industries" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                {t('industries.viewAll')}
                 <ArrowIcon />
               </Link>
             </div>
@@ -219,10 +224,8 @@ export default function HomePage() {
                   key={index}
                   className={`bg-card p-6 hover:bg-secondary transition-colors ${isRTL() ? 'text-right' : ''}`}
                 >
-                  <span className="text-xs text-primary font-mono mb-2 block">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-sm font-semibold">{industry}</span>
+                  <span className="text-2xl mb-3 block">{industry.icon}</span>
+                  <span className="text-sm font-semibold">{industry.name}</span>
                 </div>
               ))}
             </div>
@@ -230,7 +233,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Salada */}
+      {/* Why Choose Salada */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="text-center mb-16">
@@ -241,7 +244,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
-            {strengths.map((item) => (
+            {whySalada.map((item) => (
               <div
                 key={item.title}
                 className={`bg-card p-8 hover:bg-secondary transition-all duration-300 ${isRTL() ? 'text-right' : ''}`}
@@ -251,35 +254,6 @@ export default function HomePage() {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {item.description}
                 </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Global Presence */}
-      <section className="industrial-section bg-secondary/30 border-y border-border">
-        <div className="industrial-container">
-          <div className="text-center mb-16">
-            <span className="industrial-label mb-4 block">{t('global.label')}</span>
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-4">
-              {t('global.title')}
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {t('global.description')}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
-            {[
-              { region: t('global.middleEast'), detail: t('global.middleEastDetail') },
-              { region: t('global.africa'), detail: t('global.africaDetail') },
-              { region: t('global.asia'), detail: t('global.asiaDetail') },
-              { region: t('global.europe'), detail: t('global.europeDetail') },
-            ].map((item) => (
-              <div key={item.region} className={`bg-card p-8 text-center`}>
-                <Globe className="w-8 h-8 text-primary mx-auto mb-4" />
-                <h3 className="font-bold mb-1">{item.region}</h3>
-                <p className="text-xs text-muted-foreground">{item.detail}</p>
               </div>
             ))}
           </div>
@@ -308,7 +282,7 @@ export default function HomePage() {
                 <ArrowIcon />
               </Link>
               <Link
-                to="/shop"
+                to="/solutions"
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-foreground text-primary-foreground font-semibold uppercase tracking-wider text-sm transition-all duration-300 hover:bg-primary-foreground hover:text-primary"
               >
                 {t('cta.browseCatalog')}
