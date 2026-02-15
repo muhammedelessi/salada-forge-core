@@ -437,12 +437,6 @@ export function ProductsAdmin() {
     const uploadedUrls: string[] = [];
 
     try {
-      // Check auth first
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast.error(isArabic ? 'يجب تسجيل الدخول أولاً' : 'You must be logged in first');
-        return;
-      }
 
       for (const file of Array.from(files)) {
         const fileExt = file.name.split('.').pop();
