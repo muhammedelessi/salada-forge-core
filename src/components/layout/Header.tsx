@@ -25,10 +25,11 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { label: t('nav.shop'), href: '/shop' },
+    { label: t('nav.solutions'), href: '/solutions' },
+    { label: t('nav.industries'), href: '/industries' },
+    { label: t('nav.whySalada'), href: '/why-salada' },
     { label: t('nav.about'), href: '/about' },
     { label: t('nav.contact'), href: '/contact' },
-    { label: t('nav.faq'), href: '/faq' },
   ];
 
   return (
@@ -68,10 +69,6 @@ export function Header() {
             <div className={`flex items-center gap-2 md:gap-4 ${isRTL() ? 'flex-row-reverse' : ''}`}>
               <LanguageSwitcher />
               
-              <button className="hidden md:flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-foreground transition-colors focus-ring rounded">
-                <Search className="w-5 h-5" />
-              </button>
-              
               <Link
                 to="/account"
                 className="hidden md:flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-foreground transition-colors focus-ring rounded"
@@ -79,7 +76,7 @@ export function Header() {
                 <User className="w-5 h-5" />
               </Link>
 
-              {/* Cart Button - Opens Drawer */}
+              {/* Cart Button */}
               <button
                 onClick={() => setIsCartOpen(true)}
                 className={cn(
@@ -141,7 +138,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* Cart Drawer */}
       <CartDrawer open={isCartOpen} onOpenChange={setIsCartOpen} />
     </>
   );

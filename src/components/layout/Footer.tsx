@@ -9,20 +9,22 @@ export function Footer() {
 
   const footerLinks = {
     solutions: [
-      { label: t('footer.lashingEquipment'), href: '/shop?category=lashing-equipment' },
-      { label: t('footer.containerInfra'), href: '/shop?category=land-shipping-container' },
-      { label: t('footer.spareParts'), href: '/shop?category=spare-parts' },
-      { label: t('footer.storageContainers'), href: '/shop?category=storage-containers' },
+      { label: t('footer.landFreight'), href: '/solutions#land' },
+      { label: t('footer.seaFreight'), href: '/solutions#sea' },
+      { label: t('footer.airFreight'), href: '/solutions#air' },
+      { label: t('footer.storageUnits'), href: '/solutions#storage' },
+      { label: t('footer.spareParts'), href: '/solutions#spare' },
+      { label: t('footer.customEng'), href: '/solutions#custom' },
     ],
     company: [
       { label: t('footer.aboutUs'), href: '/about' },
-      { label: t('nav.contact'), href: '/contact' },
-      { label: t('footer.careers'), href: '/careers' },
+      { label: t('footer.whySalada'), href: '/why-salada' },
+      { label: t('footer.industriesServed'), href: '/industries' },
+      { label: t('footer.contactUs'), href: '/contact' },
     ],
     support: [
-      { label: t('nav.faq'), href: '/faq' },
+      { label: t('footer.faqLink'), href: '/faq' },
       { label: t('footer.shippingInfo'), href: '/shipping' },
-      { label: t('footer.trackOrder'), href: '/track' },
     ],
     legal: [
       { label: t('footer.privacyPolicy'), href: '/privacy' },
