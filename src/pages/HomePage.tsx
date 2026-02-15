@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Box, Truck, Shield, Zap, Loader2 } from 'lucide-react';
+import { ArrowRight, Anchor, Ship, Shield, Link2, Wrench, Container, Globe, CheckCircle, Loader2 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
-import { ProductCard } from '@/components/products/ProductCard';
-import { useProducts, useCategories } from '@/hooks/useProducts';
 import { useLanguageStore } from '@/store/languageStore';
+import heroImage from '@/assets/hero-port.jpg';
+import lashingImage from '@/assets/divisions-lashing.jpg';
 
 export default function HomePage() {
-  const { data: products = [], isLoading: productsLoading } = useProducts();
-  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
   const { t, isRTL } = useLanguageStore();
-
-  // Get first 4 products as featured
-  const featuredProducts = products.slice(0, 4);
 
   const stats = [
     { value: '50K+', label: t('stats.unitsDelivered') },
@@ -20,37 +15,77 @@ export default function HomePage() {
     { value: '99.8%', label: t('stats.onTimeDelivery') },
   ];
 
-  const features = [
+  const divisions = [
     {
-      icon: Box,
-      title: t('why.industrialGrade'),
-      description: t('why.industrialGradeDesc'),
+      icon: Link2,
+      title: t('divisions.lashing'),
+      description: t('divisions.lashingDesc'),
+      href: '/shop?category=lashing-equipment',
+      label: '01',
     },
     {
-      icon: Truck,
-      title: t('why.globalLogistics'),
-      description: t('why.globalLogisticsDesc'),
+      icon: Container,
+      title: t('divisions.container'),
+      description: t('divisions.containerDesc'),
+      href: '/shop?category=land-shipping-container',
+      label: '02',
     },
+    {
+      icon: Anchor,
+      title: t('divisions.port'),
+      description: t('divisions.portDesc'),
+      href: '/shop?category=spare-parts',
+      label: '03',
+    },
+    {
+      icon: Wrench,
+      title: t('divisions.hardware'),
+      description: t('divisions.hardwareDesc'),
+      href: '/shop?category=spare-parts',
+      label: '04',
+    },
+    {
+      icon: Ship,
+      title: t('divisions.logistics'),
+      description: t('divisions.logisticsDesc'),
+      href: '/shop?category=storage-containers',
+      label: '05',
+    },
+  ];
+
+  const industries = [
+    t('industries.ports'),
+    t('industries.shippingLines'),
+    t('industries.freightForwarders'),
+    t('industries.offshore'),
+    t('industries.industrialLogistics'),
+    t('industries.maritimeContractors'),
+    t('industries.governmentTransport'),
+    t('industries.defenseLogistics'),
+  ];
+
+  const strengths = [
     {
       icon: Shield,
       title: t('why.certifiedQuality'),
       description: t('why.certifiedQualityDesc'),
     },
     {
-      icon: Zap,
+      icon: Globe,
+      title: t('why.globalLogistics'),
+      description: t('why.globalLogisticsDesc'),
+    },
+    {
+      icon: Wrench,
+      title: t('why.industrialGrade'),
+      description: t('why.industrialGradeDesc'),
+    },
+    {
+      icon: CheckCircle,
       title: t('why.fastDeployment'),
       description: t('why.fastDeploymentDesc'),
     },
   ];
-
-  // Category translations
-  const categoryTranslations: Record<string, string> = {
-    'shipping-containers': isRTL() ? 'حاويات الشحن' : 'Shipping Containers',
-    'spare-parts': isRTL() ? 'قطع الغيار' : 'Spare Parts',
-    'lashing-equipment': isRTL() ? 'معدات الربط' : 'Lashing Equipment',
-    'iso-shipping-containers': isRTL() ? 'حاويات شحن ISO' : 'ISO Shipping Containers',
-    'storage-containers': isRTL() ? 'حاويات التخزين' : 'Storage Containers',
-  };
 
   const ArrowIcon = () => (
     <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
@@ -59,18 +94,21 @@ export default function HomePage() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 grid-overlay opacity-30" />
-        <div className={`absolute top-1/2 ${isRTL() ? 'left-0' : 'right-0'} -translate-y-1/2 w-[60%] h-[120%] bg-gradient-to-${isRTL() ? 'r' : 'l'} from-primary/10 to-transparent`} />
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+        </div>
         
         <div className="industrial-container relative z-10">
           <div className={`max-w-4xl ${isRTL() ? 'mr-0 text-right' : ''}`}>
             <span className="industrial-label animate-industrial-fade">{t('hero.label')}</span>
-            <h1 className="industrial-heading mt-6 mb-8 animate-industrial-fade delay-100">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter mt-6 mb-8 animate-industrial-fade delay-100 leading-[0.9]">
               {t('hero.title')}
               <span className="block text-gradient">{t('hero.titleHighlight')}</span>
             </h1>
-            <p className={`industrial-subheading max-w-2xl mb-10 animate-industrial-fade delay-200 ${isRTL() ? 'mr-0' : ''}`}>
+            <p className={`text-xl md:text-2xl text-muted-foreground max-w-2xl mb-10 animate-industrial-fade delay-200 leading-relaxed ${isRTL() ? 'mr-0' : ''}`}>
               {t('hero.description')}
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 animate-industrial-fade delay-300 ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
@@ -85,12 +123,11 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       </section>
 
       {/* Stats Section */}
-      <section className="border-y border-border bg-secondary">
+      <section className="border-y border-border bg-secondary/50">
         <div className="industrial-container">
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (
@@ -112,106 +149,137 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories Section */}
+      {/* Core Divisions */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 ${isRTL() ? 'md:flex-row-reverse text-right' : ''}`}>
-            <div>
-              <span className="industrial-label mb-4 block">{t('categories.label')}</span>
-              <h2 className="text-3xl md:text-4xl font-bold">{t('categories.title')}</h2>
-            </div>
-            <Link
-              to="/shop"
-              className={`text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium ${isRTL() ? 'flex-row-reverse' : ''}`}
-            >
-              {t('categories.viewAll')}
-              <ArrowIcon />
-            </Link>
+          <div className={`mb-16 ${isRTL() ? 'text-right' : ''}`}>
+            <span className="industrial-label mb-4 block">{t('divisions.label')}</span>
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight">
+              {t('divisions.title')}
+            </h2>
           </div>
 
-          {categoriesLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+            {divisions.map((division) => (
+              <Link
+                key={division.label}
+                to={division.href}
+                className={`group relative bg-card p-8 md:p-10 hover:bg-secondary transition-all duration-500 ${isRTL() ? 'text-right' : ''}`}
+              >
+                <div className={`absolute top-6 ${isRTL() ? 'left-6' : 'right-6'} text-5xl font-bold text-border font-mono group-hover:text-primary/20 transition-colors`}>
+                  {division.label}
+                </div>
+                <division.icon className={`w-10 h-10 text-primary mb-6 ${isRTL() ? 'mr-0' : ''}`} />
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  {division.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                  {division.description}
+                </p>
+                <span className={`inline-flex items-center text-xs uppercase tracking-wider text-primary font-mono opacity-0 group-hover:opacity-100 transition-opacity ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                  {t('divisions.explore')}
+                  <ArrowIcon />
+                </span>
+              </Link>
+            ))}
+            {/* Visual accent card */}
+            <div className="relative bg-card overflow-hidden hidden lg:block">
+              <img src={lashingImage} alt="" className="w-full h-full object-cover opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <p className="text-sm text-primary font-mono uppercase tracking-wider">
+                  {t('divisions.engineered')}
+                </p>
+              </div>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-              {categories.slice(0, 6).map((category, index) => (
-                <Link
-                  key={category.id}
-                  to={`/shop?category=${category.id}`}
-                  className="group relative bg-card border border-border p-8 md:p-12 hover:border-primary transition-all duration-300"
-                >
-                  <div className={`flex items-center justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
-                    <div className={isRTL() ? 'text-right' : ''}>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                        {categoryTranslations[category.id] || category.name}
-                      </h3>
-                      <span className="text-sm text-muted-foreground font-mono">
-                        {category.count} {t('categories.products')}
-                      </span>
-                    </div>
-                    <ArrowRight className={`w-6 h-6 text-muted-foreground group-hover:text-primary transition-all ${isRTL() ? 'group-hover:-translate-x-2 rotate-180' : 'group-hover:translate-x-2'}`} />
-                  </div>
-                  <div className={`absolute top-4 ${isRTL() ? 'left-4' : 'right-4'} text-6xl font-bold text-border/50 font-mono`}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="industrial-section bg-secondary border-y border-border">
+      {/* Industries Served */}
+      <section className="industrial-section bg-secondary/30 border-y border-border">
         <div className="industrial-container">
-          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 ${isRTL() ? 'md:flex-row-reverse text-right' : ''}`}>
-            <div>
-              <span className="industrial-label mb-4 block">{t('featured.label')}</span>
-              <h2 className="text-3xl md:text-4xl font-bold">{t('featured.title')}</h2>
+          <div className={`grid lg:grid-cols-2 gap-16 items-center ${isRTL() ? 'lg:grid-flow-dense' : ''}`}>
+            <div className={isRTL() ? 'text-right lg:col-start-2' : ''}>
+              <span className="industrial-label mb-4 block">{t('industries.label')}</span>
+              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-6">
+                {t('industries.title')}
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+                {t('industries.description')}
+              </p>
+              <Link to="/contact" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                {t('industries.partner')}
+                <ArrowIcon />
+              </Link>
             </div>
-            <Link
-              to="/shop"
-              className={`text-primary hover:text-accent transition-colors flex items-center gap-2 text-sm uppercase tracking-wider font-medium ${isRTL() ? 'flex-row-reverse' : ''}`}
-            >
-              {t('featured.viewAll')}
-              <ArrowIcon />
-            </Link>
-          </div>
-
-          {productsLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+            <div className={`grid grid-cols-2 gap-px bg-border ${isRTL() ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+              {industries.map((industry, index) => (
+                <div
+                  key={index}
+                  className={`bg-card p-6 hover:bg-secondary transition-colors ${isRTL() ? 'text-right' : ''}`}
+                >
+                  <span className="text-xs text-primary font-mono mb-2 block">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-sm font-semibold">{industry}</span>
+                </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Why Salada */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="text-center mb-16">
             <span className="industrial-label mb-4 block">{t('why.label')}</span>
-            <h2 className="text-3xl md:text-4xl font-bold">{t('why.title')}</h2>
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight">
+              {t('why.title')}
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-            {features.map((feature) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+            {strengths.map((item) => (
               <div
-                key={feature.title}
-                className={`bg-card border border-border p-8 hover:border-primary transition-all duration-300 ${isRTL() ? 'text-right' : ''}`}
+                key={item.title}
+                className={`bg-card p-8 hover:bg-secondary transition-all duration-300 ${isRTL() ? 'text-right' : ''}`}
               >
-                <feature.icon className={`w-10 h-10 text-primary mb-6 ${isRTL() ? 'mr-auto' : ''}`} />
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                <item.icon className={`w-10 h-10 text-primary mb-6 ${isRTL() ? 'mr-auto' : ''}`} />
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.description}
+                  {item.description}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Global Presence */}
+      <section className="industrial-section bg-secondary/30 border-y border-border">
+        <div className="industrial-container">
+          <div className="text-center mb-16">
+            <span className="industrial-label mb-4 block">{t('global.label')}</span>
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-4">
+              {t('global.title')}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              {t('global.description')}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
+            {[
+              { region: t('global.middleEast'), detail: t('global.middleEastDetail') },
+              { region: t('global.africa'), detail: t('global.africaDetail') },
+              { region: t('global.asia'), detail: t('global.asiaDetail') },
+              { region: t('global.europe'), detail: t('global.europeDetail') },
+            ].map((item) => (
+              <div key={item.region} className={`bg-card p-8 text-center`}>
+                <Globe className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="font-bold mb-1">{item.region}</h3>
+                <p className="text-xs text-muted-foreground">{item.detail}</p>
               </div>
             ))}
           </div>
@@ -221,11 +289,11 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-primary" />
-        <div className="absolute inset-0 container-pattern opacity-20" />
+        <div className="absolute inset-0 container-pattern opacity-10" />
         
         <div className="industrial-container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-6 uppercase tracking-tight">
               {t('cta.title')}
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-10">

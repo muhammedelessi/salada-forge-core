@@ -8,33 +8,30 @@ export function Footer() {
   const { t, isRTL } = useLanguageStore();
 
   const footerLinks = {
-    products: [
-      { label: t('footer.shippingContainers'), href: '/shop?category=shipping-containers' },
-      { label: t('footer.storageTanks'), href: '/shop?category=storage-tanks' },
-      { label: t('footer.ibcContainers'), href: '/shop?category=ibc-containers' },
-      { label: t('footer.modularBuildings'), href: '/shop?category=modular-buildings' },
+    solutions: [
+      { label: t('footer.lashingEquipment'), href: '/shop?category=lashing-equipment' },
+      { label: t('footer.containerInfra'), href: '/shop?category=land-shipping-container' },
+      { label: t('footer.spareParts'), href: '/shop?category=spare-parts' },
+      { label: t('footer.storageContainers'), href: '/shop?category=storage-containers' },
     ],
     company: [
       { label: t('footer.aboutUs'), href: '/about' },
       { label: t('nav.contact'), href: '/contact' },
       { label: t('footer.careers'), href: '/careers' },
-      { label: t('footer.blog'), href: '/blog' },
     ],
     support: [
       { label: t('nav.faq'), href: '/faq' },
       { label: t('footer.shippingInfo'), href: '/shipping' },
-      { label: t('footer.returns'), href: '/returns' },
       { label: t('footer.trackOrder'), href: '/track' },
     ],
     legal: [
       { label: t('footer.privacyPolicy'), href: '/privacy' },
       { label: t('footer.termsOfService'), href: '/terms' },
-      { label: t('footer.cookiePolicy'), href: '/cookies' },
     ],
   };
 
   return (
-    <footer className="bg-secondary border-t-2 border-primary/30 shadow-[0_-4px_20px_-4px_hsl(var(--primary)/0.15)]">
+    <footer className="bg-secondary border-t border-border">
       {/* Newsletter Section */}
       <div className="border-b border-border">
         <div className="industrial-container py-16">
@@ -79,16 +76,13 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Products */}
+          {/* Solutions */}
           <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.products')}</h4>
+            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.solutions')}</h4>
             <ul className="space-y-3">
-              {footerLinks.products.map((link) => (
+              {footerLinks.solutions.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -102,10 +96,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -119,10 +110,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -136,10 +124,7 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -154,7 +139,7 @@ export function Footer() {
         <div className="industrial-container py-6">
           <div className={`flex flex-col md:flex-row justify-between items-center gap-4 ${isRTL() ? 'md:flex-row-reverse' : ''}`}>
             <p className="text-sm text-muted-foreground">
-              © {currentYear} SALADA Industrial. {t('footer.rights')}
+              © {currentYear} SALADA. {t('footer.rights')}
             </p>
             <div className={`flex items-center gap-6 ${isRTL() ? 'flex-row-reverse' : ''}`}>
               <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
