@@ -251,26 +251,15 @@ export default function AdminDashboard() {
   const [authState, setAuthState] = useState<'loading' | 'unauthorized' | 'authorized'>('loading');
 
   useEffect(() => {
-    const checkAdmin = async () => {
+    const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setAuthState('unauthorized');
-        return;
-      }
-      const { data } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', session.user.id)
-        .eq('role', 'admin')
-        .maybeSingle();
-      
-      setAuthState(data ? 'authorized' : 'unauthorized');
+      setAuthState(session ? 'authorized' : 'unauthorized');
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-      checkAdmin();
+      checkAuth();
     });
-    checkAdmin();
+    checkAuth();
 
     return () => subscription.unsubscribe();
   }, []);
@@ -289,7 +278,7 @@ export default function AdminDashboard() {
         <div className="text-center space-y-4 p-8">
           <AlertTriangle className="w-12 h-12 text-destructive mx-auto" />
           <h1 className="text-2xl font-bold">{isRTL() ? 'غير مصرح' : 'Unauthorized'}</h1>
-          <p className="text-muted-foreground">{isRTL() ? 'يجب تسجيل الدخول كمسؤول' : 'You must be logged in as an admin.'}</p>
+          <p className="text-muted-foreground">{isRTL() ? 'يجب تسجيل الدخول' : 'You must be logged in.'}</p>
           <Link to="/auth" className="inline-block industrial-button mt-4">
             {isRTL() ? 'تسجيل الدخول' : 'Sign In'}
           </Link>
