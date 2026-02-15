@@ -1,55 +1,62 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Shield, Zap, MapPin, CheckCircle, Award, Handshake } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguageStore } from '@/store/languageStore';
 import { cn } from '@/lib/utils';
+import heroPort from '@/assets/hero-port.jpg';
 
 export default function WhySaladaPage() {
   const { t, isRTL } = useLanguageStore();
 
   const ArrowIcon = () => (
-    <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
+    <ArrowRight className={`w-5 h-5 ${isRTL() ? 'mr-3 rotate-180' : 'ml-3'}`} />
   );
 
   const strengths = [
-    { icon: Handshake, title: t('why.onePartner'), desc: t('why.onePartnerDesc') },
-    { icon: Zap, title: t('why.rapidDeployment'), desc: t('why.rapidDeploymentDesc') },
-    { icon: MapPin, title: t('why.nationalCoverage'), desc: t('why.nationalCoverageDesc') },
-    { icon: CheckCircle, title: t('why.compliance'), desc: t('why.complianceDesc') },
-    { icon: Award, title: t('why.localSupply'), desc: t('why.localSupplyDesc') },
-    { icon: Shield, title: t('why.continuity'), desc: t('why.continuityDesc') },
+    t('why.onePartner'),
+    t('why.rapidDeployment'),
+    t('why.nationalCoverage'),
+    t('why.compliance'),
+    t('why.localSupply'),
+    t('why.continuity'),
   ];
 
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-secondary border-b border-border py-16 md:py-24">
-        <div className={cn('industrial-container', isRTL() && 'text-right')}>
-          <span className="industrial-label mb-4 block">{t('why.label')}</span>
-          <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-6">
+      <section className="relative py-32 md:py-48 overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroPort} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-foreground/70" />
+        </div>
+        <div className={cn('industrial-container relative z-10', isRTL() && 'text-right')}>
+          <span className="industrial-label mb-8 block text-primary">{t('why.label')}</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
             {t('why.pageTitle')}
           </h1>
-          <p className="text-muted-foreground text-xl max-w-3xl leading-relaxed">
-            {t('why.pageDesc')}
-          </p>
         </div>
       </section>
 
-      {/* Strengths Grid */}
+      {/* Strengths — Bold numbered list */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-            {strengths.map((item) => (
+          <div className="border-t border-border">
+            {strengths.map((title, index) => (
               <div
-                key={item.title}
+                key={title}
                 className={cn(
-                  'bg-card p-8 md:p-10 hover:bg-secondary transition-all duration-300',
-                  isRTL() && 'text-right'
+                  'group flex items-center justify-between py-10 md:py-14 border-b border-border hover:pl-6 transition-all duration-300',
+                  isRTL() && 'flex-row-reverse hover:pr-6 hover:pl-0'
                 )}
               >
-                <item.icon className="w-12 h-12 text-primary mb-6" />
-                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                <div className={cn('flex items-center gap-8', isRTL() && 'flex-row-reverse')}>
+                  <span className="text-sm font-mono text-primary">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
+                    {title}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -57,19 +64,15 @@ export default function WhySaladaPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative py-24 bg-primary overflow-hidden">
-        <div className="absolute inset-0 container-pattern opacity-10" />
-        <div className="industrial-container relative z-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6 uppercase tracking-tight">
+      <section className="relative py-32 md:py-48 overflow-hidden bg-primary">
+        <div className="industrial-container text-center">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground uppercase tracking-tighter leading-[0.9] mb-10">
             {t('cta.title')}
           </h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            {t('cta.description')}
-          </p>
           <Link
             to="/contact"
             className={cn(
-              'inline-flex items-center justify-center px-8 py-4 bg-background text-foreground font-semibold uppercase tracking-wider text-sm',
+              'inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary',
               isRTL() && 'flex-row-reverse'
             )}
           >

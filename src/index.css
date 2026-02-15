@@ -32,7 +32,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 40 90% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -130,11 +130,11 @@
 
 @layer components {
   .industrial-container {
-    @apply w-full max-w-7xl mx-auto px-4 md:px-8;
+    @apply w-full max-w-7xl mx-auto px-6 md:px-12;
   }
 
   .industrial-section {
-    @apply py-16 md:py-24;
+    @apply py-24 md:py-40;
   }
 
   .industrial-grid {
@@ -151,15 +151,15 @@
   }
 
   .industrial-heading {
-    @apply text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter;
+    @apply text-5xl md:text-7xl lg:text-9xl font-bold uppercase tracking-tighter leading-[0.85];
   }
 
   .industrial-subheading {
-    @apply text-xl md:text-2xl font-medium text-muted-foreground;
+    @apply text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground;
   }
 
   .industrial-label {
-    @apply text-xs uppercase tracking-widest text-primary font-mono;
+    @apply text-xs uppercase tracking-[0.3em] text-primary font-mono;
   }
 
   .industrial-divider {
@@ -167,15 +167,15 @@
   }
 
   .industrial-button {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm transition-all duration-300;
+    @apply inline-flex items-center justify-center px-10 py-5 bg-primary text-primary-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300;
   }
 
   .industrial-button:hover {
-    @apply bg-accent;
+    @apply bg-foreground text-background;
   }
 
   .industrial-button-outline {
-    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-foreground text-foreground font-semibold uppercase tracking-wider text-sm transition-all duration-300;
+    @apply inline-flex items-center justify-center px-10 py-5 border-2 border-foreground text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300;
   }
 
   .industrial-button-outline:hover {
@@ -188,19 +188,6 @@
 
   .industrial-badge {
     @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary text-xs font-mono uppercase tracking-wider;
-  }
-
-  .steel-texture {
-    background-image: 
-      linear-gradient(135deg, transparent 40%, hsl(var(--industrial-steel) / 0.05) 40%, hsl(var(--industrial-steel) / 0.05) 60%, transparent 60%);
-    background-size: 4px 4px;
-  }
-
-  .grid-overlay {
-    background-image: 
-      linear-gradient(hsl(var(--border)) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
-    background-size: 60px 60px;
   }
 
   .container-pattern {
@@ -217,19 +204,16 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary;
   }
 
   .glow-primary {
     box-shadow: 0 0 60px hsl(var(--primary) / 0.2);
   }
 
-  .glow-accent {
-    box-shadow: 0 0 40px hsl(var(--accent) / 0.15);
-  }
-
   .animate-industrial-fade {
-    animation: industrialFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: industrialFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
   }
 
   .animate-industrial-slide {
@@ -265,25 +249,8 @@
     transform: translateY(-2px);
   }
 
-  .hover-scale {
-    @apply transition-transform duration-200;
-  }
-  .hover-scale:hover {
-    transform: scale(1.02);
-  }
-
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
-  }
-
-  .loading-shimmer {
-    background: linear-gradient(90deg, 
-      hsl(var(--muted)) 0%, 
-      hsl(var(--secondary)) 50%, 
-      hsl(var(--muted)) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
   }
 }
 
@@ -307,15 +274,10 @@
   to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
 @keyframes industrialFade {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -336,8 +298,8 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
