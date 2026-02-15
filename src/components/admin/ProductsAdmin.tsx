@@ -12,19 +12,23 @@ import {
   GripVertical,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
   Eye,
   EyeOff,
   Copy,
   Star,
   StarOff,
   Filter,
-  MoreVertical
+  MoreVertical,
+  RefreshCw
 } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -140,6 +144,8 @@ export function ProductsAdmin() {
   const { language } = useLanguageStore();
   const isArabic = language === 'ar';
   
+  const queryClient = useQueryClient();
+  
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -153,6 +159,8 @@ export function ProductsAdmin() {
   const [newImageUrl, setNewImageUrl] = useState('');
   const [newTagInput, setNewTagInput] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 25;
 
   useEffect(() => {
     fetchProducts();
@@ -286,6 +294,10 @@ export function ProductsAdmin() {
       setEditingProduct(null);
       setFormData(initialFormData);
       fetchProducts();
+      // Invalidate React Query cache so shop pages reflect changes
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['product'] });
+      queryClient.invalidateQueries({ queryKey: ['product-categories'] });
     } catch (error: any) {
       console.error('Error saving product:', error);
       toast.error(isArabic ? 'خطأ في حفظ المنتج' : 'Error saving product');
@@ -335,6 +347,8 @@ export function ProductsAdmin() {
       if (error) throw error;
       toast.success(isArabic ? 'تم حذف المنتج' : 'Product deleted');
       fetchProducts();
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['product-categories'] });
     } catch (error: any) {
       console.error('Error deleting product:', error);
       toast.error(isArabic ? 'خطأ في حذف المنتج' : 'Error deleting product');
@@ -382,6 +396,7 @@ export function ProductsAdmin() {
           : (isArabic ? 'تم إخفاء المنتج' : 'Product set to draft')
       );
       fetchProducts();
+      queryClient.invalidateQueries({ queryKey: ['products'] });
     } catch (error: any) {
       console.error('Error toggling product:', error);
       toast.error(isArabic ? 'خطأ في تحديث المنتج' : 'Error updating product');
@@ -402,6 +417,7 @@ export function ProductsAdmin() {
           : (isArabic ? 'تم إلغاء تمييز المنتج' : 'Product unfeatured')
       );
       fetchProducts();
+      queryClient.invalidateQueries({ queryKey: ['products'] });
     } catch (error: any) {
       console.error('Error toggling featured:', error);
       toast.error(isArabic ? 'خطأ في تحديث المنتج' : 'Error updating product');
@@ -562,6 +578,17 @@ export function ProductsAdmin() {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filterCategory, filterStatus]);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-500/20 text-green-500';
@@ -577,26 +604,39 @@ export function ProductsAdmin() {
         <h1 className="text-2xl font-bold">
           {isArabic ? 'المنتجات' : 'Products'}
         </h1>
-        <button
-          onClick={() => {
-            setEditingProduct(null);
-            setFormData(initialFormData);
-            setShowForm(!showForm);
-          }}
-          className="industrial-button text-sm py-2 px-4"
-        >
-          {showForm ? (
-            <>
-              <X className="w-4 h-4 mr-2" />
-              {isArabic ? 'إلغاء' : 'Cancel'}
-            </>
-          ) : (
-            <>
-              <Plus className="w-4 h-4 mr-2" />
-              {isArabic ? 'إضافة منتج' : 'Add Product'}
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              setLoading(true);
+              fetchProducts();
+              queryClient.invalidateQueries({ queryKey: ['products'] });
+            }}
+            className="industrial-button-outline text-sm py-2 px-3"
+            title={isArabic ? 'تحديث' : 'Refresh'}
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => {
+              setEditingProduct(null);
+              setFormData(initialFormData);
+              setShowForm(!showForm);
+            }}
+            className="industrial-button text-sm py-2 px-4"
+          >
+            {showForm ? (
+              <>
+                <X className="w-4 h-4 mr-2" />
+                {isArabic ? 'إلغاء' : 'Cancel'}
+              </>
+            ) : (
+              <>
+                <Plus className="w-4 h-4 mr-2" />
+                {isArabic ? 'إضافة منتج' : 'Add Product'}
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Product Form */}
@@ -1316,7 +1356,7 @@ export function ProductsAdmin() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredProducts.map((product) => (
+                  {paginatedProducts.map((product) => (
                     <tr key={product.id} className="border-t border-border hover:bg-muted/50">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -1422,6 +1462,34 @@ export function ProductsAdmin() {
                 </tbody>
               </table>
             </div>
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between p-4 border-t border-border">
+                <p className="text-sm text-muted-foreground">
+                  {isArabic 
+                    ? `عرض ${(currentPage - 1) * productsPerPage + 1}-${Math.min(currentPage * productsPerPage, filteredProducts.length)} من ${filteredProducts.length}`
+                    : `Showing ${(currentPage - 1) * productsPerPage + 1}-${Math.min(currentPage * productsPerPage, filteredProducts.length)} of ${filteredProducts.length}`
+                  }
+                </p>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="p-2 hover:bg-muted disabled:opacity-50 border border-border"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <span className="text-sm px-3">{currentPage} / {totalPages}</span>
+                  <button
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="p-2 hover:bg-muted disabled:opacity-50 border border-border"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )
       )}
