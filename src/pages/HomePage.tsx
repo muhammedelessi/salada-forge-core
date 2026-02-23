@@ -23,8 +23,8 @@ export default function HomePage() {
   ];
 
   const stats = [
-    { value: '15+', label: t('stats.yearsExperience') },
-    { value: '500+', label: t('stats.projectsDelivered') },
+    { value: '10+', label: t('stats.yearsExperience') },
+    { value: '200+', label: t('stats.projectsDelivered') },
     { value: '50+', label: t('stats.clientsServed') },
     { value: '99.5%', label: t('stats.onTimeDelivery') },
   ];
