@@ -221,14 +221,6 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="mt-8 aspect-square bg-card border border-border flex items-center justify-center">
-                <div className="text-center text-muted-foreground">
-                  <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <p className="text-sm">{t.contact.interactiveMap}</p>
-                  <p className="text-xs">Riyadh, Saudi Arabia</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
