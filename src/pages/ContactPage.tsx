@@ -76,8 +76,6 @@ export default function ContactPage() {
 
   const globalOffices = [
     { city: isRTL ? 'الرياض' : 'Riyadh', country: isRTL ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)', address: 'أحمد بن محمد العيالي, RNNA7850' },
-    { city: isRTL ? 'دبي' : 'Dubai', country: isRTL ? 'الإمارات' : 'UAE', address: isRTL ? 'ميناء جبل علي' : 'Jebel Ali Port' },
-    { city: isRTL ? 'جدة' : 'Jeddah', country: isRTL ? 'السعودية' : 'Saudi Arabia', address: isRTL ? 'ميناء جدة الإسلامي' : 'Jeddah Islamic Port' },
   ];
 
   return (
@@ -241,7 +239,7 @@ export default function ContactPage() {
         <div className="industrial-container">
           <h2 className="text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
           
-          <div className="grid md:grid-cols-3 gap-1">
+          <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
             {globalOffices.map((office) => (
               <div 
                 key={office.city} 

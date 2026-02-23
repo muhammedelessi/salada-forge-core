@@ -196,25 +196,6 @@ export default function ShopPage() {
                 ))}
               </ul>
 
-              <div className="mt-8 pt-8 border-t border-border">
-                <h3 className="text-sm uppercase tracking-wider font-semibold mb-4">{t.shop.priceRange}</h3>
-                <ul className="space-y-2">
-                  {priceRanges.map((range) => (
-                    <li key={range.id}>
-                      <button
-                        onClick={() => handlePriceRangeChange(range.id)}
-                        className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
-                          priceRange === range.id
-                            ? 'bg-primary text-primary-foreground'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                        }`}
-                      >
-                        {range.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </aside>
 
@@ -239,8 +220,6 @@ export default function ShopPage() {
                     className={`appearance-none bg-secondary border border-border px-4 py-2 ${isRTL() ? 'pl-10' : 'pr-10'} text-sm focus:outline-none focus:border-primary`}
                   >
                     <option value="featured">{t.shop.featured}</option>
-                    <option value="price-asc">{t.shop.priceLowHigh}</option>
-                    <option value="price-desc">{t.shop.priceHighLow}</option>
                     <option value="name-asc">{t.shop.nameAZ}</option>
                     <option value="name-desc">{t.shop.nameZA}</option>
                   </select>
