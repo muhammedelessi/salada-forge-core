@@ -24,7 +24,6 @@ export function Footer() {
     ],
     support: [
       { label: t('footer.faqLink'), href: '/faq' },
-      { label: t('footer.shippingInfo'), href: '/shipping' },
     ],
   };
 
