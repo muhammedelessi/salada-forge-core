@@ -26,10 +26,6 @@ export function Footer() {
       { label: t('footer.faqLink'), href: '/faq' },
       { label: t('footer.shippingInfo'), href: '/shipping' },
     ],
-    legal: [
-      { label: t('footer.privacyPolicy'), href: '/privacy' },
-      { label: t('footer.termsOfService'), href: '/terms' },
-    ],
   };
 
   return (
@@ -63,7 +59,7 @@ export function Footer() {
 
       {/* Main Footer Content */}
       <div className="industrial-container py-16">
-        <div className={`grid grid-cols-2 md:grid-cols-5 gap-8 ${isRTL() ? 'text-right' : ''}`}>
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isRTL() ? 'text-right' : ''}`}>
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center mb-6 hover-lift">
@@ -120,19 +116,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h4 className="font-semibold uppercase tracking-wider text-sm mb-4">{t('footer.legal')}</h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
 
