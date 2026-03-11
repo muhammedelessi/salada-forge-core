@@ -44,13 +44,13 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 grid-overlay opacity-20" />
-        <div className={cn('industrial-container relative z-10', isRTL() && 'text-right')}>
+        <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-6 block">{t.about.label}</span>
-          <h1 className={cn('industrial-heading max-w-4xl mb-8', isRTL() && 'mr-0')}>
+          <h1 className="industrial-heading max-w-4xl mb-8">
             {t.about.title}
             <span className="block text-gradient">{t.about.titleHighlight}</span>
           </h1>
-          <p className={cn('industrial-subheading max-w-2xl', isRTL() && 'mr-0')}>
+          <p className="industrial-subheading max-w-2xl">
             {t.about.description}
           </p>
         </div>
@@ -59,16 +59,14 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="border-y border-border bg-secondary">
         <div className="industrial-container">
-          <div className={cn('grid grid-cols-2 md:grid-cols-4', isRTL() && 'direction-rtl')}>
+          <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
                 className={cn(
                   'py-12 text-center',
-                  index < 3 && 'md:border-r border-border',
-                  index === 1 && 'border-r border-border md:border-r',
-                  isRTL() && index < 3 && 'md:border-l md:border-r-0',
-                  isRTL() && index === 1 && 'border-l border-r-0'
+                  index < 3 && 'ltr:md:border-r rtl:md:border-l border-border',
+                  index === 1 && 'ltr:border-r rtl:border-l border-border'
                 )}
               >
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2 font-mono">
@@ -84,8 +82,8 @@ export default function AboutPage() {
       {/* Story */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className={cn('grid lg:grid-cols-2 gap-12 items-center', isRTL() && 'lg:grid-flow-dense')}>
-            <div className={cn(isRTL() && 'text-right lg:col-start-2')}>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
               <span className="industrial-label mb-4 block">{t.about.storyLabel}</span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {t.about.storyTitle}
@@ -96,16 +94,13 @@ export default function AboutPage() {
                 <p>{t.about.storyP3}</p>
               </div>
             </div>
-            <div className={cn('relative', isRTL() && 'lg:col-start-1 lg:row-start-1')}>
+            <div className="relative lg:order-2 rtl:lg:order-1">
               <div className="aspect-square bg-card border border-border p-8">
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center">
                   <span className="text-6xl font-bold text-primary/30">SALADA</span>
                 </div>
               </div>
-              <div className={cn(
-                'absolute -bottom-4 bg-primary text-primary-foreground p-6',
-                isRTL() ? '-left-4' : '-right-4'
-              )}>
+              <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 bg-primary text-primary-foreground p-6">
                 <p className="text-2xl font-bold font-mono">25+</p>
                 <p className="text-sm">{t.about.yearsStrong}</p>
               </div>
@@ -123,37 +118,27 @@ export default function AboutPage() {
           </div>
 
           <div className="relative">
-            <div className={cn(
-              'absolute top-0 bottom-0 w-px bg-border',
-              isRTL() ? 'right-8 md:right-1/2' : 'left-8 md:left-1/2'
-            )} />
+            <div className="absolute top-0 bottom-0 w-px bg-border ltr:left-8 rtl:right-8 ltr:md:left-1/2 rtl:md:right-1/2" />
             
             <div className="space-y-12">
               {timeline.map((item, index) => (
                 <div
                   key={item.year}
                   className={cn(
-                    'relative flex items-start gap-8',
-                    !isRTL() && (index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'),
-                    isRTL() && (index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'),
-                    isRTL() && 'flex-row-reverse'
+                    'relative flex items-start gap-8 rtl:flex-row-reverse',
+                    index % 2 === 0 ? 'ltr:md:flex-row rtl:md:flex-row-reverse' : 'ltr:md:flex-row-reverse rtl:md:flex-row'
                   )}
                 >
                   <div className={cn(
                     'flex-1 hidden md:block',
-                    !isRTL() && index % 2 === 0 && 'text-right',
-                    isRTL() && index % 2 === 0 && 'text-left'
+                    index % 2 === 0 ? 'ltr:text-right rtl:text-left' : ''
                   )} />
                   <div className="relative flex items-center justify-center">
                     <div className="w-16 h-16 bg-primary text-primary-foreground flex items-center justify-center font-bold font-mono z-10">
                       {item.year}
                     </div>
                   </div>
-                  <div className={cn(
-                    'flex-1',
-                    !isRTL() && 'pl-0',
-                    isRTL() && 'pr-0 text-right'
-                  )}>
+                  <div className="flex-1 rtl:text-right">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </div>
@@ -176,12 +161,9 @@ export default function AboutPage() {
             {values.map((value) => (
               <div
                 key={value.title}
-                className={cn(
-                  'bg-card border border-border p-8 hover:border-primary transition-colors',
-                  isRTL() && 'text-right'
-                )}
+                className="bg-card border border-border p-8 hover:border-primary transition-colors rtl:text-right"
               >
-                <value.icon className={cn('w-10 h-10 text-primary mb-6', isRTL() && 'mr-0')} />
+                <value.icon className="w-10 h-10 text-primary mb-6" />
                 <h3 className="text-xl font-bold mb-3">{value.title}</h3>
                 <p className="text-muted-foreground text-sm">{value.description}</p>
               </div>
@@ -200,19 +182,13 @@ export default function AboutPage() {
           <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
             {t.about.partnerDesc}
           </p>
-          <div className={cn(
-            'flex flex-col sm:flex-row gap-4 justify-center',
-            isRTL() && 'sm:flex-row-reverse'
-          )}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
-              className={cn(
-                'inline-flex items-center justify-center px-8 py-4 bg-background text-foreground font-semibold uppercase tracking-wider text-sm',
-                isRTL() && 'flex-row-reverse'
-              )}
+              className="inline-flex items-center justify-center px-8 py-4 bg-background text-foreground font-semibold uppercase tracking-wider text-sm rtl:flex-row-reverse"
             >
               {t.about.contactUs}
-              <ArrowIcon className={cn('w-4 h-4', isRTL() ? 'mr-2' : 'ml-2')} />
+              <ArrowIcon className="w-4 h-4 ltr:ml-2 rtl:mr-2" />
             </Link>
             <Link
               to="/shop"

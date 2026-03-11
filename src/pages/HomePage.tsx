@@ -14,7 +14,7 @@ export default function HomePage() {
   const { t, isRTL } = useLanguageStore();
 
   const ArrowIcon = () => (
-    <ArrowRight className={`w-5 h-5 ${isRTL() ? 'mr-3 rotate-180' : 'ml-3'}`} />
+    <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />
   );
 
   const solutions = [
@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <Layout>
       <SEOHead {...seo} />
-      {/* ── HERO ── Monumental, cinematic, zero clutter */}
+      {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
         <div className="absolute inset-0">
           <img src={heroImage} alt="Salada Metal Industries — industrial shipping port" className="w-full h-full object-cover" />
@@ -44,13 +44,13 @@ export default function HomePage() {
         </div>
 
         <div className="industrial-container relative z-10">
-          <div className={`max-w-5xl ${isRTL() ? 'mr-0 text-right' : ''}`}>
+          <div className="max-w-5xl rtl:text-right">
             <h1 className="text-5xl md:text-8xl lg:text-[7rem] font-bold uppercase tracking-tighter leading-[0.85] text-background animate-industrial-fade">
               {t('hero.title')}
               <span className="block text-primary">{t('hero.titleHighlight')}</span>
             </h1>
-            <div className={`flex flex-col sm:flex-row gap-4 mt-12 animate-industrial-fade delay-300 ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
-              <Link to="/solutions" className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}>
+            <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-industrial-fade delay-300 rtl:sm:flex-row-reverse">
+              <Link to="/solutions" className="industrial-button rtl:flex-row-reverse">
                 {t('hero.cta')}
                 <ArrowIcon />
               </Link>
@@ -62,7 +62,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS ── Clean horizontal band */}
+      {/* ── STATS ── */}
       <section className="border-b border-border">
         <div className="industrial-container">
           <div className="grid grid-cols-2 md:grid-cols-4">
@@ -70,7 +70,7 @@ export default function HomePage() {
               <div
                 key={stat.label}
                 className={`py-14 md:py-20 text-center ${
-                  index < stats.length - 1 ? 'border-r border-border' : ''
+                  index < stats.length - 1 ? 'ltr:border-r rtl:border-l border-border' : ''
                 }`}
               >
                 <div className="text-4xl md:text-6xl font-bold text-primary mb-3 font-mono">
@@ -85,10 +85,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── VISION 2030 ── Single powerful statement */}
+      {/* ── VISION 2030 ── */}
       <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <div className={`max-w-5xl ${isRTL() ? 'mr-0 text-right' : ''}`}>
+          <div className="max-w-5xl rtl:text-right">
             <span className="industrial-label mb-8 block">{t('vision.label')}</span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter leading-[0.9]">
               {t('vision.title')}
@@ -97,10 +97,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SOLUTIONS ── Full-bleed image grid, headline overlays only */}
+      {/* ── SOLUTIONS ── */}
       <section className="border-b border-border">
         <div className="industrial-container py-24 md:py-32">
-          <div className={`mb-20 ${isRTL() ? 'text-right' : ''}`}>
+          <div className="mb-20 rtl:text-right">
             <span className="industrial-label mb-6 block">{t('solutions.label')}</span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
               {t('solutions.title')}
@@ -113,7 +113,7 @@ export default function HomePage() {
             <Link
               key={solution.title}
               to={solution.href}
-              className="group relative aspect-[16/10] overflow-hidden border-b border-r border-border"
+              className="group relative aspect-[16/10] overflow-hidden border-b ltr:border-r rtl:border-l border-border"
             >
               <img
                 src={solution.image}
@@ -122,11 +122,11 @@ export default function HomePage() {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-              <div className={`absolute bottom-0 left-0 right-0 p-8 md:p-12 ${isRTL() ? 'text-right' : ''}`}>
+              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 rtl:text-right">
                 <h3 className="text-2xl md:text-4xl font-bold text-background uppercase tracking-tight group-hover:text-primary transition-colors duration-300">
                   {solution.title}
                 </h3>
-                <span className={`inline-flex items-center text-xs uppercase tracking-[0.25em] text-primary font-mono mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isRTL() ? 'flex-row-reverse' : ''}`}>
+                <span className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-primary font-mono mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rtl:flex-row-reverse">
                   {t('solutions.learnMore')}
                   <ArrowIcon />
                 </span>
@@ -136,10 +136,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── INDUSTRIES ── Minimal text-only list */}
+      {/* ── INDUSTRIES ── */}
       <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <div className={`mb-20 ${isRTL() ? 'text-right' : ''}`}>
+          <div className="mb-20 rtl:text-right">
             <span className="industrial-label mb-6 block">{t('industries.label')}</span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
               {t('industries.title')}
@@ -158,29 +158,29 @@ export default function HomePage() {
               <Link
                 key={name}
                 to="/industries"
-                className={`group flex items-center justify-between py-6 md:py-8 border-b border-border hover:pl-4 transition-all duration-300 ${isRTL() ? 'flex-row-reverse hover:pr-4 hover:pl-0' : ''}`}
+                className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300 rtl:flex-row-reverse"
               >
                 <span className="text-xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
                   {name}
                 </span>
-                <ArrowRight className={`w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors ${isRTL() ? 'rotate-180' : ''}`} />
+                <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors rtl:rotate-180" />
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHY SALADA ── Bold headline + minimal grid */}
+      {/* ── WHY SALADA ── */}
       <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <div className={`mb-20 text-center`}>
+          <div className="mb-20 text-center">
             <span className="industrial-label mb-6 block">{t('why.label')}</span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
               {t('why.title')}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t ltr:border-l rtl:border-r border-border">
             {[
               { title: t('why.onePartner') },
               { title: t('why.rapidDeployment') },
@@ -189,7 +189,7 @@ export default function HomePage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className={`border-b border-r border-border p-10 md:p-12 hover:bg-secondary/50 transition-colors duration-300 ${isRTL() ? 'text-right' : ''}`}
+                className="border-b ltr:border-r rtl:border-l border-border p-10 md:p-12 hover:bg-secondary/50 transition-colors duration-300 rtl:text-right"
               >
                 <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight">
                   {item.title}
@@ -200,7 +200,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA ── Full-bleed cinematic */}
+      {/* ── CTA ── */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroPort} alt="Industrial port operations" className="w-full h-full object-cover" loading="lazy" />
@@ -212,10 +212,10 @@ export default function HomePage() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-background mb-10 uppercase tracking-tighter leading-[0.9]">
               {t('cta.title')}
             </h2>
-            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL() ? 'sm:flex-row-reverse' : ''}`}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">
               <Link
                 to="/contact"
-                className={`industrial-button ${isRTL() ? 'flex-row-reverse' : ''}`}
+                className="industrial-button rtl:flex-row-reverse"
               >
                 {t('cta.getQuote')}
                 <ArrowIcon />
