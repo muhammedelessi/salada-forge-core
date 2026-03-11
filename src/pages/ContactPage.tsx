@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
+import { SEOHead } from '@/components/SEOHead';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguageStore } from '@/store/languageStore';
@@ -8,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 
 export default function ContactPage() {
+  const seo = usePageSEO('/contact');
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 

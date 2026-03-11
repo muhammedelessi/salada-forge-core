@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
+import { SEOHead } from '@/components/SEOHead';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { ProductCard } from '@/components/products/ProductCard';
 import { useProducts, useCategories } from '@/hooks/useProducts';
 import { ChevronDown, Grid, List, SlidersHorizontal, X, Loader2 } from 'lucide-react';
@@ -10,6 +12,7 @@ import { translations } from '@/i18n/translations';
 type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'name-asc' | 'name-desc';
 
 export default function ShopPage() {
+  const seo = usePageSEO('/products');
   const [searchParams, setSearchParams] = useSearchParams();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);

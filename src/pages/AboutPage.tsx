@@ -1,4 +1,6 @@
 import { Layout } from '@/components/layout/Layout';
+import { SEOHead } from '@/components/SEOHead';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
@@ -6,6 +8,7 @@ import { translations } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
 
 export default function AboutPage() {
+  const seo = usePageSEO('/about');
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 

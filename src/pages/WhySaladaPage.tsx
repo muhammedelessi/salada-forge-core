@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
+import { SEOHead } from '@/components/SEOHead';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
 import { cn } from '@/lib/utils';
 import heroPort from '@/assets/hero-port.jpg';
 
 export default function WhySaladaPage() {
+  const seo = usePageSEO('/why-salada');
   const { t, isRTL } = useLanguageStore();
 
   const ArrowIcon = () => (
