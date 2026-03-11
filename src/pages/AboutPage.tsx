@@ -85,7 +85,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
               <span className="industrial-label mb-4 block">{t.about.storyLabel}</span>
-
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.about.storyTitle}</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>{t.about.storyP1}</p>
                 <p>{t.about.storyP2}</p>
