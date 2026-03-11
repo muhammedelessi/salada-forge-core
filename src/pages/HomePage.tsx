@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
+import { SEOHead } from '@/components/SEOHead';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
 import heroImage from '@/assets/hero-logistics.jpg';
 import seaImage from '@/assets/solutions-sea.jpg';
@@ -29,12 +31,15 @@ export default function HomePage() {
     { value: '99.5%', label: t('stats.onTimeDelivery') },
   ];
 
+  const seo = usePageSEO('/');
+
   return (
     <Layout>
+      <SEOHead {...seo} />
       {/* ── HERO ── Monumental, cinematic, zero clutter */}
       <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Salada Metal Industries — industrial shipping port" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-foreground/20" />
         </div>
 
@@ -113,6 +118,7 @@ export default function HomePage() {
               <img
                 src={solution.image}
                 alt={solution.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
@@ -197,7 +203,7 @@ export default function HomePage() {
       {/* ── CTA ── Full-bleed cinematic */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Industrial port operations" className="w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
 
