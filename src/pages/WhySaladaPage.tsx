@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
 import { cn } from '@/lib/utils';
@@ -27,6 +28,7 @@ export default function WhySaladaPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: t('nav.whySalada') }]} />
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">

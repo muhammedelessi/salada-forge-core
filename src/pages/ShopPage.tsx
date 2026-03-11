@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { ProductCard } from '@/components/products/ProductCard';
 import { useProducts, useCategories } from '@/hooks/useProducts';
@@ -132,6 +133,7 @@ export default function ShopPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: t.nav.shop }]} />
       {/* Page Header */}
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">

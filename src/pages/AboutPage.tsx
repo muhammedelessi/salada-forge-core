@@ -1,5 +1,6 @@
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
@@ -39,6 +40,7 @@ export default function AboutPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: isRTL() ? 'من نحن' : 'About' }]} />
       {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 grid-overlay opacity-20" />

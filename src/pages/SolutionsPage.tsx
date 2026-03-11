@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Container, Warehouse } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
 import { cn } from '@/lib/utils';
@@ -52,10 +53,12 @@ export default function SolutionsPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: t('nav.solutions') }]} />
+
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Industrial port solutions" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className={cn('industrial-container relative z-10', isAr && 'text-right')}>
@@ -63,29 +66,29 @@ export default function SolutionsPage() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
             {t('solutions.pageTitle')}
           </h1>
+          <p className="mt-6 text-lg text-background/70 max-w-2xl">
+            {t('solutions.pageDesc')}
+          </p>
         </div>
       </section>
 
       {/* Main Solutions */}
       {mainSolutions.map((solution, index) => (
         <section key={solution.id} id={solution.id} className="border-b border-border">
-          {/* Solution Header */}
           <div className={cn(
             'grid grid-cols-1 lg:grid-cols-2 min-h-[50vh]',
             index % 2 === 1 && 'lg:[direction:rtl]'
           )}>
-            {/* Hero image — first product image */}
             <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden bg-muted">
               {solution.products[0]?.images?.[0] && (
                 <img
                   src={solution.products[0].images[0]}
                   alt={solution.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               )}
             </div>
-
-            {/* Content */}
             <div className={cn(
               'flex flex-col justify-center p-12 md:p-20 lg:p-24',
               index % 2 === 1 && 'lg:[direction:ltr]',
@@ -98,18 +101,14 @@ export default function SolutionsPage() {
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter leading-[0.9] mb-6">
                 {solution.title}
               </h2>
-              <p className="text-lg text-muted-foreground mb-4 font-medium">
-                {solution.subtitle}
-              </p>
-              <p className="text-muted-foreground mb-10 max-w-lg leading-relaxed">
-                {solution.description}
-              </p>
+              <p className="text-lg text-muted-foreground mb-4 font-medium">{solution.subtitle}</p>
+              <p className="text-muted-foreground mb-10 max-w-lg leading-relaxed">{solution.description}</p>
               <div className={cn('flex flex-wrap gap-4', isAr && 'flex-row-reverse')}>
                 <Link
                   to={solution.shopLink}
                   className={cn('industrial-button', isAr && 'flex-row-reverse')}
                 >
-                  {isAr ? 'تصفح المنتجات' : 'Browse Products'}
+                  {isAr ? 'عرض المواصفات' : 'View Specifications'}
                   <ArrowIcon />
                 </Link>
                 <Link
@@ -125,7 +124,6 @@ export default function SolutionsPage() {
             </div>
           </div>
 
-          {/* Product Grid */}
           {solution.products.length > 0 && (
             <div className="bg-secondary/50 border-t border-border">
               <div className="industrial-container py-12">
@@ -172,12 +170,20 @@ export default function SolutionsPage() {
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground uppercase tracking-tighter leading-[0.9] mb-10">
             {t('cta.title')}
           </h2>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary"
-          >
-            {t('cta.getQuote')}
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary"
+            >
+              {t('cta.getQuote')}
+            </Link>
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center px-10 py-5 border-2 border-primary-foreground text-primary-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-primary-foreground hover:text-primary"
+            >
+              {isAr ? 'استكشف المنتجات' : 'Browse Catalog'}
+            </Link>
+          </div>
         </div>
       </section>
     </Layout>
