@@ -201,7 +201,7 @@ export default function CheckoutPage() {
       bankName: 'اسم البنك',
       bankNameValue: 'مصرف الراجحي',
       accountName: 'اسم الحساب',
-      accountNameValue: 'صلادة للحلول الصناعية',
+      accountNameValue: 'صالدة للحلول الصناعية',
       accountNumber: 'رقم الحساب (آيبان)',
       accountNumberValue: 'SA0380000000608010167519',
       note: 'يرجى تحويل المبلغ الإجمالي وإدراج رقم طلبك في مرجع التحويل. سيتم معالجة طلبك بمجرد تأكيد الدفع.',
