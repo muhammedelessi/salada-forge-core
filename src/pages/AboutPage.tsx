@@ -35,74 +35,18 @@ export default function AboutPage() {
 
   return (
     <Layout>
-      {/* About Salada - Bilingual Section */}
+      {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 grid-overlay opacity-20" />
-        <div className="industrial-container relative z-10">
-          {/* Heading */}
-          <div className="mb-6">
-            <h1 className="industrial-heading max-w-4xl mb-2">About Salada</h1>
-            <p className="text-2xl md:text-3xl font-bold text-muted-foreground" dir="rtl" style={{ textAlign: 'right' }}>عن سلادا</p>
-          </div>
-
-          {/* Paragraph 1 */}
-          <div className="max-w-3xl mb-6">
-            <p className="text-lg text-muted-foreground leading-relaxed mb-2">
-              Salada is a Saudi-based container manufacturer specializing in dry and storage container solutions.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed" dir="rtl" style={{ textAlign: 'right' }}>
-              سلادا شركة سعودية متخصصة في تصنيع الحاويات الجافة وحلول التخزين.
-            </p>
-          </div>
-
-          {/* Paragraph 2 */}
-          <div className="max-w-3xl mb-12">
-            <p className="text-lg text-muted-foreground leading-relaxed mb-2">
-              With a focus on industrial quality and local production, we aim to support Saudi Arabia's growing logistics, construction, and industrial sectors.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed" dir="rtl" style={{ textAlign: 'right' }}>
-              نركز على الجودة الصناعية والإنتاج المحلي لدعم قطاعات اللوجستيات والبناء والصناعة في المملكة العربية السعودية.
-            </p>
-          </div>
-
-          {/* Vision, Mission, Commitment Cards */}
-          <div className="grid md:grid-cols-3 gap-1">
-            {/* Vision */}
-            <div className="bg-card border border-border p-8 hover:border-primary transition-colors">
-              <h3 className="text-xl font-bold mb-1">Our Vision</h3>
-              <p className="text-lg font-bold text-muted-foreground mb-4" dir="rtl" style={{ textAlign: 'right' }}>رؤيتنا</p>
-              <p className="text-muted-foreground text-sm mb-2">
-                To become a trusted Saudi manufacturer of container solutions serving local and regional markets.
-              </p>
-              <p className="text-muted-foreground text-sm" dir="rtl" style={{ textAlign: 'right' }}>
-                أن نكون الشركة السعودية الموثوقة في تصنيع حلول الحاويات لخدمة الأسواق المحلية والإقليمية.
-              </p>
-            </div>
-
-            {/* Mission */}
-            <div className="bg-card border border-border p-8 hover:border-primary transition-colors">
-              <h3 className="text-xl font-bold mb-1">Our Mission</h3>
-              <p className="text-lg font-bold text-muted-foreground mb-4" dir="rtl" style={{ textAlign: 'right' }}>مهمتنا</p>
-              <p className="text-muted-foreground text-sm mb-2">
-                To deliver durable, reliable, and customizable container products that meet industrial standards and project demands.
-              </p>
-              <p className="text-muted-foreground text-sm" dir="rtl" style={{ textAlign: 'right' }}>
-                تقديم منتجات حاويات متينة وموثوقة وقابلة للتخصيص تلبي المعايير الصناعية ومتطلبات المشاريع.
-              </p>
-            </div>
-
-            {/* Commitment */}
-            <div className="bg-card border border-border p-8 hover:border-primary transition-colors">
-              <h3 className="text-xl font-bold mb-1">Our Commitment</h3>
-              <p className="text-lg font-bold text-muted-foreground mb-4" dir="rtl" style={{ textAlign: 'right' }}>التزامنا</p>
-              <p className="text-muted-foreground text-sm mb-2">
-                We are committed to quality manufacturing, fast delivery, and long-term partnerships with our clients.
-              </p>
-              <p className="text-muted-foreground text-sm" dir="rtl" style={{ textAlign: 'right' }}>
-                نلتزم بالتصنيع عالي الجودة والتسليم السريع وبناء شراكات طويلة الأمد مع عملائنا.
-              </p>
-            </div>
-          </div>
+        <div className={cn('industrial-container relative z-10', isRTL() && 'text-right')}>
+          <span className="industrial-label mb-6 block">{t.about.label}</span>
+          <h1 className={cn('industrial-heading max-w-4xl mb-8', isRTL() && 'mr-0')}>
+            {t.about.title}
+            <span className="block text-gradient">{t.about.titleHighlight}</span>
+          </h1>
+          <p className={cn('industrial-subheading max-w-2xl', isRTL() && 'mr-0')}>
+            {t.about.description}
+          </p>
         </div>
       </section>
 
