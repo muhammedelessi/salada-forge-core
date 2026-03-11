@@ -16,11 +16,11 @@ export default function WhySaladaPage() {
   );
 
   const strengths = [
-    t('why.onePartner'),
-    t('why.rapidDeployment'),
-    t('why.nationalCoverage'),
-    t('why.compliance'),
-    t('why.localSupply'),
+    { title: t('why.onePartner'), desc: t('why.onePartnerDesc') },
+    { title: t('why.rapidDeployment'), desc: t('why.rapidDeploymentDesc') },
+    { title: t('why.nationalCoverage'), desc: t('why.nationalCoverageDesc') },
+    { title: t('why.compliance'), desc: t('why.complianceDesc') },
+    { title: t('why.localSupply'), desc: t('why.localSupplyDesc') },
   ];
 
   return (
@@ -45,18 +45,23 @@ export default function WhySaladaPage() {
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="border-t border-border">
-            {strengths.map((title, index) => (
+            {strengths.map((item, index) => (
               <div
-                key={title}
+                key={item.title}
                 dir={isRTL() ? 'rtl' : 'ltr'}
-                className="group flex items-center py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 gap-8"
+                className="group flex items-start py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 gap-8"
               >
-                <span className="text-sm font-mono text-primary">
+                <span className="text-sm font-mono text-primary mt-1">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
-                  {title}
-                </span>
+                <div>
+                  <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors block">
+                    {item.title}
+                  </span>
+                  <p className="text-muted-foreground mt-2 text-base md:text-lg">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
