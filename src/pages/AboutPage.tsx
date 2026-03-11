@@ -80,15 +80,16 @@ export default function AboutPage() {
       </section>
 
       {/* Vision */}
-      <section className="border-b border-border">
-        <div className="industrial-container py-16 md:py-20">
-          <div className="max-w-3xl mx-auto text-center rtl:text-center">
-            <span className="industrial-label mb-4 block">{t.about.visionLabel}</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.about.visionTitle}</h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {t.about.visionDescription}
-            </p>
-          </div>
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 grid-overlay opacity-20" />
+        <div className="industrial-container relative z-10 rtl:text-right">
+          <span className="industrial-label mb-6 block">{t.about.visionLabel}</span>
+          <h2 className="industrial-heading max-w-4xl mb-8">
+            {t.about.visionTitle}
+          </h2>
+          <p className="industrial-subheading max-w-2xl">
+            {t.about.visionDescription}
+          </p>
         </div>
       </section>
 
