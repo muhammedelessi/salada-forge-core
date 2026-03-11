@@ -131,6 +131,7 @@ export default function ShopPage() {
 
   return (
     <Layout>
+      <SEOHead {...seo} />
       {/* Page Header */}
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">

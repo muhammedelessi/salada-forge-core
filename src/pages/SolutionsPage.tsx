@@ -51,6 +51,7 @@ export default function SolutionsPage() {
 
   return (
     <Layout>
+      <SEOHead {...seo} />
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">

@@ -83,6 +83,7 @@ export default function ContactPage() {
 
   return (
     <Layout>
+      <SEOHead {...seo} />
       {/* Hero */}
       <section className="bg-secondary border-b border-border py-16 md:py-24">
         <div className={cn('industrial-container', isRTL && 'text-right')}>
