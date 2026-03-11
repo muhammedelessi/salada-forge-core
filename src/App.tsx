@@ -53,6 +53,7 @@ const App = () => (
           <Route path="/inquiry/:slug" element={<ProductInquiryPage />} />
           <Route path="/account" element={<AuthPage />} />
           <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/ar/*" element={<ArabicRouteHandler />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
