@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -77,13 +78,11 @@ export default function ContactPage() {
     },
   ];
 
-  const globalOffices = [
-    { city: isRTL ? 'الرياض' : 'Riyadh', country: isRTL ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)', address: 'أحمد بن محمد العيالي, RNNA7850' },
-  ];
-
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: t.nav.contact }]} />
+
       {/* Hero */}
       <section className="bg-secondary border-b border-border py-16 md:py-24">
         <div className={cn('industrial-container', isRTL && 'text-right')}>
@@ -224,8 +223,28 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Google Maps */}
+      <section className="border-t border-border">
+        <div className="industrial-container py-16">
+          <h2 className={cn('text-2xl font-bold mb-8', isRTL && 'text-right')}>
+            {t.contact.headquarters}
+          </h2>
+          <div className="w-full aspect-[21/9] md:aspect-[3/1] border border-border overflow-hidden">
+            <iframe
+              title="Salada Metal Industries Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6!2d46.6753!3d24.7136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>
@@ -236,19 +255,11 @@ export default function ContactPage() {
           <h2 className="text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
           
           <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
-            {globalOffices.map((office) => (
-              <div 
-                key={office.city} 
-                className={cn(
-                  'bg-card border border-border p-6',
-                  isRTL && 'text-right'
-                )}
-              >
-                <h3 className="font-bold text-lg mb-1">{office.city}</h3>
-                <p className="text-primary text-sm font-mono mb-2">{office.country}</p>
-                <p className="text-muted-foreground text-sm">{office.address}</p>
-              </div>
-            ))}
+            <div className={cn('bg-card border border-border p-6', isRTL && 'text-right')}>
+              <h3 className="font-bold text-lg mb-1">{isRTL ? 'الرياض' : 'Riyadh'}</h3>
+              <p className="text-primary text-sm font-mono mb-2">{isRTL ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)'}</p>
+              <p className="text-muted-foreground text-sm">أحمد بن محمد العيالي, RNNA7850</p>
+            </div>
           </div>
         </div>
       </section>
