@@ -33,24 +33,24 @@ export function Footer() {
       {/* Newsletter Section */}
       <div className="border-b border-border">
         <div className="industrial-container py-16">
-          <div className={`grid md:grid-cols-2 gap-8 items-center ${isRTL() ? 'md:grid-flow-dense' : ''}`}>
-            <div className={isRTL() ? 'text-right md:col-start-2' : ''}>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="rtl:text-right md:order-1 rtl:md:order-2">
               <span className="industrial-label mb-4 block">{t('footer.newsletter')}</span>
               <h3 className="text-2xl md:text-3xl font-bold mb-2">{t('footer.stayUpdated')}</h3>
               <p className="text-muted-foreground">
                 {t('footer.newsletterDesc')}
               </p>
             </div>
-            <div className={`flex gap-2 ${isRTL() ? 'flex-row-reverse md:col-start-1 md:row-start-1' : ''}`}>
+            <div className="flex gap-2 rtl:flex-row-reverse md:order-2 rtl:md:order-1">
               <input
                 type="email"
                 placeholder={t('footer.emailPlaceholder')}
-                className={`industrial-input flex-1 ${isRTL() ? 'text-right' : ''}`}
-                dir={isRTL() ? 'rtl' : 'ltr'}
+                className="industrial-input flex-1 rtl:text-right"
+                dir="ltr"
               />
-              <button className={`industrial-button whitespace-nowrap ${isRTL() ? 'flex-row-reverse' : ''}`}>
+              <button className="industrial-button whitespace-nowrap rtl:flex-row-reverse">
                 {t('footer.subscribe')}
-                <ArrowRight className={`w-4 h-4 ${isRTL() ? 'mr-2 rotate-180' : 'ml-2'}`} />
+                <ArrowRight className="w-4 h-4 ltr:ml-2 rtl:mr-2 rtl:rotate-180" />
               </button>
             </div>
           </div>
@@ -59,7 +59,7 @@ export function Footer() {
 
       {/* Main Footer Content */}
       <div className="industrial-container py-16">
-        <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isRTL() ? 'text-right' : ''}`}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 rtl:text-right">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center mb-6 hover-lift">
@@ -115,18 +115,17 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
         <div className="industrial-container py-6">
-          <div className={`flex flex-col md:flex-row justify-between items-center gap-4 ${isRTL() ? 'md:flex-row-reverse' : ''}`}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 rtl:md:flex-row-reverse">
             <p className="text-sm text-muted-foreground">
               © {currentYear} SALADA. {t('footer.rights')}
             </p>
-            <div className={`flex items-center gap-6 ${isRTL() ? 'flex-row-reverse' : ''}`}>
+            <div className="flex items-center gap-6 rtl:flex-row-reverse">
               <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
                 {t('footer.isoCertified')}
               </span>
