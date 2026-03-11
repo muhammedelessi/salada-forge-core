@@ -39,7 +39,7 @@ export default function HomePage() {
       {/* ── HERO ── Monumental, cinematic, zero clutter */}
       <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Salada Metal Industries — industrial shipping port" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-foreground/20" />
         </div>
 
