@@ -202,7 +202,7 @@ export default function HomePage() {
       {/* ── CTA ── Full-bleed cinematic */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Industrial port operations" className="w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
 
