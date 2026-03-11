@@ -53,6 +53,8 @@ export default function ContactPage() {
     }
   };
 
+  const isAr = isRTL();
+
   const contactInfo = [
     {
       icon: Mail,
@@ -72,7 +74,7 @@ export default function ContactPage() {
     {
       icon: Clock,
       title: t.contact.businessHours,
-      details: isRTL 
+      details: isAr
         ? ['الأحد - الخميس: 8:00 ص - 6:00 م', 'الجمعة: مغلق'] 
         : ['Mon - Fri: 8:00 AM - 6:00 PM CST', 'Sat: 9:00 AM - 1:00 PM CST'],
     },
@@ -85,10 +87,10 @@ export default function ContactPage() {
 
       {/* Hero */}
       <section className="bg-secondary border-b border-border py-16 md:py-24">
-        <div className={cn('industrial-container', isRTL && 'text-right')}>
+        <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.contact.label}</span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
-          <p className={cn('text-muted-foreground max-w-2xl', isRTL && 'mr-0')}>
+          <p className="text-muted-foreground max-w-2xl">
             {t.contact.description}
           </p>
         </div>
@@ -96,12 +98,9 @@ export default function ContactPage() {
 
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className={cn(
-            'grid lg:grid-cols-3 gap-12',
-            isRTL && 'lg:grid-flow-dense'
-          )}>
+          <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Form */}
-            <div className={cn('lg:col-span-2', isRTL && 'lg:col-start-2 text-right')}>
+            <div className="lg:col-span-2 rtl:text-right lg:order-1 rtl:lg:order-2">
               <h2 className="text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -113,8 +112,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
-                      dir={isRTL ? 'rtl' : 'ltr'}
+                      className="industrial-input rtl:text-right"
                     />
                   </div>
                   <div>
@@ -124,7 +122,7 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
+                      className="industrial-input"
                       dir="ltr"
                     />
                   </div>
@@ -137,8 +135,7 @@ export default function ContactPage() {
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
-                      dir={isRTL ? 'rtl' : 'ltr'}
+                      className="industrial-input rtl:text-right"
                     />
                   </div>
                   <div>
@@ -147,7 +144,7 @@ export default function ContactPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
+                      className="industrial-input"
                       dir="ltr"
                     />
                   </div>
@@ -159,8 +156,7 @@ export default function ContactPage() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className={cn('industrial-input', isRTL && 'text-right')}
-                    dir={isRTL ? 'rtl' : 'ltr'}
+                    className="industrial-input rtl:text-right"
                   >
                     <option value="">{t.contact.selectSubject}</option>
                     <option value="quote">{t.contact.requestQuote}</option>
@@ -179,35 +175,31 @@ export default function ContactPage() {
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={cn('industrial-input resize-none', isRTL && 'text-right')}
+                    className="industrial-input resize-none rtl:text-right"
                     placeholder={t.contact.messagePlaceholder}
-                    dir={isRTL ? 'rtl' : 'ltr'}
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={cn(
-                    'industrial-button disabled:opacity-50',
-                    isRTL && 'flex-row-reverse'
-                  )}
+                  className="industrial-button disabled:opacity-50 rtl:flex-row-reverse"
                 >
                   {isSubmitting ? t.contact.sending : t.contact.send}
-                  <Send className={cn('w-4 h-4', isRTL ? 'mr-2 rotate-180' : 'ml-2')} />
+                  <Send className="w-4 h-4 ltr:ml-2 rtl:mr-2 rtl:rotate-180" />
                 </button>
               </form>
             </div>
 
             {/* Contact Info */}
-            <div className={cn(isRTL && 'lg:col-start-1 lg:row-start-1 text-right')}>
+            <div className="rtl:text-right lg:order-2 rtl:lg:order-1">
               <h2 className="text-2xl font-bold mb-6">{t.contact.contactInfo}</h2>
               
               <div className="space-y-6">
                 {contactInfo.map((info) => (
                   <div 
                     key={info.title} 
-                    className={cn('flex gap-4', isRTL && 'flex-row-reverse')}
+                    className="flex gap-4 rtl:flex-row-reverse"
                   >
                     <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-5 h-5 text-primary" />
@@ -231,7 +223,7 @@ export default function ContactPage() {
       {/* Google Maps */}
       <section className="border-t border-border">
         <div className="industrial-container py-16">
-          <h2 className={cn('text-2xl font-bold mb-8', isRTL && 'text-right')}>
+          <h2 className="text-2xl font-bold mb-8 rtl:text-right">
             {t.contact.headquarters}
           </h2>
           <div className="w-full aspect-[21/9] md:aspect-[3/1] border border-border overflow-hidden">
@@ -255,9 +247,9 @@ export default function ContactPage() {
           <h2 className="text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
           
           <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
-            <div className={cn('bg-card border border-border p-6', isRTL && 'text-right')}>
-              <h3 className="font-bold text-lg mb-1">{isRTL ? 'الرياض' : 'Riyadh'}</h3>
-              <p className="text-primary text-sm font-mono mb-2">{isRTL ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)'}</p>
+            <div className="bg-card border border-border p-6 rtl:text-right">
+              <h3 className="font-bold text-lg mb-1">{isAr ? 'الرياض' : 'Riyadh'}</h3>
+              <p className="text-primary text-sm font-mono mb-2">{isAr ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)'}</p>
               <p className="text-muted-foreground text-sm">أحمد بن محمد العيالي, RNNA7850</p>
             </div>
           </div>

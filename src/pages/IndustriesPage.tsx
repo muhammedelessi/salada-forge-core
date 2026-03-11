@@ -33,7 +33,7 @@ export default function IndustriesPage() {
           <img src={heroPort} alt="Industrial sectors served by Salada" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
-        <div className={cn('industrial-container relative z-10', isAr && 'text-right')}>
+        <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('industries.label')}</span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
             {t('industries.pageTitle')}
@@ -44,7 +44,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      {/* Industries — with descriptions */}
+      {/* Industries */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="border-t border-border">
@@ -52,13 +52,10 @@ export default function IndustriesPage() {
               <div
                 key={industry.id}
                 id={industry.id}
-                className={cn(
-                  'group flex items-start justify-between py-10 md:py-14 border-b border-border hover:pl-6 transition-all duration-300',
-                  isAr && 'flex-row-reverse hover:pr-6 hover:pl-0'
-                )}
+                className="group flex items-start justify-between py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 rtl:flex-row-reverse"
               >
-                <div className={cn('flex-1', isAr && 'text-right')}>
-                  <div className={cn('flex items-center gap-6 mb-3', isAr && 'flex-row-reverse')}>
+                <div className="flex-1 rtl:text-right">
+                  <div className="flex items-center gap-6 mb-3 rtl:flex-row-reverse">
                     <span className="text-sm font-mono text-muted-foreground">
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -66,21 +63,18 @@ export default function IndustriesPage() {
                       {industry.name}
                     </span>
                   </div>
-                  <p className={cn('text-muted-foreground text-sm md:text-base max-w-2xl leading-relaxed', isAr ? 'mr-14' : 'ml-14')}>
+                  <p className="text-muted-foreground text-sm md:text-base max-w-2xl leading-relaxed ltr:ml-14 rtl:mr-14">
                     {industry.desc}
                   </p>
                 </div>
-                <div className={cn('flex items-center gap-3 mt-2 flex-shrink-0', isAr && 'flex-row-reverse')}>
+                <div className="flex items-center gap-3 mt-2 flex-shrink-0 rtl:flex-row-reverse">
                   <Link
                     to="/contact"
                     className="hidden md:inline-flex text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors font-medium"
                   >
                     {isAr ? 'اعرف المزيد' : 'Learn More'}
                   </Link>
-                  <ArrowRight className={cn(
-                    'w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors',
-                    isAr && 'rotate-180'
-                  )} />
+                  <ArrowRight className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors rtl:rotate-180" />
                 </div>
               </div>
             ))}

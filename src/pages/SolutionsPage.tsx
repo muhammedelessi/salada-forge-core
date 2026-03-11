@@ -15,7 +15,7 @@ export default function SolutionsPage() {
   const { data: products = [] } = useProducts();
 
   const ArrowIcon = () => (
-    <ArrowRight className={`w-5 h-5 ${isRTL() ? 'mr-3 rotate-180' : 'ml-3'}`} />
+    <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />
   );
 
   const shippingContainers = products.filter(p => p.category === 'iso-shipping-container' && p.status === 'active');
@@ -61,7 +61,7 @@ export default function SolutionsPage() {
           <img src={heroPort} alt="Industrial port solutions" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
-        <div className={cn('industrial-container relative z-10', isAr && 'text-right')}>
+        <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('solutions.label')}</span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
             {t('solutions.pageTitle')}
@@ -90,11 +90,11 @@ export default function SolutionsPage() {
               )}
             </div>
             <div className={cn(
-              'flex flex-col justify-center p-12 md:p-20 lg:p-24',
+              'flex flex-col justify-center p-12 md:p-20 lg:p-24 rtl:text-right',
               index % 2 === 1 && 'lg:[direction:ltr]',
-              isAr && 'text-right'
+              isAr && index % 2 === 1 && 'lg:![direction:rtl]'
             )}>
-              <div className={cn('flex items-center gap-3 mb-6', isAr && 'flex-row-reverse')}>
+              <div className="flex items-center gap-3 mb-6 rtl:flex-row-reverse">
                 <solution.icon className="w-8 h-8 text-primary" />
                 <span className="industrial-label">{String(index + 1).padStart(2, '0')}</span>
               </div>
@@ -103,20 +103,17 @@ export default function SolutionsPage() {
               </h2>
               <p className="text-lg text-muted-foreground mb-4 font-medium">{solution.subtitle}</p>
               <p className="text-muted-foreground mb-10 max-w-lg leading-relaxed">{solution.description}</p>
-              <div className={cn('flex flex-wrap gap-4', isAr && 'flex-row-reverse')}>
+              <div className="flex flex-wrap gap-4 rtl:flex-row-reverse">
                 <Link
                   to={solution.shopLink}
-                  className={cn('industrial-button', isAr && 'flex-row-reverse')}
+                  className="industrial-button rtl:flex-row-reverse"
                 >
                   {isAr ? 'عرض المواصفات' : 'View Specifications'}
                   <ArrowIcon />
                 </Link>
                 <Link
                   to="/contact"
-                  className={cn(
-                    'inline-flex items-center justify-center px-8 py-4 border-2 border-border font-semibold uppercase tracking-[0.15em] text-sm transition-all duration-300 hover:bg-secondary',
-                    isAr && 'flex-row-reverse'
-                  )}
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-border font-semibold uppercase tracking-[0.15em] text-sm transition-all duration-300 hover:bg-secondary rtl:flex-row-reverse"
                 >
                   {t('solutions.inquire')}
                 </Link>
@@ -127,12 +124,9 @@ export default function SolutionsPage() {
           {solution.products.length > 0 && (
             <div className="bg-secondary/50 border-t border-border">
               <div className="industrial-container py-12">
-                <h3 className={cn(
-                  'text-sm uppercase tracking-[0.2em] font-semibold text-muted-foreground mb-8',
-                  isAr && 'text-right'
-                )}>
+                <h3 className="text-sm uppercase tracking-[0.2em] font-semibold text-muted-foreground mb-8 rtl:text-right">
                   {isAr ? 'المنتجات المتوفرة' : 'Available Products'}
-                  <span className="text-primary ml-2">({solution.products.length})</span>
+                  <span className="text-primary ltr:ml-2 rtl:mr-2">({solution.products.length})</span>
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1">
                   {solution.products.map((product) => (
@@ -151,7 +145,7 @@ export default function SolutionsPage() {
                           />
                         )}
                       </div>
-                      <div className={cn('p-3', isAr && 'text-right')}>
+                      <div className="p-3 rtl:text-right">
                         <p className="text-sm font-semibold truncate">{product.title}</p>
                         <p className="text-xs text-muted-foreground font-mono mt-1">{product.sku}</p>
                       </div>

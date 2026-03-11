@@ -5,7 +5,6 @@ import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
-import { cn } from '@/lib/utils';
 import heroPort from '@/assets/hero-port.jpg';
 
 export default function WhySaladaPage() {
@@ -13,7 +12,7 @@ export default function WhySaladaPage() {
   const { t, isRTL } = useLanguageStore();
 
   const ArrowIcon = () => (
-    <ArrowRight className={`w-5 h-5 ${isRTL() ? 'mr-3 rotate-180' : 'ml-3'}`} />
+    <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />
   );
 
   const strengths = [
@@ -35,7 +34,7 @@ export default function WhySaladaPage() {
           <img src={heroPort} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
-        <div className={cn('industrial-container relative z-10', isRTL() && 'text-right')}>
+        <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('why.label')}</span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
             {t('why.pageTitle')}
@@ -43,19 +42,16 @@ export default function WhySaladaPage() {
         </div>
       </section>
 
-      {/* Strengths — Bold numbered list */}
+      {/* Strengths */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="border-t border-border">
             {strengths.map((title, index) => (
               <div
                 key={title}
-                className={cn(
-                  'group flex items-center justify-between py-10 md:py-14 border-b border-border hover:pl-6 transition-all duration-300',
-                  isRTL() && 'flex-row-reverse hover:pr-6 hover:pl-0'
-                )}
+                className="group flex items-center justify-between py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 rtl:flex-row-reverse"
               >
-                <div className={cn('flex items-center gap-8', isRTL() && 'flex-row-reverse')}>
+                <div className="flex items-center gap-8 rtl:flex-row-reverse">
                   <span className="text-sm font-mono text-primary">
                     {String(index + 1).padStart(2, '0')}
                   </span>
@@ -77,10 +73,7 @@ export default function WhySaladaPage() {
           </h2>
           <Link
             to="/contact"
-            className={cn(
-              'inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary',
-              isRTL() && 'flex-row-reverse'
-            )}
+            className="inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary rtl:flex-row-reverse"
           >
             {t('cta.getQuote')}
             <ArrowIcon />

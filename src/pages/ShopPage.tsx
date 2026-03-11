@@ -21,7 +21,6 @@ export default function ShopPage() {
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
-  // Fetch products and categories from database
   const { data: products = [], isLoading: productsLoading } = useProducts();
   const { data: categories = [], isLoading: categoriesLoading } = useCategories();
 
@@ -29,7 +28,6 @@ export default function ShopPage() {
   const searchQuery = searchParams.get('q') || '';
   const priceRange = searchParams.get('price') || '';
 
-  // Category name translations
   const categoryTranslations: Record<string, string> = {
     'shipping-containers': t.categories.shippingContainers,
     'storage-tanks': t.categories.storageTanks,
@@ -62,13 +60,9 @@ export default function ShopPage() {
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
-
-    // Filter by category
     if (activeCategory) {
       filtered = filtered.filter((p) => p.category === activeCategory);
     }
-
-    // Filter by search
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -78,55 +72,32 @@ export default function ShopPage() {
           p.sku.toLowerCase().includes(query)
       );
     }
-
-    // Filter by price range
     if (priceRange) {
       const range = priceRanges.find(r => r.id === priceRange);
       if (range) {
         filtered = filtered.filter((p) => p.price >= range.min && p.price < range.max);
       }
     }
-
-    // Sort
     switch (sortBy) {
-      case 'price-asc':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'name-asc':
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 'name-desc':
-        filtered.sort((a, b) => b.title.localeCompare(a.title));
-        break;
+      case 'price-asc': filtered.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': filtered.sort((a, b) => b.price - a.price); break;
+      case 'name-asc': filtered.sort((a, b) => a.title.localeCompare(b.title)); break;
+      case 'name-desc': filtered.sort((a, b) => b.title.localeCompare(a.title)); break;
     }
-
     return filtered;
   }, [products, activeCategory, searchQuery, sortBy, priceRange]);
 
   const handleCategoryChange = (categoryId: string) => {
-    if (categoryId) {
-      searchParams.set('category', categoryId);
-    } else {
-      searchParams.delete('category');
-    }
+    if (categoryId) { searchParams.set('category', categoryId); } else { searchParams.delete('category'); }
     setSearchParams(searchParams);
   };
 
   const handlePriceRangeChange = (rangeId: string) => {
-    if (rangeId && rangeId !== priceRange) {
-      searchParams.set('price', rangeId);
-    } else {
-      searchParams.delete('price');
-    }
+    if (rangeId && rangeId !== priceRange) { searchParams.set('price', rangeId); } else { searchParams.delete('price'); }
     setSearchParams(searchParams);
   };
 
-  const clearFilters = () => {
-    setSearchParams({});
-  };
+  const clearFilters = () => { setSearchParams({}); };
 
   const isLoading = productsLoading || categoriesLoading;
 
@@ -136,7 +107,7 @@ export default function ShopPage() {
       <Breadcrumb items={[{ label: t.nav.shop }]} />
       {/* Page Header */}
       <section className="bg-secondary border-b border-border py-16">
-        <div className="industrial-container">
+        <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.shop.catalog}</span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {activeCategory
@@ -155,7 +126,7 @@ export default function ShopPage() {
                 {(activeCategory || priceRange) && (
                   <button
                     onClick={clearFilters}
-                    className={`${isRTL() ? 'mr-4' : 'ml-4'} text-primary hover:text-accent transition-colors inline-flex items-center gap-1`}
+                    className="ltr:ml-4 rtl:mr-4 text-primary hover:text-accent transition-colors inline-flex items-center gap-1"
                   >
                     {t.shop.clearFilters} <X className="w-4 h-4" />
                   </button>
@@ -167,16 +138,16 @@ export default function ShopPage() {
       </section>
 
       <div className="industrial-container py-8">
-        <div className={`flex flex-col lg:flex-row gap-8 ${isRTL() ? 'lg:flex-row-reverse' : ''}`}>
-          {/* Sidebar Filters - Desktop */}
-          <aside className={`hidden lg:block w-64 flex-shrink-0 ${isRTL() ? 'text-right' : ''}`}>
+        <div className="flex flex-col lg:flex-row gap-8 rtl:lg:flex-row-reverse">
+          {/* Sidebar Filters */}
+          <aside className="hidden lg:block w-64 flex-shrink-0 rtl:text-right">
             <div className="sticky top-24">
               <h3 className="text-sm uppercase tracking-wider font-semibold mb-6">{t.shop.categories}</h3>
               <ul className="space-y-2">
                 <li>
                   <button
                     onClick={() => handleCategoryChange('')}
-                    className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                    className={`w-full ltr:text-left rtl:text-right py-2 px-3 text-sm transition-colors ${
                       !activeCategory
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -189,19 +160,18 @@ export default function ShopPage() {
                   <li key={category.id}>
                     <button
                       onClick={() => handleCategoryChange(category.id)}
-                      className={`w-full ${isRTL() ? 'text-right' : 'text-left'} py-2 px-3 text-sm transition-colors ${
+                      className={`w-full ltr:text-left rtl:text-right py-2 px-3 text-sm transition-colors ${
                         activeCategory === category.id
                           ? 'bg-primary text-primary-foreground'
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                       }`}
                     >
                       {categoryTranslations[category.id] || category.name}
-                      <span className={`${isRTL() ? 'float-left' : 'float-right'} font-mono text-xs`}>({category.count})</span>
+                      <span className="ltr:float-right rtl:float-left font-mono text-xs">({category.count})</span>
                     </button>
                   </li>
                 ))}
               </ul>
-
             </div>
           </aside>
 
@@ -217,22 +187,20 @@ export default function ShopPage() {
                 {t.shop.filters}
               </button>
 
-              <div className={`flex items-center gap-4 ${isRTL() ? 'mr-auto' : 'ml-auto'}`}>
-                {/* Sort Dropdown */}
+              <div className="flex items-center gap-4 ltr:ml-auto rtl:mr-auto">
                 <div className="relative">
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className={`appearance-none bg-secondary border border-border px-4 py-2 ${isRTL() ? 'pl-10' : 'pr-10'} text-sm focus:outline-none focus:border-primary`}
+                    className="appearance-none bg-secondary border border-border px-4 py-2 ltr:pr-10 rtl:pl-10 text-sm focus:outline-none focus:border-primary"
                   >
                     <option value="featured">{t.shop.featured}</option>
                     <option value="name-asc">{t.shop.nameAZ}</option>
                     <option value="name-desc">{t.shop.nameZA}</option>
                   </select>
-                  <ChevronDown className={`absolute ${isRTL() ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none`} />
+                  <ChevronDown className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" />
                 </div>
 
-                {/* View Toggle */}
                 <div className="hidden sm:flex items-center border border-border">
                   <button
                     onClick={() => setViewMode('grid')}
@@ -256,26 +224,16 @@ export default function ShopPage() {
                 <h3 className="text-sm uppercase tracking-wider font-semibold mb-4">{t.shop.categories}</h3>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    onClick={() => {
-                      handleCategoryChange('');
-                      setShowFilters(false);
-                    }}
-                    className={`px-3 py-1 text-sm ${
-                      !activeCategory ? 'bg-primary text-primary-foreground' : 'bg-muted'
-                    }`}
+                    onClick={() => { handleCategoryChange(''); setShowFilters(false); }}
+                    className={`px-3 py-1 text-sm ${!activeCategory ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
                   >
                     {language === 'ar' ? 'الكل' : 'All'}
                   </button>
                   {categories.map((category) => (
                     <button
                       key={category.id}
-                      onClick={() => {
-                        handleCategoryChange(category.id);
-                        setShowFilters(false);
-                      }}
-                      className={`px-3 py-1 text-sm ${
-                        activeCategory === category.id ? 'bg-primary text-primary-foreground' : 'bg-muted'
-                      }`}
+                      onClick={() => { handleCategoryChange(category.id); setShowFilters(false); }}
+                      className={`px-3 py-1 text-sm ${activeCategory === category.id ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
                     >
                       {categoryTranslations[category.id] || category.name}
                     </button>
