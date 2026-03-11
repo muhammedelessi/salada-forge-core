@@ -12,8 +12,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Salada Metal Industries — leading provider of shipping containers, storage tanks, prefab buildings, and industrial metal solutions in Saudi Arabia.',
     },
     ar: {
-      title: 'صلادة للصناعات المعدنية | حلول معدنية متكاملة',
-      description: 'صلادة للصناعات المعدنية - الشركة الرائدة في حلول الحاويات الصناعية وحاويات الشحن وخزانات التخزين والمباني الجاهزة في المملكة العربية السعودية.',
+      title: 'صالدة للصناعات المعدنية | حلول معدنية متكاملة',
+      description: 'صالدة للصناعات المعدنية - الشركة الرائدة في حلول الحاويات الصناعية وحاويات الشحن وخزانات التخزين والمباني الجاهزة في المملكة العربية السعودية.',
     },
   },
   '/products': {
@@ -33,7 +33,7 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
     },
     ar: {
       title: 'الحلول | Solutions - Salada',
-      description: 'حلول لوجستية وصناعية شاملة — الشحن البري والبحري والجوي والتخزين من صلادة للصناعات المعدنية.',
+      description: 'حلول لوجستية وصناعية شاملة — الشحن البري والبحري والجوي والتخزين من صالدة للصناعات المعدنية.',
     },
   },
   '/industries': {
@@ -53,17 +53,17 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
     },
     ar: {
       title: 'من نحن | About Us - Salada',
-      description: 'تعرف على صلادة للصناعات المعدنية — تاريخنا ورؤيتنا والتزامنا بتقديم حلول معدنية صناعية عالمية المستوى.',
+      description: 'تعرف على صالدة للصناعات المعدنية — تاريخنا ورؤيتنا والتزامنا بتقديم حلول معدنية صناعية عالمية المستوى.',
     },
   },
   '/why-salada': {
     en: {
-      title: 'Why Salada | لماذا صلادة - Salada',
+      title: 'Why Salada | لماذا صالدة - Salada',
       description: 'Discover why leading enterprises choose Salada — one-stop partner, rapid deployment, national coverage, and full compliance.',
     },
     ar: {
-      title: 'لماذا صلادة | Why Salada - Salada',
-      description: 'اكتشف لماذا تختار المؤسسات الرائدة صلادة — شريك واحد، نشر سريع، تغطية وطنية، وامتثال كامل.',
+      title: 'لماذا صالدة | Why Salada - Salada',
+      description: 'اكتشف لماذا تختار المؤسسات الرائدة صالدة — شريك واحد، نشر سريع، تغطية وطنية، وامتثال كامل.',
     },
   },
   '/contact': {
@@ -73,7 +73,7 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
     },
     ar: {
       title: 'تواصل معنا | Contact Us - Salada',
-      description: 'تواصل مع صلادة للصناعات المعدنية للاستفسارات وعروض الأسعار وفرص الشراكة.',
+      description: 'تواصل مع صالدة للصناعات المعدنية للاستفسارات وعروض الأسعار وفرص الشراكة.',
     },
   },
 };
