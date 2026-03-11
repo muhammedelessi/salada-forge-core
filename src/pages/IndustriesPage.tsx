@@ -52,10 +52,11 @@ export default function IndustriesPage() {
               <div
                 key={industry.id}
                 id={industry.id}
-                className="group flex items-start justify-between py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 rtl:flex-row-reverse"
+                dir={isAr ? 'rtl' : 'ltr'}
+                className="group flex items-start justify-between py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300"
               >
-                <div className="flex-1 rtl:text-right">
-                  <div className="flex items-center gap-6 mb-3 rtl:flex-row-reverse">
+                <div className="flex-1">
+                  <div className="flex items-center gap-6 mb-3">
                     <span className="text-sm font-mono text-muted-foreground">
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -67,14 +68,14 @@ export default function IndustriesPage() {
                     {industry.desc}
                   </p>
                 </div>
-                <div className="flex items-center gap-3 mt-2 flex-shrink-0 rtl:flex-row-reverse">
+                <div className="flex items-center gap-3 mt-2 flex-shrink-0">
                   <Link
                     to="/contact"
                     className="hidden md:inline-flex text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors font-medium"
                   >
                     {isAr ? 'اعرف المزيد' : 'Learn More'}
                   </Link>
-                  <ArrowRight className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors rtl:rotate-180" />
+                  <ArrowRight className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
               </div>
             ))}
