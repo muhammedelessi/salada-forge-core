@@ -20,6 +20,7 @@ import AuthPage from "./pages/AuthPage";
 import OrdersPage from "./pages/OrdersPage";
 import ProductInquiryPage from "./pages/ProductInquiryPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import ArabicRouteHandler from "./components/ArabicRouteHandler";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/why-salada" element={<WhySaladaPage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/products" element={<ShopPage />} />
           <Route path="/product/:slug" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           
@@ -51,6 +53,7 @@ const App = () => (
           <Route path="/inquiry/:slug" element={<ProductInquiryPage />} />
           <Route path="/account" element={<AuthPage />} />
           <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/ar/*" element={<ArabicRouteHandler />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
