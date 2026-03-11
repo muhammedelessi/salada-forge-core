@@ -390,6 +390,9 @@ export const translations = {
       storyP3:
         "What sets Salada apart is our commitment to operational continuity and alignment with Saudi Vision 2030. Every solution is designed for reliability, compliance, and rapid deployment.",
       yearsStrong: "Years Strong",
+      visionLabel: "Our Vision",
+      visionTitle: "Our Vision",
+      visionDescription: "To become a trusted Saudi manufacturer of container solutions serving local and regional markets.",
       journeyLabel: "Our Journey",
       milestones: "Milestones",
       valuesLabel: "What Drives Us",
@@ -977,6 +980,9 @@ export const translations = {
       storyP3:
         "ما يميز صلادة هو التزامنا بالاستمرارية التشغيلية والتوافق مع رؤية السعودية 2030. كل حل مصمم للموثوقية والامتثال والنشر السريع.",
       yearsStrong: "عاماً من النجاح",
+      visionLabel: "رؤيتنا",
+      visionTitle: "رؤيتنا",
+      visionDescription: "أن نكون الشريك السعودي الموثوق في تصنيع حلول الحاويات للأسواق المحلية والإقليمية.",
       journeyLabel: "رحلتنا",
       milestones: "محطات بارزة",
       valuesLabel: "ما يحركنا",
