@@ -20,6 +20,7 @@ import AuthPage from "./pages/AuthPage";
 import OrdersPage from "./pages/OrdersPage";
 import ProductInquiryPage from "./pages/ProductInquiryPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import ArabicRouteHandler from "./components/ArabicRouteHandler";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
