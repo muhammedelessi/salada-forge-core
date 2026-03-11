@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://salada.sa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Products -->
+  <url>
+    <loc>https://salada.sa/products</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/products" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/products" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/products</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/products" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/products" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Solutions -->
+  <url>
+    <loc>https://salada.sa/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/solutions" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/solutions" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/solutions" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/solutions" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Industries -->
+  <url>
+    <loc>https://salada.sa/industries</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/industries" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/industries" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/industries</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/industries" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/industries" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://salada.sa/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/about" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/about" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Why Salada -->
+  <url>
+    <loc>https://salada.sa/why-salada</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/why-salada" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/why-salada" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/why-salada</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/why-salada" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/why-salada" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://salada.sa/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/contact" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://salada.sa/ar/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salada.sa/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://salada.sa/ar/contact" />
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
