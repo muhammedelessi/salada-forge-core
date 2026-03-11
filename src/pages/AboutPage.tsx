@@ -1,26 +1,30 @@
-import { Layout } from '@/components/layout/Layout';
-import { SEOHead } from '@/components/SEOHead';
-import { Breadcrumb } from '@/components/Breadcrumb';
-import { usePageSEO } from '@/hooks/usePageSEO';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
-import { useLanguageStore } from '@/store/languageStore';
-import { translations } from '@/i18n/translations';
-import { cn } from '@/lib/utils';
+import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from "lucide-react";
+import { useLanguageStore } from "@/store/languageStore";
+import { translations } from "@/i18n/translations";
+import { cn } from "@/lib/utils";
 
 export default function AboutPage() {
-  const seo = usePageSEO('/about');
+  const seo = usePageSEO("/about");
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
 
   const ArrowIcon = isRTL() ? ArrowLeft : ArrowRight;
 
   const timeline = [
-    { year: '1998', title: t.about.timeline.founded, description: t.about.timeline.foundedDesc },
-    { year: '2005', title: t.about.timeline.globalExpansion, description: t.about.timeline.globalExpansionDesc },
-    { year: '2012', title: t.about.timeline.innovationHub, description: t.about.timeline.innovationHubDesc },
-    { year: '2020', title: t.about.timeline.digitalTransformation, description: t.about.timeline.digitalTransformationDesc },
-    { year: '2024', title: t.about.timeline.industryLeader, description: t.about.timeline.industryLeaderDesc },
+    { year: "1998", title: t.about.timeline.founded, description: t.about.timeline.foundedDesc },
+    { year: "2005", title: t.about.timeline.globalExpansion, description: t.about.timeline.globalExpansionDesc },
+    { year: "2012", title: t.about.timeline.innovationHub, description: t.about.timeline.innovationHubDesc },
+    {
+      year: "2020",
+      title: t.about.timeline.digitalTransformation,
+      description: t.about.timeline.digitalTransformationDesc,
+    },
+    { year: "2024", title: t.about.timeline.industryLeader, description: t.about.timeline.industryLeaderDesc },
   ];
 
   const values = [
@@ -31,16 +35,16 @@ export default function AboutPage() {
   ];
 
   const stats = [
-    { value: '25+', label: t.about.yearsExperience },
-    { value: '50K+', label: t.about.unitsDelivered },
-    { value: '120+', label: t.about.countriesServed },
-    { value: '500+', label: t.about.enterpriseClients },
+    { value: "25+", label: t.about.yearsExperience },
+    { value: "50K+", label: t.about.unitsDelivered },
+    { value: "120+", label: t.about.countriesServed },
+    { value: "500+", label: t.about.enterpriseClients },
   ];
 
   return (
     <Layout>
       <SEOHead {...seo} />
-      <Breadcrumb items={[{ label: isRTL() ? 'من نحن' : 'About' }]} />
+      <Breadcrumb items={[{ label: isRTL() ? "من نحن" : "About" }]} />
       {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 grid-overlay opacity-20" />
@@ -50,9 +54,7 @@ export default function AboutPage() {
             {t.about.title}
             <span className="block text-gradient">{t.about.titleHighlight}</span>
           </h1>
-          <p className="industrial-subheading max-w-2xl">
-            {t.about.description}
-          </p>
+          <p className="industrial-subheading max-w-2xl">{t.about.description}</p>
         </div>
       </section>
 
@@ -64,32 +66,16 @@ export default function AboutPage() {
               <div
                 key={stat.label}
                 className={cn(
-                  'py-12 text-center',
-                  index < 3 && 'ltr:md:border-r rtl:md:border-l border-border',
-                  index === 1 && 'ltr:border-r rtl:border-l border-border'
+                  "py-12 text-center",
+                  index < 3 && "ltr:md:border-r rtl:md:border-l border-border",
+                  index === 1 && "ltr:border-r rtl:border-l border-border",
                 )}
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2 font-mono">
-                  {stat.value}
-                </div>
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2 font-mono">{stat.value}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Vision */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 grid-overlay opacity-20" />
-        <div className="industrial-container relative z-10 rtl:text-right">
-          <span className="industrial-label mb-6 block">{t.about.visionLabel}</span>
-          <h2 className="industrial-heading max-w-4xl mb-8">
-            {t.about.visionTitle}
-          </h2>
-          <p className="industrial-subheading max-w-2xl">
-            {t.about.visionDescription}
-          </p>
         </div>
       </section>
 
@@ -99,9 +85,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
               <span className="industrial-label mb-4 block">{t.about.storyLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {t.about.storyTitle}
-              </h2>
+
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>{t.about.storyP1}</p>
                 <p>{t.about.storyP2}</p>
@@ -133,20 +117,21 @@ export default function AboutPage() {
 
           <div className="relative">
             <div className="absolute top-0 bottom-0 w-px bg-border ltr:left-8 rtl:right-8 ltr:md:left-1/2 rtl:md:right-1/2" />
-            
+
             <div className="space-y-12">
               {timeline.map((item, index) => (
                 <div
                   key={item.year}
                   className={cn(
-                    'relative flex items-start gap-8 rtl:flex-row-reverse',
-                    index % 2 === 0 ? 'ltr:md:flex-row rtl:md:flex-row-reverse' : 'ltr:md:flex-row-reverse rtl:md:flex-row'
+                    "relative flex items-start gap-8 rtl:flex-row-reverse",
+                    index % 2 === 0
+                      ? "ltr:md:flex-row rtl:md:flex-row-reverse"
+                      : "ltr:md:flex-row-reverse rtl:md:flex-row",
                   )}
                 >
-                  <div className={cn(
-                    'flex-1 hidden md:block',
-                    index % 2 === 0 ? 'ltr:text-right rtl:text-left' : ''
-                  )} />
+                  <div
+                    className={cn("flex-1 hidden md:block", index % 2 === 0 ? "ltr:text-right rtl:text-left" : "")}
+                  />
                   <div className="relative flex items-center justify-center">
                     <div className="w-16 h-16 bg-primary text-primary-foreground flex items-center justify-center font-bold font-mono z-10">
                       {item.year}
@@ -190,12 +175,8 @@ export default function AboutPage() {
       <section className="relative py-24 bg-primary overflow-hidden">
         <div className="absolute inset-0 container-pattern opacity-20" />
         <div className="industrial-container relative z-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
-            {t.about.partnerCTA}
-          </h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            {t.about.partnerDesc}
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">{t.about.partnerCTA}</h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">{t.about.partnerDesc}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
