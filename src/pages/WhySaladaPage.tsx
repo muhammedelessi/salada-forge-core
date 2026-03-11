@@ -49,16 +49,15 @@ export default function WhySaladaPage() {
             {strengths.map((title, index) => (
               <div
                 key={title}
-                className="group flex items-center justify-between py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 rtl:flex-row-reverse"
+                dir={isRTL() ? 'rtl' : 'ltr'}
+                className="group flex items-center py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 gap-8"
               >
-                <div className="flex items-center gap-8 rtl:flex-row-reverse">
-                  <span className="text-sm font-mono text-primary">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
-                    {title}
-                  </span>
-                </div>
+                <span className="text-sm font-mono text-primary">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
+                  {title}
+                </span>
               </div>
             ))}
           </div>
