@@ -16,11 +16,11 @@ export default function WhySaladaPage() {
   );
 
   const strengths = [
-    t('why.onePartner'),
-    t('why.rapidDeployment'),
-    t('why.nationalCoverage'),
-    t('why.compliance'),
-    t('why.localSupply'),
+    { title: t('why.onePartner'), desc: t('why.onePartnerDesc') },
+    { title: t('why.rapidDeployment'), desc: t('why.rapidDeploymentDesc') },
+    { title: t('why.nationalCoverage'), desc: t('why.nationalCoverageDesc') },
+    { title: t('why.compliance'), desc: t('why.complianceDesc') },
+    { title: t('why.localSupply'), desc: t('why.localSupplyDesc') },
   ];
 
   return (
