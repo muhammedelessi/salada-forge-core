@@ -134,27 +134,24 @@ export const translations = {
     why: {
       label: "Why Choose Salada",
       title: "The Salada Advantage",
-      pageTitle: "Why Choose Salada",
+      pageTitle: "Why Choose Salada?",
       pageDesc:
         "One partner for complete operational support — from rapid deployment to national coverage, Salada delivers reliability at every level.",
-      onePartner: "One Partner — Complete Support",
+      onePartner: "Saudi Manufacturing Advantage",
       onePartnerDesc:
-        "End-to-end freight and storage solutions from a single trusted provider, eliminating complexity and streamlining your operations.",
-      rapidDeployment: "Rapid Deployment",
+        "Locally manufactured containers ensure faster supply and better project coordination.",
+      rapidDeployment: "Faster Delivery",
       rapidDeploymentDesc:
-        "Ready-to-deploy inventory and operational infrastructure ensures you get what you need, when you need it, anywhere in the Kingdom.",
-      nationalCoverage: "National Coverage Across KSA",
+        "Reduced lead times compared to imported containers.",
+      nationalCoverage: "Quality Control Process",
       nationalCoverageDesc:
-        "Operational presence and distribution capabilities spanning the entire Kingdom of Saudi Arabia — from Riyadh to the coast.",
-      compliance: "Compliance & Quality Standards",
+        "Each unit undergoes inspection for structural integrity, flooring stability, and coating durability.",
+      compliance: "Custom Engineering Capability",
       complianceDesc:
-        "ISO 9001:2015 certified operations, DNV-approved products, and full regulatory compliance across all solutions.",
-      localSupply: "Supporting Local Supply Chains",
+        "We adapt container specifications to match project-specific requirements.",
+      localSupply: "Industrial Reliability",
       localSupplyDesc:
-        "Committed to strengthening Saudi Arabia's domestic supply chain infrastructure and supporting local industry growth.",
-      continuity: "Operational Continuity Focus",
-      continuityDesc:
-        "Every solution is designed to minimize downtime and ensure your operations run without interruption.",
+        "Built to withstand heavy use and demanding conditions.",
     },
     // CTA Section
     cta: {
@@ -737,23 +734,20 @@ export const translations = {
     },
     // Why Salada
     why: {
-      label: "لماذا تختار صلادة",
-      title: "ميزة صلادة",
-      pageTitle: "لماذا تختار صلادة",
-      pageDesc: "شريك واحد لدعم تشغيلي كامل — من النشر السريع إلى التغطية الوطنية، صلادة تقدم الموثوقية في كل مستوى.",
-      onePartner: "شريك واحد — دعم كامل",
-      onePartnerDesc: "حلول شحن وتخزين شاملة من مزود واحد موثوق، مما يلغي التعقيد ويبسط عملياتك.",
-      rapidDeployment: "نشر سريع",
-      rapidDeploymentDesc:
-        "مخزون جاهز للنشر وبنية تحتية تشغيلية تضمن حصولك على ما تحتاجه في أي وقت وأي مكان في المملكة.",
-      nationalCoverage: "تغطية وطنية عبر المملكة",
-      nationalCoverageDesc: "تواجد تشغيلي وقدرات توزيع تغطي المملكة العربية السعودية بالكامل — من الرياض إلى الساحل.",
-      compliance: "الامتثال ومعايير الجودة",
-      complianceDesc: "عمليات حاصلة على شهادة ISO 9001:2015 ومنتجات معتمدة DNV وامتثال تنظيمي كامل.",
-      localSupply: "دعم سلاسل التوريد المحلية",
-      localSupplyDesc: "ملتزمون بتعزيز البنية التحتية لسلسلة التوريد المحلية في المملكة ودعم نمو الصناعة الوطنية.",
-      continuity: "التركيز على الاستمرارية التشغيلية",
-      continuityDesc: "كل حل مصمم لتقليل التوقف وضمان عمل عملياتك بلا انقطاع.",
+      label: "لماذا تختار صالدة",
+      title: "ميزة صالدة",
+      pageTitle: "لماذا تختار صالدة؟",
+      pageDesc: "شريك واحد لدعم تشغيلي كامل — من النشر السريع إلى التغطية الوطنية، صالدة تقدم الموثوقية في كل مستوى.",
+      onePartner: "ميزة التصنيع السعودي",
+      onePartnerDesc: "الحاويات المصنعة محلياً تضمن توريداً أسرع وتنسيقاً أفضل للمشاريع.",
+      rapidDeployment: "تسليم أسرع",
+      rapidDeploymentDesc: "أوقات تسليم أقل مقارنةً بالحاويات المستوردة.",
+      nationalCoverage: "عملية ضبط الجودة",
+      nationalCoverageDesc: "تخضع كل وحدة لفحص دقيق للتحقق من السلامة الهيكلية وثبات الأرضية ومتانة الطلاء.",
+      compliance: "قدرات هندسية مخصصة",
+      complianceDesc: "نكيّف مواصفات الحاويات لتلائم متطلبات كل مشروع.",
+      localSupply: "الموثوقية الصناعية",
+      localSupplyDesc: "مصممة لتحمل الاستخدام المكثف والظروف الصعبة.",
     },
     // CTA Section
     cta: {

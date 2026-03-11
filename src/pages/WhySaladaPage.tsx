@@ -21,7 +21,6 @@ export default function WhySaladaPage() {
     t('why.nationalCoverage'),
     t('why.compliance'),
     t('why.localSupply'),
-    t('why.continuity'),
   ];
 
   return (
