@@ -31,8 +31,11 @@ export default function HomePage() {
     { value: '99.5%', label: t('stats.onTimeDelivery') },
   ];
 
+  const seo = usePageSEO('/');
+
   return (
     <Layout>
+      <SEOHead {...seo} />
       {/* ── HERO ── Monumental, cinematic, zero clutter */}
       <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
         <div className="absolute inset-0">
