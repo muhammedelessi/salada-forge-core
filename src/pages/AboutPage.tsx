@@ -79,32 +79,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story */}
+      {/* About Cards */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
-              <span className="industrial-label mb-4 block">{t.about.storyLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {t.about.storyTitle}
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>{t.about.storyP1}</p>
-                <p>{t.about.storyP2}</p>
-                <p>{t.about.storyP3}</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { icon: Building2, titleKey: 'aboutCardTitle', altTitleKey: 'aboutCardTitleAr', descKey: 'aboutCardDesc' },
+              { icon: Eye, titleKey: 'visionCardTitle', altTitleKey: 'visionCardTitleAr', descKey: 'visionCardDesc' },
+              { icon: Target, titleKey: 'missionCardTitle', altTitleKey: 'missionCardTitleAr', descKey: 'missionCardDesc' },
+              { icon: Handshake, titleKey: 'commitmentCardTitle', altTitleKey: 'commitmentCardTitleAr', descKey: 'commitmentCardDesc' },
+            ].map((card) => (
+              <div
+                key={card.titleKey}
+                className="bg-card border border-border p-8 hover:border-primary transition-colors rtl:text-right"
+              >
+                <card.icon className="w-10 h-10 text-primary mb-5" />
+                <h3 className="text-xl font-bold mb-1">
+                  {(t.about as any)[card.titleKey]}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 font-mono">
+                  {(t.about as any)[card.altTitleKey]}
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {(t.about as any)[card.descKey]}
+                </p>
               </div>
-            </div>
-            <div className="relative lg:order-2 rtl:lg:order-1">
-              <div className="aspect-square bg-card border border-border p-8">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center">
-                  <span className="text-6xl font-bold text-primary/30">SALADA</span>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 bg-primary text-primary-foreground p-6">
-                <p className="text-2xl font-bold font-mono">25+</p>
-                <p className="text-sm">{t.about.yearsStrong}</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
