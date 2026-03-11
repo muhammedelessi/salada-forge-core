@@ -79,29 +79,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* About Cards */}
+      {/* About Cards - Timeline */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="flex flex-col gap-6 max-w-3xl mx-auto">
-            {[
-              { icon: Building2, titleKey: 'aboutCardTitle', altTitleKey: 'aboutCardTitleAr', descKey: 'aboutCardDesc' },
-              { icon: Eye, titleKey: 'visionCardTitle', altTitleKey: 'visionCardTitleAr', descKey: 'visionCardDesc' },
-              { icon: Target, titleKey: 'missionCardTitle', altTitleKey: 'missionCardTitleAr', descKey: 'missionCardDesc' },
-              { icon: Handshake, titleKey: 'commitmentCardTitle', altTitleKey: 'commitmentCardTitleAr', descKey: 'commitmentCardDesc' },
-            ].map((card) => (
-              <div
-                key={card.titleKey}
-                className="bg-card border border-border p-8 hover:border-primary transition-colors rtl:text-right"
-              >
-                <card.icon className="w-10 h-10 text-primary mb-5" />
-                <h3 className="text-xl font-bold mb-4">
-                  {(t.about as any)[card.titleKey]}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {(t.about as any)[card.descKey]}
-                </p>
-              </div>
-            ))}
+          <div className="relative max-w-3xl mx-auto">
+            {/* Timeline vertical line */}
+            <div className="absolute top-0 bottom-0 w-1 bg-primary ltr:left-6 rtl:right-6 z-0" />
+
+            <div className="flex flex-col gap-10">
+              {[
+                { icon: Building2, titleKey: 'aboutCardTitle', descKey: 'aboutCardDesc' },
+                { icon: Eye, titleKey: 'visionCardTitle', descKey: 'visionCardDesc' },
+                { icon: Target, titleKey: 'missionCardTitle', descKey: 'missionCardDesc' },
+                { icon: Handshake, titleKey: 'commitmentCardTitle', descKey: 'commitmentCardDesc' },
+              ].map((card) => (
+                <div key={card.titleKey} className="relative flex items-start ltr:pl-16 rtl:pr-16">
+                  {/* Timeline circle */}
+                  <div className="absolute ltr:left-0 rtl:right-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-md">
+                    <card.icon className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  {/* Card */}
+                  <div className="flex-1 bg-card shadow-sm border-l-4 rtl:border-l-0 rtl:border-r-4 border-primary p-6 rtl:text-right">
+                    <h3 className="text-xl font-bold mb-2">
+                      {(t.about as any)[card.titleKey]}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {(t.about as any)[card.descKey]}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
