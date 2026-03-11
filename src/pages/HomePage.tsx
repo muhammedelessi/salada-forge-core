@@ -158,7 +158,7 @@ export default function HomePage() {
               <Link
                 key={name}
                 to="/industries"
-                dir={isAr ? 'rtl' : 'ltr'}
+                dir={isRTL() ? 'rtl' : 'ltr'}
                 className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300"
               >
                 <span className="text-xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
