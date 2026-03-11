@@ -94,12 +94,9 @@ export default function AboutPage() {
                 className="bg-card border border-border p-8 hover:border-primary transition-colors rtl:text-right"
               >
                 <card.icon className="w-10 h-10 text-primary mb-5" />
-                <h3 className="text-xl font-bold mb-1">
+                <h3 className="text-xl font-bold mb-4">
                   {(t.about as any)[card.titleKey]}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4 font-mono">
-                  {(t.about as any)[card.altTitleKey]}
-                </p>
                 <p className="text-muted-foreground leading-relaxed">
                   {(t.about as any)[card.descKey]}
                 </p>
