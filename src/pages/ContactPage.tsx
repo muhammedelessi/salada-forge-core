@@ -199,7 +199,8 @@ export default function ContactPage() {
                 {contactInfo.map((info) => (
                   <div 
                     key={info.title} 
-                    className="flex gap-4 rtl:flex-row-reverse"
+                    dir={isAr ? 'rtl' : 'ltr'}
+                    className="flex gap-4"
                   >
                     <div className="w-12 h-12 bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-5 h-5 text-primary" />
