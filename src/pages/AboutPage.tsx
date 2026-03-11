@@ -40,6 +40,7 @@ export default function AboutPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: isRTL() ? 'من نحن' : 'About' }]} />
       {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 grid-overlay opacity-20" />

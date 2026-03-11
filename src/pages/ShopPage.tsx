@@ -133,6 +133,7 @@ export default function ShopPage() {
   return (
     <Layout>
       <SEOHead {...seo} />
+      <Breadcrumb items={[{ label: t.nav.shop }]} />
       {/* Page Header */}
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">
