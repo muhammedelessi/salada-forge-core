@@ -82,7 +82,7 @@ export default function AboutPage() {
       {/* About Cards */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6 max-w-3xl mx-auto">
             {[
               { icon: Building2, titleKey: 'aboutCardTitle', altTitleKey: 'aboutCardTitleAr', descKey: 'aboutCardDesc' },
               { icon: Eye, titleKey: 'visionCardTitle', altTitleKey: 'visionCardTitleAr', descKey: 'visionCardDesc' },
