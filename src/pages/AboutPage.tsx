@@ -3,7 +3,7 @@ import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap, Building2, Eye, Target, Handshake } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
