@@ -1,5 +1,6 @@
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
