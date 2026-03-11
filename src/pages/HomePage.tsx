@@ -158,12 +158,13 @@ export default function HomePage() {
               <Link
                 key={name}
                 to="/industries"
-                className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300 rtl:flex-row-reverse"
+                dir={isRTL() ? 'rtl' : 'ltr'}
+                className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300"
               >
                 <span className="text-xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
                   {name}
                 </span>
-                <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors rtl:rotate-180" />
+                <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
               </Link>
             ))}
           </div>
