@@ -3,7 +3,7 @@ import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap, Building2, Eye, Target, Handshake } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Award, Users, Globe, Zap } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
@@ -79,36 +79,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* About Cards - Timeline */}
+      {/* Story */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="relative max-w-3xl mx-auto">
-            {/* Timeline vertical line */}
-            <div className="absolute top-0 bottom-0 w-1 bg-primary ltr:left-6 rtl:right-6 z-0" />
-
-            <div className="flex flex-col gap-10">
-              {[
-                { icon: Building2, titleKey: 'aboutCardTitle', descKey: 'aboutCardDesc' },
-                { icon: Eye, titleKey: 'visionCardTitle', descKey: 'visionCardDesc' },
-                { icon: Target, titleKey: 'missionCardTitle', descKey: 'missionCardDesc' },
-                { icon: Handshake, titleKey: 'commitmentCardTitle', descKey: 'commitmentCardDesc' },
-              ].map((card) => (
-                <div key={card.titleKey} className="relative flex items-start ltr:pl-16 rtl:pr-16">
-                  {/* Timeline circle */}
-                  <div className="absolute ltr:left-0 rtl:right-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-md">
-                    <card.icon className="w-5 h-5 text-primary-foreground" />
-                  </div>
-                  {/* Card */}
-                  <div className="flex-1 bg-card shadow-sm border-l-4 rtl:border-l-0 rtl:border-r-4 border-primary p-6 rtl:text-right">
-                    <h3 className="text-xl font-bold mb-2">
-                      {(t.about as any)[card.titleKey]}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {(t.about as any)[card.descKey]}
-                    </p>
-                  </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
+              <span className="industrial-label mb-4 block">{t.about.storyLabel}</span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                {t.about.storyTitle}
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>{t.about.storyP1}</p>
+                <p>{t.about.storyP2}</p>
+                <p>{t.about.storyP3}</p>
+              </div>
+            </div>
+            <div className="relative lg:order-2 rtl:lg:order-1">
+              <div className="aspect-square bg-card border border-border p-8">
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center">
+                  <span className="text-6xl font-bold text-primary/30">SALADA</span>
                 </div>
-              ))}
+              </div>
+              <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 bg-primary text-primary-foreground p-6">
+                <p className="text-2xl font-bold font-mono">25+</p>
+                <p className="text-sm">{t.about.yearsStrong}</p>
+              </div>
             </div>
           </div>
         </div>
