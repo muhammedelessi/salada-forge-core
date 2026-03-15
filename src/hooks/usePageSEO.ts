@@ -42,8 +42,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Learn about Salada Metal Industries — over 25 years of delivering world-class industrial storage, steel fabrication, and custom engineering across KSA.',
     },
     ar: {
-      title: 'عن صالدة | أكثر من 25 عاماً من التميز الصناعي في السعودية',
-      description: 'تعرف على صالدة للصناعات المعدنية — أكثر من 25 عاماً في تقديم حلول التخزين الصناعي والتصنيع المعدني والهندسة المخصصة في المملكة.',
+      title: 'عن صلادة | أكثر من 25 عاماً من التميز الصناعي في السعودية',
+      description: 'تعرف على صلادة للصناعات المعدنية — أكثر من 25 عاماً في تقديم حلول التخزين الصناعي والتصنيع المعدني والهندسة المخصصة في المملكة.',
     },
   },
   '/contact': {
