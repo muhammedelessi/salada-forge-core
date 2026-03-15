@@ -872,7 +872,8 @@ export function ProductsAdmin() {
                       <div key={index} className="relative group border border-border">
                         <img
                           src={url}
-                          alt={`Product ${index + 1}`}
+                          alt={`Product image ${index + 1}`}
+                          loading="lazy"
                           className="w-full h-32 object-cover"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = '/placeholder.svg';
