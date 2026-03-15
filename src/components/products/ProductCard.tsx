@@ -36,6 +36,7 @@ export function ProductCard({ product, variant = 'default' }: ProductCardProps) 
           <img
             src={product.images[0]}
             alt={product.title}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
