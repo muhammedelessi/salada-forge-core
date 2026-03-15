@@ -595,7 +595,7 @@ export const translations = {
     nav: {
       solutions: "الحلول",
       industries: "القطاعات",
-      whySalada: "لماذا صالدة",
+      whySalada: "لماذا صلادة",
       about: "من نحن",
       contact: "تواصل معنا",
       faq: "الأسئلة الشائعة",
