@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { ChevronDown, Search } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
@@ -211,6 +212,7 @@ export default function FAQPage() {
 
   return (
     <Layout>
+      <Breadcrumb items={[{ label: isRTL ? 'الأسئلة الشائعة' : 'FAQ' }]} />
       {/* Hero */}
       <section className="bg-secondary border-b border-border py-16 md:py-24" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container">
