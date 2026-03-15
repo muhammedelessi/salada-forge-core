@@ -9,7 +9,7 @@ interface SEOHeadProps {
 }
 
 const BASE_URL = 'https://salada.sa';
-const OG_IMAGE = `${BASE_URL}/og-image.png`;
+const OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 
 function getJsonLd(path: string): object | null {
   if (path === '/') {
@@ -99,6 +99,9 @@ export function SEOHead({ title, description, path }: SEOHeadProps) {
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={OG_IMAGE} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Salada Metal Industries | صالدة للصناعات المعدنية" />
       <meta property="og:locale" content={isArabic ? 'ar_SA' : 'en_US'} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
