@@ -373,6 +373,72 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
+          {/* Ideal For / Key Features / Customization */}
+          <div className="mt-16 grid md:grid-cols-3 gap-1">
+            {/* Ideal For */}
+            <div className="bg-secondary border border-border p-8 rtl:text-right">
+              <h3 className="text-lg font-bold uppercase tracking-wider mb-6">{t.productDetail.idealFor}</h3>
+              <ul className="space-y-3">
+                {(product.idealFor && product.idealFor.length > 0
+                  ? product.idealFor
+                  : t.productDetail.defaultIdealFor
+                ).map((item: string, i: number) => (
+                  <li key={i} className={cn('flex items-start gap-3', isRTL && 'flex-row-reverse')}>
+                    <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Key Features */}
+            <div className="bg-secondary border border-border p-8 rtl:text-right">
+              <h3 className="text-lg font-bold uppercase tracking-wider mb-6">{t.productDetail.keyFeatures}</h3>
+              <ul className="space-y-3">
+                {(product.keyFeatures && product.keyFeatures.length > 0
+                  ? product.keyFeatures
+                  : t.productDetail.defaultKeyFeatures
+                ).map((item: string, i: number) => (
+                  <li key={i} className={cn('flex items-start gap-3', isRTL && 'flex-row-reverse')}>
+                    <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Customization */}
+            <div className="bg-secondary border border-border p-8 rtl:text-right">
+              <h3 className="text-lg font-bold uppercase tracking-wider mb-6">{t.productDetail.customization}</h3>
+              <ul className="space-y-3">
+                {(product.customizationOptions && product.customizationOptions.length > 0
+                  ? product.customizationOptions
+                  : t.productDetail.defaultCustomization
+                ).map((item: string, i: number) => (
+                  <li key={i} className={cn('flex items-start gap-3', isRTL && 'flex-row-reverse')}>
+                    <Check className="w-4 h-4 text-primary mt-1 shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Product CTA */}
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 rtl:sm:flex-row-reverse">
+            <Link
+              to="/contact"
+              className="industrial-button inline-flex items-center justify-center px-8 py-4 text-sm"
+            >
+              {t.productDetail.requestPricing}
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-8 py-4 border-2 border-border font-semibold uppercase tracking-wider text-sm hover:border-primary hover:text-primary transition-colors"
+            >
+              {t.productDetail.contactEngineer}
+            </Link>
+          </div>
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <section className="industrial-section bg-secondary border-t border-border">

@@ -23,6 +23,9 @@ interface DbProduct {
   created_at: string;
   updated_at: string;
   tags: string[] | null;
+  ideal_for: any;
+  key_features: any;
+  customization_options: any;
 }
 
 function parseSpecifications(specs: any): ProductSpecification[] {
@@ -55,6 +58,9 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     bulkPricing: Array.isArray(dbProduct.bulk_pricing) ? dbProduct.bulk_pricing : undefined,
     seoTitle: dbProduct.seo_title || undefined,
     seoDescription: dbProduct.seo_description || undefined,
+    idealFor: Array.isArray(dbProduct.ideal_for) ? dbProduct.ideal_for : [],
+    keyFeatures: Array.isArray(dbProduct.key_features) ? dbProduct.key_features : [],
+    customizationOptions: Array.isArray(dbProduct.customization_options) ? dbProduct.customization_options : [],
     createdAt: dbProduct.created_at,
     updatedAt: dbProduct.updated_at,
   };
