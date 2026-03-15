@@ -12,8 +12,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Salada Metal Industries delivers industrial storage systems, steel structures, and custom metal solutions across Saudi Arabia with 25+ years of proven expertise.',
     },
     ar: {
-      title: 'صالدة للصناعات المعدنية | حلول التخزين الصناعي والصلب في السعودية',
-      description: 'صالدة للصناعات المعدنية تقدم أنظمة تخزين صناعي وهياكل فولاذية وحلول معدنية مخصصة في المملكة العربية السعودية بخبرة تتجاوز 25 عاماً.',
+      title: 'صلادة للصناعات المعدنية | حلول التخزين الصناعي والصلب في السعودية',
+      description: 'صلادة للصناعات المعدنية تقدم أنظمة تخزين صناعي وهياكل فولاذية وحلول معدنية مخصصة في المملكة العربية السعودية بخبرة تتجاوز 25 عاماً.',
     },
   },
   '/solutions': {
