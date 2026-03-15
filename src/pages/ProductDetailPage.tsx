@@ -103,29 +103,11 @@ export default function ProductDetailPage() {
 
   return (
     <Layout>
-      {/* Breadcrumb */}
-      <div className="bg-secondary border-b border-border">
-        <div className="industrial-container py-4">
-          <nav className={cn('flex items-center gap-2 text-sm', isRTL && 'flex-row-reverse')}>
-            <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              {t.productDetail.home}
-            </Link>
-            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
-            <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
-              {t.productDetail.shop}
-            </Link>
-            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
-            <Link
-              to={`/shop?category=${product.category}`}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {categoryTranslations[product.category] || product.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
-            </Link>
-            <ChevronIcon className="w-4 h-4 text-muted-foreground" />
-            <span className="text-foreground truncate max-w-[200px]">{product.title}</span>
-          </nav>
-        </div>
-      </div>
+      <Breadcrumb items={[
+        { label: isRTL ? 'المتجر' : 'Shop', href: '/shop' },
+        { label: categoryTranslations[product.category] || product.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), href: `/shop?category=${product.category}` },
+        { label: product.title },
+      ]} />
 
       {/* Product Section */}
       <section className="industrial-section">
