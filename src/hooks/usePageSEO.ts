@@ -62,8 +62,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Find answers to common questions about Salada\'s industrial products, delivery timelines, custom engineering capabilities, and ordering process.',
     },
     ar: {
-      title: 'الأسئلة الشائعة | صالدة للصناعات المعدنية',
-      description: 'اعثر على إجابات للأسئلة الشائعة حول منتجات صالدة الصناعية ومواعيد التسليم والقدرات الهندسية المخصصة وعملية الطلب.',
+      title: 'الأسئلة الشائعة | صلادة للصناعات المعدنية',
+      description: 'اعثر على إجابات للأسئلة الشائعة حول منتجات صلادة الصناعية ومواعيد التسليم والقدرات الهندسية المخصصة وعملية الطلب.',
     },
   },
   '/why-salada': {
