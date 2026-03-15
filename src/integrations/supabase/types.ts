@@ -268,11 +268,14 @@ export type Database = {
           category: string
           compare_at_price: number | null
           created_at: string
+          customization_options: Json | null
           description: string | null
           dimensions: Json | null
           featured: boolean | null
           id: string
+          ideal_for: Json | null
           images: string[] | null
+          key_features: Json | null
           price: number
           seo_description: string | null
           seo_title: string | null
@@ -293,11 +296,14 @@ export type Database = {
           category: string
           compare_at_price?: number | null
           created_at?: string
+          customization_options?: Json | null
           description?: string | null
           dimensions?: Json | null
           featured?: boolean | null
           id?: string
+          ideal_for?: Json | null
           images?: string[] | null
+          key_features?: Json | null
           price: number
           seo_description?: string | null
           seo_title?: string | null
@@ -318,11 +324,14 @@ export type Database = {
           category?: string
           compare_at_price?: number | null
           created_at?: string
+          customization_options?: Json | null
           description?: string | null
           dimensions?: Json | null
           featured?: boolean | null
           id?: string
+          ideal_for?: Json | null
           images?: string[] | null
+          key_features?: Json | null
           price?: number
           seo_description?: string | null
           seo_title?: string | null
