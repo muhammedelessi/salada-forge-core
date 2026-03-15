@@ -15,12 +15,12 @@ export default function WhySaladaPage() {
     <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />
   );
 
-  const checkpoints = [
-    t('why.check1'),
-    t('why.check2'),
-    t('why.check3'),
-    t('why.check4'),
-    t('why.check5'),
+  const strengths = [
+    { title: t('why.onePartner'), desc: t('why.onePartnerDesc') },
+    { title: t('why.rapidDeployment'), desc: t('why.rapidDeploymentDesc') },
+    { title: t('why.nationalCoverage'), desc: t('why.nationalCoverageDesc') },
+    { title: t('why.compliance'), desc: t('why.complianceDesc') },
+    { title: t('why.localSupply'), desc: t('why.localSupplyDesc') },
   ];
 
   return (
@@ -42,23 +42,26 @@ export default function WhySaladaPage() {
         </div>
       </section>
 
-      {/* Checkpoints */}
+      {/* Strengths */}
       <section className="industrial-section">
         <div className="industrial-container">
           <div className="max-w-3xl rtl:text-right">
-            <div className="space-y-6 mb-12">
-              {checkpoints.map((point) => (
+            <div className="space-y-8 mb-12">
+              {strengths.map((item, index) => (
                 <div
-                  key={point}
+                  key={index}
                   dir={isRTL() ? 'rtl' : 'ltr'}
-                  className="flex items-center gap-4"
+                  className="flex items-start gap-4"
                 >
-                  <div className="w-8 h-8 bg-primary/10 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-5 h-5 text-primary" strokeWidth={3} />
                   </div>
-                  <span className="text-xl md:text-2xl font-bold uppercase tracking-tight">
-                    {point}
-                  </span>
+                  <div>
+                    <span className="text-xl md:text-2xl font-bold uppercase tracking-tight block">
+                      {item.title}
+                    </span>
+                    <p className="text-muted-foreground mt-1">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
