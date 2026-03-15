@@ -101,31 +101,28 @@ export const translations = {
     // Industries
     industries: {
       label: "Industries We Serve",
-      title: "Operational Readiness Across Sectors",
+      title: "Industries We Serve",
       pageTitle: "Industries We Serve",
       pageDesc:
         "Salada supports critical operations across Saudi Arabia's key industries — delivering freight and storage solutions built for reliability, compliance, and scale.",
-      description:
-        "Salada supports the industries driving Saudi Arabia's growth — from construction and energy to logistics and government infrastructure projects.",
-      viewAll: "View All Industries",
-      construction: "Construction",
+      introTitle: "Industries We Serve",
+      introDesc:
+        "Salada supports multiple sectors across Saudi Arabia and GCC with locally manufactured container solutions.",
+      logistics: "Logistics & Freight Companies",
+      logisticsDesc:
+        "We provide structurally reinforced containers built for frequent handling, stacking, and transportation.",
+      construction: "Construction Contractors",
       constructionDesc:
-        "On-site storage, material containers, and modular units for construction projects of all scales across the Kingdom.",
-      oilGas: "Oil & Gas",
-      oilGasDesc:
-        "Specialized containers, hazmat storage, and cargo securing systems designed for the demands of energy sector operations.",
-      manufacturing: "Manufacturing",
-      manufacturingDesc:
-        "Warehouse storage solutions, logistics infrastructure, and spare parts supply supporting industrial manufacturing facilities.",
-      logisticsPorts: "Logistics & Ports",
-      logisticsPortsDesc:
-        "Complete port infrastructure, container solutions, and freight handling equipment for logistics operators and port authorities.",
-      government: "Government & Public Sector",
+        "Reliable on-site storage solutions delivered quickly to meet project timelines.",
+      government: "Government Projects",
       governmentDesc:
-        "Storage units, emergency deployment containers, and infrastructure support for government agencies and public sector projects.",
-      megaProjects: "Mega Projects",
-      megaProjectsDesc:
-        "Large-scale storage and logistics infrastructure supporting Saudi Arabia's mega development and giga projects.",
+        "Saudi-manufactured containers aligned with industrial and operational standards.",
+      industrial: "Industrial Facilities",
+      industrialDesc:
+        "Heavy-duty storage solutions suitable for harsh operating environments.",
+      storage: "Storage & Warehousing Providers",
+      storageDesc:
+        "Scalable container solutions designed for efficient warehouse and storage operations.",
       ctaTitle: "Need Sector-Specific Solutions?",
       ctaDesc:
         "Our team understands the unique requirements of your industry. Get in touch to discuss your operational needs.",
