@@ -16,6 +16,9 @@ export interface Product {
   bulkPricing?: BulkPricing[];
   seoTitle?: string;
   seoDescription?: string;
+  idealFor?: string[];
+  keyFeatures?: string[];
+  customizationOptions?: string[];
   createdAt: string;
   updatedAt: string;
 }
