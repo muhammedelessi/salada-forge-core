@@ -72,8 +72,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Discover why leading enterprises choose Salada — Saudi manufacturing advantage, faster delivery, rigorous quality control, and custom engineering.',
     },
     ar: {
-      title: 'لماذا صالدة | مزود حلول صناعية معتمد في السعودية',
-      description: 'اكتشف لماذا تختار المؤسسات الرائدة صالدة — ميزة التصنيع السعودي، تسليم أسرع، ضبط جودة صارم، وهندسة مخصصة.',
+      title: 'لماذا صلادة | مزود حلول صناعية معتمد في السعودية',
+      description: 'اكتشف لماذا تختار المؤسسات الرائدة صلادة — ميزة التصنيع السعودي، تسليم أسرع، ضبط جودة صارم، وهندسة مخصصة.',
     },
   },
   '/shop': {
