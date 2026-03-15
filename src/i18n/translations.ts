@@ -293,6 +293,29 @@ export const translations = {
       estimatedDelivery: "Estimated Delivery: 3-7 Business Days",
       estimatedDeliveryDesc: "Delivery times vary based on location and product availability.",
       saveMore: "Save more when you order in larger quantities.",
+      idealFor: "Ideal For",
+      keyFeatures: "Key Features",
+      customization: "Customization Available",
+      requestPricing: "Request Custom Pricing",
+      contactEngineer: "Contact Sales Engineer",
+      defaultIdealFor: [
+        "Logistics companies",
+        "Construction sites",
+        "Industrial warehousing",
+        "Government storage facilities",
+      ],
+      defaultKeyFeatures: [
+        "Reinforced steel structure",
+        "Durable flooring system",
+        "Weather-resistant coating",
+        "Secure locking system",
+      ],
+      defaultCustomization: [
+        "Additional doors",
+        "Ventilation systems",
+        "Internal partitions",
+        "Special coating options",
+      ],
     },
     // Cart
     cart: {
