@@ -25,7 +25,7 @@ export default function IndustryDetailPage() {
 
   return (
     <Layout>
-      <SEOHead title={`${name} | Salada`} description={desc} />
+      <SEOHead title={`${name} | Salada`} description={desc} path={`/industries/${id}`} />
       <Breadcrumb items={[{ label: t('nav.industries'), href: '/industries' }, { label: name }]} />
 
       {/* Hero */}
