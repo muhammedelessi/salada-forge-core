@@ -148,12 +148,11 @@ export default function HomePage() {
 
           <div className="border-t border-border">
             {[
+              t('industries.logistics'),
               t('industries.construction'),
-              t('industries.oilGas'),
-              t('industries.manufacturing'),
-              t('industries.logisticsPorts'),
               t('industries.government'),
-              t('industries.megaProjects'),
+              t('industries.industrial'),
+              t('industries.storage'),
             ].map((name) => (
               <Link
                 key={name}

@@ -101,31 +101,28 @@ export const translations = {
     // Industries
     industries: {
       label: "Industries We Serve",
-      title: "Operational Readiness Across Sectors",
+      title: "Industries We Serve",
       pageTitle: "Industries We Serve",
       pageDesc:
         "Salada supports critical operations across Saudi Arabia's key industries — delivering freight and storage solutions built for reliability, compliance, and scale.",
-      description:
-        "Salada supports the industries driving Saudi Arabia's growth — from construction and energy to logistics and government infrastructure projects.",
-      viewAll: "View All Industries",
-      construction: "Construction",
+      introTitle: "Industries We Serve",
+      introDesc:
+        "Salada supports multiple sectors across Saudi Arabia and GCC with locally manufactured container solutions.",
+      logistics: "Logistics & Freight Companies",
+      logisticsDesc:
+        "We provide structurally reinforced containers built for frequent handling, stacking, and transportation.",
+      construction: "Construction Contractors",
       constructionDesc:
-        "On-site storage, material containers, and modular units for construction projects of all scales across the Kingdom.",
-      oilGas: "Oil & Gas",
-      oilGasDesc:
-        "Specialized containers, hazmat storage, and cargo securing systems designed for the demands of energy sector operations.",
-      manufacturing: "Manufacturing",
-      manufacturingDesc:
-        "Warehouse storage solutions, logistics infrastructure, and spare parts supply supporting industrial manufacturing facilities.",
-      logisticsPorts: "Logistics & Ports",
-      logisticsPortsDesc:
-        "Complete port infrastructure, container solutions, and freight handling equipment for logistics operators and port authorities.",
-      government: "Government & Public Sector",
+        "Reliable on-site storage solutions delivered quickly to meet project timelines.",
+      government: "Government Projects",
       governmentDesc:
-        "Storage units, emergency deployment containers, and infrastructure support for government agencies and public sector projects.",
-      megaProjects: "Mega Projects",
-      megaProjectsDesc:
-        "Large-scale storage and logistics infrastructure supporting Saudi Arabia's mega development and giga projects.",
+        "Saudi-manufactured containers aligned with industrial and operational standards.",
+      industrial: "Industrial Facilities",
+      industrialDesc:
+        "Heavy-duty storage solutions suitable for harsh operating environments.",
+      storage: "Storage & Warehousing Providers",
+      storageDesc:
+        "Scalable container solutions designed for efficient warehouse and storage operations.",
       ctaTitle: "Need Sector-Specific Solutions?",
       ctaDesc:
         "Our team understands the unique requirements of your industry. Get in touch to discuss your operational needs.",
@@ -671,26 +668,28 @@ export const translations = {
     // Industries
     industries: {
       label: "القطاعات التي نخدمها",
-      title: "جاهزية تشغيلية عبر القطاعات",
+      title: "القطاعات التي نخدمها",
       pageTitle: "القطاعات التي نخدمها",
       pageDesc:
         "صلادة تدعم العمليات الحيوية عبر القطاعات الرئيسية في المملكة — نقدم حلول شحن وتخزين مبنية على الموثوقية والامتثال والقدرة على التوسع.",
-      description:
-        "صلادة تدعم القطاعات التي تقود نمو المملكة العربية السعودية — من البناء والطاقة إلى اللوجستيات ومشاريع البنية التحتية الحكومية.",
-      viewAll: "عرض جميع القطاعات",
-      construction: "البناء والتشييد",
-      constructionDesc: "تخزين في الموقع وحاويات مواد ووحدات جاهزة لمشاريع البناء بجميع أحجامها في المملكة.",
-      oilGas: "النفط والغاز",
-      oilGasDesc: "حاويات متخصصة وتخزين المواد الخطرة وأنظمة تأمين البضائع المصممة لمتطلبات قطاع الطاقة.",
-      manufacturing: "التصنيع",
-      manufacturingDesc: "حلول تخزين المستودعات والبنية التحتية اللوجستية وتوريد قطع الغيار لدعم المنشآت الصناعية.",
-      logisticsPorts: "اللوجستيات والموانئ",
-      logisticsPortsDesc:
-        "بنية تحتية مينائية كاملة وحلول حاويات ومعدات مناولة الشحن لمشغلي الخدمات اللوجستية وسلطات الموانئ.",
-      government: "القطاع الحكومي والعام",
-      governmentDesc: "وحدات تخزين وحاويات نشر طوارئ ودعم بنية تحتية للجهات الحكومية ومشاريع القطاع العام.",
-      megaProjects: "المشاريع الكبرى",
-      megaProjectsDesc: "بنية تحتية لوجستية وتخزين واسعة النطاق تدعم مشاريع التطوير الكبرى والضخمة في المملكة.",
+      introTitle: "القطاعات التي نخدمها",
+      introDesc:
+        "تدعم صلادة قطاعات متعددة في المملكة العربية السعودية ودول الخليج بحلول حاويات مصنعة محلياً.",
+      logistics: "شركات اللوجستيات والشحن",
+      logisticsDesc:
+        "نوفر حاويات معززة هيكلياً مصممة للمناولة المتكررة والتكديس والنقل.",
+      construction: "مقاولو البناء",
+      constructionDesc:
+        "حلول تخزين موثوقة في الموقع يتم توصيلها بسرعة لتلبية الجداول الزمنية للمشاريع.",
+      government: "المشاريع الحكومية",
+      governmentDesc:
+        "حاويات مصنعة سعودياً متوافقة مع المعايير الصناعية والتشغيلية.",
+      industrial: "المنشآت الصناعية",
+      industrialDesc:
+        "حلول تخزين شديدة التحمل مناسبة لبيئات التشغيل القاسية.",
+      storage: "مزودو التخزين والتوزيع",
+      storageDesc:
+        "حلول حاويات قابلة للتوسع مصممة لعمليات المستودعات والتخزين الفعالة.",
       ctaTitle: "تحتاج حلولاً مخصصة لقطاعك؟",
       ctaDesc: "فريقنا يفهم المتطلبات الفريدة لصناعتك. تواصل معنا لمناقشة احتياجاتك التشغيلية.",
     },
