@@ -52,8 +52,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Reach out to Salada Metal Industries for a free project consultation, custom quotes, and partnership opportunities across Saudi Arabia and the region.',
     },
     ar: {
-      title: 'تواصل مع صالدة | احصل على عرض سعر مجاني لمشروعك',
-      description: 'تواصل مع صالدة للصناعات المعدنية للحصول على استشارة مجانية وعروض أسعار مخصصة وفرص شراكة في المملكة العربية السعودية والمنطقة.',
+      title: 'تواصل مع صلادة | احصل على عرض سعر مجاني لمشروعك',
+      description: 'تواصل مع صلادة للصناعات المعدنية للحصول على استشارة مجانية وعروض أسعار مخصصة وفرص شراكة في المملكة العربية السعودية والمنطقة.',
     },
   },
   '/faq': {
