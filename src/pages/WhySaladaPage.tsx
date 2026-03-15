@@ -30,7 +30,7 @@ export default function WhySaladaPage() {
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Why choose Salada Metal Industries" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">

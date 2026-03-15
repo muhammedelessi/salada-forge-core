@@ -71,6 +71,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                       <img
                         src={item.product.images[0]}
                         alt={item.product.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </Link>
