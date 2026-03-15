@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -15,18 +15,19 @@ export default function WhySaladaPage() {
     <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />
   );
 
-  const strengths = [
-    { title: t('why.onePartner'), desc: t('why.onePartnerDesc') },
-    { title: t('why.rapidDeployment'), desc: t('why.rapidDeploymentDesc') },
-    { title: t('why.nationalCoverage'), desc: t('why.nationalCoverageDesc') },
-    { title: t('why.compliance'), desc: t('why.complianceDesc') },
-    { title: t('why.localSupply'), desc: t('why.localSupplyDesc') },
-  ] as const;
+  const checkpoints = [
+    t('why.check1'),
+    t('why.check2'),
+    t('why.check3'),
+    t('why.check4'),
+    t('why.check5'),
+  ];
 
   return (
     <Layout>
       <SEOHead {...seo} />
       <Breadcrumb items={[{ label: t('nav.whySalada') }]} />
+
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
@@ -41,29 +42,29 @@ export default function WhySaladaPage() {
         </div>
       </section>
 
-      {/* Strengths */}
+      {/* Checkpoints */}
       <section className="industrial-section">
         <div className="industrial-container">
-          <div className="border-t border-border">
-            {strengths.map((item, index) => (
-              <div
-                key={item.title}
-                dir={isRTL() ? 'rtl' : 'ltr'}
-                className="group flex items-start py-10 md:py-14 border-b border-border ltr:hover:pl-6 rtl:hover:pr-6 transition-all duration-300 gap-8"
-              >
-                <span className="text-sm font-mono text-primary mt-1">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <span className="text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors block">
-                    {item.title}
+          <div className="max-w-3xl rtl:text-right">
+            <div className="space-y-6 mb-12">
+              {checkpoints.map((point) => (
+                <div
+                  key={point}
+                  dir={isRTL() ? 'rtl' : 'ltr'}
+                  className="flex items-center gap-4"
+                >
+                  <div className="w-8 h-8 bg-primary/10 flex items-center justify-center shrink-0">
+                    <Check className="w-5 h-5 text-primary" strokeWidth={3} />
+                  </div>
+                  <span className="text-xl md:text-2xl font-bold uppercase tracking-tight">
+                    {point}
                   </span>
-                  <p className="text-muted-foreground mt-2 text-base md:text-lg">
-                    {item.desc}
-                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              {t('why.supportingText')}
+            </p>
           </div>
         </div>
       </section>
