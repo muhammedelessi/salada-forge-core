@@ -33,6 +33,7 @@ export default function ArabicRouteHandler() {
       <Route path="/" element={<HomePage />} />
       <Route path="/solutions" element={<SolutionsPage />} />
       <Route path="/industries" element={<IndustriesPage />} />
+      <Route path="/industries/:id" element={<IndustryDetailPage />} />
       <Route path="/why-salada" element={<WhySaladaPage />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/products" element={<ShopPage />} />
