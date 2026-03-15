@@ -82,8 +82,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Browse Salada\'s full catalog of industrial products — racking systems, steel containers, shelving units, and custom metal fabrication solutions.',
     },
     ar: {
-      title: 'كتالوج المنتجات والحلول | صالدة للصناعات المعدنية',
-      description: 'تصفح كتالوج صالدة الكامل للمنتجات الصناعية — أنظمة الأرفف والحاويات الفولاذية ووحدات الرفوف وحلول التصنيع المعدني المخصصة.',
+      title: 'كتالوج المنتجات والحلول | صلادة للصناعات المعدنية',
+      description: 'تصفح كتالوج صلادة الكامل للمنتجات الصناعية — أنظمة الأرفف والحاويات الفولاذية ووحدات الرفوف وحلول التصنيع المعدني المخصصة.',
     },
   },
   '/products': {
