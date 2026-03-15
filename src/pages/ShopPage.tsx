@@ -137,6 +137,17 @@ export default function ShopPage() {
         </div>
       </section>
 
+      {/* Intro */}
+      <section className="border-b border-border">
+        <div className="industrial-container py-12 md:py-16 rtl:text-right">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.shop.introTitle}</h2>
+          <div className="max-w-3xl space-y-3">
+            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP1}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP2}</p>
+          </div>
+        </div>
+      </section>
+
       <div className="industrial-container py-8">
         <div className="flex flex-col lg:flex-row gap-8 rtl:lg:flex-row-reverse">
           {/* Sidebar Filters */}

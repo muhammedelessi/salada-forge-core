@@ -235,6 +235,9 @@ export const translations = {
     shop: {
       catalog: "Products",
       allProducts: "All Products",
+      introTitle: "Our Products",
+      introP1: "We manufacture durable dry and storage containers designed for commercial, industrial, and project-based applications.",
+      introP2: "Each container is built with structural strength, long-term durability, and optional customization based on client requirements.",
       products: "products",
       clearFilters: "Clear filters",
       categories: "Categories",
@@ -797,6 +800,9 @@ export const translations = {
     shop: {
       catalog: "المنتجات",
       allProducts: "جميع المنتجات",
+      introTitle: "منتجاتنا",
+      introP1: "نصنّع حاويات جافة وتخزين متينة مصممة للتطبيقات التجارية والصناعية والمشاريع.",
+      introP2: "كل حاوية مبنية بمتانة هيكلية وعمر تشغيلي طويل مع إمكانية التخصيص حسب متطلبات العميل.",
       products: "منتج",
       clearFilters: "مسح الفلاتر",
       categories: "الأقسام",
