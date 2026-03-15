@@ -32,8 +32,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Salada serves construction, oil and gas, manufacturing, logistics, government, and mega-project sectors with certified industrial metal solutions.',
     },
     ar: {
-      title: 'القطاعات التي نخدمها | إنشاءات، نفط وغاز، حكومي | صالدة',
-      description: 'تخدم صالدة قطاعات الإنشاءات والنفط والغاز والتصنيع واللوجستيات والحكومة والمشاريع العملاقة بحلول معدنية صناعية معتمدة.',
+      title: 'القطاعات التي نخدمها | إنشاءات، نفط وغاز، حكومي | صلادة',
+      description: 'تخدم صلادة قطاعات الإنشاءات والنفط والغاز والتصنيع واللوجستيات والحكومة والمشاريع العملاقة بحلول معدنية صناعية معتمدة.',
     },
   },
   '/about': {
