@@ -22,8 +22,8 @@ const seoData: Record<string, { en: PageSEO; ar: PageSEO }> = {
       description: 'Explore Salada\'s industrial solutions including racking systems, shelving units, steel structures, and custom engineering for warehouses and facilities.',
     },
     ar: {
-      title: 'الحلول الصناعية | رفوف وهياكل معدنية | صالدة',
-      description: 'استكشف حلول صالدة الصناعية من أنظمة الأرفف والرفوف والهياكل الفولاذية والهندسة المخصصة للمستودعات والمنشآت الصناعية.',
+      title: 'الحلول الصناعية | رفوف وهياكل معدنية | صلادة',
+      description: 'استكشف حلول صلادة الصناعية من أنظمة الأرفف والرفوف والهياكل الفولاذية والهندسة المخصصة للمستودعات والمنشآت الصناعية.',
     },
   },
   '/industries': {
