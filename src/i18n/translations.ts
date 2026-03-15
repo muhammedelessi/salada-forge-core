@@ -730,7 +730,7 @@ export const translations = {
     footer: {
       newsletter: "ابقَ على اطلاع",
       stayUpdated: "رؤى صناعية",
-      newsletterDesc: "تحديثات البنية التحتية اللوجستية ورؤى الصناعة وإعلانات حلول صالدة.",
+      newsletterDesc: "تحديثات البنية التحتية اللوجستية ورؤى الصناعة وإعلانات حلول صلادة.",
       emailPlaceholder: "البريد الإلكتروني",
       subscribe: "اشترك",
       solutions: "الحلول",
