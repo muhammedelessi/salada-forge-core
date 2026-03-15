@@ -5,7 +5,6 @@ import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
-import { cn } from '@/lib/utils';
 import heroPort from '@/assets/hero-port.jpg';
 
 export default function IndustriesPage() {
@@ -14,12 +13,11 @@ export default function IndustriesPage() {
   const isAr = isRTL();
 
   const industries = [
+    { name: t('industries.logistics'), desc: t('industries.logisticsDesc'), id: 'logistics' },
     { name: t('industries.construction'), desc: t('industries.constructionDesc'), id: 'construction' },
-    { name: t('industries.oilGas'), desc: t('industries.oilGasDesc'), id: 'oil-gas' },
-    { name: t('industries.manufacturing'), desc: t('industries.manufacturingDesc'), id: 'manufacturing' },
-    { name: t('industries.logisticsPorts'), desc: t('industries.logisticsPortsDesc'), id: 'logistics' },
     { name: t('industries.government'), desc: t('industries.governmentDesc'), id: 'government' },
-    { name: t('industries.megaProjects'), desc: t('industries.megaProjectsDesc'), id: 'mega' },
+    { name: t('industries.industrial'), desc: t('industries.industrialDesc'), id: 'industrial' },
+    { name: t('industries.storage'), desc: t('industries.storageDesc'), id: 'storage' },
   ];
 
   return (
@@ -40,6 +38,16 @@ export default function IndustriesPage() {
           </h1>
           <p className="mt-6 text-lg text-background/70 max-w-2xl">
             {t('industries.pageDesc')}
+          </p>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <section className="border-b border-border bg-secondary">
+        <div className="industrial-container py-16 md:py-24 rtl:text-right">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('industries.introTitle')}</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+            {t('industries.introDesc')}
           </p>
         </div>
       </section>
@@ -69,13 +77,7 @@ export default function IndustriesPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3 mt-2 flex-shrink-0">
-                  <Link
-                    to={`/industries/${industry.id}`}
-                    className="hidden md:inline-flex text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors font-medium"
-                  >
-                    {isAr ? 'اعرف المزيد' : 'Learn More'}
-                  </Link>
-                  <ArrowRight className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <ArrowRight className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors rtl:rotate-180" />
                 </div>
               </div>
             ))}
@@ -92,20 +94,12 @@ export default function IndustriesPage() {
           <p className="text-primary-foreground/70 max-w-xl mx-auto mb-10">
             {t('industries.ctaDesc')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary"
-            >
-              {t('cta.getQuote')}
-            </Link>
-            <Link
-              to="/solutions"
-              className="inline-flex items-center justify-center px-10 py-5 border-2 border-primary-foreground text-primary-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-primary-foreground hover:text-primary"
-            >
-              {isAr ? 'استكشف الحلول' : 'Explore Solutions'}
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center px-10 py-5 bg-background text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-secondary"
+          >
+            {t('cta.getQuote')}
+          </Link>
         </div>
       </section>
     </Layout>
