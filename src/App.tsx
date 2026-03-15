@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import SolutionsPage from "./pages/SolutionsPage";
 import IndustriesPage from "./pages/IndustriesPage";
+import IndustryDetailPage from "./pages/IndustryDetailPage";
 import WhySaladaPage from "./pages/WhySaladaPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import CartPage from "./pages/CartPage";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/solutions" element={<SolutionsPage />} />
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/why-salada" element={<WhySaladaPage />} />
+          <Route path="/industries/:id" element={<IndustryDetailPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/products" element={<ShopPage />} />
           <Route path="/product/:slug" element={<ProductDetailPage />} />
