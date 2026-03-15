@@ -5,6 +5,7 @@ import HomePage from '@/pages/HomePage';
 import ShopPage from '@/pages/ShopPage';
 import SolutionsPage from '@/pages/SolutionsPage';
 import IndustriesPage from '@/pages/IndustriesPage';
+import IndustryDetailPage from '@/pages/IndustryDetailPage';
 import WhySaladaPage from '@/pages/WhySaladaPage';
 import ProductDetailPage from '@/pages/ProductDetailPage';
 import CartPage from '@/pages/CartPage';
