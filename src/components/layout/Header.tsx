@@ -64,12 +64,11 @@ export function Header() {
   ];
 
   const industriesMega = [
-    { label: t('industries.construction'), desc: isAr ? 'تخزين الموقع والوحدات الجاهزة' : 'On-site storage & modular units', href: '/industries#construction' },
-    { label: t('industries.oilGas'), desc: isAr ? 'حاويات متخصصة للطاقة' : 'Specialized energy containers', href: '/industries#oil-gas' },
-    { label: t('industries.manufacturing'), desc: isAr ? 'حلول المستودعات الصناعية' : 'Industrial warehouse solutions', href: '/industries#manufacturing' },
-    { label: t('industries.logisticsPorts'), desc: isAr ? 'بنية تحتية مينائية كاملة' : 'Complete port infrastructure', href: '/industries#logistics' },
-    { label: t('industries.government'), desc: isAr ? 'دعم القطاع الحكومي' : 'Public sector support', href: '/industries#government' },
-    { label: t('industries.megaProjects'), desc: isAr ? 'بنية تحتية للمشاريع الكبرى' : 'Mega project infrastructure', href: '/industries#mega' },
+    { label: t('industries.logistics'), desc: isAr ? 'حاويات معززة للشحن والنقل' : 'Reinforced containers for freight', href: '/industries#logistics' },
+    { label: t('industries.construction'), desc: isAr ? 'حلول تخزين موثوقة في الموقع' : 'Reliable on-site storage', href: '/industries#construction' },
+    { label: t('industries.government'), desc: isAr ? 'حاويات متوافقة مع المعايير' : 'Standards-aligned containers', href: '/industries#government' },
+    { label: t('industries.industrial'), desc: isAr ? 'حلول للبيئات القاسية' : 'Solutions for harsh environments', href: '/industries#industrial' },
+    { label: t('industries.storage'), desc: isAr ? 'حلول تخزين قابلة للتوسع' : 'Scalable storage solutions', href: '/industries#storage' },
   ];
 
   const navLinks = [

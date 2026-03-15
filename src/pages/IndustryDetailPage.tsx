@@ -6,12 +6,11 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { useLanguageStore } from '@/store/languageStore';
 
 const industryData: Record<string, { nameKey: string; descKey: string }> = {
+  logistics: { nameKey: 'industries.logistics', descKey: 'industries.logisticsDesc' },
   construction: { nameKey: 'industries.construction', descKey: 'industries.constructionDesc' },
-  'oil-gas': { nameKey: 'industries.oilGas', descKey: 'industries.oilGasDesc' },
-  manufacturing: { nameKey: 'industries.manufacturing', descKey: 'industries.manufacturingDesc' },
-  logistics: { nameKey: 'industries.logisticsPorts', descKey: 'industries.logisticsPortsDesc' },
   government: { nameKey: 'industries.government', descKey: 'industries.governmentDesc' },
-  mega: { nameKey: 'industries.megaProjects', descKey: 'industries.megaProjectsDesc' },
+  industrial: { nameKey: 'industries.industrial', descKey: 'industries.industrialDesc' },
+  storage: { nameKey: 'industries.storage', descKey: 'industries.storageDesc' },
 };
 
 export default function IndustryDetailPage() {
