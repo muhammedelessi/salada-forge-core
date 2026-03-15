@@ -145,7 +145,8 @@ export function ImageUpload({ onUpload, existingImages = [], maxImages = 5 }: Im
             <div key={url} className="relative group aspect-square bg-muted">
               <img
                 src={url}
-                alt={`Product ${index + 1}`}
+                alt={`Product image ${index + 1}`}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <button

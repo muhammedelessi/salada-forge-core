@@ -674,6 +674,7 @@ export default function CheckoutPage() {
                         <img
                           src={item.product.images[0]}
                           alt={item.product.title}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                         <span className={`absolute -top-2 ${isRTL() ? '-left-2' : '-right-2'} w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center font-mono`}>
