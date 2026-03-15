@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
+import { Breadcrumb } from '@/components/Breadcrumb';
 import { useProduct, useProducts } from '@/hooks/useProducts';
 import { ProductCard } from '@/components/products/ProductCard';
 import { StickyAddToCart } from '@/components/products/StickyAddToCart';

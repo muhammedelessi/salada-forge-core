@@ -212,6 +212,7 @@ export default function FAQPage() {
 
   return (
     <Layout>
+      <Breadcrumb items={[{ label: isRTL ? 'الأسئلة الشائعة' : 'FAQ' }]} />
       {/* Hero */}
       <section className="bg-secondary border-b border-border py-16 md:py-24" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container">
