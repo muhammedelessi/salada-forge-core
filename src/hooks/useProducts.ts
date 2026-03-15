@@ -23,6 +23,9 @@ interface DbProduct {
   created_at: string;
   updated_at: string;
   tags: string[] | null;
+  ideal_for: any;
+  key_features: any;
+  customization_options: any;
 }
 
 function parseSpecifications(specs: any): ProductSpecification[] {
