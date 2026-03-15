@@ -1376,6 +1376,7 @@ export function ProductsAdmin() {
                             <img
                               src={product.images[0]}
                               alt={product.title}
+                              loading="lazy"
                               className="w-12 h-12 object-cover border border-border"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = '/placeholder.svg';

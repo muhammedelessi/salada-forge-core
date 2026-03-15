@@ -65,7 +65,7 @@ export function Footer() {
             <Link to="/" className="flex items-center mb-6 hover-lift">
               <img 
                 src={saladaLogo} 
-                alt="SALADA" 
+                alt="Salada Metal Industries logo" 
                 className="h-20 md:h-28 w-auto object-contain"
               />
             </Link>

@@ -204,6 +204,7 @@ export default function ProductInquiryPage() {
                   <img
                     src={product.images[0] || '/placeholder.svg'}
                     alt={product.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

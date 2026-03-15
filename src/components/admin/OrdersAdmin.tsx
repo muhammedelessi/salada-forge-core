@@ -367,6 +367,7 @@ export function OrdersAdmin() {
                             <img 
                               src={item.image} 
                               alt={item.title} 
+                              loading="lazy"
                               className="w-12 h-12 object-cover"
                             />
                             <div className={`flex-1 ${isRTL() ? 'text-right' : ''}`}>
