@@ -235,6 +235,9 @@ export const translations = {
     shop: {
       catalog: "Products",
       allProducts: "All Products",
+      introTitle: "Our Products",
+      introP1: "We manufacture durable dry and storage containers designed for commercial, industrial, and project-based applications.",
+      introP2: "Each container is built with structural strength, long-term durability, and optional customization based on client requirements.",
       products: "products",
       clearFilters: "Clear filters",
       categories: "Categories",
