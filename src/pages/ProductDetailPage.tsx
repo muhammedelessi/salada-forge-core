@@ -146,7 +146,7 @@ export default function ProductDetailPage() {
             {/* Product Info */}
             <div className={cn(isRTL && 'lg:col-start-1 lg:row-start-1')}>
               <span className="industrial-label mb-2 block">{product.sku}</span>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">{product.title}</h1>
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in">{product.title}</h1>
 
               {/* Contact Us Section */}
               <div className={cn('flex items-center gap-4 mb-6', isRTL && 'flex-row-reverse justify-end')}>
