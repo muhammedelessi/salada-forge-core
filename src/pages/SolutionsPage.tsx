@@ -49,6 +49,18 @@ export default function SolutionsPage() {
       shopLink: '/shop?category=storage-containers',
       color: 'bg-accent',
     },
+    {
+      id: 'land-shipping-containers',
+      icon: Truck,
+      title: isAr ? 'حاويات الشحن البري' : 'Land Shipping Containers',
+      subtitle: isAr ? 'حاويات مصممة للنقل البري والشحن عبر الطرق' : 'Containers Engineered for Road Freight & Land Transport',
+      description: isAr
+        ? 'حاويات متينة مصممة خصيصًا للنقل البري والشحن عبر الطرق، مناسبة لنقل البضائع الثقيلة والمعدات الصناعية عبر الشبكات البرية بأمان وكفاءة.'
+        : 'Heavy-duty containers purpose-built for road freight and overland transport. Engineered to safely and efficiently move heavy cargo and industrial equipment across land-based logistics networks.',
+      products: landContainers,
+      shopLink: '/shop?category=land-shipping-container',
+      color: 'bg-primary',
+    },
   ];
 
   return (
