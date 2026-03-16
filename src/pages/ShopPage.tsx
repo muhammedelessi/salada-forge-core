@@ -109,7 +109,7 @@ export default function ShopPage() {
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.shop.catalog}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {activeCategory
               ? categoryTranslations[activeCategory] || activeCategory.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
               : t.shop.allProducts}
