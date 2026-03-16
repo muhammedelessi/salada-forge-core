@@ -90,7 +90,7 @@ export default function ContactPage() {
         <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.contact.label}</span>
           <h1 className="text-3xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
-          <p className="text-muted-foreground max-w-2xl">
+          <p className="text-muted-foreground max-w-2xl text-base">
             {t.contact.description}
           </p>
         </div>
