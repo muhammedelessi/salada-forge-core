@@ -224,7 +224,7 @@ export default function ContactPage() {
       {/* Google Maps */}
       <section className="border-t border-border">
         <div className="industrial-container py-16">
-          <h2 className="text-2xl font-bold mb-8 rtl:text-right">
+          <h2 className="text-xl md:text-2xl font-bold mb-8 rtl:text-right">
             {t.contact.headquarters}
           </h2>
           <div className="w-full aspect-[21/9] md:aspect-[3/1] border border-border overflow-hidden">
