@@ -257,7 +257,7 @@ Do not return products without an RA number.`,
       <section className="bg-secondary border-b border-border py-16" dir={isRTL() ? 'rtl' : 'ltr'}>
         <div className={cn('industrial-container', isRTL() && 'text-right')}>
           <span className="industrial-label mb-4 block">{t.policy.legal}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageContent.title}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">{pageContent.title}</h1>
           <p className="text-muted-foreground">
             {t.policy.lastUpdated}: {pageContent.lastUpdated}
           </p>
