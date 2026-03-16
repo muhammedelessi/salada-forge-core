@@ -150,7 +150,7 @@ export default function ProductDetailPage() {
 
               {/* Contact Us Section */}
               <div className={cn('flex items-center gap-4 mb-6', isRTL && 'flex-row-reverse justify-end')}>
-                <span className="text-lg text-muted-foreground">
+                <span className="text-base text-muted-foreground">
                   {language === 'ar' ? 'للحصول على السعر، تواصل معنا' : 'Contact us for pricing'}
                 </span>
               </div>

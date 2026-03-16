@@ -269,7 +269,7 @@ Do not return products without an RA number.`,
           <div className={cn('max-w-3xl', isRTL() ? 'mr-0' : 'mx-auto')}>
             {pageContent.sections.map((section, index) => (
               <div key={index} className="mb-10">
-                <h2 className="text-xl font-bold mb-4">{section.title}</h2>
+                <h2 className="text-lg md:text-xl font-bold mb-4">{section.title}</h2>
                 <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
                   {section.content}
                 </div>

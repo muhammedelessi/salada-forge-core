@@ -142,8 +142,8 @@ export default function ShopPage() {
         <div className="industrial-container py-12 md:py-16 rtl:text-right">
           <h2 className="text-xl md:text-2xl font-bold mb-4">{t.shop.introTitle}</h2>
           <div className="max-w-3xl space-y-3">
-            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP1}</p>
-            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP2}</p>
+            <p className="text-base text-muted-foreground leading-relaxed">{t.shop.introP1}</p>
+            <p className="text-base text-muted-foreground leading-relaxed">{t.shop.introP2}</p>
           </div>
         </div>
       </section>

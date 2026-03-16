@@ -299,7 +299,7 @@ export default function FAQPage() {
       {/* Contact CTA */}
       <section className="bg-secondary border-t border-border py-16" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container text-center">
-          <h2 className="text-2xl font-bold mb-4">{content.stillQuestions}</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">{content.stillQuestions}</h2>
           <p className="text-muted-foreground mb-6">
             {content.stillQuestionsDesc}
           </p>

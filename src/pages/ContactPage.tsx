@@ -249,7 +249,7 @@ export default function ContactPage() {
           
           <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
             <div className="bg-card border border-border p-6 rtl:text-right">
-              <h3 className="font-bold text-lg mb-1">{isAr ? 'الرياض' : 'Riyadh'}</h3>
+              <h3 className="font-bold text-base mb-1">{isAr ? 'الرياض' : 'Riyadh'}</h3>
               <p className="text-primary text-sm font-mono mb-2">{isAr ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)'}</p>
               <p className="text-muted-foreground text-sm">أحمد بن محمد العيالي, RNNA7850</p>
             </div>

@@ -167,7 +167,7 @@ export default function CartPage() {
             {/* Order Summary */}
             <div className={`lg:col-span-1 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <div className="bg-card border border-border p-6 sticky top-24">
-                <h2 className="text-xl font-bold mb-6">{t.cart.orderSummary}</h2>
+                <h2 className="text-lg md:text-xl font-bold mb-6">{t.cart.orderSummary}</h2>
 
                 {/* Coupon */}
                 <div className="mb-6 pb-6 border-b border-border">
