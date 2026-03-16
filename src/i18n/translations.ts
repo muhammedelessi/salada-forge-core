@@ -407,7 +407,7 @@ export const translations = {
       factoryP1: "Salada operates a dedicated manufacturing facility in Saudi Arabia, equipped to produce dry and storage containers with strict quality control standards.",
       factoryP2: "Our production process includes structural welding, floor reinforcement, corrosion protection, and final inspection to ensure durability and long operational life.",
       partnerCTA: "Ready to Partner with Salada?",
-      partnerDesc: "Join the growing network of Saudi industries that trust Salada for their freight and storage infrastructure needs.",
+      partnerDesc: "Join the growing network of Saudi industries that trust Salada for industrial containers, shipping & storage solutions, and securing equipment.",
       contactUs: "Contact Us",
       viewProducts: "View Solutions",
     },
