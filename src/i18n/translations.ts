@@ -391,8 +391,8 @@ export const translations = {
     about: {
       label: "About Salada",
       title: "About Salada",
-      descP1: "Salada is a Saudi-based container manufacturer specializing in dry and storage container solutions.",
-      descP2: "With a focus on industrial quality and local production, we aim to support Saudi Arabia's growing logistics, construction, and industrial sectors.",
+      descP1: "Salada is a Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
+      descP2: "With a focus on industrial quality and local production, we support Saudi Arabia's growing logistics, construction, and industrial sectors.",
       visionLabel: "Our Vision",
       visionTitle: "Our Vision",
       visionDescription: "To become a trusted Saudi manufacturer of container solutions serving local and regional markets.",
