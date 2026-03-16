@@ -28,7 +28,7 @@ export default function CartPage() {
           <div className="industrial-container">
             <div className="max-w-lg mx-auto text-center py-16">
               <ShoppingBag className="w-16 h-16 mx-auto text-muted-foreground mb-6" />
-              <h1 className="text-3xl font-bold mb-4">{t.cart.empty}</h1>
+              <h1 className="text-2xl md:text-4xl font-bold mb-4">{t.cart.empty}</h1>
               <p className="text-muted-foreground mb-8">
                 {t.cart.emptyDesc}
               </p>
