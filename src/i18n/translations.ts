@@ -29,7 +29,7 @@ export const translations = {
       label: "Aligned with Saudi Vision 2030",
       title: "Supporting the Kingdom's Industrial & Logistics Transformation",
       description:
-        "Salada is committed to empowering Saudi Arabia's supply chain infrastructure — providing integrated freight and storage solutions that strengthen national logistics capabilities and support industrial growth across the Kingdom.",
+        "Salada is committed to empowering Saudi Arabia's supply chain infrastructure — providing industrial containers, integrated shipping & storage solutions, and container parts & securing equipment that strengthen national logistics capabilities.",
     },
     // Stats
     stats: {
