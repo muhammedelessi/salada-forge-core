@@ -20,6 +20,7 @@ export default function SolutionsPage() {
 
   const shippingContainers = products.filter(p => p.category === 'iso-shipping-container' && p.status === 'active');
   const storageContainers = products.filter(p => p.category === 'storage-containers' && p.status === 'active');
+  const landContainers = products.filter(p => p.category === 'land-shipping-container' && p.status === 'active');
 
   const isAr = isRTL();
 
