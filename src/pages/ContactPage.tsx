@@ -89,7 +89,7 @@ export default function ContactPage() {
       <section className="bg-secondary border-b border-border py-16 md:py-24">
         <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.contact.label}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
           <p className="text-muted-foreground max-w-2xl">
             {t.contact.description}
           </p>
