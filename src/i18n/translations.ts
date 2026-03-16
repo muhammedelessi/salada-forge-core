@@ -416,7 +416,7 @@ export const translations = {
       label: "Get in Touch",
       title: "Contact Us",
       description:
-        "Have a freight or storage requirement? Our team is ready to provide a tailored solution for your operational needs.",
+        "Need industrial containers, shipping & storage solutions, or container parts & securing equipment? Our team is ready to help.",
       sendMessage: "Send us a Message",
       name: "Name",
       subject: "Subject",
