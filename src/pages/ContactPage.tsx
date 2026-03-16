@@ -193,7 +193,7 @@ export default function ContactPage() {
 
             {/* Contact Info */}
             <div className="rtl:text-right lg:order-2 rtl:lg:order-1">
-              <h2 className="text-2xl font-bold mb-6">{t.contact.contactInfo}</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-6">{t.contact.contactInfo}</h2>
               
               <div className="space-y-6">
                 {contactInfo.map((info) => (
