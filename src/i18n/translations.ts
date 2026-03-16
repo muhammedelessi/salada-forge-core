@@ -151,7 +151,7 @@ export const translations = {
     cta: {
       title: "Ready to Strengthen Your Operations?",
       description:
-        "Connect with our team for integrated freight and storage solutions tailored to your business needs.",
+        "Connect with our team for industrial containers, shipping & storage solutions, and container parts & securing equipment tailored to your business needs.",
       getQuote: "Request a Quote",
       browseCatalog: "Explore Solutions",
     },
