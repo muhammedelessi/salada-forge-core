@@ -182,7 +182,7 @@ export const translations = {
       privacyPolicy: "Privacy Policy",
       termsOfService: "Terms of Service",
       tagline:
-        "Integrated freight & storage solutions across land, sea, and air — supporting Saudi Arabia's industrial and logistics transformation.",
+        "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       rights: "All rights reserved.",
       isoCertified: "ISO 9001:2015",
       dnvApproved: "DNV Approved",
