@@ -16,11 +16,11 @@ export const translations = {
     },
     // Hero
     hero: {
-      label: "Integrated Freight & Storage Solutions",
-      title: "Integrated Solutions Across",
-      titleHighlight: "Land, Sea & Air",
+      label: "Saudi Manufacturer of Industrial Containers",
+      title: "Industrial Containers, Shipping & Storage Solutions, and",
+      titleHighlight: "Container Parts & Securing Equipment",
       description:
-        "Salada delivers end-to-end freight and storage solutions supporting Saudi Arabia's industrial transformation and logistics growth.",
+        "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       cta: "Explore Solutions",
       quote: "Request a Quote",
     },
@@ -29,7 +29,7 @@ export const translations = {
       label: "Aligned with Saudi Vision 2030",
       title: "Supporting the Kingdom's Industrial & Logistics Transformation",
       description:
-        "Salada is committed to empowering Saudi Arabia's supply chain infrastructure — providing integrated freight and storage solutions that strengthen national logistics capabilities and support industrial growth across the Kingdom.",
+        "Salada is committed to empowering Saudi Arabia's supply chain infrastructure — providing industrial containers, integrated shipping & storage solutions, and container parts & securing equipment that strengthen national logistics capabilities.",
     },
     // Stats
     stats: {
@@ -104,7 +104,7 @@ export const translations = {
       title: "Industries We Serve",
       pageTitle: "Industries We Serve",
       pageDesc:
-        "Salada supports critical operations across Saudi Arabia's key industries — delivering freight and storage solutions built for reliability, compliance, and scale.",
+        "Salada supports critical operations across Saudi Arabia's key industries — delivering industrial containers, shipping & storage solutions, and container parts & securing equipment built for reliability and scale.",
       introTitle: "Industries We Serve",
       introDesc:
         "Salada supports multiple sectors across Saudi Arabia and GCC with locally manufactured container solutions.",
@@ -151,7 +151,7 @@ export const translations = {
     cta: {
       title: "Ready to Strengthen Your Operations?",
       description:
-        "Connect with our team for integrated freight and storage solutions tailored to your business needs.",
+        "Connect with our team for industrial containers, shipping & storage solutions, and container parts & securing equipment tailored to your business needs.",
       getQuote: "Request a Quote",
       browseCatalog: "Explore Solutions",
     },
@@ -182,7 +182,7 @@ export const translations = {
       privacyPolicy: "Privacy Policy",
       termsOfService: "Terms of Service",
       tagline:
-        "Integrated freight & storage solutions across land, sea, and air — supporting Saudi Arabia's industrial and logistics transformation.",
+        "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       rights: "All rights reserved.",
       isoCertified: "ISO 9001:2015",
       dnvApproved: "DNV Approved",
@@ -391,8 +391,8 @@ export const translations = {
     about: {
       label: "About Salada",
       title: "About Salada",
-      descP1: "Salada is a Saudi-based container manufacturer specializing in dry and storage container solutions.",
-      descP2: "With a focus on industrial quality and local production, we aim to support Saudi Arabia's growing logistics, construction, and industrial sectors.",
+      descP1: "Salada is a Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
+      descP2: "With a focus on industrial quality and local production, we support Saudi Arabia's growing logistics, construction, and industrial sectors.",
       visionLabel: "Our Vision",
       visionTitle: "Our Vision",
       visionDescription: "To become a trusted Saudi manufacturer of container solutions serving local and regional markets.",
@@ -407,7 +407,7 @@ export const translations = {
       factoryP1: "Salada operates a dedicated manufacturing facility in Saudi Arabia, equipped to produce dry and storage containers with strict quality control standards.",
       factoryP2: "Our production process includes structural welding, floor reinforcement, corrosion protection, and final inspection to ensure durability and long operational life.",
       partnerCTA: "Ready to Partner with Salada?",
-      partnerDesc: "Join the growing network of Saudi industries that trust Salada for their freight and storage infrastructure needs.",
+      partnerDesc: "Join the growing network of Saudi industries that trust Salada for industrial containers, shipping & storage solutions, and securing equipment.",
       contactUs: "Contact Us",
       viewProducts: "View Solutions",
     },
@@ -416,7 +416,7 @@ export const translations = {
       label: "Get in Touch",
       title: "Contact Us",
       description:
-        "Have a freight or storage requirement? Our team is ready to provide a tailored solution for your operational needs.",
+        "Need industrial containers, shipping & storage solutions, or container parts & securing equipment? Our team is ready to help.",
       sendMessage: "Send us a Message",
       name: "Name",
       subject: "Subject",
@@ -625,10 +625,10 @@ export const translations = {
     },
     // Hero
     hero: {
-      label: "حلول شحن وتخزين متكاملة",
-      title: "حلول متكاملة عبر",
-      titleHighlight: "البر والبحر والجو",
-      description: "صلادة تقدم حلول شحن وتخزين شاملة تدعم التحول الصناعي والنمو اللوجستي في المملكة العربية السعودية.",
+      label: "شركة سعودية لتصنيع الحاويات الصناعية",
+      title: "حاويات صناعية، حلول شحن وتخزين متكاملة، و",
+      titleHighlight: "قطع غيار حاويات ومعدات تثبيت",
+      description: "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
       cta: "استكشف الحلول",
       quote: "اطلب عرض سعر",
     },
@@ -637,7 +637,7 @@ export const translations = {
       label: "متوافقون مع رؤية السعودية 2030",
       title: "دعم التحول الصناعي واللوجستي للمملكة",
       description:
-        "صلادة ملتزمة بتمكين البنية التحتية لسلسلة التوريد في المملكة العربية السعودية — نقدم حلول شحن وتخزين متكاملة تعزز القدرات اللوجستية الوطنية وتدعم النمو الصناعي في المملكة.",
+        "صلادة ملتزمة بتمكين البنية التحتية لسلسلة التوريد في المملكة — نقدم حاويات صناعية وحلول شحن وتخزين متكاملة وقطع غيار حاويات ومعدات تثبيت تعزز القدرات اللوجستية الوطنية.",
     },
     // Stats
     stats: {
@@ -702,7 +702,7 @@ export const translations = {
       title: "القطاعات التي نخدمها",
       pageTitle: "القطاعات التي نخدمها",
       pageDesc:
-        "صلادة تدعم العمليات الحيوية عبر القطاعات الرئيسية في المملكة — نقدم حلول شحن وتخزين مبنية على الموثوقية والامتثال والقدرة على التوسع.",
+        "صلادة تدعم العمليات الحيوية عبر القطاعات الرئيسية في المملكة — نقدم حاويات صناعية وحلول شحن وتخزين وقطع غيار ومعدات تثبيت مبنية على الموثوقية والقدرة على التوسع.",
       introTitle: "القطاعات التي نخدمها",
       introDesc:
         "تدعم صلادة قطاعات متعددة في المملكة العربية السعودية ودول الخليج بحلول حاويات مصنعة محلياً.",
@@ -746,7 +746,7 @@ export const translations = {
     // CTA Section
     cta: {
       title: "جاهز لتعزيز عملياتك؟",
-      description: "تواصل مع فريقنا للحصول على حلول شحن وتخزين متكاملة مصممة لاحتياجات عملك.",
+      description: "تواصل مع فريقنا للحصول على حاويات صناعية وحلول شحن وتخزين متكاملة وقطع غيار ومعدات تثبيت مصممة لاحتياجات عملك.",
       getQuote: "اطلب عرض سعر",
       browseCatalog: "استكشف الحلول",
     },
@@ -777,7 +777,7 @@ export const translations = {
       privacyPolicy: "سياسة الخصوصية",
       termsOfService: "الشروط والأحكام",
       tagline:
-        "حلول شحن وتخزين متكاملة عبر البر والبحر والجو — ندعم التحول الصناعي واللوجستي في المملكة العربية السعودية.",
+        "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
       rights: "جميع الحقوق محفوظة.",
       isoCertified: "ISO 9001:2015",
       dnvApproved: "معتمدون من DNV",
@@ -978,8 +978,8 @@ export const translations = {
     about: {
       label: "عن صلادة",
       title: "عن صلادة",
-      descP1: "صلادة شركة سعودية متخصصة في تصنيع الحاويات الجافة وحلول التخزين.",
-      descP2: "نسعى من خلال التركيز على الجودة الصناعية والإنتاج المحلي إلى دعم قطاعات اللوجستيات والبناء والصناعة المتنامية في المملكة العربية السعودية.",
+      descP1: "صلادة — شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
+      descP2: "نسعى من خلال التركيز على الجودة الصناعية والإنتاج المحلي إلى دعم قطاعات اللوجستيات والبناء والصناعة المتنامية في المملكة.",
       visionLabel: "رؤيتنا",
       visionTitle: "رؤيتنا",
       visionDescription: "أن نكون الشريك السعودي الموثوق في تصنيع حلول الحاويات للأسواق المحلية والإقليمية.",
@@ -994,14 +994,14 @@ export const translations = {
       factoryP1: "تدير صلادة منشأة تصنيع مخصصة في المملكة العربية السعودية، مجهزة لإنتاج الحاويات الجافة وحاويات التخزين وفق معايير صارمة لمراقبة الجودة.",
       factoryP2: "تشمل عملية الإنتاج لدينا اللحام الهيكلي وتعزيز الأرضيات والحماية من التآكل والفحص النهائي لضمان المتانة وطول العمر التشغيلي.",
       partnerCTA: "جاهز للشراكة مع صلادة؟",
-      partnerDesc: "انضم للشبكة المتنامية من الصناعات السعودية التي تثق بصلادة لاحتياجات البنية التحتية للشحن والتخزين.",
+      partnerDesc: "انضم للشبكة المتنامية من الصناعات السعودية التي تثق بصلادة للحاويات الصناعية وحلول الشحن والتخزين ومعدات التثبيت.",
       contactUs: "تواصل معنا",
       viewProducts: "عرض الحلول",
     },
     contact: {
       label: "تواصل معنا",
       title: "اتصل بنا",
-      description: "لديك متطلبات شحن أو تخزين؟ فريقنا جاهز لتقديم حل مخصص لاحتياجاتك التشغيلية.",
+      description: "تحتاج حاويات صناعية أو حلول شحن وتخزين أو قطع غيار ومعدات تثبيت؟ فريقنا جاهز للمساعدة.",
       sendMessage: "أرسل رسالة",
       name: "الاسم",
       subject: "الموضوع",
