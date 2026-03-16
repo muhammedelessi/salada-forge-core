@@ -16,11 +16,11 @@ export const translations = {
     },
     // Hero
     hero: {
-      label: "Integrated Freight & Storage Solutions",
-      title: "Integrated Solutions Across",
-      titleHighlight: "Land, Sea & Air",
+      label: "Saudi Manufacturer of Industrial Containers",
+      title: "Industrial Containers, Shipping & Storage Solutions, and",
+      titleHighlight: "Container Parts & Securing Equipment",
       description:
-        "Salada delivers end-to-end freight and storage solutions supporting Saudi Arabia's industrial transformation and logistics growth.",
+        "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       cta: "Explore Solutions",
       quote: "Request a Quote",
     },
