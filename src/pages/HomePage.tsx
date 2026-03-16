@@ -45,7 +45,7 @@ export default function HomePage() {
 
         <div className="industrial-container relative z-10">
           <div className="max-w-5xl rtl:text-right">
-            <h1 className="text-5xl md:text-8xl lg:text-[7rem] font-bold uppercase tracking-tighter leading-[0.85] text-background animate-industrial-fade">
+            <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade">
               {t('hero.title')}
               <span className="block text-primary">{t('hero.titleHighlight')}</span>
             </h1>
@@ -73,7 +73,7 @@ export default function HomePage() {
                   index < stats.length - 1 ? 'ltr:border-r rtl:border-l border-border' : ''
                 }`}
               >
-                <div className="text-4xl md:text-6xl font-bold text-primary mb-3 font-mono">
+                <div className="text-2xl md:text-4xl font-bold text-primary mb-3 font-mono">
                   {stat.value}
                 </div>
                 <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
@@ -90,7 +90,7 @@ export default function HomePage() {
         <div className="industrial-container">
           <div className="max-w-5xl rtl:text-right">
             <span className="industrial-label mb-8 block">{t('vision.label')}</span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter leading-[0.9]">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter leading-tight">
               {t('vision.title')}
             </h2>
           </div>
@@ -102,7 +102,7 @@ export default function HomePage() {
         <div className="industrial-container py-24 md:py-32">
           <div className="mb-20 rtl:text-right">
             <span className="industrial-label mb-6 block">{t('solutions.label')}</span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">
               {t('solutions.title')}
             </h2>
           </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 rtl:text-right">
-                <h3 className="text-2xl md:text-4xl font-bold text-background uppercase tracking-tight group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-xl md:text-2xl font-bold text-background uppercase tracking-tight group-hover:text-primary transition-colors duration-300">
                   {solution.title}
                 </h3>
                 <span className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-primary font-mono mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rtl:flex-row-reverse">
@@ -141,7 +141,7 @@ export default function HomePage() {
         <div className="industrial-container">
           <div className="mb-20 rtl:text-right">
             <span className="industrial-label mb-6 block">{t('industries.label')}</span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">
               {t('industries.title')}
             </h2>
           </div>
@@ -160,7 +160,7 @@ export default function HomePage() {
                 dir={isRTL() ? 'rtl' : 'ltr'}
                 className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300"
               >
-                <span className="text-xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
+                <span className="text-lg md:text-xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
                   {name}
                 </span>
                 <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -175,7 +175,7 @@ export default function HomePage() {
         <div className="industrial-container">
           <div className="mb-20 text-center">
             <span className="industrial-label mb-6 block">{t('why.label')}</span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">
               {t('why.title')}
             </h2>
           </div>
@@ -191,7 +191,7 @@ export default function HomePage() {
                 key={item.title}
                 className="border-b ltr:border-r rtl:border-l border-border p-10 md:p-12 hover:bg-secondary/50 transition-colors duration-300 rtl:text-right"
               >
-                <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight">
+                <h3 className="text-base md:text-xl font-bold uppercase tracking-tight">
                   {item.title}
                 </h3>
               </div>
@@ -209,7 +209,7 @@ export default function HomePage() {
 
         <div className="industrial-container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-background mb-10 uppercase tracking-tighter leading-[0.9]">
+            <h2 className="text-2xl md:text-4xl font-bold text-background mb-10 uppercase tracking-tighter leading-tight">
               {t('cta.title')}
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">

@@ -217,10 +217,10 @@ export default function FAQPage() {
       <section className="bg-secondary border-b border-border py-16 md:py-24" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container">
           <span className="industrial-label mb-4 block">{content.label}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {content.title}
           </h1>
-          <p className="text-muted-foreground max-w-2xl mb-8">
+          <p className="text-muted-foreground max-w-2xl mb-8 text-base">
             {content.description}
           </p>
 
@@ -244,7 +244,7 @@ export default function FAQPage() {
             {filteredFAQs.length > 0 ? (
               filteredFAQs.map((category) => (
                 <div key={category.category} className="mb-12">
-                  <h2 className="text-xl font-bold mb-6 text-primary">
+                  <h2 className="text-lg md:text-xl font-bold mb-6 text-primary">
                     {category.category}
                   </h2>
                   <div className="space-y-1">
@@ -299,7 +299,7 @@ export default function FAQPage() {
       {/* Contact CTA */}
       <section className="bg-secondary border-t border-border py-16" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container text-center">
-          <h2 className="text-2xl font-bold mb-4">{content.stillQuestions}</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">{content.stillQuestions}</h2>
           <p className="text-muted-foreground mb-6">
             {content.stillQuestionsDesc}
           </p>

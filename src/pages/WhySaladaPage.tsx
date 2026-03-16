@@ -36,7 +36,7 @@ export default function WhySaladaPage() {
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('why.label')}</span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
+          <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background">
             {t('why.pageTitle')}
           </h1>
         </div>
@@ -57,15 +57,15 @@ export default function WhySaladaPage() {
                     <Check className="w-5 h-5 text-primary" strokeWidth={3} />
                   </div>
                   <div>
-                    <span className="text-xl md:text-2xl font-bold uppercase tracking-tight block">
+                    <span className="text-lg md:text-xl font-bold uppercase tracking-tight block">
                       {item.title}
                     </span>
-                    <p className="text-muted-foreground mt-1">{item.desc}</p>
+                    <p className="text-muted-foreground mt-1 text-base">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-muted-foreground text-base leading-relaxed">
               {t('why.supportingText')}
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function WhySaladaPage() {
       {/* CTA */}
       <section className="relative py-32 md:py-48 overflow-hidden bg-primary">
         <div className="industrial-container text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground uppercase tracking-tighter leading-[0.9] mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground uppercase tracking-tighter leading-tight mb-10">
             {t('cta.title')}
           </h2>
           <Link

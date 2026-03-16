@@ -36,7 +36,7 @@ export function Footer() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="rtl:text-right md:order-1 rtl:md:order-2">
               <span className="industrial-label mb-4 block">{t('footer.newsletter')}</span>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">{t('footer.stayUpdated')}</h3>
+              <h3 className="text-xl md:text-2xl font-bold mb-2">{t('footer.stayUpdated')}</h3>
               <p className="text-muted-foreground">
                 {t('footer.newsletterDesc')}
               </p>

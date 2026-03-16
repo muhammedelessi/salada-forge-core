@@ -109,7 +109,7 @@ export default function ShopPage() {
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.shop.catalog}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {activeCategory
               ? categoryTranslations[activeCategory] || activeCategory.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
               : t.shop.allProducts}
@@ -140,10 +140,10 @@ export default function ShopPage() {
       {/* Intro */}
       <section className="border-b border-border">
         <div className="industrial-container py-12 md:py-16 rtl:text-right">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.shop.introTitle}</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">{t.shop.introTitle}</h2>
           <div className="max-w-3xl space-y-3">
-            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP1}</p>
-            <p className="text-lg text-muted-foreground leading-relaxed">{t.shop.introP2}</p>
+            <p className="text-base text-muted-foreground leading-relaxed">{t.shop.introP1}</p>
+            <p className="text-base text-muted-foreground leading-relaxed">{t.shop.introP2}</p>
           </div>
         </div>
       </section>

@@ -63,10 +63,10 @@ export default function SolutionsPage() {
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('solutions.label')}</span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
+          <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background">
             {t('solutions.pageTitle')}
           </h1>
-          <p className="mt-6 text-lg text-background/70 max-w-2xl">
+          <p className="mt-6 text-base text-background/70 max-w-2xl">
             {t('solutions.pageDesc')}
           </p>
         </div>
@@ -98,11 +98,11 @@ export default function SolutionsPage() {
                 <solution.icon className="w-8 h-8 text-primary" />
                 <span className="industrial-label">{String(index + 1).padStart(2, '0')}</span>
               </div>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter leading-[0.9] mb-6">
+              <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter leading-tight mb-6">
                 {solution.title}
               </h2>
-              <p className="text-lg text-muted-foreground mb-4 font-medium">{solution.subtitle}</p>
-              <p className="text-muted-foreground mb-10 max-w-lg leading-relaxed">{solution.description}</p>
+              <p className="text-base text-muted-foreground mb-4 font-medium">{solution.subtitle}</p>
+              <p className="text-sm text-muted-foreground mb-10 max-w-lg leading-relaxed">{solution.description}</p>
               <div className="flex flex-wrap gap-4 rtl:flex-row-reverse">
                 <Link
                   to={solution.shopLink}
@@ -161,7 +161,7 @@ export default function SolutionsPage() {
       {/* CTA */}
       <section className="industrial-section bg-primary">
         <div className="industrial-container text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground uppercase tracking-tighter leading-[0.9] mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground uppercase tracking-tighter leading-tight mb-10">
             {t('cta.title')}
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -32,8 +32,8 @@ const NotFound = () => {
     <Layout>
       <div className="min-h-[70vh] flex items-center justify-center" dir={isRTL() ? 'rtl' : 'ltr'}>
         <div className="text-center px-4">
-          <h1 className="text-8xl font-bold text-primary font-mono mb-4">404</h1>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">{t.title}</h2>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary font-mono mb-4">404</h1>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">{t.title}</h2>
           <p className="text-muted-foreground mb-8 max-w-md mx-auto">
             {t.description}
           </p>

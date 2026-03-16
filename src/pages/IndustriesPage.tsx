@@ -33,10 +33,10 @@ export default function IndustriesPage() {
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-8 block text-primary">{t('industries.label')}</span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.85] text-background">
+          <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background">
             {t('industries.pageTitle')}
           </h1>
-          <p className="mt-6 text-lg text-background/70 max-w-2xl">
+          <p className="mt-6 text-base text-background/70 max-w-2xl">
             {t('industries.pageDesc')}
           </p>
         </div>
@@ -45,8 +45,8 @@ export default function IndustriesPage() {
       {/* Intro */}
       <section className="border-b border-border bg-secondary">
         <div className="industrial-container py-16 md:py-24 rtl:text-right">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('industries.introTitle')}</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">{t('industries.introTitle')}</h2>
+          <p className="text-base text-muted-foreground max-w-3xl leading-relaxed">
             {t('industries.introDesc')}
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function IndustriesPage() {
                     <span className="text-sm font-mono text-muted-foreground">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-2xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
+                    <span className="text-xl md:text-2xl font-bold uppercase tracking-tighter group-hover:text-primary transition-colors">
                       {industry.name}
                     </span>
                   </div>
@@ -88,10 +88,10 @@ export default function IndustriesPage() {
       {/* CTA */}
       <section className="relative py-32 md:py-48 overflow-hidden bg-primary">
         <div className="industrial-container text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground uppercase tracking-tighter leading-[0.9] mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground uppercase tracking-tighter leading-tight mb-4">
             {t('industries.ctaTitle')}
           </h2>
-          <p className="text-primary-foreground/70 max-w-xl mx-auto mb-10">
+          <p className="text-primary-foreground/70 max-w-xl mx-auto mb-10 text-base">
             {t('industries.ctaDesc')}
           </p>
           <Link

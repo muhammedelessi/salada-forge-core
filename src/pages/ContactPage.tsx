@@ -89,8 +89,8 @@ export default function ContactPage() {
       <section className="bg-secondary border-b border-border py-16 md:py-24">
         <div className="industrial-container rtl:text-right">
           <span className="industrial-label mb-4 block">{t.contact.label}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
-          <p className="text-muted-foreground max-w-2xl">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">{t.contact.title}</h1>
+          <p className="text-muted-foreground max-w-2xl text-base">
             {t.contact.description}
           </p>
         </div>
@@ -101,7 +101,7 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Form */}
             <div className="lg:col-span-2 rtl:text-right lg:order-1 rtl:lg:order-2">
-              <h2 className="text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -193,7 +193,7 @@ export default function ContactPage() {
 
             {/* Contact Info */}
             <div className="rtl:text-right lg:order-2 rtl:lg:order-1">
-              <h2 className="text-2xl font-bold mb-6">{t.contact.contactInfo}</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-6">{t.contact.contactInfo}</h2>
               
               <div className="space-y-6">
                 {contactInfo.map((info) => (
@@ -224,7 +224,7 @@ export default function ContactPage() {
       {/* Google Maps */}
       <section className="border-t border-border">
         <div className="industrial-container py-16">
-          <h2 className="text-2xl font-bold mb-8 rtl:text-right">
+          <h2 className="text-xl md:text-2xl font-bold mb-8 rtl:text-right">
             {t.contact.headquarters}
           </h2>
           <div className="w-full aspect-[21/9] md:aspect-[3/1] border border-border overflow-hidden">
@@ -245,11 +245,11 @@ export default function ContactPage() {
       {/* Global Offices */}
       <section className="industrial-section bg-secondary border-t border-border">
         <div className="industrial-container">
-          <h2 className="text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
           
           <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
             <div className="bg-card border border-border p-6 rtl:text-right">
-              <h3 className="font-bold text-lg mb-1">{isAr ? 'الرياض' : 'Riyadh'}</h3>
+              <h3 className="font-bold text-base mb-1">{isAr ? 'الرياض' : 'Riyadh'}</h3>
               <p className="text-primary text-sm font-mono mb-2">{isAr ? 'السعودية (المقر الرئيسي)' : 'Saudi Arabia (HQ)'}</p>
               <p className="text-muted-foreground text-sm">أحمد بن محمد العيالي, RNNA7850</p>
             </div>

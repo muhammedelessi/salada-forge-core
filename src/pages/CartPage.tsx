@@ -28,7 +28,7 @@ export default function CartPage() {
           <div className="industrial-container">
             <div className="max-w-lg mx-auto text-center py-16">
               <ShoppingBag className="w-16 h-16 mx-auto text-muted-foreground mb-6" />
-              <h1 className="text-3xl font-bold mb-4">{t.cart.empty}</h1>
+              <h1 className="text-2xl md:text-4xl font-bold mb-4">{t.cart.empty}</h1>
               <p className="text-muted-foreground mb-8">
                 {t.cart.emptyDesc}
               </p>
@@ -48,7 +48,7 @@ export default function CartPage() {
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">
           <span className="industrial-label mb-4 block">{t.cart.title}</span>
-          <h1 className="text-4xl md:text-5xl font-bold">{t.cart.yourCart}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">{t.cart.yourCart}</h1>
         </div>
       </section>
 
@@ -167,7 +167,7 @@ export default function CartPage() {
             {/* Order Summary */}
             <div className={`lg:col-span-1 ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
               <div className="bg-card border border-border p-6 sticky top-24">
-                <h2 className="text-xl font-bold mb-6">{t.cart.orderSummary}</h2>
+                <h2 className="text-lg md:text-xl font-bold mb-6">{t.cart.orderSummary}</h2>
 
                 {/* Coupon */}
                 <div className="mb-6 pb-6 border-b border-border">
