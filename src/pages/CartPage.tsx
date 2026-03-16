@@ -48,7 +48,7 @@ export default function CartPage() {
       <section className="bg-secondary border-b border-border py-16">
         <div className="industrial-container">
           <span className="industrial-label mb-4 block">{t.cart.title}</span>
-          <h1 className="text-4xl md:text-5xl font-bold">{t.cart.yourCart}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">{t.cart.yourCart}</h1>
         </div>
       </section>
 
