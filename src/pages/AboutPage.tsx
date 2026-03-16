@@ -25,10 +25,10 @@ export default function AboutPage() {
         <div className="absolute inset-0 grid-overlay opacity-20" />
         <div className="industrial-container relative z-10 rtl:text-right">
           <span className="industrial-label mb-6 block">{t.about.label}</span>
-          <h1 className="industrial-heading max-w-4xl mb-8">{t.about.title}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight max-w-4xl mb-8">{t.about.title}</h1>
           <div className="max-w-2xl space-y-4">
-            <p className="industrial-subheading">{t.about.descP1}</p>
-            <p className="industrial-subheading">{t.about.descP2}</p>
+            <p className="text-base text-muted-foreground">{t.about.descP1}</p>
+            <p className="text-base text-muted-foreground">{t.about.descP2}</p>
           </div>
         </div>
       </section>
@@ -40,8 +40,8 @@ export default function AboutPage() {
             <Eye className="w-12 h-12 text-primary shrink-0" />
             <div>
               <span className="industrial-label mb-4 block">{t.about.visionLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.about.visionTitle}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <h2 className="text-2xl md:text-4xl font-bold mb-4">{t.about.visionTitle}</h2>
+              <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
                 {t.about.visionDescription}
               </p>
             </div>
@@ -56,8 +56,8 @@ export default function AboutPage() {
             <Target className="w-12 h-12 text-primary shrink-0" />
             <div>
               <span className="industrial-label mb-4 block">{t.about.missionLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.about.missionTitle}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <h2 className="text-2xl md:text-4xl font-bold mb-4">{t.about.missionTitle}</h2>
+              <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
                 {t.about.missionDescription}
               </p>
             </div>
@@ -72,8 +72,8 @@ export default function AboutPage() {
             <Handshake className="w-12 h-12 text-primary shrink-0" />
             <div>
               <span className="industrial-label mb-4 block">{t.about.commitmentLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.about.commitmentTitle}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+              <h2 className="text-2xl md:text-4xl font-bold mb-4">{t.about.commitmentTitle}</h2>
+              <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
                 {t.about.commitmentDescription}
               </p>
             </div>
@@ -87,8 +87,8 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="rtl:text-right lg:order-1 rtl:lg:order-2">
               <span className="industrial-label mb-4 block">{t.about.factoryLabel}</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.about.factoryTitle}</h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <h2 className="text-2xl md:text-4xl font-bold mb-6">{t.about.factoryTitle}</h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed text-base">
                 <p>{t.about.factoryP1}</p>
                 <p>{t.about.factoryP2}</p>
               </div>
@@ -108,8 +108,8 @@ export default function AboutPage() {
       <section className="relative py-24 bg-primary overflow-hidden">
         <div className="absolute inset-0 container-pattern opacity-20" />
         <div className="industrial-container relative z-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">{t.about.partnerCTA}</h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">{t.about.partnerDesc}</p>
+          <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground mb-6">{t.about.partnerCTA}</h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto text-base">{t.about.partnerDesc}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
