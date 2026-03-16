@@ -245,7 +245,7 @@ export default function ContactPage() {
       {/* Global Offices */}
       <section className="industrial-section bg-secondary border-t border-border">
         <div className="industrial-container">
-          <h2 className="text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">{t.contact.globalOffices}</h2>
           
           <div className="grid md:grid-cols-1 max-w-md mx-auto gap-1">
             <div className="bg-card border border-border p-6 rtl:text-right">
