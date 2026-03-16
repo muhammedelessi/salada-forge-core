@@ -244,7 +244,7 @@ export default function FAQPage() {
             {filteredFAQs.length > 0 ? (
               filteredFAQs.map((category) => (
                 <div key={category.category} className="mb-12">
-                  <h2 className="text-xl font-bold mb-6 text-primary">
+                  <h2 className="text-lg md:text-xl font-bold mb-6 text-primary">
                     {category.category}
                   </h2>
                   <div className="space-y-1">
