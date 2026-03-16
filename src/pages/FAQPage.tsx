@@ -217,7 +217,7 @@ export default function FAQPage() {
       <section className="bg-secondary border-b border-border py-16 md:py-24" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="industrial-container">
           <span className="industrial-label mb-4 block">{content.label}</span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {content.title}
           </h1>
           <p className="text-muted-foreground max-w-2xl mb-8">
