@@ -220,7 +220,7 @@ export default function FAQPage() {
           <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {content.title}
           </h1>
-          <p className="text-muted-foreground max-w-2xl mb-8">
+          <p className="text-muted-foreground max-w-2xl mb-8 text-base">
             {content.description}
           </p>
 
