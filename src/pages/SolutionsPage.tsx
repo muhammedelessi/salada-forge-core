@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Container, Warehouse } from 'lucide-react';
+import { ArrowRight, Container, Warehouse, Truck } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
