@@ -104,7 +104,7 @@ export const translations = {
       title: "Industries We Serve",
       pageTitle: "Industries We Serve",
       pageDesc:
-        "Salada supports critical operations across Saudi Arabia's key industries — delivering freight and storage solutions built for reliability, compliance, and scale.",
+        "Salada supports critical operations across Saudi Arabia's key industries — delivering industrial containers, shipping & storage solutions, and container parts & securing equipment built for reliability and scale.",
       introTitle: "Industries We Serve",
       introDesc:
         "Salada supports multiple sectors across Saudi Arabia and GCC with locally manufactured container solutions.",
