@@ -101,7 +101,7 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Form */}
             <div className="lg:col-span-2 rtl:text-right lg:order-1 rtl:lg:order-2">
-              <h2 className="text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
