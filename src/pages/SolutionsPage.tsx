@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Container, Warehouse } from 'lucide-react';
+import { ArrowRight, Container, Warehouse, Truck } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SEOHead } from '@/components/SEOHead';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -20,6 +20,7 @@ export default function SolutionsPage() {
 
   const shippingContainers = products.filter(p => p.category === 'iso-shipping-container' && p.status === 'active');
   const storageContainers = products.filter(p => p.category === 'storage-containers' && p.status === 'active');
+  const landContainers = products.filter(p => p.category === 'land-shipping-container' && p.status === 'active');
 
   const isAr = isRTL();
 
@@ -47,6 +48,18 @@ export default function SolutionsPage() {
       products: storageContainers,
       shopLink: '/shop?category=storage-containers',
       color: 'bg-accent',
+    },
+    {
+      id: 'land-shipping-containers',
+      icon: Truck,
+      title: isAr ? 'حاويات الشحن البري' : 'Land Shipping Containers',
+      subtitle: isAr ? 'حاويات مصممة للنقل البري والشحن عبر الطرق' : 'Containers Engineered for Road Freight & Land Transport',
+      description: isAr
+        ? 'حاويات متينة مصممة خصيصًا للنقل البري والشحن عبر الطرق، مناسبة لنقل البضائع الثقيلة والمعدات الصناعية عبر الشبكات البرية بأمان وكفاءة.'
+        : 'Heavy-duty containers purpose-built for road freight and overland transport. Engineered to safely and efficiently move heavy cargo and industrial equipment across land-based logistics networks.',
+      products: landContainers,
+      shopLink: '/shop?category=land-shipping-container',
+      color: 'bg-primary',
     },
   ];
 
