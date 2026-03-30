@@ -291,22 +291,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-                  padding: "3px 10px",
-                  background: "hsl(var(--gold)/0.15)",
-                  border: "1px solid hsl(var(--gold)/0.3)",
-                  color: "hsl(var(--gold))",
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.55rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                  fontWeight: 600,
-                  backdropFilter: "blur(4px)",
-                }}
-              >
-                {b}
-              </span>
-            ))}
-          </div>
         </div>
 
         {/* ── Stats bar — pinned to bottom ── */}
