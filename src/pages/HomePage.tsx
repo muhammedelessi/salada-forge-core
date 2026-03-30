@@ -387,11 +387,10 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           SOLUTIONS
       ════════════════════════════════════ */}
-      <section style={{ borderBottom: "1px solid hsl(var(--border))" }}>
+      <section dir={isAr ? "rtl" : "ltr"} style={{ borderBottom: "1px solid hsl(var(--border))" }}>
         {/* Section header */}
         <div
-          dir={isAr ? "rtl" : "ltr"}
-          className={`flex items-end justify-between py-20 md:py-32 pb-8 container-xl ${isAr ? "flex-row-reverse text-right" : ""}`}
+          className="flex items-end justify-between py-20 md:py-32 pb-8 container-xl"
         >
           <div>
             <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
@@ -401,7 +400,7 @@ export default function HomePage() {
           </div>
           <Link
             to="/solutions"
-            className={`group hidden md:inline-flex items-center gap-2 ${isAr ? "flex-row-reverse" : ""}`}
+            className="group hidden md:inline-flex items-center gap-2"
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "9px",
@@ -428,7 +427,7 @@ export default function HomePage() {
 
         {/* Solutions cards — cinematic horizontal strip */}
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ${isAr ? "[direction:rtl]" : ""}`}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
           style={{ minHeight: "380px" }}
         >
           {solutions.map((sol, i) => (
@@ -438,8 +437,7 @@ export default function HomePage() {
               className="group relative overflow-hidden flex flex-col justify-end"
               style={{
                 minHeight: "380px",
-                borderRight: !isAr && i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
-                borderLeft: isAr && i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                borderInlineEnd: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
               }}
             >
               {/* Background image */}
@@ -465,8 +463,7 @@ export default function HomePage() {
                 className="absolute"
                 style={{
                   top: "20px",
-                  left: isAr ? "auto" : "24px",
-                  right: isAr ? "24px" : "auto",
+                  insetInlineStart: "24px",
                   fontFamily: "var(--font-mono)",
                   fontSize: "11px",
                   letterSpacing: "0.15em",
@@ -479,7 +476,7 @@ export default function HomePage() {
 
               {/* Content — bottom */}
               <div
-                className={`relative z-10 ${isAr ? "text-right" : ""}`}
+                className="relative z-10"
                 style={{ padding: "0 28px 32px" }}
               >
                 {/* Gold accent line */}
@@ -490,8 +487,6 @@ export default function HomePage() {
                     height: "2px",
                     background: "hsl(var(--primary))",
                     marginBottom: "16px",
-                    marginLeft: isAr ? "auto" : "0",
-                    marginRight: isAr ? "0" : "auto",
                   }}
                 />
 
