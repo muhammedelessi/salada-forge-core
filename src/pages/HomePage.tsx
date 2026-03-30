@@ -247,7 +247,7 @@ export default function HomePage() {
           <h1
             className="animate-fade-up delay-400"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.75rem)",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
               fontWeight: 900,
               textTransform: "uppercase",
               lineHeight: 0.93,
