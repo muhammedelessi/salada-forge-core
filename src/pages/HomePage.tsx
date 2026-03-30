@@ -5,10 +5,11 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
-import heroImage from "@/assets/hero-logistics.jpg";
+import HeroSection from "@/components/home/HeroSection";
 import seaImage from "@/assets/solutions-sea.jpg";
 import storageImage from "@/assets/solutions-storage.jpg";
 import lashingImage from "@/assets/divisions-lashing.jpg";
+import heroImage from "@/assets/hero-logistics.jpg";
 import heroPort from "@/assets/hero-port.jpg";
 
 /* ══ useInView — triggers once when element enters viewport ══ */
@@ -148,90 +149,7 @@ export default function HomePage() {
     <Layout>
       <SEOHead {...seo} />
 
-      {/* ════════════════════════════════
-          HERO
-      ════════════════════════════════ */}
-      <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-paper-0">
-        {/* Background image — faint, on the right side */}
-        <div className="absolute inset-0 md:left-[45%]">
-          <img
-            src={heroImage}
-            alt="Salada industrial operations"
-            className="w-full h-full object-cover animate-hero-zoom opacity-30 md:opacity-50"
-          />
-          {/* gentle gradient mask */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, hsl(var(--paper-0)) 0%, hsl(var(--paper-0)/0.85) 40%, hsl(var(--paper-0)/0.2) 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(to top, hsl(var(--paper-0)) 0%, transparent 40%)",
-            }}
-          />
-        </div>
-
-        {/* Grid lines overlay */}
-        <div className="hero-grid-lines" />
-
-        {/* Main hero content */}
-        <div className="container-xl relative z-10 pb-20 md:pb-28 pt-40">
-          <div className={`max-w-3xl ${isAr ? "mr-0 ml-auto text-right" : ""}`}>
-            {/* Eyebrow label */}
-            <div className="animate-fade-up delay-200">
-              <span className={`section-label mb-7 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
-                {t("hero.label")}
-              </span>
-            </div>
-
-            {/* H1 white line */}
-            <h1 className="section-heading text-ink-100 mb-1 animate-fade-up delay-300">{t("hero.title")}</h1>
-
-            {/* H1 gold accent */}
-            <h1 className="section-heading text-gold mb-8 animate-fade-up delay-400">{t("hero.titleHighlight")}</h1>
-
-            {/* Description */}
-            <p className="text-sm md:text-base text-ink-40 leading-relaxed max-w-lg mb-10 animate-fade-up delay-500">
-              {t("hero.description")}
-            </p>
-
-            {/* CTAs */}
-            <div className={`flex flex-wrap gap-3 animate-fade-up delay-600 ${isAr ? "flex-row-reverse" : ""}`}>
-              <Link to="/solutions" className="btn-gold">
-                <span>{t("hero.cta")}</span>
-                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-              </Link>
-              <Link to="/contact" className="btn-outline">
-                {t("hero.quote")}
-              </Link>
-            </div>
-
-            {/* Trust badges */}
-            <div
-              className={`flex flex-wrap items-center gap-4 mt-10 animate-fade-up delay-700 ${isAr ? "flex-row-reverse" : ""}`}
-            >
-              {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
-                <span key={b} className="industrial-badge text-[0.55rem] tracking-[0.25em]">
-                  {b}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll cue */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-30">
-          <span className="text-[0.5rem] font-mono uppercase tracking-[0.3em] text-ink-100">Scroll</span>
-          <ChevronDown className="w-4 h-4 text-gold animate-bounce-subtle" />
-        </div>
-
-        {/* Bottom border accent */}
-        <div className="absolute bottom-0 inset-x-0 divider-gold" />
-      </section>
+      <HeroSection />
 
       {/* ════════════════════════════════
           STATS BAR
