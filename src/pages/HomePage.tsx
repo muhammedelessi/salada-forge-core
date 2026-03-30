@@ -454,7 +454,7 @@ export default function HomePage() {
                 style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.18) 100%)" }}
               />
               <div
-                className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 px-[20px] py-[10px]"
                 style={{ background: "rgba(0,0,0,0.15)" }}
               />
 
