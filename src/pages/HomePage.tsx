@@ -390,39 +390,13 @@ export default function HomePage() {
       <section style={{ borderBottom: "1px solid hsl(var(--border))" }}>
         {/* Section header */}
         <div
-          className={`flex items-end justify-between ${isAr ? "flex-row-reverse text-right" : ""}`}
-          style={{
-            padding: "56px 48px 24px",
-            borderBottom: "1px solid hsl(var(--border))",
-          }}
+          className={`flex items-end justify-between py-20 md:py-32 pb-8 container-xl ${isAr ? "flex-row-reverse text-right" : ""}`}
         >
           <div>
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "9px",
-                textTransform: "uppercase",
-                letterSpacing: "0.28em",
-                color: "hsl(var(--primary))",
-                display: "block",
-                marginBottom: "14px",
-              }}
-            >
-              — {t("solutions.label")}
+            <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+              {t("solutions.label")}
             </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                fontWeight: 400,
-                textTransform: "uppercase",
-                letterSpacing: "0.04em",
-                lineHeight: 0.9,
-                color: "hsl(var(--foreground))",
-              }}
-            >
-              {t("solutions.title")}
-            </h2>
+            <h2 className="section-heading text-ink-100">{t("solutions.title")}</h2>
           </div>
           <Link
             to="/solutions"
