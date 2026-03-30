@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
@@ -11,396 +10,213 @@ import storageImage from "@/assets/solutions-storage.jpg";
 import lashingImage from "@/assets/divisions-lashing.jpg";
 import heroPort from "@/assets/hero-port.jpg";
 
-/* ─── Intersection Observer Hook ─── */
-function useInView(threshold = 0.15) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          obs.disconnect();
-        }
-      },
-      { threshold },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, inView };
-}
-
-/* ─── Animated Counter ─── */
-function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const { ref, inView } = useInView();
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const step = Math.ceil(target / (1800 / 16));
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else setCount(start);
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, target]);
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
-}
-
-/* ─── Scroll Reveal ─── */
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const { ref, inView } = useInView();
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(36px)",
-        transition: `opacity 0.85s cubic-bezier(0.16,1,0.3,1) ${delay}ms,
-                   transform 0.85s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 export default function HomePage() {
   const { t, isRTL } = useLanguageStore();
-  const seo = usePageSEO("/");
-  const isAr = isRTL();
+
+  const ArrowIcon = () => <ArrowRight className="w-5 h-5 ltr:ml-3 rtl:mr-3 rtl:rotate-180" />;
 
   const solutions = [
-    {
-      title: t("solutions.landFreight"),
-      desc: t("solutions.landFreightDesc"),
-      image: lashingImage,
-      href: "/solutions#land",
-      tag: "01",
-    },
-    {
-      title: t("solutions.seaFreight"),
-      desc: t("solutions.seaFreightDesc"),
-      image: seaImage,
-      href: "/solutions#sea",
-      tag: "02",
-    },
-    {
-      title: t("solutions.airFreight"),
-      desc: t("solutions.airFreightDesc"),
-      image: heroImage,
-      href: "/solutions#air",
-      tag: "03",
-    },
-    {
-      title: t("solutions.storage"),
-      desc: t("solutions.storageDesc"),
-      image: storageImage,
-      href: "/solutions#storage",
-      tag: "04",
-    },
+    { title: t("solutions.landFreight"), image: lashingImage, href: "/solutions#land" },
+    { title: t("solutions.seaFreight"), image: seaImage, href: "/solutions#sea" },
+    { title: t("solutions.airFreight"), image: heroImage, href: "/solutions#air" },
+    { title: t("solutions.storage"), image: storageImage, href: "/solutions#storage" },
   ];
 
   const stats = [
-    { value: 10, suffix: "+", label: t("stats.yearsExperience") },
-    { value: 200, suffix: "+", label: t("stats.projectsDelivered") },
-    { value: 50, suffix: "+", label: t("stats.clientsServed") },
-    { value: 99, suffix: ".5%", label: t("stats.onTimeDelivery") },
+    { value: "10+", label: t("stats.yearsExperience") },
+    { value: "200+", label: t("stats.projectsDelivered") },
+    { value: "50+", label: t("stats.clientsServed") },
+    { value: "99.5%", label: t("stats.onTimeDelivery") },
   ];
 
-  const industries = [
-    t("industries.logistics"),
-    t("industries.construction"),
-    t("industries.government"),
-    t("industries.industrial"),
-    t("industries.storage"),
-  ];
-
-  const whyItems = [
-    { num: "01", title: t("why.onePartner") },
-    { num: "02", title: t("why.rapidDeployment") },
-    { num: "03", title: t("why.nationalCoverage") },
-    { num: "04", title: t("why.compliance") },
-  ];
+  const seo = usePageSEO("/");
 
   return (
     <Layout>
       <SEOHead {...seo} />
-
-      {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-surface-base">
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Salada industrial port" className="w-full h-full object-cover animate-hero-zoom" />
-          <div className="absolute inset-0 hero-overlay" />
-          <div className="absolute inset-0 hero-overlay-side" />
+          <img
+            src={heroImage}
+            alt="Salada Metal Industries — industrial shipping port"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-foreground/20" />
         </div>
 
-        <div className="scan-line" style={{ top: "28%" }} />
-        <div className="corner-mark corner-mark-tl" style={{ top: "8rem", left: "1.5rem" }} />
-        <div className="corner-mark corner-mark-tr" style={{ top: "8rem", right: "1.5rem" }} />
-
-        <div className="absolute top-36 left-1/2 -translate-x-1/2 z-10 animate-fade-down delay-300">
-          <span className="industrial-label opacity-70">
-            {isAr ? "صانع سعودي معتمد" : "Saudi Certified Manufacturer"}
-          </span>
-        </div>
-
-        <div className="industrial-container relative z-10 pb-28 md:pb-36">
-          <div className={`max-w-5xl ${isAr ? "text-right mr-0 ml-auto" : ""}`}>
-            <div className="animate-fade-up delay-400">
-              <span className={`industrial-label-line mb-8 block ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-                {t("hero.label")}
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.92] tracking-[-0.02em] text-white mb-3 animate-fade-up delay-500">
+        <div className="industrial-container relative z-10">
+          <div className="max-w-5xl rtl:text-right">
+            <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade">
               {t("hero.title")}
+              <span className="block text-primary">{t("hero.titleHighlight")}</span>
             </h1>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.92] tracking-[-0.02em] mb-12 text-gold-gradient animate-fade-up delay-600">
-              {t("hero.titleHighlight")}
-            </h1>
-
-            <div
-              className={`flex flex-col sm:flex-row gap-4 animate-fade-up delay-800 ${isAr ? "sm:flex-row-reverse" : ""}`}
-            >
-              <Link to="/solutions" className={`industrial-button ${isAr ? "flex-row-reverse" : ""}`}>
+            <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-industrial-fade delay-300 rtl:sm:flex-row-reverse">
+              <Link to="/solutions" className="industrial-button rtl:flex-row-reverse">
                 {t("hero.cta")}
-                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+                <ArrowIcon />
               </Link>
-              <Link to="/contact" className={`industrial-button-outline ${isAr ? "flex-row-reverse" : ""}`}>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-10 py-5 border-2 border-background text-background font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-background hover:text-foreground"
+              >
                 {t("hero.quote")}
               </Link>
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-40">
-          <ChevronDown className="w-4 h-4 text-primary animate-bounce-subtle" />
-        </div>
-        <div className="absolute bottom-0 inset-x-0 gold-divider" />
       </section>
 
-      {/* ══ STATS ══ */}
-      <section className="bg-surface-raised border-b border-gold">
+      {/* ── STATS ── */}
+      <section className="border-b border-border">
         <div className="industrial-container">
           <div className="grid grid-cols-2 md:grid-cols-4">
-            {stats.map((stat, i) => (
-              <Reveal
+            {stats.map((stat, index) => (
+              <div
                 key={stat.label}
-                delay={i * 80}
-                className={`py-14 md:py-20 text-center ${i < stats.length - 1 ? (isAr ? "border-l border-gold" : "border-r border-gold") : ""}`}
+                className={`py-14 md:py-20 text-center ${
+                  index < stats.length - 1 ? "ltr:border-r rtl:border-l border-border" : ""
+                }`}
               >
-                <div className="text-3xl md:text-5xl font-black font-mono mb-3 text-stat-gold">
-                  <Counter target={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="industrial-label opacity-60">{stat.label}</div>
-              </Reveal>
+                <div className="text-2xl md:text-4xl font-bold text-primary mb-3 font-mono">{stat.value}</div>
+                <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{stat.label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ VISION 2030 ══ */}
-      <section className="bg-surface-base py-28 md:py-40 border-b border-gold">
+      {/* ── VISION 2030 ── */}
+      <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
-            <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
-              <span className={`industrial-label-line mb-8 block ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-                {t("vision.label")}
-              </span>
-              <h2 className="text-3xl md:text-5xl font-black uppercase leading-[0.95] tracking-tight text-white mb-8">
-                {t("vision.title")}
-              </h2>
-              <p className="text-white/50 leading-relaxed text-sm md:text-base max-w-lg">{t("vision.description")}</p>
-            </Reveal>
-
-            <Reveal delay={200} className={isAr ? "order-1 md:order-2" : ""}>
-              <div className="vision-badge relative aspect-square max-w-xs mx-auto flex flex-col items-center justify-center p-12">
-                <div className="corner-mark corner-mark-tl" />
-                <div className="corner-mark corner-mark-tr" />
-                <div className="corner-mark corner-mark-bl" />
-                <div className="corner-mark corner-mark-br" />
-                <div className="text-6xl md:text-8xl font-black font-mono leading-none text-gold-gradient">2030</div>
-                <div className="industrial-label mt-4 text-center opacity-50">
-                  {isAr ? "رؤية المملكة" : "Saudi Vision"}
-                </div>
-              </div>
-            </Reveal>
+          <div className="max-w-5xl rtl:text-right">
+            <span className="industrial-label mb-8 block">{t("vision.label")}</span>
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter leading-tight">
+              {t("vision.title")}
+            </h2>
           </div>
         </div>
       </section>
 
-      {/* ══ SOLUTIONS ══ */}
-      <section className="bg-surface-base border-b border-gold">
+      {/* ── SOLUTIONS ── */}
+      <section className="border-b border-border">
         <div className="industrial-container py-24 md:py-32">
-          <Reveal className={isAr ? "text-right" : ""}>
-            <span className={`industrial-label-line mb-6 block ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              {t("solutions.label")}
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black uppercase leading-[0.95] tracking-tight text-white">
-              {t("solutions.title")}
-            </h2>
-          </Reveal>
+          <div className="mb-20 rtl:text-right">
+            <span className="industrial-label mb-6 block">{t("solutions.label")}</span>
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">{t("solutions.title")}</h2>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {solutions.map((sol, i) => (
-            <Reveal key={sol.title} delay={i * 60}>
-              <Link
-                to={sol.href}
-                className={`group relative aspect-[4/3] flex overflow-hidden border-b border-gold ${
-                  i % 2 === 0 ? (isAr ? "border-l border-gold" : "border-r border-gold") : ""
-                }`}
-              >
-                <img
-                  src={sol.image}
-                  alt={sol.title}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover img-industrial transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 solution-overlay" />
-                <span className="absolute top-6 left-6 industrial-label opacity-50">{sol.tag}</span>
-                <div className={`absolute bottom-0 ${isAr ? "right-0 text-right" : "left-0"} p-8 md:p-10 w-full`}>
-                  <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-tight mb-3 group-hover:text-primary transition-colors duration-300">
-                    {sol.title}
-                  </h3>
-                  <p className="text-white/40 text-sm leading-relaxed max-w-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-4">
-                    {sol.desc}
-                  </p>
-                  <span
-                    className={`industrial-label opacity-0 group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center gap-2 ${isAr ? "flex-row-reverse" : ""}`}
-                  >
-                    {t("solutions.learnMore")}
-                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
+          {solutions.map((solution) => (
+            <Link
+              key={solution.title}
+              to={solution.href}
+              className="group relative aspect-[16/10] overflow-hidden border-b ltr:border-r rtl:border-l border-border"
+            >
+              <img
+                src={solution.image}
+                alt={solution.title}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 rtl:text-right">
+                <h3 className="text-xl md:text-2xl font-bold text-background uppercase tracking-tight group-hover:text-primary transition-colors duration-300">
+                  {solution.title}
+                </h3>
+                <span className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-primary font-mono mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rtl:flex-row-reverse">
+                  {t("solutions.learnMore")}
+                  <ArrowIcon />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* ══ INDUSTRIES ══ */}
-      <section className="bg-surface-raised py-28 md:py-40 border-b border-gold">
+      {/* ── INDUSTRIES ── */}
+      <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <Reveal className={`mb-16 ${isAr ? "text-right" : ""}`}>
-            <span className={`industrial-label-line mb-6 block ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              {t("industries.label")}
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black uppercase leading-[0.95] tracking-tight text-white">
-              {t("industries.title")}
-            </h2>
-          </Reveal>
+          <div className="mb-20 rtl:text-right">
+            <span className="industrial-label mb-6 block">{t("industries.label")}</span>
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">{t("industries.title")}</h2>
+          </div>
 
-          <div className="border-t border-gold mt-2">
-            {industries.map((name, i) => (
-              <Reveal key={name} delay={i * 60}>
-                <Link
-                  to="/industries"
-                  dir={isAr ? "rtl" : "ltr"}
-                  className={`group flex items-center justify-between py-6 md:py-8 border-b border-gold transition-all duration-300 ${isAr ? "hover:pr-4" : "hover:pl-4"}`}
-                >
-                  <div className={`flex items-center gap-6 ${isAr ? "flex-row-reverse" : ""}`}>
-                    <span className="industrial-label w-6 opacity-40">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-lg md:text-2xl font-black uppercase tracking-tight text-white/80 group-hover:text-primary transition-colors duration-300">
-                      {name}
-                    </span>
-                  </div>
-                  <ArrowRight
-                    className={`w-5 h-5 text-primary/30 group-hover:text-primary transition-all duration-300 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}
-                  />
-                </Link>
-              </Reveal>
+          <div className="border-t border-border">
+            {[
+              t("industries.logistics"),
+              t("industries.construction"),
+              t("industries.government"),
+              t("industries.industrial"),
+              t("industries.storage"),
+            ].map((name) => (
+              <Link
+                key={name}
+                to="/industries"
+                dir={isRTL() ? "rtl" : "ltr"}
+                className="group flex items-center justify-between py-6 md:py-8 border-b border-border ltr:hover:pl-4 rtl:hover:pr-4 transition-all duration-300"
+              >
+                <span className="text-lg md:text-xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">
+                  {name}
+                </span>
+                <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ WHY SALADA ══ */}
-      <section className="bg-surface-base py-28 md:py-40 border-b border-gold">
+      {/* ── WHY SALADA ── */}
+      <section className="industrial-section border-b border-border">
         <div className="industrial-container">
-          <Reveal className={`mb-20 ${isAr ? "text-right" : "text-center"}`}>
-            <span
-              className={`industrial-label-line industrial-label-line-both mb-6 flex ${isAr ? "flex-row-reverse justify-end" : "justify-center"}`}
-            >
-              {t("why.label")}
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black uppercase leading-[0.95] tracking-tight text-white">
-              {t("why.title")}
-            </h2>
-          </Reveal>
+          <div className="mb-20 text-center">
+            <span className="industrial-label mb-6 block">{t("why.label")}</span>
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter">{t("why.title")}</h2>
+          </div>
 
-          <div className="why-grid">
-            {whyItems.map((item, i) => (
-              <Reveal key={item.title} delay={i * 80}>
-                <div className={`why-grid-item group ${isAr ? "text-right" : ""}`}>
-                  <div className="text-4xl font-black font-mono mb-6 leading-none text-stat-gold">{item.num}</div>
-                  <div
-                    className={`w-8 h-px bg-primary/30 mb-6 group-hover:w-12 transition-all duration-300 ${isAr ? "mr-0 ml-auto" : ""}`}
-                  />
-                  <h3 className="text-base md:text-lg font-black uppercase tracking-tight text-white/75 group-hover:text-primary transition-colors duration-300 leading-tight">
-                    {item.title}
-                  </h3>
-                </div>
-              </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t ltr:border-l rtl:border-r border-border">
+            {[
+              { title: t("why.onePartner") },
+              { title: t("why.rapidDeployment") },
+              { title: t("why.nationalCoverage") },
+              { title: t("why.compliance") },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="border-b ltr:border-r rtl:border-l border-border p-10 md:p-12 hover:bg-secondary/50 transition-colors duration-300 rtl:text-right"
+              >
+                <h3 className="text-base md:text-xl font-bold uppercase tracking-tight">{item.title}</h3>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ CTA ══ */}
-      <section className="relative py-36 md:py-56 overflow-hidden bg-surface-base">
+      {/* ── CTA ── */}
+      <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Industrial port"
-            className="w-full h-full object-cover img-industrial"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 hero-overlay" />
-          <div className="absolute inset-0 hero-overlay-side" style={{ opacity: 0.6 }} />
+          <img src={heroPort} alt="Industrial port operations" className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-foreground/70" />
         </div>
-        <div className="absolute top-1/2 -translate-y-1/2 inset-x-0 gold-divider opacity-30" />
 
         <div className="industrial-container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Reveal>
-              <span className="industrial-label-line industrial-label-line-both mb-8 flex justify-center">
-                {isAr ? "تواصل معنا" : "Get In Touch"}
-              </span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase leading-[0.95] tracking-tight mb-12">
-                {t("cta.title")}
-              </h2>
-              <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isAr ? "sm:flex-row-reverse" : ""}`}>
-                <Link to="/contact" className={`industrial-button ${isAr ? "flex-row-reverse" : ""}`}>
-                  {t("cta.getQuote")}
-                  <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
-                <Link to="/solutions" className={`industrial-button-outline ${isAr ? "flex-row-reverse" : ""}`}>
-                  {t("cta.browseCatalog")}
-                </Link>
-              </div>
-            </Reveal>
+            <h2 className="text-2xl md:text-4xl font-bold text-background mb-10 uppercase tracking-tighter leading-tight">
+              {t("cta.title")}
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center rtl:sm:flex-row-reverse">
+              <Link to="/contact" className="industrial-button rtl:flex-row-reverse">
+                {t("cta.getQuote")}
+                <ArrowIcon />
+              </Link>
+              <Link
+                to="/solutions"
+                className="inline-flex items-center justify-center px-10 py-5 border-2 border-background text-background font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-background hover:text-foreground"
+              >
+                {t("cta.browseCatalog")}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
