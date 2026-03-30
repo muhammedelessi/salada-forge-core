@@ -174,16 +174,8 @@ export default function HomePage() {
           <div className="absolute inset-0" style={{ background: "hsl(var(--gold)/0.08)" }} />
         </div>
 
-        {/* ── Grid lines overlay ── */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(0deg,  rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 52px),
-              repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 52px)
-            `,
-          }}
-        />
+
+
 
         {/* ── Animated gold scan line ── */}
         <div
@@ -239,7 +231,7 @@ export default function HomePage() {
           <h1
             className="animate-fade-up delay-300"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.75rem)",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
               fontWeight: 900,
               textTransform: "uppercase",
               lineHeight: 0.93,
@@ -255,7 +247,7 @@ export default function HomePage() {
           <h1
             className="animate-fade-up delay-400"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.75rem)",
+              fontSize: "clamp(1.75rem, 4vw, 3rem)",
               fontWeight: 900,
               textTransform: "uppercase",
               lineHeight: 0.93,
