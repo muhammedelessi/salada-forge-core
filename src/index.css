@@ -692,76 +692,6 @@
   .industrial-button-outline {
     @apply btn-outline;
   }
-
-  /* ── Hero Section (luxury editorial) ── */
-  .hero-h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    line-height: 0.95;
-  }
-  .hero-body {
-    font-size: 0.9375rem;
-    color: hsl(var(--ink-40));
-    line-height: 1.7;
-    max-width: 26.25rem;
-    margin-bottom: 2.5rem;
-  }
-  .hero-trust-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    background: hsl(var(--gold) / 0.1);
-    color: hsl(var(--gold));
-    font-family: var(--font-mono);
-    font-size: 0.5625rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-  }
-  .hero-img-zoom {
-    animation: heroZoomSlow 14s ease-out both;
-  }
-  .hero-scan-line {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 1.5px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      hsl(var(--gold) / 0.6) 30%,
-      hsl(var(--gold) / 0.6) 70%,
-      transparent
-    );
-    animation: scanLine 7s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  /* Corner brackets */
-  .hero-bracket {
-    position: absolute;
-    width: 1rem;
-    height: 1rem;
-    border-color: hsl(var(--gold));
-    border-style: solid;
-    border-width: 0;
-    z-index: 5;
-    pointer-events: none;
-  }
-  .hero-bracket--tl {
-    top: 1.5rem;
-    left: 1.5rem;
-    border-top-width: 2px;
-    border-left-width: 2px;
-  }
-  .hero-bracket--tr {
-    top: 1.5rem;
-    right: 1.5rem;
-    border-top-width: 2px;
-    border-right-width: 2px;
-  }
 }
 
 /* ─────────────────────────────────────
@@ -893,28 +823,15 @@
     transform: scale(1);
   }
 }
-@keyframes heroZoomSlow {
-  from {
-    transform: scale(1.06);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-@keyframes scanLine {
-  0% {
-    top: -2px;
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
+@keyframes scanPulse {
+  0%,
   100% {
-    top: 100%;
     opacity: 0;
+    transform: scaleX(0.08);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }
 @keyframes fadeUp {
