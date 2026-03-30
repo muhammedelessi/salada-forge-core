@@ -511,7 +511,7 @@ export default function HomePage() {
                     {sol.num}
                   </p>
                   <p
-                    className="group-hover:!text-[hsl(var(--primary))] text-xl"
+                    className="group-hover:!text-[hsl(var(--primary))] text-base"
                     style={{
                       fontWeight: 800,
                       textTransform: "uppercase",
