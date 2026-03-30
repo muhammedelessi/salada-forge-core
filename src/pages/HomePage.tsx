@@ -47,7 +47,7 @@ export default function HomePage() {
 
         <div className="industrial-container relative z-10">
           <div className="max-w-5xl rtl:text-right">
-            <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade">
+            <h1 className="text-3xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade md:text-4xl rounded shadow-none">
               {t("hero.title")}
               <span className="block text-primary">{t("hero.titleHighlight")}</span>
             </h1>
