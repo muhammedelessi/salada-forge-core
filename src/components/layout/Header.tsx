@@ -6,20 +6,19 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { cn } from '@/lib/utils';
 import saladaLogo from '@/assets/SALADA_LOGO.png';
 
-function MegaMenu({ items, isOpen, onLinkClick }: { items: { label: string; desc: string; href: string }[]; isOpen: boolean; onLinkClick?: () => void }) {
+function MegaMenu({ items, isOpen }: { items: { label: string; desc: string; href: string }[]; isOpen: boolean }) {
   if (!isOpen) return null;
   return (
-    <div className="absolute top-full left-0 right-0 bg-background border-b border-border shadow-lg z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-      <div className="industrial-container py-6">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 rtl:text-right">
+    <div className="absolute top-full left-0 right-0 bg-background border-b-2 border-primary/30 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+      <div className="industrial-container py-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 rtl:text-right">
           {items.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              onClick={onLinkClick}
-              className="group p-4 rounded-lg hover:bg-secondary/60 transition-all duration-200"
+              className="group p-4 rounded hover:bg-secondary/80 transition-colors border border-transparent hover:border-border"
             >
-              <span className="block text-sm font-semibold tracking-wide group-hover:text-primary transition-colors">
+              <span className="block text-sm font-semibold uppercase tracking-wider group-hover:text-primary transition-colors">
                 {item.label}
               </span>
               <span className="block text-xs text-muted-foreground mt-1 leading-relaxed">
@@ -44,7 +43,7 @@ export function Header() {
   const { t, isRTL } = useLanguageStore();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -52,12 +51,6 @@ export function Header() {
   useEffect(() => {
     if (isSearchOpen) searchRef.current?.focus();
   }, [isSearchOpen]);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
 
   const isAr = isRTL();
 
@@ -101,34 +94,21 @@ export function Header() {
   ) : [];
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background shadow-[0_2px_16px_-2px_hsl(var(--foreground)/0.08)]"
-          : "bg-background/95 backdrop-blur-sm"
-      )}
-    >
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out",
+      isScrolled
+        ? "bg-background/98 backdrop-blur-md border-b-2 border-primary/40 shadow-[0_4px_30px_-4px_hsl(var(--primary)/0.25)]"
+        : "bg-background/80 backdrop-blur-sm border-b border-primary/20 shadow-[0_2px_10px_-4px_hsl(var(--primary)/0.1)]"
+    )}>
       <div className="industrial-container">
-        <div className={cn(
-          "flex items-center justify-between transition-all duration-300",
-          isScrolled ? "h-16 md:h-20" : "h-20 md:h-24",
-          "rtl:flex-row-reverse"
-        )}>
+        <div className="flex items-center justify-between h-24 md:h-32 rtl:flex-row-reverse">
           {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0 py-2">
-            <img
-              src={saladaLogo}
-              alt="SALADA Metal Industries"
-              className={cn(
-                "w-auto object-contain transition-all duration-300",
-                isScrolled ? "h-12 md:h-16" : "h-16 md:h-20"
-              )}
-            />
+          <Link to="/" className="flex items-center hover-lift">
+            <img src={saladaLogo} alt="SALADA Metal Industries" className="h-20 md:h-28 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8 rtl:flex-row-reverse">
+          <nav className="hidden md:flex items-center gap-6 rtl:flex-row-reverse">
             {navLinks.map((link) => (
               <div
                 key={link.href}
@@ -138,38 +118,33 @@ export function Header() {
               >
                 <Link
                   to={link.href}
-                  className={cn(
-                    "relative text-[13px] font-semibold uppercase tracking-[0.08em] text-foreground/70 hover:text-primary transition-colors duration-200 inline-flex items-center gap-1.5 py-2",
-                    "rtl:flex-row-reverse rtl:tracking-normal rtl:normal-case rtl:text-sm"
-                  )}
+                  className="relative text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-medium group inline-flex items-center gap-1 rtl:flex-row-reverse"
                 >
                   {link.label}
-                  {link.mega && <ChevronDown className="w-3.5 h-3.5 opacity-50" />}
-                  <span className="absolute bottom-0 ltr:left-0 rtl:right-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full hover-parent" />
+                  {link.mega && <ChevronDown className="w-3.5 h-3.5" />}
+                  <span className="absolute -bottom-1 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ltr:left-0 rtl:right-0" />
                 </Link>
               </div>
             ))}
           </nav>
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-3 rtl:flex-row-reverse">
-            {/* Search */}
+          {/* Actions */}
+          <div className="flex items-center gap-2 md:gap-3 rtl:flex-row-reverse">
+            {/* Search toggle */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex items-center justify-center w-9 h-9 rounded-full text-foreground/60 hover:text-primary hover:bg-secondary transition-all duration-200"
+              className="flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-primary transition-colors focus-ring rounded"
               aria-label="Search"
             >
-              <Search className="w-[18px] h-[18px]" />
+              <Search className="w-5 h-5" />
             </button>
 
-            {/* Language Switcher */}
             <LanguageSwitcher />
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full text-foreground/70 hover:text-primary hover:bg-secondary transition-all duration-200"
+              className="md:hidden flex items-center justify-center w-10 h-10 focus-ring rounded"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -178,28 +153,28 @@ export function Header() {
 
         {/* Search Bar */}
         <div className={cn(
-          'overflow-hidden transition-all duration-300',
-          isSearchOpen ? 'max-h-20 py-3 border-t border-border' : 'max-h-0 py-0'
+          'overflow-hidden transition-all duration-300 border-t border-border',
+          isSearchOpen ? 'max-h-20 py-4' : 'max-h-0 py-0 border-transparent'
         )}>
           <div className="relative">
-            <Search className="absolute top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground ltr:left-4 rtl:right-4" />
+            <Search className="absolute top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground ltr:left-4 rtl:right-4" />
             <input
               ref={searchRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isAr ? 'ابحث في الموقع...' : 'Search the site...'}
-              className="w-full py-2.5 bg-secondary/40 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all ltr:pl-11 ltr:pr-4 rtl:pr-11 rtl:pl-4 rtl:text-right"
+              className="w-full py-3 bg-secondary/50 border border-border text-sm focus:outline-none focus:border-primary transition-colors ltr:pl-12 ltr:pr-4 rtl:pr-12 rtl:pl-4 rtl:text-right"
             />
           </div>
           {searchResults.length > 0 && (
-            <div className="absolute left-4 right-4 bg-background border border-border rounded-lg shadow-lg mt-1.5 z-50 overflow-hidden">
+            <div className="absolute left-0 right-0 bg-background border border-border shadow-lg mt-1 z-50">
               {searchResults.map((r) => (
                 <Link
                   key={r.href}
                   to={r.href}
                   onClick={() => { setSearchQuery(''); setIsSearchOpen(false); }}
-                  className="block px-4 py-3 text-sm hover:bg-secondary/60 transition-colors rtl:text-right"
+                  className="block px-4 py-3 text-sm hover:bg-secondary transition-colors rtl:text-right"
                 >
                   {r.label}
                 </Link>
@@ -207,66 +182,31 @@ export function Header() {
             </div>
           )}
         </div>
+
+        {/* Mobile Menu */}
+        <div className={cn(
+          'md:hidden border-t border-border overflow-hidden transition-all duration-300',
+          isMenuOpen ? 'max-h-[500px] py-6' : 'max-h-0 py-0'
+        )}>
+          <nav className="flex flex-col gap-4 rtl:text-right">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors animate-slide-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
 
       {/* Mega Menus */}
-      <MegaMenu items={solutionsMega} isOpen={openMega === 'solutions'} onLinkClick={() => setOpenMega(null)} />
-      <MegaMenu items={industriesMega} isOpen={openMega === 'industries'} onLinkClick={() => setOpenMega(null)} />
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300",
-          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
-        onClick={() => setIsMenuOpen(false)}
-      />
-
-      {/* Mobile Slide-in Menu */}
-      <div
-        className={cn(
-          "fixed top-0 z-50 h-full w-[280px] bg-background shadow-2xl lg:hidden transition-transform duration-300 ease-out overflow-y-auto",
-          isAr ? "right-0" : "left-0",
-          isMenuOpen
-            ? "translate-x-0"
-            : isAr ? "translate-x-full" : "-translate-x-full"
-        )}
-      >
-        {/* Mobile menu header */}
-        <div className="flex items-center justify-between p-5 border-b border-border rtl:flex-row-reverse">
-          <img src={saladaLogo} alt="SALADA" className="h-10 w-auto" />
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-secondary transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Mobile nav links */}
-        <nav className="flex flex-col p-4 rtl:text-right">
-          {navLinks.map((link, index) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className={cn(
-                "py-3.5 px-3 text-[15px] font-medium text-foreground/80 hover:text-primary hover:bg-secondary/50 rounded-lg transition-all duration-200",
-                "animate-slide-up",
-                isAr ? "text-right" : "uppercase tracking-wider text-sm"
-              )}
-              style={{ animationDelay: `${index * 40}ms` }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile language switcher */}
-        <div className="p-4 mt-auto border-t border-border">
-          <LanguageSwitcher />
-        </div>
-      </div>
+      <MegaMenu items={solutionsMega} isOpen={openMega === 'solutions'} />
+      <MegaMenu items={industriesMega} isOpen={openMega === 'industries'} />
     </header>
   );
 }
