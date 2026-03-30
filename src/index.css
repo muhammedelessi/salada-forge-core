@@ -823,6 +823,30 @@
     transform: scale(1);
   }
 }
+@keyframes heroZoomSlow {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes scanLine {
+  0% {
+    top: -2px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
 @keyframes fadeUp {
   from {
     opacity: 0;
