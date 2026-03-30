@@ -35,33 +35,101 @@ export default function HomePage() {
     <Layout>
       <SEOHead {...seo} />
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Salada Metal Industries — industrial shipping port"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-foreground/20" />
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background split: text side clean, image side visual */}
+        <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-5">
+          {/* Left/text background */}
+          <div className="hidden lg:block lg:col-span-3 bg-background" />
+          {/* Right/image background */}
+          <div className="col-span-1 lg:col-span-2 relative">
+            <img
+              src={heroImage}
+              alt="Salada Metal Industries — industrial shipping port"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-foreground/40" />
+          </div>
         </div>
 
-        <div className="industrial-container relative z-10">
-          <div className="max-w-5xl rtl:text-right">
-            <h1 className="text-3xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade md:text-4xl rounded shadow-none">
-              {t("hero.title")}
-              <span className="block text-primary">{t("hero.titleHighlight")}</span>
-            </h1>
-            <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-industrial-fade delay-300 rtl:sm:flex-row-reverse">
-              <Link to="/solutions" className="industrial-button rtl:flex-row-reverse">
-                {t("hero.cta")}
-                <ArrowIcon />
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-10 py-5 border-2 border-background text-background font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-background hover:text-foreground"
-              >
-                {t("hero.quote")}
-              </Link>
+        {/* Mobile full overlay */}
+        <div className="absolute inset-0 lg:hidden">
+          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-foreground/70" />
+        </div>
+
+        {/* Subtle geometric accent */}
+        <div className="absolute top-0 ltr:right-0 rtl:left-0 w-1/2 h-full hidden lg:block pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-l rtl:bg-gradient-to-r from-transparent via-background/60 to-background z-10" />
+        </div>
+
+        <div className="industrial-container relative z-20 py-20 lg:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-5 items-center gap-12 lg:gap-0 min-h-[80vh]">
+            {/* Text content — 3/5 */}
+            <div className="lg:col-span-3 ltr:lg:pr-20 rtl:lg:pl-20 rtl:text-right">
+              {/* Label */}
+              <span className="inline-block text-xs uppercase tracking-[0.3em] font-mono text-primary mb-6 animate-industrial-fade lg:text-foreground/60 lg:text-primary">
+                {t("hero.label")}
+              </span>
+
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tighter leading-[1.1] text-background lg:text-foreground animate-industrial-fade">
+                {t("hero.title")}
+                <span className="block text-primary mt-2">{t("hero.titleHighlight")}</span>
+              </h1>
+
+              <p className="mt-6 text-sm md:text-base leading-relaxed text-background/70 lg:text-muted-foreground max-w-xl animate-industrial-fade delay-100">
+                {t("hero.description")}
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mt-10 animate-industrial-fade delay-200 rtl:sm:flex-row-reverse">
+                <Link
+                  to="/solutions"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold uppercase tracking-[0.15em] text-sm rounded-lg transition-all duration-300 hover:shadow-[0_8px_30px_-4px_hsl(var(--primary)/0.4)] hover:-translate-y-0.5 rtl:flex-row-reverse"
+                >
+                  {t("hero.cta")}
+                  <ArrowIcon />
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-background lg:border-foreground/20 text-background lg:text-foreground font-semibold uppercase tracking-[0.15em] text-sm rounded-lg transition-all duration-300 hover:border-primary hover:text-primary"
+                >
+                  {t("hero.quote")}
+                </Link>
+              </div>
+
+              {/* Trust signals */}
+              <div className="flex items-center gap-6 mt-10 animate-industrial-fade delay-300 rtl:flex-row-reverse flex-wrap">
+                {[
+                  { icon: "🚛", labelEn: "Land Freight", labelAr: "شحن بري" },
+                  { icon: "🚢", labelEn: "Sea Freight", labelAr: "شحن بحري" },
+                  { icon: "✈️", labelEn: "Air Freight", labelAr: "شحن جوي" },
+                ].map((badge) => (
+                  <div key={badge.labelEn} className="flex items-center gap-2 rtl:flex-row-reverse">
+                    <span className="text-base">{badge.icon}</span>
+                    <span className="text-xs uppercase tracking-wider text-background/60 lg:text-muted-foreground font-medium">
+                      {isRTL() ? badge.labelAr : badge.labelEn}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Visual element — 2/5 (desktop only, image already visible behind) */}
+            <div className="hidden lg:flex lg:col-span-2 items-center justify-center relative">
+              <div className="relative w-full aspect-[3/4] max-w-md rounded-lg overflow-hidden shadow-[0_20px_60px_-10px_hsl(var(--foreground)/0.3)] border border-border/30">
+                <img
+                  src={heroPort}
+                  alt="Industrial container port operations"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="text-2xl font-bold text-primary font-mono">10+</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-background/80 mt-1">
+                    {isRTL() ? "سنوات من الخبرة" : "Years of Experience"}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
