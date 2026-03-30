@@ -35,33 +35,40 @@ export default function HomePage() {
     <Layout>
       <SEOHead {...seo} />
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-end overflow-hidden pb-24 md:pb-32">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Salada Metal Industries — industrial shipping port"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-foreground/20" />
-        </div>
+      <section className="relative min-h-[90vh] bg-background container-pattern">
+        <div className="industrial-container relative z-10 h-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 min-h-[90vh]">
+            {/* Text Side */}
+            <div className="flex flex-col justify-center py-20 md:py-32 order-2 md:order-1 rtl:md:order-2 rtl:text-right">
+              <h1 className="industrial-heading animate-industrial-slide">
+                {t("hero.title")}{" "}
+                <span className="text-primary">{t("hero.titleHighlight")}</span>
+              </h1>
+              <p className="industrial-subheading mt-6 max-w-lg animate-industrial-fade delay-200">
+                {t("hero.description") !== "hero.description"
+                  ? t("hero.description")
+                  : "Delivering end-to-end logistics, storage, and metal fabrication services across the Kingdom with precision and reliability."}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-10 animate-fade-in delay-400 rtl:sm:flex-row-reverse">
+                <Link to="/solutions" className="industrial-button rtl:flex-row-reverse">
+                  {t("hero.cta")}
+                  <ArrowIcon />
+                </Link>
+                <Link to="/about" className="industrial-button-outline rtl:flex-row-reverse">
+                  {t("hero.quote")}
+                  <ArrowIcon />
+                </Link>
+              </div>
+            </div>
 
-        <div className="industrial-container relative z-10">
-          <div className="max-w-5xl rtl:text-right">
-            <h1 className="text-3xl font-bold uppercase tracking-tighter leading-tight text-background animate-industrial-fade md:text-4xl rounded shadow-none">
-              {t("hero.title")}
-              <span className="block text-primary">{t("hero.titleHighlight")}</span>
-            </h1>
-            <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-industrial-fade delay-300 rtl:sm:flex-row-reverse">
-              <Link to="/solutions" className="industrial-button rtl:flex-row-reverse">
-                {t("hero.cta")}
-                <ArrowIcon />
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-10 py-5 border-2 border-background text-background font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-background hover:text-foreground"
-              >
-                {t("hero.quote")}
-              </Link>
+            {/* Image Side */}
+            <div className="relative order-1 md:order-2 rtl:md:order-1 min-h-[300px] md:min-h-0">
+              <img
+                src={heroImage}
+                alt="Salada Metal Industries — industrial shipping port"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-foreground/40" />
             </div>
           </div>
         </div>
