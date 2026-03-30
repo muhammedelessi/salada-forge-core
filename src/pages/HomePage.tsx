@@ -359,9 +359,9 @@ export default function HomePage() {
         <div
           className="relative z-10 w-full"
           style={{
-            background: "rgba(0,0,0,0.45)",
-            backdropFilter: "blur(12px)",
-            borderTop: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(10, 8, 4, 0.65)",
+            backdropFilter: "blur(16px)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
           <div className="container-xl">
@@ -369,19 +369,26 @@ export default function HomePage() {
               {stats.map((s, i) => (
                 <div
                   key={s.label}
-                  className="py-4 text-center"
+                  className="py-3 md:py-5 text-center cursor-default transition-colors duration-[250ms]"
                   style={{
-                    borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                    borderRight: i < stats.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(196, 150, 20, 0.07)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
                   }}
                 >
                   <div
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
-                      fontWeight: 900,
+                      fontSize: "clamp(1.2rem, 3vw, 2.2rem)",
+                      fontWeight: 700,
                       color: "hsl(var(--gold))",
                       lineHeight: 1,
-                      marginBottom: "0.2rem",
+                      marginBottom: "4px",
+                      textShadow: "0 0 20px rgba(196, 150, 20, 0.35)",
                     }}
                   >
                     <Counter target={s.value} suffix={s.suffix} />
@@ -389,11 +396,12 @@ export default function HomePage() {
                   <p
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.5rem",
-                      fontWeight: 600,
+                      fontSize: "clamp(0.45rem, 1vw, 0.5rem)",
+                      fontWeight: 500,
                       textTransform: "uppercase",
-                      letterSpacing: "0.2em",
-                      color: "rgba(255,255,255,0.4)",
+                      letterSpacing: "clamp(0.15em, 0.5vw, 0.22em)",
+                      color: "rgba(255, 255, 255, 0.45)",
+                      lineHeight: 1.4,
                     }}
                   >
                     {s.label}
