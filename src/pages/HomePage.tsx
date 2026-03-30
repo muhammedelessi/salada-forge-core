@@ -433,7 +433,6 @@ export default function HomePage() {
                 to={sol.href}
                 className="group relative block overflow-hidden h-[240px] lg:h-[280px]"
                 style={{
-                  height: "280px",
                   borderRight: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
                 }}
               >
