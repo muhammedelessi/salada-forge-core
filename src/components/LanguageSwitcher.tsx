@@ -6,36 +6,45 @@ export function LanguageSwitcher() {
   const isEn = language === 'en';
 
   return (
-    <button
-      onClick={() => setLanguage(isEn ? 'ar' : 'en')}
-      className={cn(
-        "relative flex items-center h-8 w-[72px] rounded-full border border-border bg-secondary/50 transition-colors duration-200 hover:border-primary/40 overflow-hidden"
-      )}
-      title={isEn ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
+    <div
+      className="inline-flex items-center overflow-hidden"
+      style={{
+        borderRadius: '20px',
+        border: '1.5px solid hsl(var(--primary))',
+      }}
     >
-      {/* Sliding pill indicator */}
-      <span
+      <button
+        onClick={() => setLanguage('en')}
         className={cn(
-          "absolute top-0.5 h-[calc(100%-4px)] w-[calc(50%-2px)] rounded-full bg-primary transition-all duration-300 ease-out",
-          isEn ? "left-0.5" : "left-[calc(50%+1px)]"
+          "transition-all duration-200",
+          isEn ? "text-primary-foreground" : "text-primary hover:bg-primary/10"
         )}
-      />
-      <span
-        className={cn(
-          "relative z-10 flex-1 text-center text-xs font-bold transition-colors duration-200",
-          isEn ? "text-primary-foreground" : "text-foreground/60"
-        )}
+        style={{
+          padding: '6px 14px',
+          fontSize: '13px',
+          fontWeight: 600,
+          backgroundColor: isEn ? 'hsl(var(--primary))' : 'transparent',
+          borderRadius: '18px 0 0 18px',
+        }}
       >
         EN
-      </span>
-      <span
+      </button>
+      <button
+        onClick={() => setLanguage('ar')}
         className={cn(
-          "relative z-10 flex-1 text-center text-xs font-bold transition-colors duration-200",
-          !isEn ? "text-primary-foreground" : "text-foreground/60"
+          "transition-all duration-200",
+          !isEn ? "text-primary-foreground" : "text-primary hover:bg-primary/10"
         )}
+        style={{
+          padding: '6px 14px',
+          fontSize: '13px',
+          fontWeight: 600,
+          backgroundColor: !isEn ? 'hsl(var(--primary))' : 'transparent',
+          borderRadius: '0 18px 18px 0',
+        }}
       >
         AR
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }
