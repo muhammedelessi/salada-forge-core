@@ -368,7 +368,7 @@ export default function HomePage() {
               <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
                 {t("vision.label")}
               </span>
-              <h2 className="section-heading text-ink-100 mb-5 text-2xl">{t("vision.title")}</h2>
+              <h2 className="section-heading text-ink-100 mb-5">{t("vision.title")}</h2>
               <p className="text-sm text-ink-40 leading-relaxed max-w-md mb-7">{t("vision.description")}</p>
               <Link
                 to="/why-salada"
