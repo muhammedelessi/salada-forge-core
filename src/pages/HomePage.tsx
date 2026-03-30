@@ -500,7 +500,7 @@ export default function HomePage() {
                   }}
                 >
                   <p
-                    className="text-4xl"
+                    className="text-4xl text-primary"
                     style={{
                       fontFamily: "var(--font-mono)",
                       color: "hsl(var(--primary))",
