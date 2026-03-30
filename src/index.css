@@ -265,11 +265,11 @@
 
   /* ── Section heading ── */
   .section-heading {
-    font-size: clamp(2rem, 5vw, 3.75rem);
+    font-size: clamp(1.8rem, 4.5vw, 3.4rem);
     font-weight: 900;
     text-transform: uppercase;
     line-height: 0.95;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.03em;
     color: hsl(var(--ink-100));
   }
 
