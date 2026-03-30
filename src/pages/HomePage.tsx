@@ -159,16 +159,7 @@ export default function HomePage() {
           {/* Multi-layer overlay: warm dark tint + vignette */}
           <div
             className="absolute inset-0"
-            style={{
-              background: `
-                linear-gradient(
-                  to bottom,
-                  hsl(var(--ink-100)/0.55) 0%,
-                  hsl(var(--ink-100)/0.40) 40%,
-                  hsl(var(--ink-100)/0.65) 100%
-                )
-              `,
-            }}
+            style={{ background: "rgba(0, 0, 0, 0.25)" }}
           />
           {/* warm gold tint layer */}
           <div className="absolute inset-0" style={{ background: "hsl(var(--gold)/0.08)" }} />
