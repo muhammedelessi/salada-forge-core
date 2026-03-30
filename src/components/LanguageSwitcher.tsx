@@ -1,21 +1,50 @@
 import { useLanguageStore } from '@/store/languageStore';
-import { Globe } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguageStore();
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'ar' : 'en');
-  };
+  const isEn = language === 'en';
 
   return (
-    <button
-      onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors border border-border hover:border-primary"
-      title={language === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
+    <div
+      className="inline-flex items-center overflow-hidden"
+      style={{
+        borderRadius: '20px',
+        border: '1.5px solid hsl(var(--primary))',
+      }}
     >
-      <Globe className="w-4 h-4" />
-      <span className="font-mono uppercase">{language === 'en' ? 'AR' : 'EN'}</span>
-    </button>
+      <button
+        onClick={() => setLanguage('en')}
+        className={cn(
+          "transition-all duration-200",
+          isEn ? "text-primary-foreground" : "text-primary hover:bg-primary/10"
+        )}
+        style={{
+          padding: '6px 14px',
+          fontSize: '13px',
+          fontWeight: 600,
+          backgroundColor: isEn ? 'hsl(var(--primary))' : 'transparent',
+          borderRadius: '18px 0 0 18px',
+        }}
+      >
+        EN
+      </button>
+      <button
+        onClick={() => setLanguage('ar')}
+        className={cn(
+          "transition-all duration-200",
+          !isEn ? "text-primary-foreground" : "text-primary hover:bg-primary/10"
+        )}
+        style={{
+          padding: '6px 14px',
+          fontSize: '13px',
+          fontWeight: 600,
+          backgroundColor: !isEn ? 'hsl(var(--primary))' : 'transparent',
+          borderRadius: '0 18px 18px 0',
+        }}
+      >
+        AR
+      </button>
+    </div>
   );
 }
