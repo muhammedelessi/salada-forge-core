@@ -394,113 +394,174 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           SOLUTIONS
       ════════════════════════════════════ */}
-      <section className="bg-paper-0 border-b border-warm">
-        <div className="container-xl pt-20 md:pt-28 pb-10">
-          <Reveal>
-            <div
-              className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 ${isAr ? "md:flex-row-reverse text-right" : ""}`}
+      <section className="border-b" style={{ borderColor: "hsl(var(--border))" }}>
+        {/* Section header */}
+        <div
+          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 ${isAr ? "md:flex-row-reverse text-right" : ""}`}
+          style={{ padding: "40px 40px 28px", borderBottom: "1px solid hsl(var(--border))" }}
+        >
+          <div>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "9px",
+                textTransform: "uppercase",
+                letterSpacing: "0.28em",
+                color: "hsl(var(--primary))",
+              }}
             >
-              <div>
-                <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
-                  {t("solutions.label")}
-                </span>
-                <h2 className="section-heading text-ink-100">{t("solutions.title")}</h2>
-              </div>
-              <Link
-                to="/solutions"
-                className={`inline-flex items-center gap-2 text-ink-40 hover:text-gold transition-colors duration-200 ${isAr ? "flex-row-reverse" : ""}`}
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.6rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                {isAr ? "جميع الحلول" : "View all"}
-                <ArrowUpRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </Reveal>
+              — {t("solutions.label")}
+            </span>
+            <h2
+              style={{
+                fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
+                fontWeight: 900,
+                textTransform: "uppercase",
+                letterSpacing: "-0.03em",
+                lineHeight: 0.95,
+                color: "hsl(var(--foreground))",
+                marginTop: "12px",
+              }}
+            >
+              {t("solutions.title")}
+            </h2>
+          </div>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "8px",
+              textTransform: "uppercase",
+              letterSpacing: "0.2em",
+              color: "hsl(var(--muted-foreground))",
+            }}
+          >
+            04 Solutions
+          </span>
         </div>
 
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-          style={{ borderTop: "1px solid hsl(var(--border))" }}
-        >
-          {solutions.map((sol, i) => (
-            <Reveal key={sol.num} delay={i * 50}>
-              <Link
-                to={sol.href}
-                className="group relative block overflow-hidden h-[240px] lg:h-[280px]"
+        {/* Two-column layout */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${isAr ? "md:[direction:rtl]" : ""}`} style={{ minHeight: "420px" }}>
+          {/* Left column */}
+          <div
+            className="flex flex-col justify-between"
+            style={{
+              padding: "48px 40px",
+              borderRight: isAr ? "none" : "1px solid hsl(var(--border))",
+              borderLeft: isAr ? "1px solid hsl(var(--border))" : "none",
+            }}
+          >
+            <div className={isAr ? "text-right" : ""}>
+              <span
                 style={{
-                  borderRight: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "9px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.28em",
+                  color: "hsl(var(--primary))",
                 }}
               >
-                {/* Background image */}
-                <img
-                  src={sol.image}
-                  alt={sol.title}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-in-out group-hover:scale-105"
-                />
-                {/* Dark overlay */}
-                <div
-                  className="absolute inset-0 transition-[background] duration-[600ms]"
-                  style={{ background: "rgba(0,0,0,0.55)" }}
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/[0.13] opacity-0 group-hover:opacity-100 transition-opacity duration-[600ms]" />
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+                — {t("solutions.label")}
+              </span>
+              <h2
+                style={{
+                  fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
+                  fontWeight: 900,
+                  textTransform: "uppercase",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 0.95,
+                  color: "hsl(var(--foreground))",
+                  marginTop: "12px",
+                }}
+              >
+                {t("solutions.title")}
+              </h2>
+            </div>
+
+            {/* 2x2 mini cards */}
+            <div
+              className="grid grid-cols-2"
+              style={{ gap: "1px", background: "hsl(var(--border))", marginTop: "28px" }}
+            >
+              {solutions.map((sol) => (
+                <Link
+                  key={sol.num}
+                  to={sol.href}
+                  className={`group block ${isAr ? "text-right" : ""}`}
+                  style={{
+                    background: "hsl(var(--background))",
+                    padding: "16px 18px",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "hsl(var(--primary) / 0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "hsl(var(--background))";
+                  }}
+                >
                   <p
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.55rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.25em",
+                      fontSize: "8px",
                       color: "hsl(var(--primary))",
+                      marginBottom: "6px",
                       opacity: 0.6,
                     }}
                   >
                     {sol.num}
                   </p>
-                  <div
+                  <p
+                    className="group-hover:!text-[hsl(var(--primary))]"
                     style={{
-                      width: "1.5rem",
-                      height: "1.5px",
-                      background: "hsl(var(--primary))",
-                      margin: "10px auto",
-                    }}
-                  />
-                  <h3
-                    className="transition-colors duration-[600ms] group-hover:!text-[hsl(var(--primary))]"
-                    style={{
-                      fontSize: "0.875rem",
+                      fontSize: "11px",
                       fontWeight: 800,
                       textTransform: "uppercase",
-                      letterSpacing: "-0.02em",
-                      color: "white",
+                      letterSpacing: "-0.01em",
+                      color: "hsl(var(--foreground))",
                     }}
                   >
                     {sol.title}
-                  </h3>
-                  <span
-                    className={`inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3 ${isAr ? "flex-row-reverse" : ""}`}
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.55rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.15em",
-                      color: "hsl(var(--primary))",
-                    }}
-                  >
-                    {t("solutions.learnMore")}
-                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right column — dark image panel */}
+          <div className="relative overflow-hidden md:order-none" style={{ minHeight: "200px" }}>
+            <img
+              src={heroPort}
+              alt="Industrial containers"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: "rgba(10, 8, 4, 0.60)" }} />
+            {/* Grid pattern overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(hsl(var(--foreground) / 0.08) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / 0.08) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
+            {/* Bottom badge */}
+            <span
+              className="absolute"
+              style={{
+                bottom: "24px",
+                left: isAr ? "auto" : "28px",
+                right: isAr ? "28px" : "auto",
+                fontFamily: "var(--font-mono)",
+                fontSize: "8px",
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                color: "rgba(255,255,255,0.35)",
+              }}
+            >
+              ISO · DNV · Saudi Made
+            </span>
+          </div>
         </div>
       </section>
 
