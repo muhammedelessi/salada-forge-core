@@ -560,6 +560,7 @@
   }
   .stat-value {
     font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 900;
     color: hsl(var(--gold));
