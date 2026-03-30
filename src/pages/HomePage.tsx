@@ -288,9 +288,8 @@ export default function HomePage() {
         <div
           className="relative z-10 w-full"
           style={{
-            background: "rgba(10, 8, 4, 0.65)",
-            backdropFilter: "blur(16px)",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            background: "rgba(0, 0, 0, 0.55)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
           <div className="container-xl">
@@ -298,12 +297,12 @@ export default function HomePage() {
               {stats.map((s, i) => (
                 <div
                   key={s.label}
-                  className="py-3 md:py-5 text-center cursor-default transition-colors duration-[250ms]"
+                  className="py-3 md:py-5 text-center cursor-default"
                   style={{
                     borderRight: i < stats.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(196, 150, 20, 0.07)";
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255, 255, 255, 0.04)";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.background = "transparent";
@@ -312,12 +311,11 @@ export default function HomePage() {
                   <div
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "clamp(1.2rem, 3vw, 2.2rem)",
+                      fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
                       fontWeight: 700,
-                      color: "hsl(var(--gold))",
+                      color: "#c49614",
                       lineHeight: 1,
                       marginBottom: "4px",
-                      textShadow: "0 0 20px rgba(196, 150, 20, 0.35)",
                     }}
                   >
                     <Counter target={s.value} suffix={s.suffix} />
@@ -325,12 +323,11 @@ export default function HomePage() {
                   <p
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "clamp(0.45rem, 1vw, 0.5rem)",
+                      fontSize: "0.5rem",
                       fontWeight: 500,
                       textTransform: "uppercase",
-                      letterSpacing: "clamp(0.15em, 0.5vw, 0.22em)",
-                      color: "rgba(255, 255, 255, 0.45)",
-                      lineHeight: 1.4,
+                      letterSpacing: "0.2em",
+                      color: "rgba(255, 255, 255, 0.4)",
                     }}
                   >
                     {s.label}
