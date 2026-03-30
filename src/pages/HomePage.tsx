@@ -431,7 +431,7 @@ export default function HomePage() {
             <Reveal key={sol.num} delay={i * 50}>
               <Link
                 to={sol.href}
-                className="group relative block overflow-hidden"
+                className="group relative block overflow-hidden h-[240px] lg:h-[280px]"
                 style={{
                   height: "280px",
                   borderRight: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
