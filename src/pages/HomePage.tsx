@@ -208,24 +208,6 @@ export default function HomePage() {
 
         {/* ── Main centered content ── */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
-          {/* Eyebrow label */}
-          <div className="animate-fade-up delay-200 mb-5">
-            <span
-              className="inline-flex items-center gap-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.6rem",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.32em",
-                color: "hsl(var(--gold))",
-              }}
-            >
-              <span style={{ width: "1.5rem", height: "1px", background: "hsl(var(--gold)/0.7)", display: "block" }} />
-              {t("hero.label")}
-              <span style={{ width: "1.5rem", height: "1px", background: "hsl(var(--gold)/0.7)", display: "block" }} />
-            </span>
-          </div>
 
           {/* H1 — white */}
           <h1
@@ -269,20 +251,6 @@ export default function HomePage() {
               margin: "0 auto 1.25rem",
             }}
           />
-
-          {/* Description */}
-          <p
-            className="animate-fade-up delay-500"
-            style={{
-              fontSize: "0.75rem",
-              color: "rgba(255,255,255,0.55)",
-              lineHeight: 1.7,
-              maxWidth: "32rem",
-              marginBottom: "1.75rem",
-            }}
-          >
-            {t("hero.description")}
-          </p>
 
           {/* CTA Buttons */}
           <div
