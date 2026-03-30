@@ -390,6 +390,7 @@ export default function HomePage() {
       <section style={{ borderBottom: "1px solid hsl(var(--border))" }}>
         {/* Section header */}
         <div
+          dir={isAr ? "rtl" : "ltr"}
           className={`flex items-end justify-between py-20 md:py-32 pb-8 container-xl ${isAr ? "flex-row-reverse text-right" : ""}`}
         >
           <div>
