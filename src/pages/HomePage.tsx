@@ -375,7 +375,7 @@ export default function HomePage() {
                 className="btn-gold inline-flex"
                 style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}
               >
-                <span>{isAr ? "تعرف على سلادة" : "About Salada"}</span>
+                <span>{isAr ? "تعرف على صلادة" : "About Salada"}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </Reveal>
