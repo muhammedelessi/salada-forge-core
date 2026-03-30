@@ -368,7 +368,7 @@ export default function HomePage() {
               <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
                 {t("vision.label")}
               </span>
-              <h2 className="section-heading text-ink-100 mb-5">{t("vision.title")}</h2>
+              <h2 className="section-heading text-ink-100 mb-5 text-2xl">{t("vision.title")}</h2>
               <p className="text-sm text-ink-40 leading-relaxed max-w-md mb-7">{t("vision.description")}</p>
               <Link
                 to="/why-salada"
@@ -381,7 +381,7 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <div className="vision-badge glow-gold max-w-xs mx-auto">
+              <div className="vision-badge glow-gold max-w-xs mx-auto shadow-none opacity-100">
                 <span className="vision-year">2030</span>
                 <div className="divider-gold w-12 my-3" />
                 <p className="vision-sub">{isAr ? "رؤية المملكة العربية السعودية" : "Saudi Vision"}</p>
