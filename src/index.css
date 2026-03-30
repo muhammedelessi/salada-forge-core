@@ -190,11 +190,7 @@
     letter-spacing: 0;
   }
 
-  code,
-  pre,
-  .mono {
-    font-family: var(--font-mono);
-  }
+  /* code/pre/mono already handled above */
 
   ::selection {
     background: hsl(var(--gold-pale));
