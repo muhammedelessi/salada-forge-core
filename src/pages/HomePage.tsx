@@ -446,11 +446,11 @@ export default function HomePage() {
                 />
                 {/* Dark overlay */}
                 <div
-                  className="absolute inset-0 transition-colors duration-[600ms]"
+                  className="absolute inset-0 transition-[background] duration-[600ms]"
                   style={{ background: "rgba(0,0,0,0.55)" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.68)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.55)"; }}
                 />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/[0.13] opacity-0 group-hover:opacity-100 transition-opacity duration-[600ms]" />
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
                   <p
