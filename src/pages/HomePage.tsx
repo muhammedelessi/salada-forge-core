@@ -396,48 +396,6 @@ export default function HomePage() {
       ════════════════════════════════════ */}
       <section className="border-b" style={{ borderColor: "hsl(var(--border))" }}>
         {/* Section header */}
-        <div
-          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 ${isAr ? "md:flex-row-reverse text-right" : ""}`}
-          style={{ padding: "40px 40px 28px", borderBottom: "1px solid hsl(var(--border))" }}
-        >
-          <div>
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "9px",
-                textTransform: "uppercase",
-                letterSpacing: "0.28em",
-                color: "hsl(var(--primary))",
-              }}
-            >
-              — {t("solutions.label")}
-            </span>
-            <h2
-              style={{
-                fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                letterSpacing: "-0.03em",
-                lineHeight: 0.95,
-                color: "hsl(var(--foreground))",
-                marginTop: "12px",
-              }}
-            >
-              {t("solutions.title")}
-            </h2>
-          </div>
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "8px",
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              color: "hsl(var(--muted-foreground))",
-            }}
-          >
-            04 Solutions
-          </span>
-        </div>
 
         {/* Two-column layout */}
         <div className={`grid grid-cols-1 md:grid-cols-2 ${isAr ? "md:[direction:rtl]" : ""}`} style={{ minHeight: "420px" }}>
