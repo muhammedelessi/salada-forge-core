@@ -380,13 +380,6 @@ export default function HomePage() {
               </Link>
             </Reveal>
 
-            <Reveal delay={150}>
-              <div className="vision-badge glow-gold max-w-xs mx-auto shadow-none opacity-100">
-                <span className="vision-year">2030</span>
-                <div className="divider-gold w-12 my-3" />
-                <p className="vision-sub">{isAr ? "رؤية المملكة العربية السعودية" : "Saudi Vision"}</p>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>
