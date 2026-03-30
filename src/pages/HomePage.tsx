@@ -423,19 +423,77 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-warm">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+          style={{ borderTop: "1px solid hsl(var(--border))" }}
+        >
           {solutions.map((sol, i) => (
             <Reveal key={sol.num} delay={i * 50}>
-              <Link to={sol.href} className="block sol-card h-full">
-                <div className="sol-card-img-wrap">
-                  <img src={sol.image} alt={sol.title} loading="lazy" className="sol-card-img" />
-                </div>
-                <div className="sol-card-inner">
-                  <p className="sol-card-num">{sol.num}</p>
-                  <div className="sol-card-bar" />
-                  <h3 className="sol-card-title">{sol.title}</h3>
-                  <p className="sol-card-desc">{sol.desc}</p>
-                  <span className={`sol-card-arrow ${isAr ? "flex-row-reverse" : ""}`}>
+              <Link
+                to={sol.href}
+                className="group relative block overflow-hidden h-[240px] lg:h-[280px]"
+                style={{
+                  borderRight: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                }}
+              >
+                {/* Background image */}
+                <img
+                  src={sol.image}
+                  alt={sol.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-in-out group-hover:scale-105"
+                />
+                {/* Dark overlay */}
+                <div
+                  className="absolute inset-0 transition-[background] duration-[600ms]"
+                  style={{ background: "rgba(0,0,0,0.55)" }}
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/[0.13] opacity-0 group-hover:opacity-100 transition-opacity duration-[600ms]" />
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+                  <p
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.55rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.25em",
+                      color: "hsl(var(--primary))",
+                      opacity: 0.6,
+                    }}
+                  >
+                    {sol.num}
+                  </p>
+                  <div
+                    style={{
+                      width: "1.5rem",
+                      height: "1.5px",
+                      background: "hsl(var(--primary))",
+                      margin: "10px auto",
+                    }}
+                  />
+                  <h3
+                    className="transition-colors duration-[600ms] group-hover:!text-[hsl(var(--primary))]"
+                    style={{
+                      fontSize: "0.875rem",
+                      fontWeight: 800,
+                      textTransform: "uppercase",
+                      letterSpacing: "-0.02em",
+                      color: "white",
+                    }}
+                  >
+                    {sol.title}
+                  </h3>
+                  <span
+                    className={`inline-flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-3 ${isAr ? "flex-row-reverse" : ""}`}
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.55rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "hsl(var(--primary))",
+                    }}
+                  >
                     {t("solutions.learnMore")}
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
                   </span>
