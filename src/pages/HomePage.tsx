@@ -5,14 +5,13 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
-import HeroSection from "@/components/home/HeroSection";
+import heroImage from "@/assets/hero-logistics.jpg";
 import seaImage from "@/assets/solutions-sea.jpg";
 import storageImage from "@/assets/solutions-storage.jpg";
 import lashingImage from "@/assets/divisions-lashing.jpg";
-import heroImage from "@/assets/hero-logistics.jpg";
 import heroPort from "@/assets/hero-port.jpg";
 
-/* ══ useInView — triggers once when element enters viewport ══ */
+/* ── useInView ── */
 function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -34,36 +33,33 @@ function useInView(threshold = 0.12) {
   return { ref, inView };
 }
 
-/* ══ Reveal — smooth scroll-triggered fade+slide ══ */
+/* ── Scroll Reveal ── */
 function Reveal({
   children,
   delay = 0,
   className = "",
-  as: Tag = "div",
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
-  as?: React.ElementType;
 }) {
   const { ref, inView } = useInView();
   return (
-    <Tag
+    <div
       ref={ref}
       className={className}
       style={{
         opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity .9s cubic-bezier(.16,1,.3,1) ${delay}ms,
-                     transform .9s cubic-bezier(.16,1,.3,1) ${delay}ms`,
+        transform: inView ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity .85s cubic-bezier(.16,1,.3,1) ${delay}ms, transform .85s cubic-bezier(.16,1,.3,1) ${delay}ms`,
       }}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
 
-/* ══ Counter — counts up when in view ══ */
+/* ── Animated Counter ── */
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [n, setN] = useState(0);
   const { ref, inView } = useInView(0.5);
@@ -86,7 +82,6 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   );
 }
 
-/* ══ HomePage ══ */
 export default function HomePage() {
   const { t, isRTL } = useLanguageStore();
   const seo = usePageSEO("/");
@@ -149,56 +144,312 @@ export default function HomePage() {
     <Layout>
       <SEOHead {...seo} />
 
-      <HeroSection />
+      {/* ════════════════════════════════════════
+          HERO — Centered, full viewport, bg image
+          كل العناصر تظهر في شاشة واحدة بدون scroll
+      ════════════════════════════════════════ */}
+      <section className="relative h-[100svh] min-h-[600px] max-h-[900px] flex flex-col overflow-hidden">
+        {/* ── Background image ── */}
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="Salada industrial operations"
+            className="w-full h-full object-cover animate-hero-zoom"
+          />
+          {/* Multi-layer overlay: warm dark tint + vignette */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `
+                linear-gradient(
+                  to bottom,
+                  hsl(var(--ink-100)/0.55) 0%,
+                  hsl(var(--ink-100)/0.40) 40%,
+                  hsl(var(--ink-100)/0.65) 100%
+                )
+              `,
+            }}
+          />
+          {/* warm gold tint layer */}
+          <div className="absolute inset-0" style={{ background: "hsl(var(--gold)/0.08)" }} />
+        </div>
 
-      {/* ════════════════════════════════
-          STATS BAR
-      ════════════════════════════════ */}
-      <section className="bg-paper-0 border-b border-warm">
-        <div className="container-xl">
-          <div className="grid grid-cols-2 md:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal
-                key={s.label}
-                delay={i * 60}
-                className={`stat-cell ${i === stats.length - 1 ? "!border-r-0" : ""}`}
+        {/* ── Grid lines overlay ── */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(0deg,  rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 52px),
+              repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 52px)
+            `,
+          }}
+        />
+
+        {/* ── Animated gold scan line ── */}
+        <div
+          className="absolute inset-x-0 pointer-events-none"
+          style={{
+            top: "38%",
+            height: "1px",
+            background: `linear-gradient(to right, transparent, hsl(var(--gold)/0.6) 30%, hsl(var(--gold)/0.6) 70%, transparent)`,
+            animation: "scanPulse 7s ease-in-out infinite",
+          }}
+        />
+
+        {/* ── Corner bracket marks ── */}
+        <div
+          className="absolute top-20 left-6 md:left-10 w-5 h-5 pointer-events-none"
+          style={{ borderTop: "2px solid hsl(var(--gold)/0.55)", borderLeft: "2px solid hsl(var(--gold)/0.55)" }}
+        />
+        <div
+          className="absolute top-20 right-6 md:right-10 w-5 h-5 pointer-events-none"
+          style={{ borderTop: "2px solid hsl(var(--gold)/0.55)", borderRight: "2px solid hsl(var(--gold)/0.55)" }}
+        />
+        <div
+          className="absolute bottom-10 left-6 md:left-10 w-5 h-5 pointer-events-none"
+          style={{ borderBottom: "2px solid hsl(var(--gold)/0.55)", borderLeft: "2px solid hsl(var(--gold)/0.55)" }}
+        />
+        <div
+          className="absolute bottom-10 right-6 md:right-10 w-5 h-5 pointer-events-none"
+          style={{ borderBottom: "2px solid hsl(var(--gold)/0.55)", borderRight: "2px solid hsl(var(--gold)/0.55)" }}
+        />
+
+        {/* ── Main centered content ── */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
+          {/* Eyebrow label */}
+          <div className="animate-fade-up delay-200 mb-5">
+            <span
+              className="inline-flex items-center gap-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.6rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.32em",
+                color: "hsl(var(--gold))",
+              }}
+            >
+              <span style={{ width: "1.5rem", height: "1px", background: "hsl(var(--gold)/0.7)", display: "block" }} />
+              {t("hero.label")}
+              <span style={{ width: "1.5rem", height: "1px", background: "hsl(var(--gold)/0.7)", display: "block" }} />
+            </span>
+          </div>
+
+          {/* H1 — white */}
+          <h1
+            className="animate-fade-up delay-300"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.75rem)",
+              fontWeight: 900,
+              textTransform: "uppercase",
+              lineHeight: 0.93,
+              letterSpacing: "-0.03em",
+              color: "#ffffff",
+              marginBottom: "0.25rem",
+            }}
+          >
+            {t("hero.title")}
+          </h1>
+
+          {/* H1 — gold accent */}
+          <h1
+            className="animate-fade-up delay-400"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.75rem)",
+              fontWeight: 900,
+              textTransform: "uppercase",
+              lineHeight: 0.93,
+              letterSpacing: "-0.03em",
+              color: "hsl(var(--gold))",
+              marginBottom: "1.25rem",
+            }}
+          >
+            {t("hero.titleHighlight")}
+          </h1>
+
+          {/* Gold divider */}
+          <div
+            className="animate-fade-up delay-450"
+            style={{
+              width: "3rem",
+              height: "1.5px",
+              background: "hsl(var(--gold)/0.6)",
+              margin: "0 auto 1.25rem",
+            }}
+          />
+
+          {/* Description */}
+          <p
+            className="animate-fade-up delay-500"
+            style={{
+              fontSize: "0.75rem",
+              color: "rgba(255,255,255,0.55)",
+              lineHeight: 1.7,
+              maxWidth: "32rem",
+              marginBottom: "1.75rem",
+            }}
+          >
+            {t("hero.description")}
+          </p>
+
+          {/* CTA Buttons */}
+          <div
+            className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}
+            style={{ marginBottom: "1.5rem" }}
+          >
+            <Link to="/solutions" className="btn-gold" style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}>
+              <span>{t("hero.cta")}</span>
+              <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+            </Link>
+            <Link
+              to="/contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1.75rem",
+                border: "1px solid rgba(255,255,255,0.3)",
+                color: "#ffffff",
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.6rem",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                transition: "all 0.3s ease",
+                backdropFilter: "blur(6px)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--gold)/0.7)";
+                (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
+                (e.currentTarget as HTMLElement).style.color = "#ffffff";
+              }}
+            >
+              {t("hero.quote")}
+            </Link>
+          </div>
+
+          {/* Trust badges */}
+          <div className="animate-fade-up delay-700 flex flex-wrap gap-2 justify-center">
+            {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
+              <span
+                key={b}
+                style={{
+                  padding: "3px 10px",
+                  background: "hsl(var(--gold)/0.15)",
+                  border: "1px solid hsl(var(--gold)/0.3)",
+                  color: "hsl(var(--gold))",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.55rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.2em",
+                  fontWeight: 600,
+                  backdropFilter: "blur(4px)",
+                }}
               >
-                <div className="stat-value">
-                  <Counter target={s.value} suffix={s.suffix} />
-                </div>
-                <p className="stat-label">{s.label}</p>
-              </Reveal>
+                {b}
+              </span>
             ))}
           </div>
         </div>
+
+        {/* ── Stats bar — pinned to bottom ── */}
+        <div
+          className="relative z-10 w-full"
+          style={{
+            background: "rgba(0,0,0,0.45)",
+            backdropFilter: "blur(12px)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <div className="container-xl">
+            <div className="grid grid-cols-4">
+              {stats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className="py-4 text-center"
+                  style={{
+                    borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
+                      fontWeight: 900,
+                      color: "hsl(var(--gold))",
+                      lineHeight: 1,
+                      marginBottom: "0.2rem",
+                    }}
+                  >
+                    <Counter target={s.value} suffix={s.suffix} />
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.5rem",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.2em",
+                      color: "rgba(255,255,255,0.4)",
+                    }}
+                  >
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Scroll cue ── */}
+        <div
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
+          style={{ opacity: 0.35 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.45rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.3em",
+              color: "#fff",
+            }}
+          >
+            Scroll
+          </span>
+          <ChevronDown className="w-3.5 h-3.5 text-white animate-bounce-subtle" />
+        </div>
       </section>
 
-      {/* ════════════════════════════════
+      {/* ════════════════════════════════════
           VISION 2030
-      ════════════════════════════════ */}
-      <section className="bg-paper-1 py-24 md:py-36 border-b border-warm">
+      ════════════════════════════════════ */}
+      <section className="bg-paper-1 py-20 md:py-32 border-b border-warm">
         <div className="container-xl">
-          <div className={`grid md:grid-cols-2 gap-16 md:gap-24 items-center`}>
-            {/* Text */}
-            <Reveal className={`order-2 md:order-1 ${isAr ? "text-right" : ""}`}>
-              <span className={`section-label mb-6 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+          <div className="grid md:grid-cols-2 gap-14 md:gap-24 items-center">
+            <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
+              <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
                 {t("vision.label")}
               </span>
-              <h2 className="section-heading text-ink-100 mb-6">{t("vision.title")}</h2>
-              <p className="text-sm md:text-base text-ink-40 leading-relaxed max-w-md mb-8">
-                {t("vision.description")}
-              </p>
-              <Link to="/why-salada" className="btn-gold inline-flex">
+              <h2 className="section-heading text-ink-100 mb-5">{t("vision.title")}</h2>
+              <p className="text-sm text-ink-40 leading-relaxed max-w-md mb-7">{t("vision.description")}</p>
+              <Link
+                to="/why-salada"
+                className="btn-gold inline-flex"
+                style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}
+              >
                 <span>{isAr ? "تعرف على سلادة" : "About Salada"}</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </Reveal>
 
-            {/* Badge */}
-            <Reveal delay={150} className="order-1 md:order-2">
-              <div className="vision-badge glow-gold">
+            <Reveal delay={150}>
+              <div className="vision-badge glow-gold max-w-xs mx-auto">
                 <span className="vision-year">2030</span>
-                <div className="divider-gold w-16 my-4" />
+                <div className="divider-gold w-12 my-3" />
                 <p className="vision-sub">{isAr ? "رؤية المملكة العربية السعودية" : "Saudi Vision"}</p>
               </div>
             </Reveal>
@@ -206,43 +457,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
+      {/* ════════════════════════════════════
           SOLUTIONS
-      ════════════════════════════════ */}
+      ════════════════════════════════════ */}
       <section className="bg-paper-0 border-b border-warm">
-        {/* Header */}
-        <div className="container-xl pt-24 md:pt-32 pb-12">
+        <div className="container-xl pt-20 md:pt-28 pb-10">
           <Reveal>
             <div
-              className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 ${isAr ? "md:flex-row-reverse text-right" : ""}`}
+              className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 ${isAr ? "md:flex-row-reverse text-right" : ""}`}
             >
               <div>
-                <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+                <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
                   {t("solutions.label")}
                 </span>
                 <h2 className="section-heading text-ink-100">{t("solutions.title")}</h2>
               </div>
               <Link
                 to="/solutions"
-                className={`inline-flex items-center gap-2 text-[0.6rem] font-mono uppercase tracking-[0.2em] text-ink-40 hover:text-gold transition-colors duration-300 ${isAr ? "flex-row-reverse" : ""}`}
+                className={`inline-flex items-center gap-2 text-ink-40 hover:text-gold transition-colors duration-200 ${isAr ? "flex-row-reverse" : ""}`}
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.6rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.2em",
+                }}
               >
-                {isAr ? "جميع الحلول" : "View all solutions"}
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                {isAr ? "جميع الحلول" : "View all"}
+                <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
           </Reveal>
         </div>
 
-        {/* 2×2 grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 border-t border-warm">
           {solutions.map((sol, i) => (
             <Reveal key={sol.num} delay={i * 50}>
               <Link to={sol.href} className="block sol-card h-full">
-                {/* Image */}
                 <div className="sol-card-img-wrap">
                   <img src={sol.image} alt={sol.title} loading="lazy" className="sol-card-img" />
                 </div>
-                {/* Content */}
                 <div className="sol-card-inner">
                   <p className="sol-card-num">{sol.num}</p>
                   <div className="sol-card-bar" />
@@ -259,18 +512,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
+      {/* ════════════════════════════════════
           INDUSTRIES
-      ════════════════════════════════ */}
-      <section className="bg-paper-1 py-24 md:py-36 border-b border-warm">
+      ════════════════════════════════════ */}
+      <section className="bg-paper-1 py-20 md:py-32 border-b border-warm">
         <div className="container-xl">
-          <Reveal className={`mb-14 ${isAr ? "text-right" : ""}`}>
-            <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+          <Reveal className={`mb-12 ${isAr ? "text-right" : ""}`}>
+            <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
               {t("industries.label")}
             </span>
             <h2 className="section-heading text-ink-100">{t("industries.title")}</h2>
           </Reveal>
-
           <div className="border-t border-warm">
             {industries.map((ind, i) => (
               <Reveal key={ind.name} delay={i * 45}>
@@ -279,7 +531,7 @@ export default function HomePage() {
                     <span className="industry-num">{String(i + 1).padStart(2, "0")}</span>
                     <span className="industry-name">{ind.name}</span>
                   </div>
-                  <ArrowRight className={`industry-arrow w-5 h-5 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className={`industry-arrow w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
               </Reveal>
             ))}
@@ -287,18 +539,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
+      {/* ════════════════════════════════════
           WHY SALADA
-      ════════════════════════════════ */}
-      <section className="bg-paper-0 py-24 md:py-36 border-b border-warm">
+      ════════════════════════════════════ */}
+      <section className="bg-paper-0 py-20 md:py-32 border-b border-warm">
         <div className="container-xl">
-          <Reveal className={`mb-14 ${isAr ? "text-right" : "text-center"}`}>
-            <span className={`section-label section-label-center mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+          <Reveal className={`mb-12 ${isAr ? "text-right" : "text-center"}`}>
+            <span
+              className={`section-label section-label-center mb-4 inline-flex ${isAr ? "flex-row-reverse justify-end" : ""}`}
+            >
               {t("why.label")}
             </span>
             <h2 className="section-heading text-ink-100">{t("why.title")}</h2>
           </Reveal>
-
           <div className="why-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {whyItems.map((w, i) => (
               <Reveal key={w.title} delay={i * 60}>
@@ -313,85 +566,67 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
-          CTA — editorial dark strip
-      ════════════════════════════════ */}
-      <section className="relative overflow-hidden">
-        {/* Background image with warm overlay */}
+      {/* ════════════════════════════════════
+          CTA
+      ════════════════════════════════════ */}
+      <section className="relative py-28 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroPort}
-            alt="Industrial port operations"
+            alt="Industrial port"
             loading="lazy"
             className="w-full h-full object-cover"
-            style={{ filter: "grayscale(40%) brightness(0.4)" }}
+            style={{ filter: "grayscale(35%) brightness(0.38)" }}
           />
-          {/* warm tint overlay using gold token */}
           <div
             className="absolute inset-0"
-            style={{
-              background: "linear-gradient(135deg, hsl(var(--ink-100)/0.92) 0%, hsl(var(--ink-100)/0.75) 100%)",
-            }}
+            style={{ background: "linear-gradient(135deg, hsl(var(--ink-100)/0.88), hsl(var(--ink-100)/0.72))" }}
           />
         </div>
-
-        <div className="container-xl relative z-10 py-32 md:py-48">
-          <div className="max-w-3xl mx-auto text-center">
+        <div className="container-xl relative z-10">
+          <div className="max-w-2xl mx-auto text-center">
             <Reveal>
               <span
-                className="section-label section-label-center mb-7 inline-flex"
+                className="section-label section-label-center mb-6 inline-flex justify-center"
                 style={{ color: "hsl(var(--gold))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
-
-              <h2 className="section-heading mb-10" style={{ color: "#ffffff" }}>
+              <h2 className="section-heading mb-8" style={{ color: "#ffffff" }}>
                 {t("cta.title")}
               </h2>
-
-              <div className={`flex flex-wrap gap-4 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-gold">
+              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
+                <Link to="/contact" className="btn-gold" style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}>
                   <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
-                {/* outline button on dark bg */}
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5
-                             border border-white/30 text-white
-                             font-mono text-[0.6875rem] font-700 uppercase tracking-[0.2em]
-                             transition-all duration-300
-                             hover:border-[hsl(var(--gold))] hover:text-[hsl(var(--gold))]"
-                  style={{ fontSize: "0.6875rem", letterSpacing: "0.2em" }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0.75rem 1.75rem",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    color: "#ffffff",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6rem",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.2em",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--gold)/0.6)";
+                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+                    (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                  }}
                 >
                   {t("cta.browseCatalog")}
                 </Link>
-              </div>
-
-              {/* newsletter mini */}
-              <div className="mt-16 pt-10 border-t border-white/10">
-                <p
-                  className="text-xs uppercase tracking-[0.25em] font-mono mb-5"
-                  style={{ color: "rgba(255,255,255,0.35)" }}
-                >
-                  {isAr ? "ابقَ على اطلاع" : "Stay Updated"}
-                </p>
-                <div className={`flex max-w-md mx-auto ${isAr ? "flex-row-reverse" : ""}`}>
-                  <input
-                    type="email"
-                    placeholder={isAr ? "البريد الإلكتروني" : "your@email.com"}
-                    dir={isAr ? "rtl" : "ltr"}
-                    className="newsletter-input"
-                    style={{
-                      background: "rgba(255,255,255,0.07)",
-                      borderColor: "rgba(255,255,255,0.15)",
-                      color: "#fff",
-                    }}
-                  />
-                  <button className="btn-gold shrink-0" style={{ height: "3rem", paddingInline: "1.5rem" }}>
-                    {isAr ? "اشتراك" : "Subscribe"}
-                  </button>
-                </div>
               </div>
             </Reveal>
           </div>
