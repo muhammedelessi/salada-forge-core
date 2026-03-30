@@ -71,9 +71,9 @@
     --ink-10: 0 0% 88%; /* #e0e0e0 hairline */
 
     /* Typography */
-    --font-display: "IBM Plex Sans Arabic", "Space Grotesk", sans-serif;
-    --font-body: "IBM Plex Sans Arabic", "Space Grotesk", sans-serif;
-    --font-mono: "JetBrains Mono", monospace;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', 'IBM Plex Sans Arabic', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
 
     /* Motion */
     --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
