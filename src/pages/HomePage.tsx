@@ -291,12 +291,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Trust badges */}
-          <div className="animate-fade-up delay-700 flex flex-wrap gap-2 justify-center">
-            {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
-              <span
-                key={b}
-                style={{
                   padding: "3px 10px",
                   background: "hsl(var(--gold)/0.15)",
                   border: "1px solid hsl(var(--gold)/0.3)",
