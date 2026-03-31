@@ -583,7 +583,7 @@ export default function HomePage() {
               <Reveal key={ind.href} delay={i * 80}>
                 <Link
                   to={ind.href}
-                  className="group relative flex flex-col justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full"
+                  className="group relative flex flex-col items-center justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full"
                 >
                   {/* Number */}
                   <span
