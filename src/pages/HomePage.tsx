@@ -361,19 +361,27 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           VISION 2030
       ════════════════════════════════════ */}
-      <section className="bg-paper-1 py-20 md:py-32 border-b border-warm">
+      <section className="bg-paper-1 py-12 md:py-16 border-b border-warm">
         <div className="container-xl">
           <div className="grid md:grid-cols-2 gap-14 md:gap-24 items-center">
             <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
-              <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+              <span
+                className={`font-mono uppercase block text-primary mb-5 ${isAr ? "flex-row-reverse" : ""}`}
+                style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
+              >
                 {t("vision.label")}
               </span>
-              <h2 className="section-heading text-ink-100 mb-5">{t("vision.title")}</h2>
-              <p className="text-sm text-ink-40 leading-relaxed max-w-md mb-7">{t("vision.description")}</p>
+              <h2
+                className="uppercase font-black text-foreground mb-5"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1 }}
+              >
+                {t("vision.title")}
+              </h2>
+              <p className="max-w-md mb-7 text-muted-foreground" style={{ fontSize: "0.8125rem", lineHeight: 1.7 }}>{t("vision.description")}</p>
               <Link
                 to="/why-salada"
                 className="btn-gold inline-flex"
-                style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}
+                style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}
               >
                 <span>{isAr ? "تعرف على صلادة" : "About Salada"}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
