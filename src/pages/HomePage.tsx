@@ -544,115 +544,74 @@ export default function HomePage() {
       ════════════════════════════════════ */}
       <section
         dir={isAr ? "rtl" : "ltr"}
-        style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}
+        className="bg-background border-b border-border"
       >
-        <div className="industrial-container">
+        <div className="industrial-container py-16 md:py-24">
           {/* HEADER */}
-          <div
-            className="flex items-end justify-between"
-            style={{ padding: "36px 0 24px", borderBottom: "1px solid hsl(var(--border))" }}
-          >
-            <div>
-              <span
-                className="font-mono uppercase block"
-                style={{ fontSize: "8px", letterSpacing: "0.28em", color: "hsl(var(--primary))" }}
-              >
-                — {t("industries.label")}
-              </span>
-              <h2
-                className="font-black uppercase"
-                style={{
-                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                  color: "hsl(var(--foreground))",
-                  marginTop: "8px",
-                }}
-              >
-                {t("industries.title")}
-              </h2>
-            </div>
-            <span
-              className="font-mono uppercase"
-              style={{ fontSize: "8px", letterSpacing: "0.18em", color: "hsl(var(--muted-foreground))" }}
-            >
-              05 sectors
-            </span>
-          </div>
-
-          {/* ROWS */}
-          <div>
-            {industries.map((ind, i) => (
-              <Link
-                key={ind.href}
-                to={ind.href}
-                className="group flex items-center"
-                style={{
-                  borderBottom: "1px solid hsl(var(--border))",
-                  background: "transparent",
-                  transition: "background 0.2s ease",
-                  padding: 0,
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--primary) / 0.08)")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-              >
-                {/* BIG NUMBER */}
+          <Reveal>
+            <div className="flex items-end justify-between pb-8 mb-10 border-b border-border">
+              <div>
                 <span
-                  className="font-mono font-black flex-shrink-0 group-hover:opacity-100"
+                  className="font-mono uppercase block text-primary"
+                  style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+                >
+                  — {t("industries.label")}
+                </span>
+                <h2
+                  className="section-heading font-black uppercase mt-2 text-foreground"
                   style={{
-                    fontSize: "clamp(1.5rem, 4vw, 2.75rem)",
-                    color: "hsl(var(--primary))",
-                    opacity: 0.15,
-                    width: "80px",
-                    padding: "16px 0",
+                    fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                    letterSpacing: "-0.03em",
                     lineHeight: 1,
-                    transition: "opacity 0.25s ease",
                   }}
                 >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                  {t("industries.title")}
+                </h2>
+              </div>
+              <span
+                className="font-mono uppercase text-muted-foreground"
+                style={{ fontSize: "8px", letterSpacing: "0.18em" }}
+              >
+                {String(industries.length).padStart(2, "0")} sectors
+              </span>
+            </div>
+          </Reveal>
 
-                {/* VERTICAL DIVIDER */}
-                <div
-                  className="flex-shrink-0"
-                  style={{ width: "1px", height: "40px", background: "hsl(var(--border))" }}
-                />
-
-                {/* TEXT CONTENT */}
-                <div className="flex-1" style={{ padding: "16px 24px" }}>
+          {/* CARDS GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {industries.map((ind, i) => (
+              <Reveal key={ind.href} delay={i * 80}>
+                <Link
+                  to={ind.href}
+                  className="group relative flex flex-col justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full"
+                >
+                  {/* Number */}
                   <span
-                    className="uppercase font-extrabold block group-hover:text-primary"
-                    style={{
-                      fontSize: "13px",
-                      letterSpacing: "-0.01em",
-                      color: "hsl(var(--foreground))",
-                      transition: "color 0.25s",
-                    }}
+                    className="font-mono font-black text-primary/15 group-hover:text-primary/40 transition-colors duration-300 block"
+                    style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
                   >
-                    {ind.name}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span
-                    className="hidden sm:block"
-                    style={{ fontSize: "9px", color: "hsl(var(--muted-foreground))", marginTop: "3px" }}
-                  >
-                    {ind.desc}
-                  </span>
-                </div>
 
-                {/* ARROW */}
-                <ArrowRight
-                  className={`flex-shrink-0 group-hover:opacity-80 ${isAr ? "rotate-180" : ""}`}
-                  style={{
-                    width: "14px",
-                    height: "14px",
-                    color: "hsl(var(--primary))",
-                    opacity: 0.3,
-                    marginInlineEnd: "4px",
-                    transition: "opacity 0.25s ease",
-                  }}
-                />
-              </Link>
+                  {/* Text */}
+                  <div className="mt-6">
+                    <h3 className="uppercase font-extrabold text-sm tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
+                      {ind.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed line-clamp-3">
+                      {ind.desc}
+                    </p>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex items-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="font-mono uppercase text-[9px] tracking-widest">
+                      {t("solutions.learnMore")}
+                    </span>
+                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
