@@ -387,155 +387,95 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           SOLUTIONS
       ════════════════════════════════════ */}
-      <section dir={isAr ? "rtl" : "ltr"} style={{ borderBottom: "1px solid hsl(var(--border))" }}>
-        {/* Section header */}
-        <div
-          className="flex items-end justify-between py-20 md:py-32 pb-8 container-xl"
-        >
-          <div>
-            <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
-              {t("solutions.label")}
-            </span>
-            <h2 className="section-heading text-ink-100">{t("solutions.title")}</h2>
-          </div>
-          <Link
-            to="/solutions"
-            className="group hidden md:inline-flex items-center gap-2"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "9px",
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              color: "hsl(var(--muted-foreground))",
-              paddingBottom: "4px",
-              borderBottom: "1px solid hsl(var(--border))",
-              transition: "color 0.3s, border-color 0.3s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "hsl(var(--primary))";
-              e.currentTarget.style.borderColor = "hsl(var(--primary))";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "hsl(var(--muted-foreground))";
-              e.currentTarget.style.borderColor = "hsl(var(--border))";
-            }}
-          >
-            <span>{isAr ? "عرض الكل" : "View All"}</span>
-            <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
-          </Link>
-        </div>
-
-        {/* Solutions cards — cinematic horizontal strip */}
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-          style={{ minHeight: "380px" }}
-        >
-          {solutions.map((sol, i) => (
-            <Link
-              key={sol.num}
-              to={sol.href}
-              className="group relative overflow-hidden flex flex-col justify-end"
-              style={{
-                minHeight: "380px",
-                borderInlineEnd: i < solutions.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
-              }}
-            >
-              {/* Background image */}
-              <img
-                src={sol.image}
-                alt={sol.title}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-
-              {/* Dark overlay */}
-              <div
-                className="absolute inset-0 transition-all duration-500"
-                style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.18) 100%)" }}
-              />
-              <div
-                className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 px-[20px] py-[10px]"
-                style={{ background: "rgba(0,0,0,0.15)" }}
-              />
-
-              {/* Number — top corner */}
-              <span
-                className="absolute"
-                style={{
-                  top: "20px",
-                  insetInlineStart: "24px",
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "11px",
-                  letterSpacing: "0.15em",
-                  color: "rgba(255,255,255,0.3)",
-                  transition: "color 0.4s",
-                }}
-              >
-                {sol.num}
-              </span>
-
-              {/* Content — bottom */}
-              <div
-                className="relative z-10"
-                style={{ padding: "0 28px 32px" }}
-              >
-                {/* Gold accent line */}
-                <div
-                  className="transition-all duration-500 group-hover:w-10"
+      <section
+        dir={isAr ? "rtl" : "ltr"}
+        className="bg-background border-b border-border"
+      >
+        <div className="industrial-container py-16 md:py-24">
+          {/* HEADER */}
+          <Reveal>
+            <div className="flex items-end justify-between pb-8 mb-10 border-b border-border">
+              <div>
+                <span
+                  className="font-mono uppercase block text-primary"
+                  style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+                >
+                  — {t("solutions.label")}
+                </span>
+                <h2
+                  className="section-heading font-black uppercase mt-2 text-foreground"
                   style={{
-                    width: "24px",
-                    height: "2px",
-                    background: "hsl(var(--primary))",
-                    marginBottom: "16px",
-                  }}
-                />
-
-                <h3
-                  className="transition-colors duration-400"
-                  style={{
-                    fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-                    fontWeight: 800,
-                    textTransform: "uppercase",
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.15,
-                    color: "white",
-                    marginBottom: "8px",
+                    fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1,
                   }}
                 >
-                  {sol.title}
-                </h3>
-
-                <p
-                  className="transition-all duration-500 opacity-0 group-hover:opacity-70 max-h-0 group-hover:max-h-20 overflow-hidden"
-                  style={{
-                    fontSize: "12px",
-                    lineHeight: 1.5,
-                    color: "rgba(255,255,255,0.7)",
-                    marginBottom: "0",
-                    transition: "opacity 0.5s, max-height 0.5s ease",
-                  }}
-                >
-                  {sol.desc}
-                </p>
-
-                {/* Hover arrow */}
-                <div
-                  className="flex items-center gap-1.5 transition-all duration-500 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
-                  style={{
-                    marginTop: "14px",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "8px",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.2em",
-                    color: "hsl(var(--primary))",
-                  }}
-                >
-                  <span>{isAr ? "اكتشف" : "Explore"}</span>
-                  <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
-                </div>
+                  {t("solutions.title")}
+                </h2>
               </div>
-            </Link>
-          ))}
+              <Link
+                to="/solutions"
+                className="group hidden md:inline-flex items-center gap-2 font-mono uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+                style={{ fontSize: "9px", letterSpacing: "0.2em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
+              >
+                <span>{isAr ? "عرض الكل" : "View All"}</span>
+                <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+              </Link>
+            </div>
+          </Reveal>
+
+          {/* CARDS GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center items-stretch">
+            {solutions.map((sol, i) => (
+              <Reveal key={sol.num} delay={i * 80}>
+                <Link
+                  to={sol.href}
+                  className="group relative flex flex-col items-center justify-between border border-border overflow-hidden p-6 md:p-8 transition-all duration-300 hover:border-primary/40 h-full"
+                  style={{ minHeight: "320px" }}
+                >
+                  {/* Background image */}
+                  <img
+                    src={sol.image}
+                    alt={sol.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  {/* Dark overlay */}
+                  <div
+                    className="absolute inset-0 transition-all duration-500"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.25) 100%)" }}
+                  />
+                  <div className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100" style={{ background: "rgba(0,0,0,0.15)" }} />
+
+                  {/* Number */}
+                  <span
+                    className="relative z-10 font-mono font-black text-white/30 group-hover:text-white/50 transition-colors duration-300 block"
+                    style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
+                  >
+                    {sol.num}
+                  </span>
+
+                  {/* Text */}
+                  <div className="relative z-10 mt-6">
+                    <h3 className="uppercase font-extrabold tracking-tight text-white group-hover:text-primary transition-colors duration-300 text-lg">
+                      {sol.title}
+                    </h3>
+                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 text-sm transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden">
+                      {sol.desc}
+                    </p>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="font-mono uppercase text-[9px] tracking-widest">
+                      {isAr ? "اكتشف" : "Explore"}
+                    </span>
+                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
