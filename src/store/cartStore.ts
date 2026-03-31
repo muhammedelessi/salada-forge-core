@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, Product, ProductVariant, Coupon } from '@/types';
+import { CartItem, Product, ProductVariant } from '@/types';
+import { supabase } from '@/integrations/supabase/client';
 
 interface CartState {
   items: CartItem[];
@@ -10,7 +11,7 @@ interface CartState {
   removeItem: (productId: string, variantId?: string) => void;
   updateQuantity: (productId: string, quantity: number, variantId?: string) => void;
   clearCart: () => void;
-  applyCoupon: (code: string) => boolean;
+  applyCoupon: (code: string) => Promise<boolean>;
   removeCoupon: () => void;
   getSubtotal: () => number;
   getItemCount: () => number;
@@ -18,12 +19,6 @@ interface CartState {
   getShipping: () => number;
   getTax: () => number;
 }
-
-const coupons: Coupon[] = [
-  { id: '1', code: 'INDUSTRY20', type: 'percentage', value: 20, minOrderAmount: 1000, active: true, usedCount: 0 },
-  { id: '2', code: 'FIRST100', type: 'fixed', value: 100, active: true, usedCount: 0 },
-  { id: '3', code: 'BULK500', type: 'fixed', value: 500, minOrderAmount: 5000, active: true, usedCount: 0 },
-];
 
 export const useCartStore = create<CartState>()(
   persist(
