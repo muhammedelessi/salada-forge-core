@@ -399,22 +399,22 @@ export default function HomePage() {
         dir={isAr ? "rtl" : "ltr"}
         className="bg-background border-b border-border"
       >
-        <div className="industrial-container py-16 md:py-24">
+        <div className="industrial-container py-12 md:py-16">
           {/* HEADER */}
           <Reveal>
-            <div className="flex items-end justify-between pb-8 mb-10 border-b border-border">
+            <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
                   className="font-mono uppercase block text-primary"
-                  style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+                  style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
                 >
                   — {t("solutions.label")}
                 </span>
                 <h2
-                  className="section-heading font-black uppercase mt-2 text-foreground"
+                  className="uppercase font-black mt-2 text-foreground"
                   style={{
-                    fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                    letterSpacing: "-0.03em",
+                    fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                    letterSpacing: "-0.025em",
                     lineHeight: 1,
                   }}
                 >
@@ -424,7 +424,7 @@ export default function HomePage() {
               <Link
                 to="/solutions"
                 className="group hidden md:inline-flex items-center gap-2 font-mono uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-                style={{ fontSize: "9px", letterSpacing: "0.2em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
+                style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
               >
                 <span>{isAr ? "عرض الكل" : "View All"}</span>
                 <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
