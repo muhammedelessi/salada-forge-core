@@ -543,10 +543,10 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {ind.name}
                     </h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3 text-sm">
+                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize: "0.75rem" }}>
                       {ind.desc}
                     </p>
                   </div>
