@@ -620,23 +620,46 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           WHY SALADA
       ════════════════════════════════════ */}
-      <section className="bg-paper-0 py-20 md:py-32 border-b border-warm">
-        <div className="container-xl">
-          <Reveal className={`mb-12 ${isAr ? "text-right" : "text-center"}`}>
+      <section className="py-20 md:py-32 border-b border-border bg-background">
+        <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
+          <Reveal className="mb-12 text-center">
             <span
-              className={`section-label section-label-center mb-4 inline-flex ${isAr ? "flex-row-reverse justify-end" : ""}`}
+              className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
+              style={{ fontSize: "8px", letterSpacing: "0.28em" }}
             >
+              <span className="w-4 h-px bg-primary" />
               {t("why.label")}
             </span>
-            <h2 className="section-heading text-ink-100">{t("why.title")}</h2>
+            <h2
+              className="section-heading font-black uppercase mt-2 text-foreground"
+              style={{
+                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                letterSpacing: "-0.03em",
+                lineHeight: 1,
+              }}
+            >
+              {t("why.title")}
+            </h2>
           </Reveal>
-          <div className="why-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center items-stretch">
             {whyItems.map((w, i) => (
-              <Reveal key={w.title} delay={i * 60}>
-                <div className={`why-cell ${isAr ? "text-right" : ""}`}>
-                  <p className="why-num">{w.num}</p>
-                  <div className={`why-bar ${isAr ? "mr-0 ml-auto" : ""}`} />
-                  <h3 className="why-title">{w.title}</h3>
+              <Reveal key={w.title} delay={i * 80}>
+                <div className="group relative flex flex-col items-center justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full">
+                  {/* Number */}
+                  <span
+                    className="font-mono font-black text-primary/30 group-hover:text-primary/50 transition-colors duration-300 block"
+                    style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
+                  >
+                    {w.num}
+                  </span>
+
+                  {/* Title */}
+                  <div className="mt-6">
+                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                      {w.title}
+                    </h3>
+                  </div>
                 </div>
               </Reveal>
             ))}
