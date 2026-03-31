@@ -312,7 +312,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
-                      fontWeight: 700,
+                      fontWeight: 900,
                       color: "#c49614",
                       lineHeight: 1,
                       marginBottom: "4px",
@@ -326,7 +326,7 @@ export default function HomePage() {
                       fontSize: "0.5rem",
                       fontWeight: 500,
                       textTransform: "uppercase",
-                      letterSpacing: "0.2em",
+                      letterSpacing: "0.22em",
                       color: "rgba(255, 255, 255, 0.4)",
                     }}
                   >
