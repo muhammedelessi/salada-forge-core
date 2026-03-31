@@ -248,7 +248,7 @@ export default function HomePage() {
             className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}
             style={{ marginBottom: "1.5rem" }}
           >
-            <Link to="/solutions" className="btn-gold" style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}>
+            <Link to="/solutions" className="btn-gold" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
               <span>{t("hero.cta")}</span>
               <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
             </Link>
@@ -262,10 +262,10 @@ export default function HomePage() {
                 border: "1px solid rgba(255,255,255,0.3)",
                 color: "#ffffff",
                 fontFamily: "var(--font-mono)",
-                fontSize: "0.6rem",
+                fontSize: "0.6875rem",
                 fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
+                textTransform: "uppercase" as const,
+                letterSpacing: "0.18em",
                 transition: "all 0.3s ease",
                 backdropFilter: "blur(6px)",
               }}
@@ -312,7 +312,7 @@ export default function HomePage() {
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
-                      fontWeight: 700,
+                      fontWeight: 900,
                       color: "#c49614",
                       lineHeight: 1,
                       marginBottom: "4px",
@@ -326,7 +326,7 @@ export default function HomePage() {
                       fontSize: "0.5rem",
                       fontWeight: 500,
                       textTransform: "uppercase",
-                      letterSpacing: "0.2em",
+                      letterSpacing: "0.22em",
                       color: "rgba(255, 255, 255, 0.4)",
                     }}
                   >
@@ -361,19 +361,27 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           VISION 2030
       ════════════════════════════════════ */}
-      <section className="bg-paper-1 py-20 md:py-32 border-b border-warm">
+      <section className="bg-paper-1 py-12 md:py-16 border-b border-warm">
         <div className="container-xl">
           <div className="grid md:grid-cols-2 gap-14 md:gap-24 items-center">
             <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
-              <span className={`section-label mb-5 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
+              <span
+                className={`font-mono uppercase block text-primary mb-5 ${isAr ? "flex-row-reverse" : ""}`}
+                style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
+              >
                 {t("vision.label")}
               </span>
-              <h2 className="section-heading text-ink-100 mb-5">{t("vision.title")}</h2>
-              <p className="text-sm text-ink-40 leading-relaxed max-w-md mb-7">{t("vision.description")}</p>
+              <h2
+                className="uppercase font-black text-foreground mb-5"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1 }}
+              >
+                {t("vision.title")}
+              </h2>
+              <p className="max-w-md mb-7 text-muted-foreground" style={{ fontSize: "0.8125rem", lineHeight: 1.7 }}>{t("vision.description")}</p>
               <Link
                 to="/why-salada"
                 className="btn-gold inline-flex"
-                style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}
+                style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}
               >
                 <span>{isAr ? "تعرف على صلادة" : "About Salada"}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -391,22 +399,22 @@ export default function HomePage() {
         dir={isAr ? "rtl" : "ltr"}
         className="bg-background border-b border-border"
       >
-        <div className="industrial-container py-16 md:py-24">
+        <div className="industrial-container py-12 md:py-16">
           {/* HEADER */}
           <Reveal>
-            <div className="flex items-end justify-between pb-8 mb-10 border-b border-border">
+            <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
                   className="font-mono uppercase block text-primary"
-                  style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+                  style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
                 >
                   — {t("solutions.label")}
                 </span>
                 <h2
-                  className="section-heading font-black uppercase mt-2 text-foreground"
+                  className="uppercase font-black mt-2 text-foreground"
                   style={{
-                    fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                    letterSpacing: "-0.03em",
+                    fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                    letterSpacing: "-0.025em",
                     lineHeight: 1,
                   }}
                 >
@@ -416,7 +424,7 @@ export default function HomePage() {
               <Link
                 to="/solutions"
                 className="group hidden md:inline-flex items-center gap-2 font-mono uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-                style={{ fontSize: "9px", letterSpacing: "0.2em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
+                style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
               >
                 <span>{isAr ? "عرض الكل" : "View All"}</span>
                 <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
@@ -457,17 +465,17 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="relative z-10 mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-white group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-white group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {sol.title}
                     </h3>
-                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 text-sm transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden">
+                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden" style={{ fontSize: "0.75rem" }}>
                       {sol.desc}
                     </p>
                   </div>
 
                   {/* Arrow */}
                   <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="font-mono uppercase text-[9px] tracking-widest">
+                     <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}>
                       {isAr ? "اكتشف" : "Explore"}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -486,22 +494,22 @@ export default function HomePage() {
         dir={isAr ? "rtl" : "ltr"}
         className="bg-background border-b border-border"
       >
-        <div className="industrial-container py-16 md:py-24">
+        <div className="industrial-container py-12 md:py-16">
           {/* HEADER */}
           <Reveal>
-            <div className="flex items-end justify-between pb-8 mb-10 border-b border-border">
+            <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
                   className="font-mono uppercase block text-primary"
-                  style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+                  style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
                 >
                   — {t("industries.label")}
                 </span>
                 <h2
-                  className="section-heading font-black uppercase mt-2 text-foreground"
+                  className="uppercase font-black mt-2 text-foreground"
                   style={{
-                    fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                    letterSpacing: "-0.03em",
+                    fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                    letterSpacing: "-0.025em",
                     lineHeight: 1,
                   }}
                 >
@@ -510,7 +518,7 @@ export default function HomePage() {
               </div>
               <span
                 className="font-mono uppercase text-muted-foreground"
-                style={{ fontSize: "8px", letterSpacing: "0.18em" }}
+                style={{ fontSize: "0.625rem", letterSpacing: "0.18em" }}
               >
                 {String(industries.length).padStart(2, "0")} sectors
               </span>
@@ -535,17 +543,17 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {ind.name}
                     </h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3 text-sm">
+                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize: "0.75rem" }}>
                       {ind.desc}
                     </p>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="font-mono uppercase text-[9px] tracking-widest">
+                    <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}>
                       {t("solutions.learnMore")}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -560,21 +568,21 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           WHY SALADA
       ════════════════════════════════════ */}
-      <section className="py-20 md:py-32 border-b border-border bg-background">
+      <section className="py-12 md:py-16 border-b border-border bg-background">
         <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-          <Reveal className="mb-12 text-center">
+          <Reveal className="mb-8 md:mb-10 text-center">
             <span
               className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
-              style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+              style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
             >
               <span className="w-4 h-px bg-primary" />
               {t("why.label")}
             </span>
             <h2
-              className="section-heading font-black uppercase mt-2 text-foreground"
+              className="uppercase font-black mt-2 text-foreground"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                letterSpacing: "-0.03em",
+                fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                letterSpacing: "-0.025em",
                 lineHeight: 1,
               }}
             >
@@ -596,7 +604,7 @@ export default function HomePage() {
 
                   {/* Title */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {w.title}
                     </h3>
                   </div>
@@ -610,7 +618,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           CTA
       ════════════════════════════════════ */}
-      <section className="relative py-28 md:py-40 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -628,16 +636,19 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center">
             <Reveal>
               <span
-                className="section-label section-label-center mb-6 inline-flex justify-center"
-                style={{ color: "hsl(var(--gold))" }}
+                className="font-mono uppercase mb-6 inline-flex justify-center"
+                style={{ fontSize: "0.625rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
-              <h2 className="section-heading mb-8" style={{ color: "#ffffff" }}>
+              <h2
+                className="uppercase font-black mb-8"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1, color: "#ffffff" }}
+              >
                 {t("cta.title")}
               </h2>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-gold" style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}>
+                <Link to="/contact" className="btn-gold" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
@@ -651,10 +662,10 @@ export default function HomePage() {
                     border: "1px solid rgba(255,255,255,0.25)",
                     color: "#ffffff",
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.6rem",
+                    fontSize: "0.6875rem",
                     fontWeight: 700,
                     textTransform: "uppercase",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.18em",
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
