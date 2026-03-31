@@ -72,18 +72,17 @@ export const useCartStore = create<CartState>()(
         set({ items: [], couponCode: null, couponDiscount: 0 });
       },
 
-      applyCoupon: (code) => {
-        const coupon = coupons.find((c) => c.code.toUpperCase() === code.toUpperCase() && c.active);
-        if (!coupon) return false;
-
+      applyCoupon: async (code) => {
         const subtotal = get().getSubtotal();
-        if (coupon.minOrderAmount && subtotal < coupon.minOrderAmount) return false;
+        const { data, error } = await supabase.rpc('validate_coupon', {
+          coupon_code: code,
+          order_subtotal: subtotal,
+        });
 
-        const discount = coupon.type === 'percentage' 
-          ? (subtotal * coupon.value) / 100 
-          : coupon.value;
+        if (error || !data || !(data as any).valid) return false;
 
-        set({ couponCode: coupon.code, couponDiscount: discount });
+        const result = data as any;
+        set({ couponCode: result.code, couponDiscount: Number(result.discount) });
         return true;
       },
 
