@@ -572,8 +572,8 @@ export default function HomePage() {
         <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
           <Reveal className="mb-8 md:mb-10">
             <span
-              className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
-              style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
+              className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""} text-base`}
+              style={{ letterSpacing: "0.28em" }}
             >
               <span className="w-4 h-px bg-primary" />
               {t("why.label")}
