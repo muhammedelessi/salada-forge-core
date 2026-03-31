@@ -500,8 +500,8 @@ export default function HomePage() {
             <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
-                  className="font-mono uppercase block text-primary"
-                  style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
+                  className="font-mono uppercase block text-primary text-base"
+                  style={{ letterSpacing: "0.28em" }}
                 >
                   — {t("industries.label")}
                 </span>
