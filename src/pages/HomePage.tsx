@@ -568,21 +568,21 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           WHY SALADA
       ════════════════════════════════════ */}
-      <section className="py-20 md:py-32 border-b border-border bg-background">
+      <section className="py-12 md:py-16 border-b border-border bg-background">
         <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-          <Reveal className="mb-12 text-center">
+          <Reveal className="mb-8 md:mb-10 text-center">
             <span
               className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
-              style={{ fontSize: "8px", letterSpacing: "0.28em" }}
+              style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
             >
               <span className="w-4 h-px bg-primary" />
               {t("why.label")}
             </span>
             <h2
-              className="section-heading font-black uppercase mt-2 text-foreground"
+              className="uppercase font-black mt-2 text-foreground"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                letterSpacing: "-0.03em",
+                fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                letterSpacing: "-0.025em",
                 lineHeight: 1,
               }}
             >
@@ -604,7 +604,7 @@ export default function HomePage() {
 
                   {/* Title */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {w.title}
                     </h3>
                   </div>
