@@ -595,7 +595,7 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-extrabold text-sm tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
+                    <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
                       {ind.name}
                     </h3>
                     <p className="text-xs text-muted-foreground mt-2 leading-relaxed line-clamp-3">
