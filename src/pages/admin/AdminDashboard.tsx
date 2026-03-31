@@ -248,6 +248,38 @@ function PlaceholderPage({ title }: { title: string }) {
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t, isRTL } = useLanguageStore();
+  const navigate = useNavigate();
+
+  const { data: isAdmin, isLoading: authLoading } = useQuery({
+    queryKey: ['admin-auth-check'],
+    queryFn: async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) return false;
+      const { data } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', session.user.id)
+        .eq('role', 'admin')
+        .maybeSingle();
+      return !!data;
+    },
+  });
+
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      navigate('/', { replace: true });
+    }
+  }, [authLoading, isAdmin, navigate]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!isAdmin) return null;
 
   return (
     <div className="min-h-screen bg-background">

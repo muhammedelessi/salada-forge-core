@@ -127,16 +127,12 @@ export default function OrdersPage() {
     setGuestSearching(true);
     try {
       const { data, error } = await supabase
-        .from('orders')
-        .select('*')
-        .eq('order_number', orderNumber)
-        .eq('guest_email', email)
-        .maybeSingle();
+        .rpc('get_guest_order', { order_num: orderNumber, email: email });
 
       if (error) throw error;
       
-      if (data) {
-        setOrders([data as unknown as Order]);
+      if (data && data.length > 0) {
+        setOrders([data[0] as unknown as Order]);
       } else {
         toast.error(language === 'ar' ? 'الطلب غير موجود' : 'Order not found');
         setOrders([]);
