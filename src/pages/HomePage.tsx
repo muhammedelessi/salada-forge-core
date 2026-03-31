@@ -126,11 +126,11 @@ export default function HomePage() {
   ];
 
   const industries = [
-    { name: t("industries.logistics"), href: "/industries#logistics" },
-    { name: t("industries.construction"), href: "/industries#construction" },
-    { name: t("industries.government"), href: "/industries#government" },
-    { name: t("industries.industrial"), href: "/industries#industrial" },
-    { name: t("industries.storage"), href: "/industries#storage" },
+    { name: t("industries.logistics"), desc: t("industries.logisticsDesc"), href: "/industries#logistics" },
+    { name: t("industries.construction"), desc: t("industries.constructionDesc"), href: "/industries#construction" },
+    { name: t("industries.government"), desc: t("industries.governmentDesc"), href: "/industries#government" },
+    { name: t("industries.industrial"), desc: t("industries.industrialDesc"), href: "/industries#industrial" },
+    { name: t("industries.storage"), desc: t("industries.storageDesc"), href: "/industries#storage" },
   ];
 
   const whyItems = [
