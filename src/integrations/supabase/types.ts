@@ -402,6 +402,35 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_guest_order: {
+        Args: { email: string; order_num: string }
+        Returns: {
+          billing_address: Json | null
+          created_at: string
+          discount: number
+          guest_email: string | null
+          id: string
+          items: Json
+          notes: string | null
+          order_number: string
+          payment_method: string
+          shipping: number
+          shipping_address: Json
+          shipping_updates: Json | null
+          status: string
+          subtotal: number
+          tax: number
+          total: number
+          updated_at: string
+          user_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "orders"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
