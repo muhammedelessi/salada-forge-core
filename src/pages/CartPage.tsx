@@ -186,10 +186,11 @@ export default function CartPage() {
                     </div>
                   ) : (
                     <form
-                      onSubmit={(e) => {
+                      onSubmit={async (e) => {
                         e.preventDefault();
                         const input = e.currentTarget.coupon as HTMLInputElement;
-                        if (applyCoupon(input.value)) {
+                        const success = await applyCoupon(input.value);
+                        if (success) {
                           input.value = '';
                         }
                       }}

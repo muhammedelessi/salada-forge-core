@@ -438,6 +438,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      validate_coupon: {
+        Args: { coupon_code: string; order_subtotal: number }
+        Returns: Json
+      }
     }
     Enums: {
       app_role: "admin" | "user"
