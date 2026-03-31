@@ -465,10 +465,10 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="relative z-10 mt-6">
-                    <h3 className="uppercase font-extrabold tracking-tight text-white group-hover:text-primary transition-colors duration-300 text-lg">
+                    <h3 className="uppercase font-[800] text-white group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
                       {sol.title}
                     </h3>
-                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 text-sm transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden">
+                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden" style={{ fontSize: "0.75rem" }}>
                       {sol.desc}
                     </p>
                   </div>
