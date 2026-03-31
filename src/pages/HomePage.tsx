@@ -553,7 +553,7 @@ export default function HomePage() {
 
                   {/* Arrow */}
                   <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="font-mono uppercase text-[9px] tracking-widest">
+                    <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}>
                       {t("solutions.learnMore")}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
