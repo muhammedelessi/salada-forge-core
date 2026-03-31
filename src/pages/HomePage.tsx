@@ -604,7 +604,7 @@ export default function HomePage() {
                   </div>
 
                   {/* Arrow */}
-                  <div className="flex items-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="font-mono uppercase text-[9px] tracking-widest">
                       {t("solutions.learnMore")}
                     </span>
