@@ -542,25 +542,117 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           INDUSTRIES
       ════════════════════════════════════ */}
-      <section className="bg-paper-1 py-20 md:py-32 border-b border-warm">
-        <div className="container-xl">
-          <Reveal className={`mb-12 ${isAr ? "text-right" : ""}`}>
-            <span className={`section-label mb-4 inline-flex ${isAr ? "flex-row-reverse" : ""}`}>
-              {t("industries.label")}
+      <section
+        dir={isAr ? "rtl" : "ltr"}
+        style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}
+      >
+        <div className="industrial-container">
+          {/* HEADER */}
+          <div
+            className="flex items-end justify-between"
+            style={{ padding: "36px 0 24px", borderBottom: "1px solid hsl(var(--border))" }}
+          >
+            <div>
+              <span
+                className="font-mono uppercase block"
+                style={{ fontSize: "8px", letterSpacing: "0.28em", color: "hsl(var(--primary))" }}
+              >
+                — {t("industries.label")}
+              </span>
+              <h2
+                className="font-black uppercase"
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                  color: "hsl(var(--foreground))",
+                  marginTop: "8px",
+                }}
+              >
+                {t("industries.title")}
+              </h2>
+            </div>
+            <span
+              className="font-mono uppercase"
+              style={{ fontSize: "8px", letterSpacing: "0.18em", color: "hsl(var(--muted-foreground))" }}
+            >
+              05 sectors
             </span>
-            <h2 className="section-heading text-ink-100">{t("industries.title")}</h2>
-          </Reveal>
-          <div className="border-t border-warm">
+          </div>
+
+          {/* ROWS */}
+          <div>
             {industries.map((ind, i) => (
-              <Reveal key={ind.name} delay={i * 45}>
-                <Link to={ind.href} dir={isAr ? "rtl" : "ltr"} className="industry-row">
-                  <div className={`flex items-center gap-5 ${isAr ? "flex-row-reverse" : ""}`}>
-                    <span className="industry-num">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="industry-name">{ind.name}</span>
-                  </div>
-                  <ArrowRight className={`industry-arrow w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
-              </Reveal>
+              <Link
+                key={ind.href}
+                to={ind.href}
+                className="group flex items-center"
+                style={{
+                  borderBottom: "1px solid hsl(var(--border))",
+                  background: "transparent",
+                  transition: "background 0.2s ease",
+                  padding: 0,
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--primary) / 0.08)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              >
+                {/* BIG NUMBER */}
+                <span
+                  className="font-mono font-black flex-shrink-0 group-hover:opacity-100"
+                  style={{
+                    fontSize: "clamp(1.5rem, 4vw, 2.75rem)",
+                    color: "hsl(var(--primary))",
+                    opacity: 0.15,
+                    width: "80px",
+                    padding: "16px 0",
+                    lineHeight: 1,
+                    transition: "opacity 0.25s ease",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* VERTICAL DIVIDER */}
+                <div
+                  className="flex-shrink-0"
+                  style={{ width: "1px", height: "40px", background: "hsl(var(--border))" }}
+                />
+
+                {/* TEXT CONTENT */}
+                <div className="flex-1" style={{ padding: "16px 24px" }}>
+                  <span
+                    className="uppercase font-extrabold block group-hover:text-primary"
+                    style={{
+                      fontSize: "13px",
+                      letterSpacing: "-0.01em",
+                      color: "hsl(var(--foreground))",
+                      transition: "color 0.25s",
+                    }}
+                  >
+                    {ind.name}
+                  </span>
+                  <span
+                    className="hidden sm:block"
+                    style={{ fontSize: "9px", color: "hsl(var(--muted-foreground))", marginTop: "3px" }}
+                  >
+                    {ind.desc}
+                  </span>
+                </div>
+
+                {/* ARROW */}
+                <ArrowRight
+                  className={`flex-shrink-0 group-hover:opacity-80 ${isAr ? "rotate-180" : ""}`}
+                  style={{
+                    width: "14px",
+                    height: "14px",
+                    color: "hsl(var(--primary))",
+                    opacity: 0.3,
+                    marginInlineEnd: "4px",
+                    transition: "opacity 0.25s ease",
+                  }}
+                />
+              </Link>
             ))}
           </div>
         </div>
