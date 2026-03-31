@@ -598,7 +598,7 @@ export default function HomePage() {
                     <h3 className="uppercase font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
                       {ind.name}
                     </h3>
-                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed line-clamp-3">
+                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3 text-sm">
                       {ind.desc}
                     </p>
                   </div>
