@@ -618,7 +618,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           CTA
       ════════════════════════════════════ */}
-      <section className="relative py-28 md:py-40 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -636,16 +636,19 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center">
             <Reveal>
               <span
-                className="section-label section-label-center mb-6 inline-flex justify-center"
-                style={{ color: "hsl(var(--gold))" }}
+                className="font-mono uppercase mb-6 inline-flex justify-center"
+                style={{ fontSize: "0.625rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
-              <h2 className="section-heading mb-8" style={{ color: "#ffffff" }}>
+              <h2
+                className="uppercase font-black mb-8"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1, color: "#ffffff" }}
+              >
                 {t("cta.title")}
               </h2>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-gold" style={{ fontSize: "0.6rem", padding: "0.75rem 1.75rem" }}>
+                <Link to="/contact" className="btn-gold" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
@@ -659,10 +662,10 @@ export default function HomePage() {
                     border: "1px solid rgba(255,255,255,0.25)",
                     color: "#ffffff",
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.6rem",
+                    fontSize: "0.6875rem",
                     fontWeight: 700,
                     textTransform: "uppercase",
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.18em",
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
