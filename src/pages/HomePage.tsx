@@ -578,12 +578,12 @@ export default function HomePage() {
           </Reveal>
 
           {/* CARDS GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center items-stretch">
             {industries.map((ind, i) => (
               <Reveal key={ind.href} delay={i * 80}>
                 <Link
                   to={ind.href}
-                  className="group relative flex flex-col justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full"
+                  className="group relative flex flex-col items-center justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] h-full"
                 >
                   {/* Number */}
                   <span
@@ -604,7 +604,7 @@ export default function HomePage() {
                   </div>
 
                   {/* Arrow */}
-                  <div className="flex items-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="font-mono uppercase text-[9px] tracking-widest">
                       {t("solutions.learnMore")}
                     </span>
