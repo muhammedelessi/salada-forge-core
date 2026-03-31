@@ -262,10 +262,10 @@ export default function HomePage() {
                 border: "1px solid rgba(255,255,255,0.3)",
                 color: "#ffffff",
                 fontFamily: "var(--font-mono)",
-                fontSize: "0.6rem",
+                fontSize: "0.6875rem",
                 fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
+                textTransform: "uppercase" as const,
+                letterSpacing: "0.18em",
                 transition: "all 0.3s ease",
                 backdropFilter: "blur(6px)",
               }}
