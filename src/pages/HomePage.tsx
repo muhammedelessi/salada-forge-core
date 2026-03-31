@@ -570,7 +570,7 @@ export default function HomePage() {
       ════════════════════════════════════ */}
       <section className="py-12 md:py-16 border-b border-border bg-background">
         <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-          <Reveal className="mb-8 md:mb-10 text-center">
+          <Reveal className="mb-8 md:mb-10">
             <span
               className={`font-mono uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
               style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
