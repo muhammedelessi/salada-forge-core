@@ -366,8 +366,8 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-14 md:gap-24 items-center">
             <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
               <span
-                className={`font-mono uppercase block text-primary mb-5 ${isAr ? "flex-row-reverse" : ""}`}
-                style={{ fontSize: "0.625rem", letterSpacing: "0.28em" }}
+                className={`font-mono uppercase block text-primary mb-5 ${isAr ? "flex-row-reverse" : ""} text-base`}
+                style={{ letterSpacing: "0.28em" }}
               >
                 {t("vision.label")}
               </span>
