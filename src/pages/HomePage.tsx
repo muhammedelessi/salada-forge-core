@@ -587,7 +587,7 @@ export default function HomePage() {
                 >
                   {/* Number */}
                   <span
-                    className="font-mono font-black text-primary/15 group-hover:text-primary/40 transition-colors duration-300 block"
+                    className="font-mono font-black text-primary/30 group-hover:text-primary/50 transition-colors duration-300 block"
                     style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
                   >
                     {String(i + 1).padStart(2, "0")}
