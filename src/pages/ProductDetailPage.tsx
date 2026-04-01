@@ -140,7 +140,7 @@ export default function ProductDetailPage() {
                           : 'border-border hover:border-muted-foreground'
                       )}
                     >
-                      <img src={image} alt={`${product.title} - view ${index + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                      <img src={image} alt={`${product.title} - view ${index + 1}`} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover max-w-full" />
                     </button>
                   ))}
                 </div>

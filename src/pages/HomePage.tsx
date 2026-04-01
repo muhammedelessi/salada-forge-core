@@ -644,7 +644,10 @@ export default function HomePage() {
             src={heroPort}
             alt="Industrial port"
             loading="lazy"
-            className="w-full h-full object-cover"
+            decoding="async"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover max-w-full"
             style={{ filter: "grayscale(35%) brightness(0.38)" }}
           />
           <div
