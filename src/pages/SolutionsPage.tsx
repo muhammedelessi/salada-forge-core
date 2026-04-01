@@ -211,7 +211,7 @@ export default function SolutionsPage() {
                     <solution.icon className="w-16 h-16" style={{ color: "hsl(var(--primary)/0.3)" }} />
                   </div>
                 )}
-                <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.32)" }} />
+                
                 {/* watermark */}
                 <div
                   className="absolute font-mono font-black leading-none pointer-events-none select-none"
