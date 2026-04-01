@@ -210,19 +210,18 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INDUSTRIES — number ticker list
       ════════════════════════════════ */}
-      <section className="bg-background border-b border-border">
+      <section className="bg-background border-b border-border" dir={isAr ? "rtl" : "ltr"}>
         <div className="industrial-container">
           {industries.map((ind, i) => (
             <Reveal key={ind.id} delay={i * 60}>
               <div
                 id={ind.id}
-                dir={isAr ? "rtl" : "ltr"}
                 className="group border-b border-border last:border-b-0 transition-all duration-300 hover:bg-primary/5"
               >
-                <div className={`flex items-stretch gap-0 ${isAr ? "flex-row-reverse" : ""}`}>
+                <div className="flex items-stretch gap-0">
                   {/* Number */}
                   <div
-                    className={`flex items-center px-5 py-6 shrink-0 border-border ${isAr ? "border-l" : "border-r"}`}
+                    className="flex items-center px-5 py-6 shrink-0 border-border ltr:border-r rtl:border-l"
                     style={{ width: "72px" }}
                   >
                     <span
@@ -248,7 +247,7 @@ export default function IndustriesPage() {
                   </div>
 
                   {/* Content */}
-                  <div className={`flex flex-1 items-center gap-5 py-6 px-6 md:px-8 ${isAr ? "flex-row-reverse" : ""}`}>
+                  <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
                     {/* Image — small square */}
                     <div
                       className="relative overflow-hidden shrink-0 hidden sm:block"
@@ -268,7 +267,7 @@ export default function IndustriesPage() {
                     </div>
 
                     {/* Text */}
-                    <div className={`flex-1 ${isAr ? "text-right" : ""}`}>
+                    <div className="flex-1">
                       <h2
                         className="font-black uppercase tracking-tight leading-tight mb-1 group-hover:text-primary transition-colors duration-300"
                         style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.2rem)", color: "hsl(var(--foreground))" }}
@@ -282,7 +281,7 @@ export default function IndustriesPage() {
 
                     {/* Arrow */}
                     <ArrowRight
-                      className={`w-4 h-4 shrink-0 opacity-25 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1 group-hover:translate-x-0" : ""}`}
+                      className="w-4 h-4 shrink-0 opacity-25 group-hover:opacity-100 transition-all duration-300 ltr:group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
                       style={{ color: "hsl(var(--primary))" }}
                     />
                   </div>
