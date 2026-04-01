@@ -66,7 +66,7 @@ export function Footer() {
               <img 
                 src={saladaLogo} 
                 alt="Salada Metal Industries logo" 
-                className="h-20 md:h-28 w-auto object-contain"
+                className="h-10 md:h-14 w-auto object-contain"
               />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
