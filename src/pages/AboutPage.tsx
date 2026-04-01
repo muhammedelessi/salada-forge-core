@@ -229,7 +229,7 @@ export default function AboutPage() {
                   {/* number */}
                   <div
                     className="font-mono font-black mb-2 leading-none"
-                    style={{ fontSize: "1.5rem", color: "hsl(var(--primary))", opacity: 0.5 }}
+                    style={{ fontSize: "1.5rem", color: "hsl(var(--primary))" }}
                   >
                     {p.num}
                   </div>
