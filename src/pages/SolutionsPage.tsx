@@ -13,10 +13,12 @@ function Reveal({
   children,
   delay = 0,
   className = "",
+  style,
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -40,6 +42,7 @@ function Reveal({
       ref={ref}
       className={className}
       style={{
+        ...style,
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(20px)",
         transition: `opacity .8s cubic-bezier(.16,1,.3,1) ${delay}ms, transform .8s cubic-bezier(.16,1,.3,1) ${delay}ms`,
@@ -211,7 +214,7 @@ export default function SolutionsPage() {
                     <solution.icon className="w-16 h-16" style={{ color: "hsl(var(--primary)/0.3)" }} />
                   </div>
                 )}
-                <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.32)" }} />
+                
                 {/* watermark */}
                 <div
                   className="absolute font-mono font-black leading-none pointer-events-none select-none"
