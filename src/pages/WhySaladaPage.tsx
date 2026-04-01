@@ -346,7 +346,10 @@ export default function WhySaladaPage() {
             src={heroPort}
             alt="Industrial operations"
             loading="lazy"
-            className="w-full h-full object-cover"
+            decoding="async"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover max-w-full"
             style={{ filter: "grayscale(25%) brightness(0.35)" }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />

@@ -156,8 +156,11 @@ export default function SolutionsPage() {
                           <img
                             src={product.images[0]}
                             alt={product.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            width={300}
+                            height={300}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 max-w-full"
                             loading="lazy"
+                            decoding="async"
                           />
                         )}
                       </div>

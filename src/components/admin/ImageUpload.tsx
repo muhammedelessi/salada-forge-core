@@ -147,7 +147,10 @@ export function ImageUpload({ onUpload, existingImages = [], maxImages = 5 }: Im
                 src={url}
                 alt={`Product image ${index + 1}`}
                 loading="lazy"
-                className="w-full h-full object-cover"
+                decoding="async"
+                width={200}
+                height={200}
+                className="w-full h-full object-cover max-w-full"
               />
               <button
                 onClick={() => removeImage(index)}
