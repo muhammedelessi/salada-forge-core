@@ -85,6 +85,62 @@ function Label({ text, isAr, center = false }: { text: string; isAr: boolean; ce
   );
 }
 
+/* ── Shared card component ── */
+function StrengthCard({
+  item,
+  isAr,
+}: {
+  item: { num: string; title: string; desc: string; image: string };
+  isAr: boolean;
+}) {
+  return (
+    <div
+      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : ""}`}
+    >
+      {/* Square image */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
+        <img
+          src={item.image}
+          alt={item.title}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          style={{ filter: "grayscale(12%) brightness(0.9)" }}
+        />
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ background: "hsl(var(--primary)/0.08)" }}
+        />
+        <span
+          className="absolute top-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
+          style={{
+            color: "hsl(var(--primary))",
+            left: isAr ? "auto" : "0.875rem",
+            right: isAr ? "0.875rem" : "auto",
+          }}
+        >
+          {item.num}
+        </span>
+      </div>
+      {/* Content */}
+      <div className="p-5 border-t border-border">
+        <div
+          className={`h-px mb-3 ${isAr ? "ml-auto mr-0" : ""}`}
+          style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)" }}
+        />
+        <h3
+          className="font-black uppercase tracking-tight leading-snug mb-2 group-hover:text-primary transition-colors duration-300"
+          style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
+        >
+          {item.title}
+        </h3>
+        <p className="leading-relaxed" style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}>
+          {item.desc}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function WhySaladaPage() {
   const seo = usePageSEO("/why-salada");
   const { t, isRTL } = useLanguageStore();
@@ -187,111 +243,16 @@ export default function WhySaladaPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             {strengths.slice(0, 3).map((item, i) => (
               <Reveal key={item.num} delay={i * 70}>
-                <div
-                  className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : ""}`}
-                >
-                  {/* Square image */}
-                  <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      style={{ filter: "grayscale(12%) brightness(0.9)" }}
-                    />
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: "hsl(var(--primary)/0.08)" }}
-                    />
-                    {/* number badge */}
-                    <span
-                      className="absolute top-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
-                      style={{
-                        color: "hsl(var(--primary))",
-                        left: isAr ? "auto" : "0.875rem",
-                        right: isAr ? "0.875rem" : "auto",
-                      }}
-                    >
-                      {item.num}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5 border-t border-border">
-                    <div
-                      className={`h-px mb-3 transition-all duration-400 ${isAr ? "ml-auto mr-0" : ""}`}
-                      style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)" }}
-                    />
-                    <h3
-                      className="font-black uppercase tracking-tight leading-snug mb-2 group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      className="leading-relaxed"
-                      style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
-                    >
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+                <StrengthCard item={item} isAr={isAr} />
               </Reveal>
             ))}
           </div>
 
-          {/* Row 2 — 2 cards centered */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          {/* Row 2 — 2 cards centered, same width as row 1 cards */}
+          <div className="flex justify-center gap-4">
             {strengths.slice(3).map((item, i) => (
-              <Reveal key={item.num} delay={i * 70 + 210}>
-                <div
-                  className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : ""}`}
-                >
-                  {/* Square image */}
-                  <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      style={{ filter: "grayscale(12%) brightness(0.9)" }}
-                    />
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: "hsl(var(--primary)/0.08)" }}
-                    />
-                    <span
-                      className="absolute top-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
-                      style={{
-                        color: "hsl(var(--primary))",
-                        left: isAr ? "auto" : "0.875rem",
-                        right: isAr ? "0.875rem" : "auto",
-                      }}
-                    >
-                      {item.num}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5 border-t border-border">
-                    <div
-                      className={`h-px mb-3 transition-all duration-400 ${isAr ? "ml-auto mr-0" : ""}`}
-                      style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)" }}
-                    />
-                    <h3
-                      className="font-black uppercase tracking-tight leading-snug mb-2 group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      className="leading-relaxed"
-                      style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
-                    >
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+              <Reveal key={item.num} delay={i * 70 + 210} className="w-full sm:w-[calc(33.333%-11px)]">
+                <StrengthCard item={item} isAr={isAr} />
               </Reveal>
             ))}
           </div>
