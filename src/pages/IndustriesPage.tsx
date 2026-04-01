@@ -5,9 +5,9 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
-import heroPort from "@/assets/hero-port.jpg";
-import seaImage from "@/assets/solutions-sea.jpg";
-import storageImage from "@/assets/solutions-storage.jpg";
+import heroPort from "@/assets/hero-port.webp";
+import seaImage from "@/assets/solutions-sea.webp";
+import storageImage from "@/assets/solutions-storage.webp";
 
 /* ── Scroll reveal ── */
 function Reveal({

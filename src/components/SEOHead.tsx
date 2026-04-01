@@ -9,7 +9,7 @@ interface SEOHeadProps {
 }
 
 const BASE_URL = 'https://salada.sa';
-const OG_IMAGE = `${BASE_URL}/og-image.jpg`;
+const OG_IMAGE = `${BASE_URL}/og-image.webp`;
 
 function getJsonLd(path: string): object | null {
   if (path === '/') {
