@@ -120,7 +120,11 @@ export default function ProductDetailPage() {
                 <img
                   src={product.images[selectedImage] || '/placeholder.svg'}
                   alt={product.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={800}
+                  height={800}
+                  fetchPriority="high"
+                  decoding="sync"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 max-w-full"
                 />
               </div>
               {product.images.length > 1 && (
