@@ -301,7 +301,11 @@ export default function AboutPage() {
                 <img
                   src={lashingImage}
                   alt="Salada factory"
-                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover max-w-full"
                   style={{ filter: "grayscale(10%)" }}
                 />
                 <div
