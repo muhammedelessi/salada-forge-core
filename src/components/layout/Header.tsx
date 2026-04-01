@@ -418,7 +418,7 @@ export function Header() {
         <div className="container-xl">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* ── Logo — bigger ── */}
-            <Link to="/" className="flex items-center shrink-0 hover-lift" aria-label="Salada — Home">
+            <Link to="/" className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-4" : "ps-4")} aria-label="Salada — Home">
               <img src={saladaLogo} alt="SALADA Metal Industries" className="h-6 md:h-8 w-auto object-contain" />
             </Link>
 
