@@ -188,7 +188,7 @@ export default function AboutPage() {
                   <div
                     key={i}
                     className="p-5 transition-colors duration-200 hover:bg-primary/5"
-                    style={{ background: i % 2 === 1 ? "hsl(var(--secondary)/0.4)" : "hsl(var(--background))" }}
+                    style={"hsl(var(--background))"}
                   >
                     <div
                       className="font-mono font-black mb-1"
