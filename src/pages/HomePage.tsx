@@ -247,7 +247,7 @@ export default function HomePage() {
             className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}
             style={{ marginBottom: "1.5rem" }}
           >
-            <Link to="/solutions" className="btn-gold" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
+            <Link to="/solutions" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase hover:opacity-90 transition-opacity" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
               <span>{t("hero.cta")}</span>
               <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
             </Link>
