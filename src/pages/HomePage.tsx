@@ -341,7 +341,10 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           VISION 2030
       ════════════════════════════════════ */}
-      <section style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
+      <section
+        dir={isAr ? "rtl" : "ltr"}
+        style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}
+      >
         <div
           style={{
             background: "hsl(var(--primary) / 0.08)",
@@ -350,9 +353,9 @@ export default function HomePage() {
           }}
           className="px-5 py-8 md:px-10 md:py-10"
         >
-          <div className={`flex flex-col md:flex-row md:items-center md:justify-between gap-6 ${isAr ? "md:flex-row-reverse" : ""}`}>
-            {/* LEFT SIDE */}
-            <div className={`flex flex-col md:flex-row md:items-center gap-5 ${isAr ? "md:flex-row-reverse text-right" : ""}`}>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            {/* LEFT SIDE (START) */}
+            <div className="flex flex-col md:flex-row md:items-center gap-5">
               {/* BIG NUMBER */}
               <span
                 className="font-mono font-black text-primary leading-none shrink-0"
@@ -381,8 +384,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* RIGHT SIDE */}
-            <div className={`max-w-[380px] ${isAr ? "text-right" : ""}`}>
+            {/* RIGHT SIDE (END) */}
+            <div className="max-w-[380px]">
               <p
                 className="text-muted-foreground"
                 style={{ fontSize: "0.8125rem", lineHeight: 1.75, marginBottom: "14px" }}
