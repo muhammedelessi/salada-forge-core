@@ -324,11 +324,9 @@ export default function HomePage() {
                     className="text-base text-[#bea7a7]"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.5rem",
                       fontWeight: 500,
                       textTransform: "uppercase",
                       letterSpacing: "0.22em",
-                      color: "rgba(255, 255, 255, 0.4)",
                     }}
                   >
                     {s.label}
