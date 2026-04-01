@@ -168,86 +168,96 @@ export default function WhySaladaPage() {
       </section>
 
       {/* ════════════════════════════════
-          STRENGTHS — alternating rows
+          STRENGTHS — compact cards grid
       ════════════════════════════════ */}
-      <section className="bg-background border-b border-border">
-        {strengths.map((item, i) => {
-          const isEven = i % 2 === 0;
-          const imgLeft = isAr ? !isEven : isEven;
-          return (
-            <Reveal key={item.num} delay={i * 50}>
-              <div
-                className={`grid md:grid-cols-2 border-b border-border ${isAr ? "" : ""}`}
-                style={{ borderBottom: i === strengths.length - 1 ? "none" : undefined }}
-              >
-                {/* Image */}
+      <section className="bg-background border-b border-border py-10 md:py-14">
+        <div className="industrial-container">
+          <Reveal className={`mb-8 ${isAr ? "text-right" : ""}`}>
+            <Label text={t("why.label")} isAr={isAr} />
+            <h2
+              className="font-black uppercase leading-[0.95] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)", color: "hsl(var(--foreground))" }}
+            >
+              {isAr ? "مميزات " : "The Salada "}
+              <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "صلادة" : "Advantage"}</span>
+            </h2>
+          </Reveal>
+
+          {/* 5 cards — 2 cols mobile, 3 cols md, 5 cols lg */}
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px"
+            style={{ background: "hsl(var(--border))" }}
+          >
+            {strengths.map((item, i) => (
+              <Reveal key={item.num} delay={i * 60}>
                 <div
-                  className={`relative overflow-hidden ${imgLeft ? "order-1" : "order-1 md:order-2"}`}
-                  style={{ minHeight: "220px" }}
+                  className={`bg-background group hover:bg-primary/5 transition-colors duration-300 h-full ${isAr ? "text-right" : ""}`}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                    style={{ filter: "grayscale(15%) brightness(0.88)" }}
-                  />
-                  {/* dark overlay */}
-                  <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.42)" }} />
-                  {/* number watermark */}
-                  <div
-                    className="absolute font-mono font-black leading-none pointer-events-none"
-                    style={{
-                      fontSize: "clamp(4rem, 10vw, 7rem)",
-                      color: "rgba(255,255,255,0.06)",
-                      bottom: "-0.15em",
-                      right: isAr ? "auto" : "0.2em",
-                      left: isAr ? "0.2em" : "auto",
-                    }}
-                  >
-                    {item.num}
+                  {/* Square image */}
+                  <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.05]"
+                      style={{ filter: "grayscale(18%) brightness(0.86)" }}
+                    />
+                    {/* overlay */}
+                    <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.38)" }} />
+                    {/* number top */}
+                    <div
+                      className="absolute top-3 font-mono text-[0.5rem] uppercase tracking-[0.2em]"
+                      style={{
+                        color: "hsl(var(--primary))",
+                        left: isAr ? "auto" : "0.875rem",
+                        right: isAr ? "0.875rem" : "auto",
+                      }}
+                    >
+                      {item.num}
+                    </div>
+                    {/* gold bar bottom */}
+                    <div
+                      className="absolute bottom-0 h-px transition-all duration-400 group-hover:opacity-100"
+                      style={{
+                        width: "0",
+                        background: "hsl(var(--primary))",
+                        opacity: 0,
+                        left: isAr ? "auto" : 0,
+                        right: isAr ? 0 : "auto",
+                        transition: "width .4s cubic-bezier(.16,1,.3,1), opacity .3s ease",
+                      }}
+                      ref={(el) => {
+                        if (!el) return;
+                        const card = el.closest(".group")!;
+                        card.addEventListener("mouseenter", () => {
+                          el.style.width = "100%";
+                          el.style.opacity = "1";
+                        });
+                        card.addEventListener("mouseleave", () => {
+                          el.style.width = "0";
+                          el.style.opacity = "0";
+                        });
+                      }}
+                    />
                   </div>
-                  {/* small number badge */}
-                  <div
-                    className="absolute top-4 font-mono text-[0.52rem] uppercase tracking-[0.22em]"
-                    style={{
-                      color: "hsl(var(--primary))",
-                      left: isAr ? "auto" : "1.25rem",
-                      right: isAr ? "1.25rem" : "auto",
-                    }}
-                  >
-                    {item.num}
+
+                  {/* Text below image */}
+                  <div className="p-4">
+                    <h3
+                      className="font-black uppercase leading-tight tracking-[-0.01em] mb-2 group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize: "0.8rem", color: "hsl(var(--foreground))" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-[0.72rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
-
-                {/* Text */}
-                <div
-                  className={`p-8 md:p-10 flex flex-col justify-center ${
-                    imgLeft ? "order-2" : "order-2 md:order-1"
-                  } ${isAr ? "text-right" : ""}`}
-                  style={{ background: isEven ? "hsl(var(--background))" : "hsl(var(--secondary)/0.3)" }}
-                >
-                  {/* gold bar */}
-                  <div
-                    className={`h-px mb-4 ${isAr ? "ml-auto mr-0" : ""}`}
-                    style={{ width: "2rem", background: "hsl(var(--primary)/0.6)" }}
-                  />
-
-                  <h2
-                    className="font-black uppercase leading-tight tracking-[-0.02em] mb-3"
-                    style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "hsl(var(--foreground))" }}
-                  >
-                    {item.title}
-                  </h2>
-
-                  <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          );
-        })}
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ════════════════════════════════
