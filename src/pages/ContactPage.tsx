@@ -13,7 +13,7 @@ import heroPort from "@/assets/hero-port.jpg";
 /* ── Shared section label ── */
 function SectionLabel({ text, isAr }: { text: string; isAr: boolean }) {
   return (
-    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse" : ""}`}>
       <span
         className="block shrink-0"
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
@@ -33,17 +33,15 @@ function FormField({
   label,
   required,
   children,
-  isAr,
 }: {
   label: string;
   required?: boolean;
   children: React.ReactNode;
-  isAr: boolean;
 }) {
   return (
     <div>
       <label
-        className={`block font-mono text-[0.65rem] uppercase tracking-[0.18em] mb-2.5 ${isAr ? "text-right" : "text-left"}`}
+        className="block font-mono text-[0.65rem] uppercase tracking-[0.18em] mb-2.5"
         style={{ color: "hsl(var(--foreground)/0.7)" }}
       >
         {label}
@@ -69,6 +67,7 @@ export default function ContactPage() {
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
   const isAr = isRTL();
+  const dir = isAr ? "rtl" : "ltr";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -136,7 +135,7 @@ export default function ContactPage() {
       {/* ════════════════════════════════
           HERO
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "240px" }}>
+      <section className="relative overflow-hidden" dir={dir} style={{ minHeight: "240px" }}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -158,8 +157,8 @@ export default function ContactPage() {
           className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
           style={{ minHeight: "240px" }}
         >
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+          <div className="max-w-xl">
+            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse" : ""}`}>
               <Link
                 to="/"
                 className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
@@ -193,18 +192,18 @@ export default function ContactPage() {
       {/* ════════════════════════════════
           CONTACT INFO — large cards
       ════════════════════════════════ */}
-      <section className="border-b border-border" style={{ background: "hsl(var(--secondary)/0.3)" }}>
+      <section className="border-b border-border" dir={dir} style={{ background: "hsl(var(--secondary)/0.3)" }}>
         <div className="industrial-container py-8 md:py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {contactItems.map((item) => {
               const Content = (
                 <div
-                  className={`border border-border p-5 md:p-6 h-full transition-colors duration-200 hover:border-primary/40 ${isAr ? "text-right" : "text-left"}`}
+                  className="border border-border p-5 md:p-6 h-full transition-colors duration-200 hover:border-primary/40"
                   style={{ background: "hsl(var(--background))" }}
                 >
                   {/* Icon */}
                   <div
-                    className={`flex items-center justify-center w-10 h-10 mb-4 ${isAr ? "ml-auto" : ""}`}
+                    className="flex items-center justify-center w-10 h-10 mb-4"
                     style={{ background: "hsl(var(--primary)/0.1)" }}
                   >
                     <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(var(--primary))" }} />
@@ -248,26 +247,24 @@ export default function ContactPage() {
       {/* ════════════════════════════════
           FORM + SIDEBAR
       ════════════════════════════════ */}
-      <section className="bg-background border-b border-border py-12 md:py-16">
+      <section className="bg-background border-b border-border py-12 md:py-16" dir={dir}>
         <div className="industrial-container">
-          <div
-            className={`grid lg:grid-cols-3 gap-10 md:gap-14 ${isAr ? "lg:flex lg:flex-row-reverse" : ""}`}
-          >
+          <div className="grid lg:grid-cols-3 gap-10 md:gap-14">
             {/* ── Form — 2/3 ── */}
-            <div className="lg:col-span-2">
+            <div className={`lg:col-span-2 ${isAr ? "lg:order-2" : "lg:order-1"}`}>
               <SectionLabel text={t.contact.sendMessage} isAr={isAr} />
               <h2
-                className={`font-black uppercase leading-tight tracking-[-0.02em] mb-8 ${isAr ? "text-right" : "text-left"}`}
+                className="font-black uppercase leading-tight tracking-[-0.02em] mb-8"
                 style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.7rem)", color: "hsl(var(--foreground))" }}
               >
                 {isAr ? "أرسل لنا " : "Send Us a "}
                 <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "رسالة" : "Message"}</span>
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6" dir={isAr ? "rtl" : "ltr"}>
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name + Email */}
                 <div className="grid md:grid-cols-2 gap-6">
-                  <FormField label={t.contact.name} required isAr={isAr}>
+                  <FormField label={t.contact.name} required>
                     <input
                       type="text"
                       required
@@ -277,7 +274,7 @@ export default function ContactPage() {
                       className={inputCls}
                     />
                   </FormField>
-                  <FormField label={t.checkout?.email || (isAr ? "البريد الإلكتروني" : "Email")} required isAr={isAr}>
+                  <FormField label={t.checkout?.email || (isAr ? "البريد الإلكتروني" : "Email")} required>
                     <input
                       type="email"
                       required
@@ -285,14 +282,14 @@ export default function ContactPage() {
                       dir="ltr"
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="email@example.com"
-                      className={`${inputCls} ${isAr ? "text-right" : ""}`}
+                      className={`${inputCls} ${isAr ? "text-end" : ""}`}
                     />
                   </FormField>
                 </div>
 
                 {/* Company + Phone */}
                 <div className="grid md:grid-cols-2 gap-6">
-                  <FormField label={t.checkout?.company || (isAr ? "الشركة" : "Company")} isAr={isAr}>
+                  <FormField label={t.checkout?.company || (isAr ? "الشركة" : "Company")}>
                     <input
                       type="text"
                       value={formData.company}
@@ -301,20 +298,20 @@ export default function ContactPage() {
                       className={inputCls}
                     />
                   </FormField>
-                  <FormField label={t.checkout?.phone || (isAr ? "الهاتف" : "Phone")} isAr={isAr}>
+                  <FormField label={t.checkout?.phone || (isAr ? "الهاتف" : "Phone")}>
                     <input
                       type="tel"
                       value={formData.phone}
                       dir="ltr"
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+966 5X XXX XXXX"
-                      className={`${inputCls} ${isAr ? "text-right" : ""}`}
+                      className={`${inputCls} ${isAr ? "text-end" : ""}`}
                     />
                   </FormField>
                 </div>
 
                 {/* Subject */}
-                <FormField label={t.contact.subject} required isAr={isAr}>
+                <FormField label={t.contact.subject} required>
                   <select
                     required
                     value={formData.subject}
@@ -332,7 +329,7 @@ export default function ContactPage() {
                 </FormField>
 
                 {/* Message */}
-                <FormField label={t.contact.message} required isAr={isAr}>
+                <FormField label={t.contact.message} required>
                   <textarea
                     required
                     rows={5}
@@ -356,7 +353,7 @@ export default function ContactPage() {
             </div>
 
             {/* ── Sidebar — 1/3 ── */}
-            <div className={`lg:col-span-1 ${isAr ? "text-right lg:w-1/3 shrink-0" : ""}`}>
+            <div className={`lg:col-span-1 ${isAr ? "lg:order-1" : "lg:order-2"}`}>
               {/* WhatsApp CTA */}
               <div className="p-5 mb-6 border border-border" style={{ background: "hsl(var(--primary)/0.05)" }}>
                 <SectionLabel text={isAr ? "واتساب" : "WhatsApp"} isAr={isAr} />
@@ -377,7 +374,7 @@ export default function ContactPage() {
               </div>
 
               {/* Quick links */}
-              <div className={`border-t border-border pt-5 ${isAr ? "text-right" : ""}`}>
+              <div className="border-t border-border pt-5">
                 <p
                   className="font-mono text-[0.57rem] uppercase tracking-[0.25em] mb-4"
                   style={{ color: "hsl(var(--primary))" }}
@@ -410,10 +407,10 @@ export default function ContactPage() {
       {/* ════════════════════════════════
           MAP
       ════════════════════════════════ */}
-      <section className="border-b border-border">
+      <section className="border-b border-border" dir={dir}>
         <div className="industrial-container py-10 md:py-14">
-          <div className={`flex items-center justify-between mb-6 ${isAr ? "flex-row-reverse" : ""}`}>
-            <div className={isAr ? "text-right" : ""}>
+          <div className="flex items-center justify-between mb-6">
+            <div>
               <SectionLabel text={t.contact.headquarters} isAr={isAr} />
               <h2
                 className="font-black uppercase leading-tight tracking-[-0.02em]"
