@@ -100,7 +100,11 @@ export default function AboutPage() {
           <img
             src={heroPort}
             alt="Salada operations"
-            className="w-full h-full object-cover object-center"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="sync"
+            className="w-full h-full object-cover object-center max-w-full"
             style={{ filter: "grayscale(18%) brightness(0.48)" }}
           />
           {/* single flat dark overlay — no white fade */}
