@@ -189,7 +189,6 @@ export default function AboutPage() {
                     <div
                       className="font-mono font-black mb-1"
                       style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)", color: "hsl(var(--primary))" }}
-                      style={{ color: "hsl(var(--muted-foreground))" }}
                     >
                       {s.value}
                     </div>
