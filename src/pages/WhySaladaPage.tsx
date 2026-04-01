@@ -288,50 +288,27 @@ export default function WhySaladaPage() {
       <section className="border-b border-border py-10 md:py-14 bg-background">
         <div className="industrial-container">
           <Reveal>
-            <div
-              className={`grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center ${isAr ? "md:flex md:flex-row-reverse" : ""}`}
-            >
-              {/* Left — big decorative label */}
-              <div className="shrink-0">
-                <div
-                  className="font-mono font-black leading-none select-none"
-                  style={{
-                    fontSize: "clamp(3.5rem, 8vw, 6rem)",
-                    color: "hsl(var(--primary)/0.08)",
-                    letterSpacing: "-0.04em",
-                    lineHeight: 1,
-                  }}
-                >
-                  {isAr ? "باختصار" : "IN\nSHORT"}
-                </div>
-              </div>
-
-              {/* Vertical divider */}
-              <div className="hidden md:block w-px self-stretch" style={{ background: "hsl(var(--border))" }} />
-
-              {/* Right — content */}
-              <div className={isAr ? "text-right" : ""}>
-                <Label text={isAr ? "باختصار" : "In Short"} isAr={isAr} />
-                <p
-                  className="leading-relaxed"
-                  style={{
-                    fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
-                    color: "hsl(var(--foreground))",
-                    fontWeight: 500,
-                    maxWidth: "42rem",
-                  }}
-                >
-                  {t("why.supportingText")}
-                </p>
-                <Link
-                  to="/contact"
-                  className={`inline-flex items-center gap-2 mt-5 font-mono text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
-                  style={{ color: "hsl(var(--primary))" }}
-                >
-                  {isAr ? "تواصل معنا" : "Get In Touch"}
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
-              </div>
+            <div className={isAr ? "text-right" : ""}>
+              <Label text={isAr ? "باختصار" : "In Short"} isAr={isAr} />
+              <p
+                className="leading-relaxed"
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
+                  color: "hsl(var(--foreground))",
+                  fontWeight: 500,
+                  maxWidth: "42rem",
+                }}
+              >
+                {t("why.supportingText")}
+              </p>
+              <Link
+                to="/contact"
+                className={`inline-flex items-center gap-2 mt-5 font-mono text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
+                style={{ color: "hsl(var(--primary))" }}
+              >
+                {isAr ? "تواصل معنا" : "Get In Touch"}
+                <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+              </Link>
             </div>
           </Reveal>
         </div>
