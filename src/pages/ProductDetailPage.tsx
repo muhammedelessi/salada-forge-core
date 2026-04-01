@@ -21,9 +21,9 @@ import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 
 /* ── Shared eyebrow label ── */
-function Label({ text, isAr }: { text: string; isAr: boolean }) {
+function Label({ text }: { text: string }) {
   return (
-    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+    <div className="flex items-center gap-2.5 mb-3 rtl:flex-row-reverse rtl:justify-end">
       <span
         style={{
           width: "1.25rem",
@@ -44,9 +44,9 @@ export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { data: product, isLoading } = useProduct(slug || "");
   const { data: allProducts = [] } = useProducts();
-  const { language, isRTL } = useLanguageStore();
+  const { language } = useLanguageStore();
   const t = translations[language];
-  const isAr = isRTL();
+  const isAr = language === "ar";
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(undefined);
@@ -69,10 +69,10 @@ export default function ProductDetailPage() {
     "specialty-containers": t.categories.specialtyContainers,
     "drums-barrels": t.categories.drumsBarrels,
     "modular-buildings": t.categories.modularBuildings,
-    "spare-parts": language === "ar" ? "قطع الغيار" : "Spare Parts",
-    "lashing-equipment": language === "ar" ? "معدات الربط" : "Lashing Equipment",
-    "iso-shipping-containers": language === "ar" ? "حاويات شحن ISO" : "ISO Shipping Containers",
-    "storage-containers": language === "ar" ? "حاويات التخزين" : "Storage Containers",
+    "spare-parts": isAr ? "قطع الغيار" : "Spare Parts",
+    "lashing-equipment": isAr ? "معدات الربط" : "Lashing Equipment",
+    "iso-shipping-containers": isAr ? "حاويات شحن ISO" : "ISO Shipping Containers",
+    "storage-containers": isAr ? "حاويات التخزين" : "Storage Containers",
   };
 
   const formatPrice = (price: number) =>
@@ -106,7 +106,7 @@ export default function ProductDetailPage() {
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-6 py-3"
           >
             {isAr ? "العودة للمتجر" : "Back to Shop"}
-            <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+            <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
           </Link>
         </div>
       </Layout>
@@ -130,9 +130,9 @@ export default function ProductDetailPage() {
   return (
     <Layout>
       {/* ── BREADCRUMB ─────────────────── */}
-      <nav className="border-b border-border" dir={isAr ? "rtl" : "ltr"}>
+      <nav className="border-b border-border">
         <div className="industrial-container py-3">
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div className="flex items-center gap-1.5 flex-wrap rtl:flex-row-reverse">
             {[
               { label: isAr ? "الرئيسية" : "Home", href: "/" },
               { label: t.nav.shop, href: "/shop" },
@@ -143,11 +143,11 @@ export default function ProductDetailPage() {
                 href: `/shop?category=${product.category}`,
               },
               { label: product.title },
-            ].map((item, i, arr) => (
-              <span key={i} className="flex items-center gap-1.5">
+            ].map((item, i) => (
+              <span key={i} className="flex items-center gap-1.5 rtl:flex-row-reverse">
                 {i > 0 && (
                   <ChevronRight
-                    className={`w-3 h-3 shrink-0 ${isAr ? "rotate-180" : ""}`}
+                    className="w-3 h-3 shrink-0 rtl:rotate-180"
                     style={{ color: "hsl(var(--border))" }}
                   />
                 )}
@@ -176,12 +176,9 @@ export default function ProductDetailPage() {
       {/* ── PRODUCT MAIN ───────────────── */}
       <section className="bg-background border-b border-border py-8 md:py-12">
         <div className="industrial-container">
-          <div
-            className={`grid lg:grid-cols-2 gap-8 md:gap-14 ${isAr ? "lg:flex lg:flex-row-reverse" : ""}`}
-            dir={isAr ? "rtl" : "ltr"}
-          >
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-14">
             {/* ── GALLERY ── */}
-            <div className="space-y-3">
+            <div className="space-y-3 lg:order-1 rtl:lg:order-2">
               {/* Main image */}
               <div
                 className="relative overflow-hidden border border-border bg-secondary"
@@ -241,9 +238,9 @@ export default function ProductDetailPage() {
             </div>
 
             {/* ── PRODUCT INFO ── */}
-            <div className={isAr ? "text-right" : ""}>
+            <div className="rtl:text-right lg:order-2 rtl:lg:order-1">
               {/* SKU + Category */}
-              <div className={`flex items-center gap-3 mb-3 flex-wrap ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+              <div className="flex items-center gap-3 mb-3 flex-wrap rtl:flex-row-reverse rtl:justify-end">
                 <span
                   className="font-mono text-[0.55rem] uppercase tracking-[0.2em] px-2 py-1 border border-border"
                   style={{ color: "hsl(var(--muted-foreground))" }}
@@ -269,7 +266,7 @@ export default function ProductDetailPage() {
               {/* Pricing note */}
               <div className="mb-4 py-3 px-4 border border-border" style={{ background: "hsl(var(--primary)/0.05)" }}>
                 <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
-                  {language === "ar" ? "للحصول على السعر، تواصل معنا" : "Contact us for pricing"}
+                  {isAr ? "للحصول على السعر، تواصل معنا" : "Contact us for pricing"}
                 </p>
               </div>
 
@@ -315,7 +312,7 @@ export default function ProductDetailPage() {
                 >
                   {t.productDetail.quantity}
                 </p>
-                <div className={`flex items-center gap-4 ${isAr ? "flex-row-reverse" : ""}`}>
+                <div className="flex items-center gap-4 rtl:flex-row-reverse">
                   <div className="flex items-center border border-border">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -328,6 +325,7 @@ export default function ProductDetailPage() {
                       value={quantity}
                       onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                       className="w-14 h-11 text-center bg-transparent border-x border-border font-mono text-sm focus:outline-none"
+                      dir="ltr"
                     />
                     <button
                       onClick={() => setQuantity(quantity + 1)}
@@ -348,10 +346,10 @@ export default function ProductDetailPage() {
               {/* CTA */}
               <Link
                 to={`/inquiry/${product.slug}?quantity=${quantity}`}
-                className={`w-full inline-flex items-center justify-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] py-4 mb-6 hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+                className="w-full inline-flex items-center justify-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] py-4 mb-6 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
               >
                 <MessageSquare className="w-4 h-4" />
-                {language === "ar" ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
+                {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
               </Link>
 
               {/* Trust badges */}
@@ -381,9 +379,9 @@ export default function ProductDetailPage() {
 
       {/* ── TABS ───────────────────────── */}
       <section className="bg-background border-b border-border">
-        <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
+        <div className="industrial-container">
           {/* Tab nav */}
-          <div className="flex border-b border-border overflow-x-auto scrollbar-none">
+          <div className="flex border-b border-border overflow-x-auto scrollbar-none rtl:flex-row-reverse">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -411,7 +409,7 @@ export default function ProductDetailPage() {
                   product.specifications.map((spec, i) => (
                     <div
                       key={i}
-                      className={`flex items-center justify-between py-3 px-4 ${isAr ? "flex-row-reverse" : ""}`}
+                      className="flex items-center justify-between py-3 px-4 rtl:flex-row-reverse"
                       style={{ background: i % 2 === 0 ? "hsl(var(--background))" : "hsl(var(--secondary)/0.4)" }}
                     >
                       <span className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
@@ -423,8 +421,8 @@ export default function ProductDetailPage() {
                     </div>
                   ))
                 ) : (
-                  <p className="col-span-2 text-sm py-4" style={{ color: "hsl(var(--muted-foreground))" }}>
-                    {language === "ar" ? "لا توجد مواصفات متاحة" : "No specifications available"}
+                  <p className="col-span-2 text-sm py-4 rtl:text-right" style={{ color: "hsl(var(--muted-foreground))" }}>
+                    {isAr ? "لا توجد مواصفات متاحة" : "No specifications available"}
                   </p>
                 )}
               </div>
@@ -438,7 +436,7 @@ export default function ProductDetailPage() {
                   { title: t.productDetail.worldwideDelivery, desc: t.productDetail.worldwideDeliveryDesc },
                   { title: t.productDetail.estimatedDelivery, desc: t.productDetail.estimatedDeliveryDesc },
                 ].map((item, i) => (
-                  <div key={i} className={`flex items-start gap-3 ${isAr ? "flex-row-reverse text-right" : ""}`}>
+                  <div key={i} className="flex items-start gap-3 rtl:flex-row-reverse rtl:text-right">
                     <div
                       className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
                       style={{ background: "hsl(var(--primary)/0.12)" }}
@@ -460,10 +458,10 @@ export default function ProductDetailPage() {
             {activeTab === "bulk" &&
               (product.bulkPricing && product.bulkPricing.length > 0 ? (
                 <div className="max-w-md">
-                  <p className="text-sm mb-5" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  <p className="text-sm mb-5 rtl:text-right" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {t.productDetail.saveMore}
                   </p>
-                  <table className="w-full border border-border" dir={isAr ? "rtl" : "ltr"}>
+                  <table className="w-full border border-border" dir="ltr">
                     <thead style={{ background: "hsl(var(--secondary))" }}>
                       <tr>
                         {[t.productDetail.quantityLabel, t.productDetail.unitPrice, t.productDetail.savings].map(
@@ -508,7 +506,7 @@ export default function ProductDetailPage() {
                   </table>
                 </div>
               ) : (
-                <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
+                <p className="text-sm rtl:text-right" style={{ color: "hsl(var(--muted-foreground))" }}>
                   {t.productDetail.contactBulk}
                 </p>
               ))}
@@ -518,7 +516,7 @@ export default function ProductDetailPage() {
 
       {/* ── IDEAL FOR / KEY FEATURES / CUSTOMIZATION ── */}
       <section className="border-b border-border py-10 md:py-14" style={{ background: "hsl(var(--secondary)/0.25)" }}>
-        <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
+        <div className="industrial-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: "hsl(var(--border))" }}>
             {[
               {
@@ -538,15 +536,15 @@ export default function ProductDetailPage() {
             ].map((block, i) => (
               <div
                 key={i}
-                className={`p-6 md:p-8 ${isAr ? "text-right" : ""}`}
+                className="p-6 md:p-8 rtl:text-right"
                 style={{ background: "hsl(var(--background))" }}
               >
-                <Label text={block.title} isAr={isAr} />
+                <Label text={block.title} />
                 <ul className="space-y-2.5 mt-1">
                   {(block.items as string[]).map((item, j) => (
                     <li
                       key={j}
-                      className={`flex items-start gap-2.5 text-sm ${isAr ? "flex-row-reverse" : ""}`}
+                      className="flex items-start gap-2.5 text-sm rtl:flex-row-reverse"
                       style={{ color: "hsl(var(--muted-foreground))" }}
                     >
                       <Check className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "hsl(var(--primary))" }} />
@@ -559,13 +557,13 @@ export default function ProductDetailPage() {
           </div>
 
           {/* CTA row */}
-          <div className={`flex flex-col sm:flex-row gap-3 mt-8 ${isAr ? "sm:flex-row-reverse" : ""}`}>
+          <div className="flex flex-col sm:flex-row gap-3 mt-8 rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
-              className={`inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
             >
               <span>{t.productDetail.requestPricing}</span>
-              <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
             </Link>
             <Link
               to="/contact"
@@ -581,10 +579,10 @@ export default function ProductDetailPage() {
       {/* ── RELATED PRODUCTS ───────────── */}
       {relatedProducts.length > 0 && (
         <section className="bg-background border-b border-border py-10 md:py-14">
-          <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-            <div className={`flex items-center justify-between mb-8 ${isAr ? "flex-row-reverse" : ""}`}>
-              <div className={isAr ? "text-right" : ""}>
-                <Label text={t.productDetail.relatedProducts} isAr={isAr} />
+          <div className="industrial-container">
+            <div className="flex items-center justify-between mb-8 rtl:flex-row-reverse">
+              <div className="rtl:text-right">
+                <Label text={t.productDetail.relatedProducts} />
                 <h2
                   className="font-black uppercase leading-tight tracking-[-0.02em]"
                   style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)", color: "hsl(var(--foreground))" }}
@@ -594,11 +592,11 @@ export default function ProductDetailPage() {
               </div>
               <Link
                 to={`/shop?category=${product.category}`}
-                className={`inline-flex items-center gap-1.5 font-mono text-[0.58rem] uppercase tracking-[0.15em] hover:text-primary transition-colors shrink-0 ${isAr ? "flex-row-reverse" : ""}`}
+                className="inline-flex items-center gap-1.5 font-mono text-[0.58rem] uppercase tracking-[0.15em] hover:text-primary transition-colors shrink-0 rtl:flex-row-reverse"
                 style={{ color: "hsl(var(--muted-foreground))" }}
               >
                 {isAr ? "عرض الكل" : "View All"}
-                <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
+                <ArrowRight className="w-3 h-3 rtl:rotate-180" />
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
