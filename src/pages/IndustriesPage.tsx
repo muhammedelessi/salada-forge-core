@@ -185,12 +185,10 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INTRO STRIP
       ════════════════════════════════ */}
-      <section className="border-b border-border py-8 md:py-10" style={{ background: "hsl(var(--secondary)/0.3)" }}>
+      <section className="border-b border-border py-8 md:py-10" dir={isAr ? "rtl" : "ltr"} style={{ background: "hsl(var(--secondary)/0.3)" }}>
         <div className="industrial-container">
           <Reveal>
-            <div
-              className={`grid md:grid-cols-[1fr_auto] gap-6 items-center ${isAr ? "text-right md:flex md:flex-row-reverse" : ""}`}
-            >
+            <div className="grid md:grid-cols-[1fr_auto] gap-6 items-center">
               <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {t("industries.introDesc")}
               </p>
