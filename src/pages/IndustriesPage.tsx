@@ -54,9 +54,9 @@ function Reveal({
 }
 
 /* ── Shared eyebrow label ── */
-function Label({ text, isAr }: { text: string; isAr: boolean }) {
+function Label({ text }: { text: string; isAr?: boolean }) {
   return (
-    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+    <div className="flex items-center gap-2.5 mb-3">
       <span
         style={{
           width: "1.25rem",
