@@ -247,22 +247,12 @@ export default function IndustriesPage() {
 
                   {/* Content */}
                   <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
-                    {/* Image — small square */}
+                    {/* Icon */}
                     <div
-                      className="relative overflow-hidden shrink-0 hidden sm:block"
-                      style={{ width: "64px", height: "64px" }}
+                      className="relative shrink-0 hidden sm:flex items-center justify-center bg-primary rounded-md transition-transform duration-300 group-hover:scale-105"
+                      style={{ width: "52px", height: "52px" }}
                     >
-                      <img
-                        src={ind.image}
-                        alt={ind.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
-                        style={{ filter: "grayscale(15%)" }}
-                      />
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: "hsl(var(--primary)/0.12)" }}
-                      />
+                      <ind.icon className="w-5 h-5 text-primary-foreground" />
                     </div>
 
                     {/* Text */}
