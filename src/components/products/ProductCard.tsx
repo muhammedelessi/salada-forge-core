@@ -33,41 +33,65 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   const contactLabel = language === "ar" ? "تواصل معنا" : "Request a Quote";
   const viewLabel = language === "ar" ? "عرض المنتج" : "View Product";
 
-  /* ── COMPACT variant ── */
+  /* ── COMPACT variant — horizontal list item ── */
   if (variant === "compact") {
     return (
       <Link
         to={`/product/${product.slug}`}
-        className="group block border border-border bg-background hover:border-primary transition-colors duration-300"
+        dir={isAr ? "rtl" : "ltr"}
+        className="group flex items-stretch border border-border bg-background hover:border-primary transition-colors duration-300"
       >
-        {/* Image */}
-        <div className="aspect-square overflow-hidden bg-secondary">
+        {/* Fixed square image */}
+        <div
+          className="relative overflow-hidden shrink-0 bg-secondary"
+          style={{ width: "96px", minWidth: "96px", height: "96px" }}
+        >
           <img
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            decoding="async"
-            width={400}
-            height={400}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] max-w-full"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
             style={{ filter: "grayscale(8%)" }}
           />
+          {product.status === "out_of_stock" && (
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ background: "rgba(8,6,2,0.55)" }}
+            >
+              <span className="font-mono text-[0.45rem] uppercase tracking-[0.15em] text-white">
+                {t.product.outOfStock}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content */}
-        <div className={`p-4 ${isAr ? "text-right" : ""}`}>
-          <span className="block font-mono text-[0.55rem] uppercase tracking-[0.22em] text-primary/60 mb-1.5">
+        <div
+          className={`flex flex-col justify-center flex-1 min-w-0 px-4 py-3 border-s border-border ${isAr ? "text-right" : ""}`}
+        >
+          <span
+            className="block font-mono text-[0.5rem] uppercase tracking-[0.2em] mb-1"
+            style={{ color: "hsl(var(--primary)/0.6)" }}
+          >
             {categoryLabel}
           </span>
-          <h3 className="text-sm font-bold uppercase tracking-tight leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-200">
+          <h3 className="text-[0.82rem] font-bold uppercase tracking-tight leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-200 mb-1">
             {product.title}
           </h3>
           <span
-            className={`inline-flex items-center gap-1.5 mt-3 font-mono text-[0.55rem] uppercase tracking-[0.18em] text-primary/70 ${isAr ? "flex-row-reverse" : ""}`}
+            className="font-mono text-[0.5rem] uppercase tracking-[0.15em]"
+            style={{ color: "hsl(var(--muted-foreground)/0.5)" }}
           >
-            {contactLabel}
-            <ArrowUpRight className="w-3 h-3" />
+            {product.sku}
           </span>
+        </div>
+
+        {/* Arrow */}
+        <div className="flex items-center px-3 shrink-0">
+          <ArrowUpRight
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            style={{ color: "hsl(var(--primary))" }}
+          />
         </div>
       </Link>
     );
@@ -78,15 +102,12 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
     <div className="group border border-border bg-background transition-all duration-300 hover:border-primary">
       {/* Image block */}
       <Link to={`/product/${product.slug}`} className="block relative overflow-hidden">
-        <div className="aspect-[4/3] bg-secondary overflow-hidden">
+        <div className="bg-secondary overflow-hidden" style={{ aspectRatio: "4/3" }}>
           <img
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            decoding="async"
-            width={600}
-            height={450}
-            className="w-full h-full object-cover transition-transform duration-600 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04] max-w-full"
+            className="w-full h-full object-cover transition-transform duration-600 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
             style={{ filter: "grayscale(10%)", transition: "transform .6s cubic-bezier(.16,1,.3,1), filter .6s ease" }}
           />
         </div>
