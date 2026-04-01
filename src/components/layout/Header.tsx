@@ -26,32 +26,27 @@ function MegaMenu({
         isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none",
       )}
     >
-      {/* hairline gold accent */}
       <div
         className="h-px w-full"
         style={{
           background:
-            "linear-gradient(to right, transparent, hsl(var(--gold)/0.5) 30%, hsl(var(--gold)/0.5) 70%, transparent)",
+            "linear-gradient(to right, transparent, hsl(var(--primary)/0.5) 30%, hsl(var(--primary)/0.5) 70%, transparent)",
         }}
       />
 
-      <div className="border-b border-warm" style={{ background: "hsl(var(--paper-0))", backdropFilter: "blur(12px)" }}>
+      <div className="border-b border-border" style={{ background: "hsl(var(--background)/0.97)", backdropFilter: "blur(12px)" }}>
         <div className="container-xl py-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-px" style={{ background: "hsl(var(--border))" }}>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
             {items.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className="group p-6 flex flex-col gap-1.5 transition-colors duration-200"
-                style={{ background: "hsl(var(--paper-0))" }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--gold-pale))")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "hsl(var(--paper-0))")}
+                className="group p-6 flex flex-col gap-1.5 bg-background hover:bg-primary/5 transition-colors duration-200"
               >
-                {/* gold bar */}
                 <div
-                  className="h-px mb-2 transition-all duration-300"
-                  style={{ width: "0", background: "hsl(var(--gold))" }}
+                  className="h-px mb-2 transition-all duration-300 bg-primary"
+                  style={{ width: "0" }}
                   ref={(el) => {
                     if (!el) return;
                     el.closest("a")!.addEventListener("mouseenter", () => {
@@ -62,19 +57,13 @@ function MegaMenu({
                     });
                   }}
                 />
-                <span
-                  className="text-xs font-black uppercase tracking-[0.05em] transition-colors duration-200"
-                  style={{ color: "hsl(var(--ink-100))" }}
-                >
+                <span className="text-xs font-black uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
                   {item.label}
                 </span>
-                <span className="text-[0.7rem] leading-relaxed" style={{ color: "hsl(var(--ink-40))" }}>
+                <span className="text-[0.7rem] leading-relaxed text-muted-foreground">
                   {item.desc}
                 </span>
-                <span
-                  className="inline-flex items-center gap-1 mt-1 text-[0.6rem] font-mono uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                  style={{ color: "hsl(var(--gold))" }}
-                >
+                <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] font-mono uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   View <ArrowUpRight style={{ width: 10, height: 10 }} />
                 </span>
               </Link>
@@ -94,50 +83,45 @@ function MobileDrawer({
   onClose,
   navLinks,
   isAr,
+  currentPath,
 }: {
   open: boolean;
   onClose: () => void;
   navLinks: { label: string; href: string }[];
   isAr: boolean;
+  currentPath: string;
 }) {
+  const dir = isAr ? "rtl" : "ltr";
+
   return (
     <>
       {/* backdrop */}
       <div
         className={cn(
-          "fixed inset-0 z-40 transition-opacity duration-300",
+          "fixed inset-0 z-40 bg-foreground/35 backdrop-blur-sm transition-opacity duration-300",
           open ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
-        style={{ background: "hsl(var(--ink-100)/0.35)", backdropFilter: "blur(4px)" }}
         onClick={onClose}
       />
 
       {/* drawer panel */}
       <div
+        dir={dir}
         className={cn(
-          "fixed top-0 z-50 h-full w-80 max-w-[90vw] flex flex-col",
+          "fixed top-0 z-50 h-full w-80 max-w-[90vw] flex flex-col bg-background",
           "transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-          isAr ? "right-0" : "left-0",
-          open ? "translate-x-0" : isAr ? "translate-x-full" : "-translate-x-full",
+          "ltr:left-0 rtl:right-0 ltr:border-r rtl:border-l border-border",
+          open ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full",
         )}
-        style={{
-          background: "hsl(var(--paper-0))",
-          borderRight: isAr ? "none" : "1px solid hsl(var(--border))",
-          borderLeft: isAr ? "1px solid hsl(var(--border))" : "none",
-        }}
       >
         {/* drawer header */}
-        <div
-          className="flex items-center justify-between px-6 py-5 border-b"
-          style={{ borderColor: "hsl(var(--border))" }}
-        >
-          <span className="text-xs font-mono uppercase tracking-[0.25em]" style={{ color: "hsl(var(--gold))" }}>
-            Menu
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary">
+            {isAr ? "القائمة" : "Menu"}
           </span>
           <button
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 transition-colors duration-200"
-            style={{ color: "hsl(var(--ink-40))" }}
+            className="flex items-center justify-center w-8 h-8 text-muted-foreground transition-colors duration-200"
             aria-label="Close menu"
           >
             <X style={{ width: 18, height: 18 }} />
@@ -146,48 +130,52 @@ function MobileDrawer({
 
         {/* nav items */}
         <nav className="flex-1 overflow-y-auto px-6 py-8">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={onClose}
-              className="flex items-center justify-between py-4 border-b group"
-              style={{
-                borderColor: "hsl(var(--border))",
-                animationDelay: `${i * 40}ms`,
-                color: "hsl(var(--ink-100))",
-              }}
-            >
-              <div className={`flex items-center gap-3 ${isAr ? "flex-row-reverse" : ""}`}>
-                <span className="text-[0.55rem] font-mono" style={{ color: "hsl(var(--gold))" }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-sm font-black uppercase tracking-[0.04em] group-hover:text-[hsl(var(--gold))] transition-colors duration-200">
-                  {link.label}
-                </span>
-              </div>
-              <ArrowUpRight
-                style={{ width: 14, height: 14, color: "hsl(var(--ink-20))", flexShrink: 0 }}
-                className="group-hover:text-[hsl(var(--gold))] transition-colors duration-200"
-              />
-            </Link>
-          ))}
+          {navLinks.map((link, i) => {
+            const isActive = currentPath === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={onClose}
+                className="flex items-center justify-between py-4 border-b border-border group"
+                style={{ animationDelay: `${i * 40}ms` }}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-[0.55rem] font-mono text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={cn(
+                      "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
+                      isActive ? "text-primary" : "text-foreground group-hover:text-primary",
+                    )}
+                  >
+                    {link.label}
+                  </span>
+                </div>
+                <ArrowUpRight
+                  className={cn(
+                    "shrink-0 transition-colors duration-200",
+                    isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary",
+                  )}
+                  style={{ width: 14, height: 14 }}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         {/* drawer footer */}
-        <div className="px-6 py-6 border-t" style={{ borderColor: "hsl(var(--border))" }}>
+        <div className="px-6 py-6 border-t border-border">
           <Link
             to="/contact"
             onClick={onClose}
-            className="btn-gold w-full flex items-center justify-center gap-2 text-[0.65rem]"
+            className="w-full flex items-center justify-center gap-2 text-[0.65rem] bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] px-5 py-3 hover:opacity-90 transition-opacity"
           >
             <span>{isAr ? "اطلب عرض سعر" : "Request a Quote"}</span>
             <ArrowUpRight style={{ width: 14, height: 14 }} />
           </Link>
-          <p
-            className="text-center mt-4 text-[0.55rem] font-mono uppercase tracking-[0.2em]"
-            style={{ color: "hsl(var(--ink-20))" }}
-          >
+          <p className="text-center mt-4 text-[0.55rem] font-mono uppercase tracking-[0.2em] text-muted-foreground">
             ISO Certified · DNV Approved
           </p>
         </div>
@@ -218,7 +206,6 @@ function SearchOverlay({
     } else setQ("");
   }, [open]);
 
-  // close on Escape
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -231,43 +218,37 @@ function SearchOverlay({
     <div
       className={cn(
         "fixed inset-0 z-[60] flex items-start justify-center pt-28 px-4",
-        "transition-all duration-300",
+        "transition-all duration-300 bg-foreground/50 backdrop-blur-md",
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
       )}
-      style={{ background: "hsl(var(--ink-100)/0.5)", backdropFilter: "blur(8px)" }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div
         className={cn(
-          "w-full max-w-xl transition-all duration-300",
+          "w-full max-w-xl bg-background border border-border transition-all duration-300",
           open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0",
         )}
-        style={{ background: "hsl(var(--paper-0))", border: "1px solid hsl(var(--border))" }}
       >
-        {/* search input */}
-        <div className="flex items-center gap-3 px-4 py-4 border-b" style={{ borderColor: "hsl(var(--border))" }}>
-          <Search style={{ width: 16, height: 16, color: "hsl(var(--gold))", flexShrink: 0 }} />
+        <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
+          <Search className="text-primary shrink-0" style={{ width: 16, height: 16 }} />
           <input
             ref={inputRef}
             type="text"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search..."
-            className="flex-1 bg-transparent text-sm outline-none"
-            style={{ color: "hsl(var(--ink-100))" }}
+            className="flex-1 bg-transparent text-sm text-foreground outline-none"
           />
           <button
             onClick={onClose}
-            className="text-[0.6rem] font-mono uppercase tracking-[0.15em] px-2 py-1 border"
-            style={{ color: "hsl(var(--ink-40))", borderColor: "hsl(var(--border))" }}
+            className="text-[0.6rem] font-mono uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
           >
             Esc
           </button>
         </div>
 
-        {/* results */}
         {results.length > 0 && (
           <div>
             {results.map((r) => (
@@ -278,22 +259,17 @@ function SearchOverlay({
                   onClose();
                   setQ("");
                 }}
-                className="flex items-center justify-between px-5 py-3.5 border-b group transition-colors duration-150"
-                style={{ borderColor: "hsl(var(--border))" }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--gold-pale))")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                className="flex items-center justify-between px-5 py-3.5 border-b border-border hover:bg-primary/5 transition-colors duration-150"
               >
-                <span className="text-sm font-semibold" style={{ color: "hsl(var(--ink-100))" }}>
-                  {r.label}
-                </span>
-                <ArrowUpRight style={{ width: 14, height: 14, color: "hsl(var(--gold))" }} />
+                <span className="text-sm font-semibold text-foreground">{r.label}</span>
+                <ArrowUpRight className="text-primary" style={{ width: 14, height: 14 }} />
               </Link>
             ))}
           </div>
         )}
 
         {q && results.length === 0 && (
-          <p className="px-5 py-4 text-sm" style={{ color: "hsl(var(--ink-40))" }}>
+          <p className="px-5 py-4 text-sm text-muted-foreground">
             No results for "{q}"
           </p>
         )}
@@ -314,21 +290,19 @@ export function Header() {
   const { t, isRTL } = useLanguageStore();
   const location = useLocation();
   const isAr = isRTL();
+  const dir = isAr ? "rtl" : "ltr";
 
-  /* close mobile menu on route change */
   useEffect(() => {
     setIsMenuOpen(false);
     setOpenMega(null);
   }, [location.pathname]);
 
-  /* scroll detection */
   useEffect(() => {
     const fn = () => setIsScrolled(window.scrollY > 30);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  /* prevent body scroll when drawer is open */
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
@@ -336,8 +310,9 @@ export function Header() {
     };
   }, [isMenuOpen]);
 
-  /* nav items */
+  /* nav items — Home added */
   const navLinks = [
+    { label: isAr ? "الرئيسية" : "Home", href: "/" },
     { label: t("nav.solutions"), href: "/solutions", mega: "solutions" },
     { label: t("nav.shop"), href: "/shop" },
     { label: t("nav.industries"), href: "/industries", mega: "industries" },
@@ -421,31 +396,35 @@ export function Header() {
     megaTimer.current = setTimeout(() => setOpenMega(null), 180);
   };
 
+  const isActive = (href: string) =>
+    href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
+
   return (
     <>
       <header
+        dir={dir}
         className={cn(
           "fixed top-0 inset-x-0 z-50",
           "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-          isScrolled ? "shadow-[0_2px_24px_-4px_hsl(var(--ink-100)/0.1)]" : "",
+          isScrolled ? "shadow-md" : "",
         )}
         style={{
-          background: isScrolled ? "hsl(var(--paper-0)/0.97)" : "hsl(var(--paper-0))",
+          background: isScrolled ? "hsl(var(--background)/0.97)" : "hsl(var(--background))",
           backdropFilter: isScrolled ? "blur(16px)" : "none",
-          borderBottom: `1px solid hsl(var(--border))`,
+          borderBottom: "1px solid hsl(var(--border))",
         }}
       >
         <div className="container-xl">
-          <div className={cn("flex items-center justify-between", "h-16 md:h-20", isAr ? "flex-row-reverse" : "")}>
-            {/* ── Logo ── */}
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* ── Logo — bigger ── */}
             <Link to="/" className="flex items-center shrink-0 hover-lift" aria-label="Salada — Home">
-              <img src={saladaLogo} alt="SALADA Metal Industries" className="h-10 md:h-12 w-auto object-contain" />
+              <img src={saladaLogo} alt="SALADA Metal Industries" className="h-12 md:h-14 w-auto object-contain" />
             </Link>
 
             {/* ── Desktop nav ── */}
-            <nav className={cn("hidden md:flex items-center gap-1", isAr ? "flex-row-reverse" : "")}>
+            <nav className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => {
-                const isActive = location.pathname === link.href;
+                const active = isActive(link.href);
                 const hasMega = Boolean(link.mega);
                 return (
                   <div
@@ -460,10 +439,9 @@ export function Header() {
                         "relative flex items-center gap-1 px-3 py-2",
                         "text-[0.7rem] font-black uppercase tracking-[0.08em]",
                         "transition-colors duration-200 group",
-                        isAr ? "flex-row-reverse" : "",
-                        isActive
-                          ? "text-[hsl(var(--gold))]"
-                          : "text-[hsl(var(--ink-60))] hover:text-[hsl(var(--ink-100))]",
+                        active
+                          ? "text-primary"
+                          : "text-muted-foreground hover:text-foreground",
                       )}
                     >
                       {link.label}
@@ -477,18 +455,13 @@ export function Header() {
                         />
                       )}
                       {/* active underline */}
-                      {isActive && (
-                        <span className="absolute bottom-0 inset-x-3 h-px" style={{ background: "hsl(var(--gold))" }} />
+                      {active && (
+                        <span className="absolute bottom-0 inset-x-3 h-px bg-primary" />
                       )}
                       {/* hover underline */}
-                      {!isActive && (
+                      {!active && (
                         <span
-                          className="absolute bottom-0 h-px transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]"
-                          style={{
-                            background: "hsl(var(--ink-100))",
-                            left: isAr ? "auto" : "0.75rem",
-                            right: isAr ? "0.75rem" : "auto",
-                          }}
+                          className="absolute bottom-0 ltr:left-3 rtl:right-3 h-px bg-foreground transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]"
                         />
                       )}
                     </Link>
@@ -498,19 +471,12 @@ export function Header() {
             </nav>
 
             {/* ── Right actions ── */}
-            <div className={cn("flex items-center gap-2", isAr ? "flex-row-reverse" : "")}>
+            <div className="flex items-center gap-2">
               {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center justify-center w-9 h-9 transition-colors duration-200"
-                style={{ color: "hsl(var(--ink-40))" }}
+                className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Search"
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "hsl(var(--ink-40))";
-                }}
               >
                 <Search style={{ width: 17, height: 17 }} />
               </button>
@@ -519,14 +485,16 @@ export function Header() {
               <LanguageSwitcher />
 
               {/* CTA — desktop */}
-              <Link to="/contact" className="hidden md:inline-flex btn-gold text-[0.6rem] px-5 py-2.5">
+              <Link
+                to="/contact"
+                className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] text-[0.6rem] px-5 py-2.5 hover:opacity-90 transition-opacity"
+              >
                 {isAr ? "اطلب عرض سعر" : "Get Quote"}
               </Link>
 
               {/* Hamburger — mobile */}
               <button
-                className="md:hidden flex items-center justify-center w-9 h-9 transition-colors duration-200"
-                style={{ color: "hsl(var(--ink-100))" }}
+                className="md:hidden flex items-center justify-center w-9 h-9 text-foreground transition-colors duration-200"
                 onClick={() => setIsMenuOpen(true)}
                 aria-label="Open menu"
               >
@@ -545,7 +513,13 @@ export function Header() {
       </header>
 
       {/* ── Mobile drawer ── */}
-      <MobileDrawer open={isMenuOpen} onClose={() => setIsMenuOpen(false)} navLinks={navLinks} isAr={isAr} />
+      <MobileDrawer
+        open={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        navLinks={navLinks}
+        isAr={isAr}
+        currentPath={location.pathname}
+      />
 
       {/* ── Search overlay ── */}
       <SearchOverlay open={isSearchOpen} onClose={() => setIsSearchOpen(false)} navLinks={navLinks} />
