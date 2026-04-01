@@ -100,7 +100,11 @@ export default function AboutPage() {
           <img
             src={heroPort}
             alt="Salada operations"
-            className="w-full h-full object-cover object-center"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="sync"
+            className="w-full h-full object-cover object-center max-w-full"
             style={{ filter: "grayscale(18%) brightness(0.48)" }}
           />
           {/* single flat dark overlay — no white fade */}
@@ -297,7 +301,11 @@ export default function AboutPage() {
                 <img
                   src={lashingImage}
                   alt="Salada factory"
-                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover max-w-full"
                   style={{ filter: "grayscale(10%)" }}
                 />
                 <div
@@ -328,7 +336,10 @@ export default function AboutPage() {
             src={heroPort}
             alt="Industrial operations"
             loading="lazy"
-            className="w-full h-full object-cover"
+            decoding="async"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover max-w-full"
             style={{ filter: "grayscale(25%) brightness(0.35)" }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />

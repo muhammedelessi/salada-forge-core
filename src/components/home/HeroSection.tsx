@@ -14,7 +14,11 @@ export default function HeroSection() {
         <img
           src={heroImage}
           alt="Salada industrial operations"
-          className="w-full h-full object-cover scale-105"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="sync"
+          className="w-full h-full object-cover scale-105 max-w-full"
         />
       </div>
 

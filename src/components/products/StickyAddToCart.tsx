@@ -51,7 +51,10 @@ export function StickyAddToCart({
                 src={product.images[0]}
                 alt={product.title}
                 loading="lazy"
-                className="w-full h-full object-cover"
+                decoding="async"
+                width={48}
+                height={48}
+                className="w-full h-full object-cover max-w-full"
               />
             </div>
             <div className="min-w-0">

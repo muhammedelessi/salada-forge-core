@@ -109,7 +109,10 @@ function StrengthCard({
             src={item.image}
             alt={item.title}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            decoding="async"
+            width={400}
+            height={400}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] max-w-full"
             style={{ filter: "grayscale(12%) brightness(0.9)" }}
           />
           <div
@@ -184,7 +187,9 @@ export default function WhySaladaPage() {
           <img
             src={heroPort}
             alt="Why choose Salada"
-            className="w-full h-full object-cover object-center"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover object-center max-w-full"
             style={{ filter: "grayscale(18%) brightness(0.45)" }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
@@ -341,7 +346,10 @@ export default function WhySaladaPage() {
             src={heroPort}
             alt="Industrial operations"
             loading="lazy"
-            className="w-full h-full object-cover"
+            decoding="async"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover max-w-full"
             style={{ filter: "grayscale(25%) brightness(0.35)" }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />

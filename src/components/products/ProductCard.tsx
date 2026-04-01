@@ -46,7 +46,10 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            decoding="async"
+            width={400}
+            height={400}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] max-w-full"
             style={{ filter: "grayscale(8%)" }}
           />
         </div>
@@ -80,7 +83,10 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-600 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
+            decoding="async"
+            width={600}
+            height={450}
+            className="w-full h-full object-cover transition-transform duration-600 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04] max-w-full"
             style={{ filter: "grayscale(10%)", transition: "transform .6s cubic-bezier(.16,1,.3,1), filter .6s ease" }}
           />
         </div>

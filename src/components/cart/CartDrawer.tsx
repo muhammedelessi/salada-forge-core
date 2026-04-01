@@ -72,7 +72,10 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                         src={item.product.images[0]}
                         alt={item.product.title}
                         loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        decoding="async"
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 max-w-full"
                       />
                     </Link>
 

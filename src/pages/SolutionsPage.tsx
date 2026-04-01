@@ -71,7 +71,7 @@ export default function SolutionsPage() {
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="Industrial port solutions" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Industrial port solutions" width={1920} height={1080} className="w-full h-full object-cover max-w-full" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">
@@ -97,8 +97,11 @@ export default function SolutionsPage() {
                 <img
                   src={solution.products[0].images[0]}
                   alt={solution.title}
-                  className="w-full h-full object-cover"
+                  width={800}
+                  height={500}
+                  className="w-full h-full object-cover max-w-full"
                   loading="lazy"
+                  decoding="async"
                 />
               )}
             </div>
@@ -153,8 +156,11 @@ export default function SolutionsPage() {
                           <img
                             src={product.images[0]}
                             alt={product.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            width={300}
+                            height={300}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 max-w-full"
                             loading="lazy"
+                            decoding="async"
                           />
                         )}
                       </div>

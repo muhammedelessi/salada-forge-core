@@ -205,7 +205,10 @@ export default function ProductInquiryPage() {
                     src={product.images[0] || '/placeholder.svg'}
                     alt={product.title}
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    decoding="async"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover max-w-full"
                   />
                 </div>
                 <h3 className={cn('font-semibold mb-2', isRTL && 'text-right')}>{product.title}</h3>

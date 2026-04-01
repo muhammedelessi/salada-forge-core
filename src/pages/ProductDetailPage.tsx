@@ -120,7 +120,11 @@ export default function ProductDetailPage() {
                 <img
                   src={product.images[selectedImage] || '/placeholder.svg'}
                   alt={product.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={800}
+                  height={800}
+                  fetchPriority="high"
+                  decoding="sync"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 max-w-full"
                 />
               </div>
               {product.images.length > 1 && (
@@ -136,7 +140,7 @@ export default function ProductDetailPage() {
                           : 'border-border hover:border-muted-foreground'
                       )}
                     >
-                      <img src={image} alt={`${product.title} - view ${index + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                      <img src={image} alt={`${product.title} - view ${index + 1}`} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover max-w-full" />
                     </button>
                   ))}
                 </div>

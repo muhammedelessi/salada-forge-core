@@ -154,7 +154,11 @@ export default function HomePage() {
           <img
             src={heroImage}
             alt="Salada industrial operations"
-            className="w-full h-full object-cover animate-hero-zoom"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="sync"
+            className="w-full h-full object-cover animate-hero-zoom max-w-full"
           />
           {/* Multi-layer overlay: warm dark tint + vignette */}
           <div
@@ -459,7 +463,10 @@ export default function HomePage() {
                     src={sol.image}
                     alt={sol.title}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    decoding="async"
+                    width={600}
+                    height={375}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 max-w-full"
                   />
                   {/* Dark overlay */}
                   <div
@@ -637,7 +644,10 @@ export default function HomePage() {
             src={heroPort}
             alt="Industrial port"
             loading="lazy"
-            className="w-full h-full object-cover"
+            decoding="async"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover max-w-full"
             style={{ filter: "grayscale(35%) brightness(0.38)" }}
           />
           <div

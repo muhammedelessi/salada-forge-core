@@ -368,7 +368,10 @@ export function OrdersAdmin() {
                               src={item.image} 
                               alt={item.title} 
                               loading="lazy"
-                              className="w-12 h-12 object-cover"
+                              decoding="async"
+                              width={48}
+                              height={48}
+                              className="w-12 h-12 object-cover max-w-full"
                             />
                             <div className={`flex-1 ${isRTL() ? 'text-right' : ''}`}>
                               <p className="text-sm font-medium">{item.title}</p>
