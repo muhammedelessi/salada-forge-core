@@ -213,10 +213,7 @@ export default function IndustriesPage() {
         <div className="industrial-container">
           {industries.map((ind, i) => (
             <Reveal key={ind.id} delay={i * 60}>
-              <div
-                id={ind.id}
-                className="group border-b border-border last:border-b-0 transition-all duration-300 hover:bg-primary/5"
-              >
+           
                 <div className="flex items-stretch gap-0">
                   {/* Number */}
                   <div
