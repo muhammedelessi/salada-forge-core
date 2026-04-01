@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Ship, HardHat, Landmark, Factory, Warehouse } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -7,7 +7,6 @@ import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
 import heroPort from "@/assets/hero-port.jpg";
 import seaImage from "@/assets/solutions-sea.jpg";
-import lashingImage from "@/assets/divisions-lashing.jpg";
 import storageImage from "@/assets/solutions-storage.jpg";
 
 /* ── Scroll reveal ── */
