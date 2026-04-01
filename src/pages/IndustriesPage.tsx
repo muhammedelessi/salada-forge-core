@@ -295,7 +295,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           CTA — dark
       ════════════════════════════════ */}
-      <section className="relative py-14 md:py-20 overflow-hidden">
+      <section className="relative py-14 md:py-20 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -348,13 +348,13 @@ export default function IndustriesPage() {
                 {t("industries.ctaDesc")}
               </p>
 
-              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
+              <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/contact"
-                  className={`inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-6 py-3 hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-6 py-3 hover:opacity-90 transition-opacity"
                 >
                   <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </Link>
                 <Link
                   to="/solutions"
