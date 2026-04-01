@@ -95,10 +95,11 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : ""}`}
+      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : "text-left"}`}
+      dir={isAr ? "rtl" : "ltr"}
     >
       {/* Square image */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
+      <div className="relative overflow-hidden" style={{ aspectRatio: "1/1", maxHeight: "160px" }}>
         <img
           src={item.image}
           alt={item.title}
@@ -110,30 +111,28 @@ function StrengthCard({
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "hsl(var(--primary)/0.08)" }}
         />
+        {/* number — top start corner */}
         <span
-          className="absolute top-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
-          style={{
-            color: "hsl(var(--primary))",
-            left: isAr ? "auto" : "0.875rem",
-            right: isAr ? "0.875rem" : "auto",
-          }}
+          className="absolute top-3 start-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
+          style={{ color: "hsl(var(--primary))" }}
         >
           {item.num}
         </span>
       </div>
       {/* Content */}
       <div className="p-5 border-t border-border">
+        {/* gold bar — aligns to start */}
         <div
-          className={`h-px mb-3 ${isAr ? "ml-auto mr-0" : ""}`}
-          style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)" }}
+          className="h-px mb-3"
+          style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)", marginInlineStart: 0 }}
         />
         <h3
           className="font-black uppercase tracking-tight leading-snug mb-2 group-hover:text-primary transition-colors duration-300"
-          style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
+          style={{ fontSize: "1rem", color: "hsl(var(--foreground))" }}
         >
           {item.title}
         </h3>
-        <p className="leading-relaxed" style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}>
+        <p className="leading-relaxed" style={{ fontSize: "0.85rem", color: "hsl(var(--muted-foreground))" }}>
           {item.desc}
         </p>
       </div>
@@ -260,16 +259,55 @@ export default function WhySaladaPage() {
       </section>
 
       {/* ════════════════════════════════
-          SUPPORTING TEXT — editorial strip
+          IN SHORT — premium editorial strip
       ════════════════════════════════ */}
-      <section className="border-b border-border py-10 md:py-14" style={{ background: "hsl(var(--secondary)/0.25)" }}>
+      <section className="border-b border-border py-10 md:py-14 bg-background">
         <div className="industrial-container">
           <Reveal>
-            <div className={`max-w-2xl ${isAr ? "text-right mr-auto ml-0" : "mx-auto text-center"}`}>
-              <Label text={isAr ? "بكلمة واحدة" : "In Short"} isAr={isAr} center={!isAr} />
-              <p className="text-sm md:text-base leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                {t("why.supportingText")}
-              </p>
+            <div
+              className={`grid md:grid-cols-[auto_1fr] gap-8 md:gap-16 items-center ${isAr ? "md:flex md:flex-row-reverse" : ""}`}
+            >
+              {/* Left — big decorative label */}
+              <div className="shrink-0">
+                <div
+                  className="font-mono font-black leading-none select-none"
+                  style={{
+                    fontSize: "clamp(3.5rem, 8vw, 6rem)",
+                    color: "hsl(var(--primary)/0.08)",
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {isAr ? "باختصار" : "IN\nSHORT"}
+                </div>
+              </div>
+
+              {/* Vertical divider */}
+              <div className="hidden md:block w-px self-stretch" style={{ background: "hsl(var(--border))" }} />
+
+              {/* Right — content */}
+              <div className={isAr ? "text-right" : ""}>
+                <Label text={isAr ? "باختصار" : "In Short"} isAr={isAr} />
+                <p
+                  className="leading-relaxed"
+                  style={{
+                    fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
+                    color: "hsl(var(--foreground))",
+                    fontWeight: 500,
+                    maxWidth: "42rem",
+                  }}
+                >
+                  {t("why.supportingText")}
+                </p>
+                <Link
+                  to="/contact"
+                  className={`inline-flex items-center gap-2 mt-5 font-mono text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
+                  style={{ color: "hsl(var(--primary))" }}
+                >
+                  {isAr ? "تواصل معنا" : "Get In Touch"}
+                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>
