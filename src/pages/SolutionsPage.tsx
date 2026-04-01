@@ -236,10 +236,7 @@ export default function SolutionsPage() {
 
               {/* Content */}
               <Reveal
-                className={`flex flex-col justify-center p-8 md:p-10 ${txtOrder}`}
-                style={
-                  { background: isEven ? "hsl(var(--background))" : "hsl(var(--secondary)/0.3)" } as React.CSSProperties
-                }
+                className={`flex flex-col justify-center p-8 md:p-10 ${txtOrder} ${isEven ? "bg-background" : "bg-secondary/30"}`}
                 delay={80}
               >
                 <Label text={sol.title} isAr={isAr} />
