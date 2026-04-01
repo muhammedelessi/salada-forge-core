@@ -409,7 +409,7 @@ export function Header() {
           paddingTop: "env(safe-area-inset-top)",
         }}
       >
-        <div className="container-xl">
+        <div className="container-xl px-4 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* ── Logo — bigger ── */}
             <Link
