@@ -60,7 +60,6 @@ export default function AboutPage() {
   const pillars = [
     { num: "01", label: t.about.visionLabel, title: t.about.visionTitle, desc: t.about.visionDescription },
     { num: "02", label: t.about.missionLabel, title: t.about.missionTitle, desc: t.about.missionDescription },
-    { num: "03", label: t.about.commitmentLabel, title: t.about.commitmentTitle, desc: t.about.commitmentDescription },
   ];
 
   const factoryStats = [
