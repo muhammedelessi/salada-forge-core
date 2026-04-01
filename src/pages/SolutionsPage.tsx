@@ -71,7 +71,7 @@ export default function SolutionsPage() {
       {/* Hero */}
       <section className="relative py-32 md:py-48 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroPort} alt="Industrial port solutions" className="w-full h-full object-cover" />
+          <img src={heroPort} alt="Industrial port solutions" width={1920} height={1080} className="w-full h-full object-cover max-w-full" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
         <div className="industrial-container relative z-10 rtl:text-right">
