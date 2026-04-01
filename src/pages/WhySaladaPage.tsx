@@ -109,7 +109,10 @@ function StrengthCard({
             src={item.image}
             alt={item.title}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            decoding="async"
+            width={400}
+            height={400}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] max-w-full"
             style={{ filter: "grayscale(12%) brightness(0.9)" }}
           />
           <div
