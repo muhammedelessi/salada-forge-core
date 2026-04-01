@@ -7,10 +7,10 @@ import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
 import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/products/ProductCard";
-import heroPort from "@/assets/hero-port.jpg";
-import seaImage from "@/assets/solutions-sea.jpg";
-import lashingImage from "@/assets/divisions-lashing.jpg";
-import storageImage from "@/assets/solutions-storage.jpg";
+import heroPort from "@/assets/hero-port.webp";
+import seaImage from "@/assets/solutions-sea.webp";
+import lashingImage from "@/assets/divisions-lashing.webp";
+import storageImage from "@/assets/solutions-storage.webp";
 
 /* ── Scroll reveal ── */
 function Reveal({
