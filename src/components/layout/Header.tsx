@@ -404,13 +404,11 @@ export function Header() {
       <header
         dir={dir}
         className={cn(
-          "fixed top-0 inset-x-0 z-50",
+          "relative inset-x-0 z-50",
           "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-          isScrolled ? "shadow-md" : "",
         )}
         style={{
-          background: isScrolled ? "hsl(var(--background)/0.97)" : "hsl(var(--background))",
-          backdropFilter: isScrolled ? "blur(16px)" : "none",
+          background: "hsl(var(--background))",
           borderBottom: "1px solid hsl(var(--border))",
         }}
       >
