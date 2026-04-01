@@ -54,9 +54,9 @@ function Reveal({
 }
 
 /* ── Shared eyebrow label ── */
-function Label({ text, isAr }: { text: string; isAr: boolean }) {
+function Label({ text }: { text: string; isAr?: boolean }) {
   return (
-    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+    <div className="flex items-center gap-2.5 mb-3">
       <span
         style={{
           width: "1.25rem",
@@ -123,7 +123,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           HERO — compact
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
+      <section className="relative overflow-hidden" dir={isAr ? "rtl" : "ltr"} style={{ minHeight: "260px" }}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -146,9 +146,9 @@ export default function IndustriesPage() {
           className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
           style={{ minHeight: "260px" }}
         >
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
+          <div className="max-w-xl">
             {/* breadcrumb */}
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+            <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
                 className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
@@ -185,12 +185,10 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INTRO STRIP
       ════════════════════════════════ */}
-      <section className="border-b border-border py-8 md:py-10" style={{ background: "hsl(var(--secondary)/0.3)" }}>
+      <section className="border-b border-border py-8 md:py-10" dir={isAr ? "rtl" : "ltr"} style={{ background: "hsl(var(--secondary)/0.3)" }}>
         <div className="industrial-container">
           <Reveal>
-            <div
-              className={`grid md:grid-cols-[1fr_auto] gap-6 items-center ${isAr ? "text-right md:flex md:flex-row-reverse" : ""}`}
-            >
+            <div className="grid md:grid-cols-[1fr_auto] gap-6 items-center">
               <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {t("industries.introDesc")}
               </p>
@@ -212,19 +210,18 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INDUSTRIES — number ticker list
       ════════════════════════════════ */}
-      <section className="bg-background border-b border-border">
+      <section className="bg-background border-b border-border" dir={isAr ? "rtl" : "ltr"}>
         <div className="industrial-container">
           {industries.map((ind, i) => (
             <Reveal key={ind.id} delay={i * 60}>
               <div
                 id={ind.id}
-                dir={isAr ? "rtl" : "ltr"}
                 className="group border-b border-border last:border-b-0 transition-all duration-300 hover:bg-primary/5"
               >
-                <div className={`flex items-stretch gap-0 ${isAr ? "flex-row-reverse" : ""}`}>
+                <div className="flex items-stretch gap-0">
                   {/* Number */}
                   <div
-                    className={`flex items-center px-5 py-6 shrink-0 border-border ${isAr ? "border-l" : "border-r"}`}
+                    className="flex items-center px-5 py-6 shrink-0 border-border ltr:border-r rtl:border-l"
                     style={{ width: "72px" }}
                   >
                     <span
@@ -250,7 +247,7 @@ export default function IndustriesPage() {
                   </div>
 
                   {/* Content */}
-                  <div className={`flex flex-1 items-center gap-5 py-6 px-6 md:px-8 ${isAr ? "flex-row-reverse" : ""}`}>
+                  <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
                     {/* Image — small square */}
                     <div
                       className="relative overflow-hidden shrink-0 hidden sm:block"
@@ -270,7 +267,7 @@ export default function IndustriesPage() {
                     </div>
 
                     {/* Text */}
-                    <div className={`flex-1 ${isAr ? "text-right" : ""}`}>
+                    <div className="flex-1">
                       <h2
                         className="font-black uppercase tracking-tight leading-tight mb-1 group-hover:text-primary transition-colors duration-300"
                         style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.2rem)", color: "hsl(var(--foreground))" }}
@@ -284,7 +281,7 @@ export default function IndustriesPage() {
 
                     {/* Arrow */}
                     <ArrowRight
-                      className={`w-4 h-4 shrink-0 opacity-25 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1 group-hover:translate-x-0" : ""}`}
+                      className="w-4 h-4 shrink-0 opacity-25 group-hover:opacity-100 transition-all duration-300 ltr:group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
                       style={{ color: "hsl(var(--primary))" }}
                     />
                   </div>
@@ -298,7 +295,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           CTA — dark
       ════════════════════════════════ */}
-      <section className="relative py-14 md:py-20 overflow-hidden">
+      <section className="relative py-14 md:py-20 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -351,13 +348,13 @@ export default function IndustriesPage() {
                 {t("industries.ctaDesc")}
               </p>
 
-              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
+              <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/contact"
-                  className={`inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-6 py-3 hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-6 py-3 hover:opacity-90 transition-opacity"
                 >
                   <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </Link>
                 <Link
                   to="/solutions"
