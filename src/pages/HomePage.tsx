@@ -5,11 +5,11 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
-import heroImage from "@/assets/hero-logistics.jpg";
-import seaImage from "@/assets/solutions-sea.jpg";
-import storageImage from "@/assets/solutions-storage.jpg";
-import lashingImage from "@/assets/divisions-lashing.jpg";
-import heroPort from "@/assets/hero-port.jpg";
+import heroImage from "@/assets/hero-logistics.webp";
+import seaImage from "@/assets/solutions-sea.webp";
+import storageImage from "@/assets/solutions-storage.webp";
+import lashingImage from "@/assets/divisions-lashing.webp";
+import heroPort from "@/assets/hero-port.webp";
 
 /* ── useInView ── */
 function useInView(threshold = 0.12) {

@@ -8,7 +8,7 @@ import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
-import heroPort from "@/assets/hero-port.jpg";
+import heroPort from "@/assets/hero-port.webp";
 
 function SectionLabel({ text }: { text: string }) {
   return (

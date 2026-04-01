@@ -6,7 +6,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { useLanguageStore } from '@/store/languageStore';
 import { cn } from '@/lib/utils';
-import heroPort from '@/assets/hero-port.jpg';
+import heroPort from '@/assets/hero-port.webp';
 import { useProducts } from '@/hooks/useProducts';
 
 export default function SolutionsPage() {

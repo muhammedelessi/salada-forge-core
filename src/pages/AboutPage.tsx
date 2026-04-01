@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
-import heroPort from "@/assets/hero-port.jpg";
-import lashingImage from "@/assets/divisions-lashing.jpg";
+import heroPort from "@/assets/hero-port.webp";
+import lashingImage from "@/assets/divisions-lashing.webp";
 
 function Reveal({
   children,

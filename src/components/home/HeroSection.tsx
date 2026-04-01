@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
-import heroImage from "@/assets/hero-logistics.jpg";
+import heroImage from "@/assets/hero-logistics.webp";
 
 export default function HeroSection() {
   const { t, isRTL } = useLanguageStore();
