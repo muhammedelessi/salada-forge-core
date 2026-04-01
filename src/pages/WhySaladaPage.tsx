@@ -187,7 +187,9 @@ export default function WhySaladaPage() {
           <img
             src={heroPort}
             alt="Why choose Salada"
-            className="w-full h-full object-cover object-center"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover object-center max-w-full"
             style={{ filter: "grayscale(18%) brightness(0.45)" }}
           />
           <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
