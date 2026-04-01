@@ -414,7 +414,7 @@ export function Header() {
             {/* ── Logo — bigger ── */}
             <Link
               to="/"
-              className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-20" : "ps-20")}
+              className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-1" : "ps-1")}
               aria-label="Salada — Home"
             >
               <img src={saladaLogo} alt="SALADA Metal Industries" className="h-6 md:h-8 w-auto object-contain" />
