@@ -291,42 +291,24 @@ export default function HomePage() {
             borderTop: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-          <div className="container-xl">
-            <div className="grid grid-cols-4">
+          <div className="industrial-container">
+            <div className="grid grid-cols-2 md:grid-cols-4">
               {stats.map((s, i) => (
                 <div
                   key={s.label}
-                  className="py-3 md:py-5 text-center cursor-default"
-                  style={{
-                    borderRight: i < stats.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255, 255, 255, 0.04)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                  }}
+                  className={`py-4 sm:py-5 md:py-6 px-2 text-center cursor-default transition-colors duration-200 hover:bg-white/[0.04] ${
+                    i < stats.length - 1 ? "border-b md:border-b-0 md:border-r border-white/[0.08]" : ""
+                  } ${i % 2 === 0 && i < stats.length - 1 ? "border-r md:border-r border-white/[0.08]" : ""}`}
                 >
                   <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
-                      fontWeight: 900,
-                      color: "#c49614",
-                      lineHeight: 1,
-                      marginBottom: "4px",
-                    }}
+                    className="font-mono font-black text-primary leading-none mb-1"
+                    style={{ fontSize: "clamp(1.25rem, 3vw, 2rem)" }}
                   >
                     <Counter target={s.value} suffix={s.suffix} />
                   </div>
                   <p
-                    className="text-base text-[#bea7a7]"
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontWeight: 500,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.22em",
-                    }}
+                    className="font-mono font-medium uppercase tracking-[0.18em] text-white/60"
+                    style={{ fontSize: "clamp(0.5rem, 1.2vw, 0.75rem)" }}
                   >
                     {s.label}
                   </p>
