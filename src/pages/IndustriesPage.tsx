@@ -123,7 +123,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           HERO — compact
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
+      <section className="relative overflow-hidden" dir={isAr ? "rtl" : "ltr"} style={{ minHeight: "260px" }}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -146,9 +146,9 @@ export default function IndustriesPage() {
           className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
           style={{ minHeight: "260px" }}
         >
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
+          <div className="max-w-xl">
             {/* breadcrumb */}
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+            <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
                 className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
