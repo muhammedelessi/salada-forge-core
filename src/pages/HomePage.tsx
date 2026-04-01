@@ -154,7 +154,11 @@ export default function HomePage() {
           <img
             src={heroImage}
             alt="Salada industrial operations"
-            className="w-full h-full object-cover animate-hero-zoom"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="sync"
+            className="w-full h-full object-cover animate-hero-zoom max-w-full"
           />
           {/* Multi-layer overlay: warm dark tint + vignette */}
           <div
