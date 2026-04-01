@@ -463,7 +463,10 @@ export default function HomePage() {
                     src={sol.image}
                     alt={sol.title}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    decoding="async"
+                    width={600}
+                    height={375}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 max-w-full"
                   />
                   {/* Dark overlay */}
                   <div
