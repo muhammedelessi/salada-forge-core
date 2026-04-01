@@ -184,7 +184,11 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INTRO STRIP
       ════════════════════════════════ */}
-      <section className="border-b border-border py-8 md:py-10" dir={isAr ? "rtl" : "ltr"} style={{ background: "hsl(var(--secondary)/0.3)" }}>
+      <section
+        className="border-b border-border py-8 md:py-10"
+        dir={isAr ? "rtl" : "ltr"}
+        style={{ background: "hsl(var(--secondary)/0.3)" }}
+      >
         <div className="industrial-container">
           <Reveal>
             <div className="grid md:grid-cols-[1fr_auto] gap-6 items-center">
@@ -213,34 +217,12 @@ export default function IndustriesPage() {
         <div className="industrial-container">
           {industries.map((ind, i) => (
             <Reveal key={ind.id} delay={i * 60}>
-           
+              <div
+                id={ind.id}
+                className="group border-b border-border last:border-b-0 transition-all duration-300 hover:bg-primary/5"
+              >
                 <div className="flex items-stretch gap-0">
                   {/* Number */}
-                  <div
-                    className="flex items-center px-5 py-6 shrink-0 border-border ltr:border-r rtl:border-l"
-                    style={{ width: "72px" }}
-                  >
-                    <span
-                      className="font-mono font-black leading-none transition-all duration-300 group-hover:opacity-100"
-                      style={{
-                        fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                        color: "hsl(var(--primary))",
-                        opacity: 0.18,
-                      }}
-                      ref={(el) => {
-                        if (!el) return;
-                        const row = el.closest(".group")!;
-                        row.addEventListener("mouseenter", () => {
-                          el.style.opacity = "1";
-                        });
-                        row.addEventListener("mouseleave", () => {
-                          el.style.opacity = "0.18";
-                        });
-                      }}
-                    >
-                      {ind.num}
-                    </span>
-                  </div>
 
                   {/* Content */}
                   <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
