@@ -404,12 +404,15 @@ export function Header() {
       <header
         dir={dir}
         className={cn(
-          "relative inset-x-0 z-50",
+          "sticky top-0 inset-x-0 z-50",
           "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
+          isScrolled ? "shadow-md" : "",
         )}
         style={{
-          background: "hsl(var(--background))",
+          background: isScrolled ? "hsl(var(--background)/0.97)" : "hsl(var(--background))",
+          backdropFilter: isScrolled ? "blur(16px)" : "none",
           borderBottom: "1px solid hsl(var(--border))",
+          paddingTop: "env(safe-area-inset-top)",
         }}
       >
         <div className="container-xl">
