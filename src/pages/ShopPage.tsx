@@ -329,7 +329,7 @@ export default function ShopPage() {
 
       {/* ── MOBILE: category tabs ─── */}
       <div
-        className="lg:hidden sticky top-0 z-30 border-b border-border"
+        className="lg:hidden sticky top-16 md:top-20 z-30 border-b border-border"
         style={{ background: "hsl(var(--background))" }}
       >
         {/* Category tabs — horizontal scroll */}
