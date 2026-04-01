@@ -321,6 +321,7 @@ export default function HomePage() {
                     <Counter target={s.value} suffix={s.suffix} />
                   </div>
                   <p
+                    className="text-base text-[#bea7a7]"
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: "0.5rem",
