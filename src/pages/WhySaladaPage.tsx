@@ -246,7 +246,7 @@ export default function WhySaladaPage() {
           </div>
 
           {/* Row 2 — 2 cards centered, same width as row 1 cards */}
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             {strengths.slice(3).map((item, i) => (
               <Reveal key={item.num} delay={i * 70 + 210} className="w-full sm:w-[calc(33.333%-11px)]">
                 <StrengthCard item={item} isAr={isAr} />
