@@ -10,10 +10,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import heroPort from "@/assets/hero-port.jpg";
 
-/* ── Shared section label ── */
-function SectionLabel({ text, isAr }: { text: string; isAr: boolean }) {
+function SectionLabel({ text }: { text: string }) {
   return (
-    <div className={`flex items-center gap-2.5 mb-3 ${isAr ? "flex-row-reverse" : ""}`}>
+    <div className="flex items-center gap-2.5 mb-3">
       <span
         className="block shrink-0"
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
@@ -28,7 +27,6 @@ function SectionLabel({ text, isAr }: { text: string; isAr: boolean }) {
   );
 }
 
-/* ── Form field wrapper ── */
 function FormField({
   label,
   required,
@@ -52,7 +50,6 @@ function FormField({
   );
 }
 
-/* ── Shared input classes ── */
 const inputCls = `
   w-full bg-background border border-border
   px-4 py-3.5 text-[0.85rem]
@@ -107,12 +104,14 @@ export default function ContactPage() {
       title: t.contact.emailLabel,
       lines: ["Hello@salada.sa"],
       href: "mailto:Hello@salada.sa",
+      contentDir: "ltr" as const,
     },
     {
       icon: Phone,
       title: t.contact.phoneLabel,
       lines: ["050 016 5914"],
       href: "tel:+966500165914",
+      contentDir: "ltr" as const,
     },
     {
       icon: MapPin,
@@ -132,9 +131,6 @@ export default function ContactPage() {
     <Layout>
       <SEOHead {...seo} />
 
-      {/* ════════════════════════════════
-          HERO
-      ════════════════════════════════ */}
       <section className="relative overflow-hidden" dir={dir} style={{ minHeight: "240px" }}>
         <div className="absolute inset-0">
           <img
@@ -157,8 +153,8 @@ export default function ContactPage() {
           className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
           style={{ minHeight: "240px" }}
         >
-          <div className="max-w-xl">
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse" : ""}`}>
+          <div className="max-w-xl text-start">
+            <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
                 className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
@@ -174,7 +170,7 @@ export default function ContactPage() {
                 {isAr ? "تواصل معنا" : "Contact"}
               </span>
             </nav>
-            <SectionLabel text={t.contact.label} isAr={isAr} />
+            <SectionLabel text={t.contact.label} />
             <h1
               className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
               style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
@@ -182,51 +178,53 @@ export default function ContactPage() {
               {isAr ? "تواصل " : "Get In "}
               <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "معنا" : "Touch"}</span>
             </h1>
-            <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "34rem" }}>
+            <p
+              className="text-[0.8rem] leading-relaxed text-start"
+              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "34rem" }}
+            >
               {t.contact.description}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════
-          CONTACT INFO — large cards
-      ════════════════════════════════ */}
       <section className="border-b border-border" dir={dir} style={{ background: "hsl(var(--secondary)/0.3)" }}>
         <div className="industrial-container py-8 md:py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {contactItems.map((item) => {
               const Content = (
                 <div
-                  className="border border-border p-5 md:p-6 h-full transition-colors duration-200 hover:border-primary/40"
+                  className="border border-border p-5 md:p-6 h-full transition-colors duration-200 hover:border-primary/40 text-start"
                   style={{ background: "hsl(var(--background))" }}
                 >
-                  {/* Icon */}
                   <div
                     className="flex items-center justify-center w-10 h-10 mb-4"
                     style={{ background: "hsl(var(--primary)/0.1)" }}
                   >
                     <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(var(--primary))" }} />
                   </div>
-                  {/* Title */}
                   <p
                     className="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold mb-2"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {item.title}
                   </p>
-                  {/* Lines */}
-                  {item.lines.map((line, j) => (
-                    <p
-                      key={j}
-                      className="text-[0.9rem] leading-relaxed font-medium"
-                      style={{
-                        color: j === 0 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
-                      }}
-                    >
-                      {line}
-                    </p>
-                  ))}
+                  <div
+                    dir={item.contentDir ?? dir}
+                    className={item.contentDir === "ltr" ? (isAr ? "text-end" : "text-start") : "text-start"}
+                  >
+                    {item.lines.map((line, j) => (
+                      <p
+                        key={j}
+                        className="text-[0.9rem] leading-relaxed font-medium"
+                        style={{
+                          color: j === 0 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
+                        }}
+                      >
+                        {line}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               );
 
@@ -244,15 +242,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
-          FORM + SIDEBAR
-      ════════════════════════════════ */}
       <section className="bg-background border-b border-border py-12 md:py-16" dir={dir}>
         <div className="industrial-container">
-          <div className="grid lg:grid-cols-3 gap-10 md:gap-14">
-            {/* ── Form — 2/3 ── */}
-            <div className={`lg:col-span-2 ${isAr ? "lg:order-2" : "lg:order-1"}`}>
-              <SectionLabel text={t.contact.sendMessage} isAr={isAr} />
+          <div className="grid lg:grid-cols-3 gap-10 md:gap-14 items-start">
+            <div className="lg:col-span-2 text-start">
+              <SectionLabel text={t.contact.sendMessage} />
               <h2
                 className="font-black uppercase leading-tight tracking-[-0.02em] mb-8"
                 style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.7rem)", color: "hsl(var(--foreground))" }}
@@ -261,8 +255,7 @@ export default function ContactPage() {
                 <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "رسالة" : "Message"}</span>
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name + Email */}
+              <form onSubmit={handleSubmit} className="space-y-6" dir={dir}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <FormField label={t.contact.name} required>
                     <input
@@ -271,7 +264,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={isAr ? "أدخل اسمك الكامل" : "Enter your full name"}
-                      className={inputCls}
+                      className={`${inputCls} text-start`}
                     />
                   </FormField>
                   <FormField label={t.checkout?.email || (isAr ? "البريد الإلكتروني" : "Email")} required>
@@ -282,12 +275,11 @@ export default function ContactPage() {
                       dir="ltr"
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="email@example.com"
-                      className={`${inputCls} ${isAr ? "text-end" : ""}`}
+                      className={`${inputCls} ${isAr ? "text-end" : "text-start"}`}
                     />
                   </FormField>
                 </div>
 
-                {/* Company + Phone */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <FormField label={t.checkout?.company || (isAr ? "الشركة" : "Company")}>
                     <input
@@ -295,7 +287,7 @@ export default function ContactPage() {
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder={isAr ? "اسم الشركة (اختياري)" : "Company name (optional)"}
-                      className={inputCls}
+                      className={`${inputCls} text-start`}
                     />
                   </FormField>
                   <FormField label={t.checkout?.phone || (isAr ? "الهاتف" : "Phone")}>
@@ -305,18 +297,17 @@ export default function ContactPage() {
                       dir="ltr"
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+966 5X XXX XXXX"
-                      className={`${inputCls} ${isAr ? "text-end" : ""}`}
+                      className={`${inputCls} ${isAr ? "text-end" : "text-start"}`}
                     />
                   </FormField>
                 </div>
 
-                {/* Subject */}
                 <FormField label={t.contact.subject} required>
                   <select
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className={inputCls}
+                    className={`${inputCls} text-start`}
                   >
                     <option value="">{t.contact.selectSubject}</option>
                     <option value="quote">{t.contact.requestQuote}</option>
@@ -328,7 +319,6 @@ export default function ContactPage() {
                   </select>
                 </FormField>
 
-                {/* Message */}
                 <FormField label={t.contact.message} required>
                   <textarea
                     required
@@ -336,28 +326,25 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder={t.contact.messagePlaceholder}
-                    className={`${inputCls} resize-none`}
+                    className={`${inputCls} resize-none text-start`}
                   />
                 </FormField>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`inline-flex items-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 transition-opacity hover:opacity-90 disabled:opacity-50 ${isAr ? "flex-row-reverse" : ""}`}
+                  className="inline-flex items-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 transition-opacity hover:opacity-90 disabled:opacity-50"
                 >
                   <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
-                  <Send className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  <Send className="w-3.5 h-3.5 rtl:rotate-180" />
                 </button>
               </form>
             </div>
 
-            {/* ── Sidebar — 1/3 ── */}
-            <div className={`lg:col-span-1 ${isAr ? "lg:order-1" : "lg:order-2"}`}>
-              {/* WhatsApp CTA */}
+            <div className="lg:col-span-1 text-start">
               <div className="p-5 mb-6 border border-border" style={{ background: "hsl(var(--primary)/0.05)" }}>
-                <SectionLabel text={isAr ? "واتساب" : "WhatsApp"} isAr={isAr} />
-                <p className="text-sm mb-4" style={{ color: "hsl(var(--muted-foreground))" }}>
+                <SectionLabel text={isAr ? "واتساب" : "WhatsApp"} />
+                <p className="text-sm mb-4 text-start" style={{ color: "hsl(var(--muted-foreground))" }}>
                   {isAr
                     ? "تواصل معنا مباشرة على واتساب للردود السريعة."
                     : "Chat with us directly on WhatsApp for quick responses."}
@@ -366,15 +353,14 @@ export default function ContactPage() {
                   href="https://wa.me/966500165914"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+                  className="inline-flex items-center gap-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
                 >
                   <span>{isAr ? "ابدأ المحادثة" : "Start Chat"}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </a>
               </div>
 
-              {/* Quick links */}
-              <div className="border-t border-border pt-5">
+              <div className="border-t border-border pt-5 text-start">
                 <p
                   className="font-mono text-[0.57rem] uppercase tracking-[0.25em] mb-4"
                   style={{ color: "hsl(var(--primary))" }}
@@ -389,13 +375,11 @@ export default function ContactPage() {
                   <Link
                     key={lnk.href}
                     to={lnk.href}
-                    className={`flex items-center justify-between py-3 border-b border-border group hover:text-primary transition-colors duration-200 ${isAr ? "flex-row-reverse" : ""}`}
+                    className="flex items-center justify-between py-3 border-b border-border group hover:text-primary transition-colors duration-200"
                     style={{ color: "hsl(var(--foreground)/0.7)", fontSize: "0.8rem", fontWeight: 500 }}
                   >
                     {lnk.label}
-                    <ArrowRight
-                      className={`w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity ${isAr ? "rotate-180" : ""}`}
-                    />
+                    <ArrowRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity rtl:rotate-180" />
                   </Link>
                 ))}
               </div>
@@ -404,14 +388,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════
-          MAP
-      ════════════════════════════════ */}
       <section className="border-b border-border" dir={dir}>
         <div className="industrial-container py-10 md:py-14">
           <div className="flex items-center justify-between mb-6">
-            <div>
-              <SectionLabel text={t.contact.headquarters} isAr={isAr} />
+            <div className="text-start">
+              <SectionLabel text={t.contact.headquarters} />
               <h2
                 className="font-black uppercase leading-tight tracking-[-0.02em]"
                 style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "hsl(var(--foreground))" }}
