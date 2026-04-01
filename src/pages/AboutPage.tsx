@@ -60,6 +60,7 @@ export default function AboutPage() {
   const pillars = [
     { num: "01", label: t.about.visionLabel, title: t.about.visionTitle, desc: t.about.visionDescription },
     { num: "02", label: t.about.missionLabel, title: t.about.missionTitle, desc: t.about.missionDescription },
+    { num: "03", label: t.about.commitmentLabel, title: t.about.commitmentTitle, desc: t.about.commitmentDescription },
   ];
 
   const factoryStats = [
@@ -74,90 +75,51 @@ export default function AboutPage() {
       <SEOHead {...seo} />
 
       {/* ════════════════════════════════
-          HERO — fullscreen with image
+          HERO — compact page hero
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden" style={{ minHeight: "280px" }}>
+        {/* Background image — fixed height, not full screen */}
         <div className="absolute inset-0">
           <img
             src={heroPort}
             alt="Salada manufacturing facility"
-            className="w-full h-full object-cover"
-            style={{ filter: "grayscale(15%) brightness(0.85)", animation: "heroZoom 16s ease-out both" }}
+            className="w-full h-full object-cover object-center"
+            style={{ filter: "grayscale(20%) brightness(0.5)" }}
           />
+          {/* Single clean dark overlay */}
+          <div className="absolute inset-0" style={{ background: "rgba(10,8,4,0.62)" }} />
+          {/* Subtle bottom fade to page bg */}
           <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(10,8,4,0.65) 0%, rgba(10,8,4,0.5) 50%, rgba(10,8,4,0.72) 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: isAr
-                ? "linear-gradient(to left, rgba(10,8,4,0.65), transparent 55%)"
-                : "linear-gradient(to right, rgba(10,8,4,0.65), transparent 55%)",
-            }}
-          />
-          {/* grid lines */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 1px, transparent 1px, transparent 52px), repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 1px, transparent 1px, transparent 52px)",
-            }}
-          />
-          {/* scan line */}
-          <div
-            className="absolute inset-x-0 pointer-events-none"
-            style={{
-              top: "38%",
-              height: "1px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.5) 30%, hsl(var(--primary)/0.5) 70%, transparent)",
-              animation: "scanPulse 8s ease-in-out infinite",
-            }}
-          />
-          {/* corner marks */}
-          <div
-            className="absolute top-6 left-6 w-5 h-5"
-            style={{
-              borderTop: "1.5px solid hsl(var(--primary)/0.5)",
-              borderLeft: "1.5px solid hsl(var(--primary)/0.5)",
-            }}
-          />
-          <div
-            className="absolute top-6 right-6 w-5 h-5"
-            style={{
-              borderTop: "1.5px solid hsl(var(--primary)/0.5)",
-              borderRight: "1.5px solid hsl(var(--primary)/0.5)",
-            }}
+            className="absolute bottom-0 inset-x-0 h-24"
+            style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }}
           />
           {/* bottom gold line */}
           <div
             className="absolute bottom-0 inset-x-0"
             style={{
-              height: "1px",
+              height: "1.5px",
               background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.4) 30%, hsl(var(--primary)/0.4) 70%, transparent)",
+                "linear-gradient(to right, transparent, hsl(var(--primary)/0.5) 30%, hsl(var(--primary)/0.5) 70%, transparent)",
             }}
           />
         </div>
 
-        <div className="industrial-container relative z-10">
-          <div className={`max-w-3xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
+        {/* Content — vertically centered */}
+        <div
+          className="industrial-container relative z-10 py-12 md:py-16 flex flex-col justify-center"
+          style={{ minHeight: "280px" }}
+        >
+          <div className={`max-w-2xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
             {/* breadcrumb */}
-            <nav
-              className={`flex items-center gap-2 mb-8 animate-fade-up delay-100 ${isAr ? "flex-row-reverse justify-end" : ""}`}
-            >
+            <nav className={`flex items-center gap-2 mb-5 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
               <Link
                 to="/"
-                className="font-mono text-[0.5rem] uppercase tracking-[0.2em] transition-colors"
-                style={{ color: "rgba(255,255,255,0.4)" }}
+                className="font-mono text-[0.5rem] uppercase tracking-[0.2em]"
+                style={{ color: "rgba(255,255,255,0.38)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>/</span>
+              <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "10px" }}>/</span>
               <span
                 className="font-mono text-[0.5rem] uppercase tracking-[0.2em]"
                 style={{ color: "hsl(var(--primary))" }}
@@ -166,67 +128,43 @@ export default function AboutPage() {
               </span>
             </nav>
 
-            {/* eyebrow */}
+            {/* eyebrow label */}
             <div
-              className={`flex items-center gap-3 mb-5 animate-fade-up delay-200 ${isAr ? "flex-row-reverse justify-end" : ""}`}
+              className={`flex items-center gap-3 mb-3 animate-fade-up delay-100 ${isAr ? "flex-row-reverse justify-end" : ""}`}
             >
               <span
-                className="block flex-shrink-0"
-                style={{ width: "1.5rem", height: "1.5px", background: "hsl(var(--primary)/0.7)" }}
+                style={{
+                  width: "1.25rem",
+                  height: "1.5px",
+                  background: "hsl(var(--primary)/0.7)",
+                  display: "block",
+                  flexShrink: 0,
+                }}
               />
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.3em]"
+                className="font-mono text-[0.58rem] uppercase tracking-[0.28em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t.about.label}
               </span>
             </div>
 
-            {/* H1 */}
+            {/* H1 — single line, white + gold accent inline */}
             <h1
-              className="font-black uppercase leading-[0.92] tracking-[-0.03em] mb-2 animate-fade-up delay-300"
-              style={{ fontSize: "clamp(2.25rem, 5.5vw, 4rem)", color: "#ffffff" }}
+              className="font-black uppercase leading-[0.92] tracking-[-0.03em] mb-4 animate-fade-up delay-200"
+              style={{ fontSize: "clamp(1.75rem, 4.5vw, 3rem)", color: "#ffffff" }}
             >
-              {isAr ? "عن" : "About"}
-            </h1>
-            <h1
-              className="font-black uppercase leading-[0.92] tracking-[-0.03em] mb-3 animate-fade-up delay-400"
-              style={{ fontSize: "clamp(2.25rem, 5.5vw, 4rem)", color: "hsl(var(--primary))" }}
-            >
-              Salada
+              {isAr ? "عن " : "About "}
+              <span style={{ color: "hsl(var(--primary))" }}>Salada</span>
             </h1>
 
-            {/* divider */}
-            <div
-              className={`h-px mb-6 animate-fade-up delay-400 ${isAr ? "ml-auto mr-0" : ""}`}
-              style={{ width: "3rem", background: "hsl(var(--primary)/0.55)" }}
-            />
-
-            {/* description */}
+            {/* Short description */}
             <p
-              className="text-sm md:text-base leading-relaxed max-w-xl mb-6 animate-fade-up delay-500"
-              style={{ color: "rgba(255,255,255,0.55)" }}
+              className="text-sm leading-relaxed animate-fade-up delay-300"
+              style={{ color: "rgba(255,255,255,0.5)", maxWidth: "38rem" }}
             >
               {t.about.descP1}
             </p>
-
-            {/* CTAs */}
-            <div className={`flex flex-wrap gap-3 animate-fade-up delay-600 ${isAr ? "flex-row-reverse" : ""}`}>
-              <Link
-                to="/solutions"
-                className={`inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-6 py-3 transition-all duration-300 hover:opacity-90 ${isAr ? "flex-row-reverse" : ""}`}
-              >
-                <span>{isAr ? "حلولنا" : "Our Solutions"}</span>
-                <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
-              </Link>
-              <Link
-                to="/contact"
-                className={`inline-flex items-center gap-2 px-6 py-3 border font-mono text-[0.65rem] uppercase tracking-[0.18em] transition-all duration-300 ${isAr ? "flex-row-reverse" : ""}`}
-                style={{ borderColor: "rgba(255,255,255,0.25)", color: "#ffffff" }}
-              >
-                {t.about.contactUs}
-              </Link>
-            </div>
           </div>
         </div>
       </section>
