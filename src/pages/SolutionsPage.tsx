@@ -202,7 +202,6 @@ export default function SolutionsPage() {
                     alt={solution.title}
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                    style={{ filter: "grayscale(10%)" }}
                   />
                 ) : (
                   <div
