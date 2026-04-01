@@ -341,33 +341,63 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           VISION 2030
       ════════════════════════════════════ */}
-      <section className="bg-paper-1 py-12 md:py-16 border-b border-warm">
-        <div className="container-xl">
-          <div className="grid md:grid-cols-2 gap-14 md:gap-24 items-center">
-            <Reveal className={isAr ? "text-right order-2 md:order-1" : ""}>
+      <section style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
+        <div
+          style={{
+            background: "hsl(var(--primary) / 0.08)",
+            borderTop: "2px solid hsl(var(--primary))",
+            borderBottom: "1px solid hsl(var(--primary) / 0.2)",
+          }}
+          className="px-5 py-8 md:px-10 md:py-10"
+        >
+          <div className={`flex flex-col md:flex-row md:items-center md:justify-between gap-6 ${isAr ? "md:flex-row-reverse" : ""}`}>
+            {/* LEFT SIDE */}
+            <div className={`flex flex-col md:flex-row md:items-center gap-5 ${isAr ? "md:flex-row-reverse text-right" : ""}`}>
+              {/* BIG NUMBER */}
               <span
-                className={`font-mono uppercase block text-primary mb-5 ${isAr ? "flex-row-reverse" : ""} text-base`}
-                style={{ letterSpacing: "0.28em" }}
+                className="font-mono font-black text-primary leading-none shrink-0"
+                style={{ fontSize: "clamp(2.75rem, 6vw, 3.5rem)" }}
               >
-                {t("vision.label")}
+                2030
               </span>
-              <h2
-                className="uppercase font-black text-foreground mb-5"
-                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1 }}
+
+              {/* DIVIDER — horizontal on mobile, vertical on desktop */}
+              <div className="w-full h-px md:w-px md:h-[52px] shrink-0" style={{ background: "hsl(var(--primary) / 0.25)" }} />
+
+              {/* TEXT BLOCK */}
+              <div>
+                <span
+                  className="font-mono uppercase block text-primary mb-1.5"
+                  style={{ fontSize: "0.6rem", letterSpacing: "0.28em" }}
+                >
+                  {t("vision.label")}
+                </span>
+                <h2
+                  className="uppercase font-black text-foreground"
+                  style={{ fontSize: "clamp(1rem, 2.2vw, 1.375rem)", letterSpacing: "-0.02em", lineHeight: 1.1 }}
+                >
+                  {t("vision.title")}
+                </h2>
+              </div>
+            </div>
+
+            {/* RIGHT SIDE */}
+            <div className={`max-w-[380px] ${isAr ? "text-right" : ""}`}>
+              <p
+                className="text-muted-foreground"
+                style={{ fontSize: "0.8125rem", lineHeight: 1.75, marginBottom: "14px" }}
               >
-                {t("vision.title")}
-              </h2>
-              <p className="max-w-md mb-7 text-muted-foreground" style={{ fontSize: "0.8125rem", lineHeight: 1.7 }}>{t("vision.description")}</p>
+                {t("vision.description")}
+              </p>
               <Link
                 to="/why-salada"
-                className="btn-gold inline-flex"
-                style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}
+                className="industrial-button inline-flex items-center gap-2"
+                style={{ fontSize: "0.6rem", padding: "8px 18px" }}
               >
-                <span>{isAr ? "تعرف على صلادة" : "About Salada"}</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>{t("nav.whySalada")}</span>
+                <ArrowUpRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
               </Link>
-            </Reveal>
-
+            </div>
           </div>
         </div>
       </section>
