@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Ship, HardHat, Landmark, Factory, Warehouse } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -7,7 +7,6 @@ import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
 import heroPort from "@/assets/hero-port.jpg";
 import seaImage from "@/assets/solutions-sea.jpg";
-import lashingImage from "@/assets/divisions-lashing.jpg";
 import storageImage from "@/assets/solutions-storage.jpg";
 
 /* ── Scroll reveal ── */
@@ -84,35 +83,35 @@ export default function IndustriesPage() {
       num: "01",
       name: t("industries.logistics"),
       desc: t("industries.logisticsDesc"),
-      image: seaImage,
+      icon: Ship,
     },
     {
       id: "construction",
       num: "02",
       name: t("industries.construction"),
       desc: t("industries.constructionDesc"),
-      image: lashingImage,
+      icon: HardHat,
     },
     {
       id: "government",
       num: "03",
       name: t("industries.government"),
       desc: t("industries.governmentDesc"),
-      image: heroPort,
+      icon: Landmark,
     },
     {
       id: "industrial",
       num: "04",
       name: t("industries.industrial"),
       desc: t("industries.industrialDesc"),
-      image: storageImage,
+      icon: Factory,
     },
     {
       id: "storage",
       num: "05",
       name: t("industries.storage"),
       desc: t("industries.storageDesc"),
-      image: seaImage,
+      icon: Warehouse,
     },
   ];
 
@@ -248,22 +247,12 @@ export default function IndustriesPage() {
 
                   {/* Content */}
                   <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
-                    {/* Image — small square */}
+                    {/* Icon */}
                     <div
-                      className="relative overflow-hidden shrink-0 hidden sm:block"
-                      style={{ width: "64px", height: "64px" }}
+                      className="relative shrink-0 hidden sm:flex items-center justify-center bg-primary rounded-md transition-transform duration-300 group-hover:scale-105"
+                      style={{ width: "52px", height: "52px" }}
                     >
-                      <img
-                        src={ind.image}
-                        alt={ind.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
-                        style={{ filter: "grayscale(15%)" }}
-                      />
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: "hsl(var(--primary)/0.12)" }}
-                      />
+                      <ind.icon className="w-5 h-5 text-primary-foreground" />
                     </div>
 
                     {/* Text */}
