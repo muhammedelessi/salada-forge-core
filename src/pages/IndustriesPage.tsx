@@ -249,7 +249,7 @@ export default function IndustriesPage() {
                   <div className="flex flex-1 items-center gap-5 py-6 px-6 md:px-8">
                     {/* Icon */}
                     <div
-                      className="relative shrink-0 hidden sm:flex items-center justify-center bg-primary rounded-md transition-transform duration-300 group-hover:scale-105"
+                      className="relative shrink-0 flex items-center justify-center bg-primary rounded-md transition-transform duration-300 group-hover:scale-105"
                       style={{ width: "52px", height: "52px" }}
                     >
                       <ind.icon className="w-5 h-5 text-primary-foreground" />
