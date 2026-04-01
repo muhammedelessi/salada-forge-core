@@ -97,8 +97,11 @@ export default function SolutionsPage() {
                 <img
                   src={solution.products[0].images[0]}
                   alt={solution.title}
-                  className="w-full h-full object-cover"
+                  width={800}
+                  height={500}
+                  className="w-full h-full object-cover max-w-full"
                   loading="lazy"
+                  decoding="async"
                 />
               )}
             </div>
