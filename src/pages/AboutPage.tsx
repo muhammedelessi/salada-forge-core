@@ -185,11 +185,7 @@ export default function AboutPage() {
             <Reveal delay={120}>
               <div className="grid grid-cols-2 gap-px" style={{ background: "hsl(var(--border))" }}>
                 {factoryStats.map((s, i) => (
-                  <div
-                    key={i}
-                    className="p-5 transition-colors duration-200 hover:bg-primary/5"
-                    style={"hsl(var(--background))"}
-                  >
+                  <div key={i} className="p-5 transition-colors duration-200 hover:bg-primary/5">
                     <div
                       className="font-mono font-black mb-1"
                       style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)", color: "hsl(var(--primary))" }}
