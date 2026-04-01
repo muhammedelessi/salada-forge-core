@@ -95,44 +95,88 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full flex flex-row sm:flex-col ${isAr ? "text-right" : "text-left"}`}
+      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : "text-left"}`}
       dir={isAr ? "rtl" : "ltr"}
     >
-      {/* Image — 1:1 square on mobile (side), full width on desktop (top) */}
-      <div className="relative overflow-hidden shrink-0 w-[120px] sm:w-full" style={{ aspectRatio: "1/1" }}>
-        <img
-          src={item.image}
-          alt={item.title}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-          style={{ filter: "grayscale(12%) brightness(0.9)" }}
-        />
+      {/*
+        Mobile  → row: [square 100px image] [text]
+        Desktop → col: [full-width image]   [text below]
+      */}
+      <div className="flex flex-row sm:flex-col h-full">
+        {/* ── Image ── */}
+        {/* Mobile: 100px square | Desktop: full width, aspect 1/1 */}
+        <div className="relative overflow-hidden shrink-0 sm:shrink-0" style={{ width: "100px", aspectRatio: "1/1" }}>
+          {/* Mobile image */}
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            className="sm:hidden w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            style={{ filter: "grayscale(12%) brightness(0.9)" }}
+          />
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:hidden"
+            style={{ background: "hsl(var(--primary)/0.08)" }}
+          />
+          <span
+            className="absolute top-2 start-2 font-mono text-[0.5rem] uppercase tracking-[0.2em] sm:hidden"
+            style={{ color: "hsl(var(--primary))" }}
+          >
+            {item.num}
+          </span>
+        </div>
+
+        {/* Desktop full-width image — hidden on mobile */}
+        <div className="relative overflow-hidden w-full hidden sm:block" style={{ aspectRatio: "1/1" }}>
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            style={{ filter: "grayscale(12%) brightness(0.9)" }}
+          />
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{ background: "hsl(var(--primary)/0.08)" }}
+          />
+          <span
+            className="absolute top-3 start-3 font-mono text-[0.5rem] uppercase tracking-[0.2em]"
+            style={{ color: "hsl(var(--primary))" }}
+          >
+            {item.num}
+          </span>
+        </div>
+
+        {/* ── Text ── */}
         <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ background: "hsl(var(--primary)/0.08)" }}
-        />
-        <span
-          className="absolute top-3 start-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
-          style={{ color: "hsl(var(--primary))" }}
+          className="
+          p-3 sm:p-4
+          flex flex-col justify-center flex-1
+          border-s border-s-border sm:border-s-0
+          sm:border-t sm:border-t-border
+        "
         >
-          {item.num}
-        </span>
-      </div>
-      {/* Content */}
-      <div className="p-4 sm:p-5 sm:border-t border-border flex flex-col justify-center min-w-0">
-        <div
-          className="h-px mb-3 hidden sm:block"
-          style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)", marginInlineStart: 0 }}
-        />
-        <h3
-          className="font-black uppercase tracking-tight leading-snug mb-1.5 sm:mb-2 group-hover:text-primary transition-colors duration-300 text-[0.85rem] sm:text-[1rem]"
-          style={{ color: "hsl(var(--foreground))" }}
-        >
-          {item.title}
-        </h3>
-        <p className="leading-relaxed text-[0.78rem] sm:text-[0.85rem]" style={{ color: "hsl(var(--muted-foreground))" }}>
-          {item.desc}
-        </p>
+          <div className="h-px mb-2" style={{ width: "1.25rem", background: "hsl(var(--primary)/0.6)" }} />
+          <h3
+            className="font-black uppercase tracking-tight leading-snug mb-1.5 group-hover:text-primary transition-colors duration-300"
+            style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
+          >
+            {item.title}
+          </h3>
+          <p
+            className="leading-relaxed hidden sm:block"
+            style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
+          >
+            {item.desc}
+          </p>
+          {/* on mobile show shorter desc */}
+          <p
+            className="leading-relaxed sm:hidden line-clamp-2"
+            style={{ fontSize: "0.72rem", color: "hsl(var(--muted-foreground))" }}
+          >
+            {item.desc}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -246,7 +290,7 @@ export default function WhySaladaPage() {
           </div>
 
           {/* Row 2 — 2 cards centered, same width as row 1 cards */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex justify-center gap-4">
             {strengths.slice(3).map((item, i) => (
               <Reveal key={item.num} delay={i * 70 + 210} className="w-full sm:w-[calc(33.333%-11px)]">
                 <StrengthCard item={item} isAr={isAr} />
