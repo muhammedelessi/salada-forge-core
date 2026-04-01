@@ -225,7 +225,6 @@ export default function HomePage() {
               textTransform: "uppercase",
               lineHeight: 0.93,
               letterSpacing: "-0.03em",
-              color: "hsl(var(--gold))",
               marginBottom: "1.25rem",
             }}
           >
