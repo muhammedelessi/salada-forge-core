@@ -34,7 +34,10 @@ function MegaMenu({
         }}
       />
 
-      <div className="border-b border-border" style={{ background: "hsl(var(--background)/0.97)", backdropFilter: "blur(12px)" }}>
+      <div
+        className="border-b border-border"
+        style={{ background: "hsl(var(--background)/0.97)", backdropFilter: "blur(12px)" }}
+      >
         <div className="container-xl py-10">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
             {items.map((item) => (
@@ -60,9 +63,7 @@ function MegaMenu({
                 <span className="text-xs font-black uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
                   {item.label}
                 </span>
-                <span className="text-[0.7rem] leading-relaxed text-muted-foreground">
-                  {item.desc}
-                </span>
+                <span className="text-[0.7rem] leading-relaxed text-muted-foreground">{item.desc}</span>
                 <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] font-mono uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   View <ArrowUpRight style={{ width: 10, height: 10 }} />
                 </span>
@@ -141,9 +142,7 @@ function MobileDrawer({
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-[0.55rem] font-mono text-primary">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <span className="text-[0.55rem] font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
                   <span
                     className={cn(
                       "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
@@ -268,11 +267,7 @@ function SearchOverlay({
           </div>
         )}
 
-        {q && results.length === 0 && (
-          <p className="px-5 py-4 text-sm text-muted-foreground">
-            No results for "{q}"
-          </p>
-        )}
+        {q && results.length === 0 && <p className="px-5 py-4 text-sm text-muted-foreground">No results for "{q}"</p>}
       </div>
     </div>
   );
@@ -396,8 +391,7 @@ export function Header() {
     megaTimer.current = setTimeout(() => setOpenMega(null), 180);
   };
 
-  const isActive = (href: string) =>
-    href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
+  const isActive = (href: string) => (href === "/" ? location.pathname === "/" : location.pathname.startsWith(href));
 
   return (
     <>
@@ -418,7 +412,11 @@ export function Header() {
         <div className="container-xl">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* ── Logo — bigger ── */}
-            <Link to="/" className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-4" : "ps-4")} aria-label="Salada — Home">
+            <Link
+              to="/"
+              className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-10" : "ps-10")}
+              aria-label="Salada — Home"
+            >
               <img src={saladaLogo} alt="SALADA Metal Industries" className="h-6 md:h-8 w-auto object-contain" />
             </Link>
 
@@ -440,9 +438,7 @@ export function Header() {
                         "relative flex items-center gap-1 px-3 py-2",
                         "text-[0.7rem] font-black uppercase tracking-[0.08em]",
                         "transition-colors duration-200 group",
-                        active
-                          ? "text-primary"
-                          : "text-muted-foreground hover:text-foreground",
+                        active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                       )}
                     >
                       {link.label}
@@ -456,14 +452,10 @@ export function Header() {
                         />
                       )}
                       {/* active underline */}
-                      {active && (
-                        <span className="absolute bottom-0 inset-x-3 h-px bg-primary" />
-                      )}
+                      {active && <span className="absolute bottom-0 inset-x-3 h-px bg-primary" />}
                       {/* hover underline */}
                       {!active && (
-                        <span
-                          className="absolute bottom-0 ltr:left-3 rtl:right-3 h-px bg-foreground transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]"
-                        />
+                        <span className="absolute bottom-0 ltr:left-3 rtl:right-3 h-px bg-foreground transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]" />
                       )}
                     </Link>
                   </div>
