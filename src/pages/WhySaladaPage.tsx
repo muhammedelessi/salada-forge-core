@@ -95,11 +95,11 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : "text-left"}`}
+      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full flex flex-row sm:flex-col ${isAr ? "text-right" : "text-left"}`}
       dir={isAr ? "rtl" : "ltr"}
     >
-      {/* Square image */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: "1/1", maxHeight: "160px" }}>
+      {/* Image — 1:1 square on mobile (side), full width on desktop (top) */}
+      <div className="relative overflow-hidden shrink-0 w-[120px] sm:w-full" style={{ aspectRatio: "1/1" }}>
         <img
           src={item.image}
           alt={item.title}
@@ -111,7 +111,6 @@ function StrengthCard({
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "hsl(var(--primary)/0.08)" }}
         />
-        {/* number — top start corner */}
         <span
           className="absolute top-3 start-3 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
           style={{ color: "hsl(var(--primary))" }}
@@ -120,19 +119,18 @@ function StrengthCard({
         </span>
       </div>
       {/* Content */}
-      <div className="p-5 border-t border-border">
-        {/* gold bar — aligns to start */}
+      <div className="p-4 sm:p-5 sm:border-t border-border flex flex-col justify-center min-w-0">
         <div
-          className="h-px mb-3"
+          className="h-px mb-3 hidden sm:block"
           style={{ width: "1.5rem", background: "hsl(var(--primary)/0.6)", marginInlineStart: 0 }}
         />
         <h3
-          className="font-black uppercase tracking-tight leading-snug mb-2 group-hover:text-primary transition-colors duration-300"
-          style={{ fontSize: "1rem", color: "hsl(var(--foreground))" }}
+          className="font-black uppercase tracking-tight leading-snug mb-1.5 sm:mb-2 group-hover:text-primary transition-colors duration-300 text-[0.85rem] sm:text-[1rem]"
+          style={{ color: "hsl(var(--foreground))" }}
         >
           {item.title}
         </h3>
-        <p className="leading-relaxed" style={{ fontSize: "0.85rem", color: "hsl(var(--muted-foreground))" }}>
+        <p className="leading-relaxed text-[0.78rem] sm:text-[0.85rem]" style={{ color: "hsl(var(--muted-foreground))" }}>
           {item.desc}
         </p>
       </div>
