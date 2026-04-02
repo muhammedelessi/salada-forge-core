@@ -175,19 +175,34 @@
   }
 
   .industrial-button {
-    @apply inline-flex items-center justify-center px-10 py-5 bg-primary text-primary-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300;
+    @apply inline-flex items-center justify-center bg-primary text-primary-foreground font-mono font-bold uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    padding: 0.75rem 1.5rem;
+    min-height: 44px;
+    gap: 0.5rem;
+    transition: opacity 150ms ease;
   }
 
   .industrial-button:hover {
-    @apply bg-foreground text-background;
+    opacity: 0.88;
   }
 
   .industrial-button-outline {
-    @apply inline-flex items-center justify-center px-10 py-5 border-2 border-foreground text-foreground font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300;
+    @apply inline-flex items-center justify-center border border-border font-mono uppercase;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    padding: 0.75rem 1.5rem;
+    min-height: 44px;
+    gap: 0.5rem;
+    color: hsl(var(--foreground) / 0.7);
+    transition: border-color 150ms ease, color 150ms ease;
   }
 
   .industrial-button-outline:hover {
-    @apply bg-foreground text-background;
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
   }
 
   .industrial-input {

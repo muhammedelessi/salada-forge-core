@@ -333,7 +333,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 transition-opacity hover:opacity-90 disabled:opacity-50"
+                  className="industrial-button w-full sm:w-auto disabled:opacity-50"
                 >
                   <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
                   <Send className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -353,7 +353,7 @@ export default function ContactPage() {
                   href="https://wa.me/966500165914"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+                  className="industrial-button"
                 >
                   <span>{isAr ? "ابدأ المحادثة" : "Start Chat"}</span>
                   <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
