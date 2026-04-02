@@ -25,11 +25,11 @@ export function ContactButton({
       <Link
         to={`/inquiry/${productSlug}?quantity=${quantity}`}
         className={cn(
-          'flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground hover:bg-accent transition-all duration-200',
+          'flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground hover:opacity-[0.88] transition-opacity',
           className
         )}
       >
-        <MessageSquare className="w-5 h-5" />
+        <MessageSquare className="w-3.5 h-3.5" />
       </Link>
     );
   }
@@ -38,12 +38,11 @@ export function ContactButton({
     <Link
       to={`/inquiry/${productSlug}?quantity=${quantity}`}
       className={cn(
-        'industrial-button transition-all duration-200 inline-flex items-center justify-center',
-        size === 'lg' && 'py-5 text-base',
+        'industrial-button w-full sm:w-auto',
         className
       )}
     >
-      <MessageSquare className={cn('w-5 h-5', isRTL ? 'ml-2' : 'mr-2')} />
+      <MessageSquare className={cn('w-3.5 h-3.5')} />
       {label}
     </Link>
   );
