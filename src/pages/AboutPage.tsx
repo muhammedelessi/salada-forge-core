@@ -370,8 +370,11 @@ export default function AboutPage() {
                 </Link>
                 <Link
                   to="/shop"
-                  className="inline-flex items-center gap-2 px-6 py-3 font-mono text-[0.62rem] uppercase tracking-[0.18em] transition-all duration-200"
-                  style={{ border: "1px solid rgba(255,255,255,0.2)", color: "#fff" }}
+                  className="industrial-button-outline w-full sm:w-auto"
+                  style={{
+                    borderColor: "rgba(255,255,255,0.2)",
+                    color: "#fff",
+                  }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.55)";
                     (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
