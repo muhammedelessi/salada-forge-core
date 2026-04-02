@@ -264,15 +264,14 @@ export default function SolutionsPage() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to={solution.shopLink}
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 hover:opacity-90 transition-opacity"
+                    className="industrial-button w-full sm:w-auto"
                   >
                     <span>{isAr ? "عرض المواصفات" : "View Specifications"}</span>
                     <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                   </Link>
                   <Link
                     to="/contact"
-                    className="inline-flex items-center px-5 py-2.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] border border-border hover:border-primary transition-colors duration-200"
-                    style={{ color: "hsl(var(--foreground)/0.7)" }}
+                    className="industrial-button-outline w-full sm:w-auto"
                   >
                     {t("solutions.inquire")}
                   </Link>
