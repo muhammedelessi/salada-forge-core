@@ -475,6 +475,9 @@ export function Header() {
                 <Search style={{ width: 17, height: 17 }} />
               </button>
 
+              {/* Dark mode toggle */}
+              <DarkModeToggle />
+
               {/* Language switcher */}
               <LanguageSwitcher />
 

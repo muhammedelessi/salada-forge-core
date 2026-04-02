@@ -412,3 +412,12 @@
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
 }
+
+/* Dark mode image dimming */
+.dark img {
+  filter: brightness(0.92) contrast(1.02);
+}
+
+.dark img.no-dim {
+  filter: none;
+}
