@@ -388,11 +388,10 @@ export default function HomePage() {
               </p>
               <Link
                 to="/why-salada"
-                className="industrial-button inline-flex items-center gap-2"
-                style={{ fontSize: "0.6rem", padding: "8px 18px" }}
+                className="industrial-button"
               >
                 <span>{t("nav.whySalada")}</span>
-                <ArrowUpRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
+                <ArrowUpRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
               </Link>
             </div>
           </div>
