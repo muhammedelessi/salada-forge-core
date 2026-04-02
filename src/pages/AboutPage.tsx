@@ -363,7 +363,7 @@ export default function AboutPage() {
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
                 <Link
                   to="/contact"
-                  className={`inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] px-6 py-3 hover:opacity-90 transition-opacity ${isAr ? "flex-row-reverse" : ""}`}
+                  className="industrial-button w-full sm:w-auto"
                 >
                   <span>{t.about.contactUs}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
