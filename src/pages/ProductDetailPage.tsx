@@ -389,19 +389,22 @@ export default function ProductDetailPage() {
                 {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
               </Link>
 
-              {/* Trust badges — 3 equal columns, dir handles RTL order */}
+              {/* Trust badges — flex + dir handles RTL order & text alignment */}
               <div
-                className="grid grid-cols-3 border-t border-b border-border py-4"
+                className="flex border-t border-b border-border"
                 dir={isAr ? "rtl" : "ltr"}
                 style={{ gap: "1px", background: "hsl(var(--border))" }}
               >
                 {trustBadges.map(({ Icon, title, sub }, i) => (
-                  <div key={i} className="flex flex-col items-center text-center gap-1.5 px-3 py-2 bg-background">
-                    <Icon className="w-5 h-5 text-primary mb-0.5" />
-                    <span className="font-mono text-[0.58rem] uppercase tracking-[0.1em] leading-snug text-foreground font-semibold">
+                  <div
+                    key={i}
+                    className="flex-1 flex flex-col items-center text-center gap-1.5 px-3 py-4 bg-background"
+                  >
+                    <Icon className="w-5 h-5 text-primary shrink-0" />
+                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.08em] leading-snug text-foreground font-semibold w-full">
                       {title}
                     </span>
-                    <span className="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-muted-foreground">
+                    <span className="font-mono text-[0.52rem] uppercase tracking-[0.06em] text-muted-foreground w-full">
                       {sub}
                     </span>
                   </div>
