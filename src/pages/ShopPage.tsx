@@ -390,7 +390,7 @@ export default function ShopPage() {
             >
               <Grid
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "grid" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "grid" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
               />
             </button>
             <button
