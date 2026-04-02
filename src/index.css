@@ -44,9 +44,9 @@
     --sidebar-ring: 40 90% 50%;
 
     /* Typography */
-    --font-display: "DM Sans", sans-serif;
-    --font-body: "DM Sans", sans-serif;
-    --font-mono: "IBM Plex Mono", monospace;
+    --font-display: 'DM Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
 
     /* Spacing */
     --section-gap: 6rem;
