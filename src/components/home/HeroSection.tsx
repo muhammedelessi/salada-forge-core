@@ -115,7 +115,7 @@ export default function HeroSection() {
 
       {/* ── Scroll cue ── */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-40">
-        <span className="text-[0.5rem] font-mono uppercase tracking-[0.3em] text-white/60">
+        <span className="text-[0.65rem] font-mono uppercase tracking-[0.3em] text-white/60">
           Scroll
         </span>
         <ChevronDown className="w-4 h-4 text-primary animate-bounce" />

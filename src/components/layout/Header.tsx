@@ -143,7 +143,7 @@ function MobileDrawer({
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-[0.55rem] font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[0.65rem] font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
                   <span
                     className={cn(
                       "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
@@ -175,7 +175,7 @@ function MobileDrawer({
             <span>{isAr ? "اطلب عرض سعر" : "Request a Quote"}</span>
             <ArrowUpRight style={{ width: 14, height: 14 }} />
           </Link>
-          <p className="text-center mt-4 text-[0.55rem] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="text-center mt-4 text-[0.65rem] font-mono uppercase tracking-[0.2em] text-muted-foreground">
             ISO Certified · DNV Approved
           </p>
         </div>

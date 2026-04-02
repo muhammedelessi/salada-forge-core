@@ -320,7 +320,7 @@ export default function HomePage() {
           <span
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.45rem",
+              fontSize: "0.65rem",
               textTransform: "uppercase",
               letterSpacing: "0.3em",
               color: "#fff",

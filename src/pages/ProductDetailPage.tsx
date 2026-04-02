@@ -33,7 +33,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
           background: "hsl(var(--primary)/0.6)",
         }}
       />
-      <span className="font-mono text-[0.56rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
         {children}
       </span>
     </div>
@@ -43,7 +43,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
 function Pill({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex font-mono text-[0.52rem] uppercase tracking-[0.18em] px-2.5 py-1 border border-border"
+      className="inline-flex font-mono text-[0.65rem] uppercase tracking-[0.18em] px-2.5 py-1 border border-border"
       style={{ color: "hsl(var(--muted-foreground))" }}
     >
       {children}
@@ -55,7 +55,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="border border-border p-4 hover:border-primary transition-colors duration-200 bg-background group">
       <p
-        className="font-mono text-[0.5rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
+        className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
         style={{ color: "hsl(var(--primary))", opacity: 0.65 }}
       >
         {label}
@@ -232,13 +232,13 @@ export default function ProductDetailPage() {
                 {item.href ? (
                   <Link
                     to={item.href}
-                    className="font-mono text-[0.5rem] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <span
-                    className="font-mono text-[0.5rem] uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
                     style={{ color: "hsl(var(--primary))" }}
                   >
                     {item.label}
@@ -343,7 +343,7 @@ export default function ProductDetailPage() {
               {/* Variants */}
               {product.variants && product.variants.length > 1 && (
                 <div className="mb-5">
-                  <p className="font-mono text-[0.54rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
+                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
                     {t.productDetail.variant}
                   </p>
                   <div className="flex flex-wrap gap-2 rtl:justify-end">
@@ -369,12 +369,12 @@ export default function ProductDetailPage() {
 
               {/* Quantity */}
               <div className="mb-6">
-                <p className="font-mono text-[0.54rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
                   {t.productDetail.quantity}
                 </p>
                 <div className="flex items-center gap-4 rtl:flex-row-reverse rtl:justify-end">
                   <QuantityStepper value={quantity} onChange={setQuantity} />
-                  <span className="font-mono text-[0.56rem] uppercase tracking-[0.15em] text-muted-foreground">
+                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
                     {product.stock} {t.productDetail.inStock}
                   </span>
                 </div>
@@ -404,7 +404,7 @@ export default function ProductDetailPage() {
                     <span className="font-mono text-[0.6rem] uppercase tracking-[0.08em] leading-snug text-foreground font-semibold w-full">
                       {title}
                     </span>
-                    <span className="font-mono text-[0.52rem] uppercase tracking-[0.06em] text-muted-foreground w-full">
+                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.06em] text-muted-foreground w-full">
                       {sub}
                     </span>
                   </div>
@@ -493,7 +493,7 @@ export default function ProductDetailPage() {
                             (h, i) => (
                               <th
                                 key={i}
-                                className="py-3 px-4 font-mono text-[0.52rem] uppercase tracking-[0.16em] text-start text-muted-foreground border-b border-border"
+                                className="py-3 px-4 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-start text-muted-foreground border-b border-border"
                               >
                                 {h}
                               </th>
@@ -591,7 +591,7 @@ export default function ProductDetailPage() {
               </div>
               <Link
                 to={`/shop?category=${product.category}`}
-                className="inline-flex items-center gap-1.5 font-mono text-[0.56rem] uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors shrink-0 rtl:flex-row-reverse"
+                className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors shrink-0 rtl:flex-row-reverse"
               >
                 {isAr ? "عرض الكل" : "View All"}
                 <ArrowRight className="w-3 h-3 rtl:rotate-180" />
