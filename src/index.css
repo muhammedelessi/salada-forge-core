@@ -250,7 +250,10 @@
   }
 
   .industrial-badge {
-    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary text-xs font-mono uppercase tracking-wider;
+    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary font-mono uppercase;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
   }
 
   .container-pattern {
