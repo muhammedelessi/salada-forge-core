@@ -333,7 +333,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-primary text-primary-foreground font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 transition-opacity hover:opacity-90 disabled:opacity-50"
+                  className="industrial-button w-full sm:w-auto disabled:opacity-50"
                 >
                   <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
                   <Send className="w-3.5 h-3.5 rtl:rotate-180" />
