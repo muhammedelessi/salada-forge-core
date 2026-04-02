@@ -33,7 +33,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
           background: "hsl(var(--primary)/0.6)",
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.56rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
         {children}
       </span>
     </div>
@@ -43,7 +43,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
 function Pill({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex font-mono text-[0.65rem] uppercase tracking-[0.18em] px-2.5 py-1 border border-border"
+      className="inline-flex font-mono text-[0.52rem] uppercase tracking-[0.18em] px-2.5 py-1 border border-border"
       style={{ color: "hsl(var(--muted-foreground))" }}
     >
       {children}
@@ -55,12 +55,12 @@ function SpecCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="border border-border p-4 hover:border-primary transition-colors duration-200 bg-background group">
       <p
-        className="font-mono text-[0.6rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
+        className="font-mono text-[0.5rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
         style={{ color: "hsl(var(--primary))", opacity: 0.65 }}
       >
         {label}
       </p>
-      <p className="font-mono text-[0.8rem] font-bold leading-snug tracking-[0.05em]" style={{ color: "hsl(var(--foreground))" }}>
+      <p className="font-mono text-sm font-bold leading-snug" style={{ color: "hsl(var(--foreground))" }}>
         {value}
       </p>
     </div>
@@ -171,7 +171,7 @@ export default function ProductDetailPage() {
           <h1 className="font-black uppercase text-2xl mb-6">{t.product.notFound}</h1>
           <Link
             to="/shop"
-            className="industrial-button w-full sm:w-auto"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-6 py-3"
           >
             {isAr ? "العودة للمتجر" : "Back to Shop"}
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -232,13 +232,13 @@ export default function ProductDetailPage() {
                 {item.href ? (
                   <Link
                     to={item.href}
-                    className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
+                    className="font-mono text-[0.5rem] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <span
-                    className="font-mono text-[0.65rem] uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
+                    className="font-mono text-[0.5rem] uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
                     style={{ color: "hsl(var(--primary))" }}
                   >
                     {item.label}
@@ -343,7 +343,7 @@ export default function ProductDetailPage() {
               {/* Variants */}
               {product.variants && product.variants.length > 1 && (
                 <div className="mb-5">
-                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
+                  <p className="font-mono text-[0.54rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
                     {t.productDetail.variant}
                   </p>
                   <div className="flex flex-wrap gap-2 rtl:justify-end">
@@ -369,12 +369,12 @@ export default function ProductDetailPage() {
 
               {/* Quantity */}
               <div className="mb-6">
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
+                <p className="font-mono text-[0.54rem] uppercase tracking-[0.2em] mb-2.5 text-muted-foreground">
                   {t.productDetail.quantity}
                 </p>
                 <div className="flex items-center gap-4 rtl:flex-row-reverse rtl:justify-end">
                   <QuantityStepper value={quantity} onChange={setQuantity} />
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
+                  <span className="font-mono text-[0.56rem] uppercase tracking-[0.15em] text-muted-foreground">
                     {product.stock} {t.productDetail.inStock}
                   </span>
                 </div>
@@ -383,9 +383,9 @@ export default function ProductDetailPage() {
               {/* CTA */}
               <Link
                 to={`/inquiry/${product.slug}?quantity=${quantity}`}
-                className="industrial-button w-full rtl:flex-row-reverse mb-6"
+                className="flex items-center justify-center gap-2.5 w-full bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] py-4 mb-6 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
               >
-                <MessageSquare className="w-3.5 h-3.5 shrink-0" />
+                <MessageSquare className="w-4 h-4 shrink-0" />
                 {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
               </Link>
 
@@ -404,7 +404,7 @@ export default function ProductDetailPage() {
                     <span className="font-mono text-[0.6rem] uppercase tracking-[0.08em] leading-snug text-foreground font-semibold w-full">
                       {title}
                     </span>
-                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.06em] text-muted-foreground w-full">
+                    <span className="font-mono text-[0.52rem] uppercase tracking-[0.06em] text-muted-foreground w-full">
                       {sub}
                     </span>
                   </div>
@@ -430,7 +430,7 @@ export default function ProductDetailPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative shrink-0 px-5 py-4 font-mono text-[0.6rem] uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-200 ${
+                className={`relative shrink-0 px-5 py-4 font-mono text-[0.6rem] uppercase tracking-[0.18em] whitespace-nowrap transition-colors duration-200 ${
                   activeTab === tab.id ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -493,7 +493,7 @@ export default function ProductDetailPage() {
                             (h, i) => (
                               <th
                                 key={i}
-                                className="py-3 px-4 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-start text-muted-foreground border-b border-border"
+                                className="py-3 px-4 font-mono text-[0.52rem] uppercase tracking-[0.16em] text-start text-muted-foreground border-b border-border"
                               >
                                 {h}
                               </th>
@@ -558,14 +558,14 @@ export default function ProductDetailPage() {
           <div className="flex flex-col sm:flex-row gap-3 rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
-              className="industrial-button w-full sm:w-auto rtl:flex-row-reverse"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
             >
               <span>{t.productDetail.requestPricing}</span>
               <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
             </Link>
             <Link
               to="/contact"
-              className="industrial-button-outline w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-7 py-3.5 border border-border font-mono text-[0.65rem] uppercase tracking-[0.18em] hover:border-primary transition-colors text-foreground/65"
             >
               {t.productDetail.contactEngineer}
             </Link>
@@ -591,14 +591,20 @@ export default function ProductDetailPage() {
               </div>
               <Link
                 to={`/shop?category=${product.category}`}
-                className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors shrink-0 rtl:flex-row-reverse"
+                className="inline-flex items-center gap-1.5 font-mono text-[0.56rem] uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors shrink-0 rtl:flex-row-reverse"
               >
                 {isAr ? "عرض الكل" : "View All"}
                 <ArrowRight className="w-3 h-3 rtl:rotate-180" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+            {/* Mobile: linear list — Desktop: grid */}
+            <div className="flex flex-col gap-3 lg:hidden">
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} variant="compact" />
+              ))}
+            </div>
+            <div className="hidden lg:grid lg:grid-cols-4 gap-4">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
