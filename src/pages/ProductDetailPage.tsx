@@ -383,7 +383,7 @@ export default function ProductDetailPage() {
               {/* CTA */}
               <Link
                 to={`/inquiry/${product.slug}?quantity=${quantity}`}
-                className="industrial-button w-full rtl:flex-row-reverse"
+                className="industrial-button w-full rtl:flex-row-reverse mb-6"
               >
                 <MessageSquare className="w-3.5 h-3.5 shrink-0" />
                 {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
