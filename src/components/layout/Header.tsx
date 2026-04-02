@@ -3,6 +3,7 @@ import { Menu, X, Search, ChevronDown, ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import DarkModeToggle from "@/components/DarkModeToggle";
 import { cn } from "@/lib/utils";
 import saladaLogo from "@/assets/SALADA_LOGO.png";
 
@@ -473,6 +474,9 @@ export function Header() {
               >
                 <Search style={{ width: 17, height: 17 }} />
               </button>
+
+              {/* Dark mode toggle */}
+              <DarkModeToggle />
 
               {/* Language switcher */}
               <LanguageSwitcher />

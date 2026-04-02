@@ -390,7 +390,7 @@ export default function ShopPage() {
             >
               <Grid
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "grid" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "grid" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
               />
             </button>
             <button
@@ -400,7 +400,7 @@ export default function ShopPage() {
             >
               <List
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "list" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "list" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
               />
             </button>
           </div>
@@ -461,7 +461,7 @@ export default function ShopPage() {
                   >
                     <Grid
                       className="w-3.5 h-3.5"
-                      style={{ color: viewMode === "grid" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                      style={{ color: viewMode === "grid" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
                     />
                   </button>
                   <button
@@ -471,7 +471,7 @@ export default function ShopPage() {
                   >
                     <List
                       className="w-3.5 h-3.5"
-                      style={{ color: viewMode === "list" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                      style={{ color: viewMode === "list" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
                     />
                   </button>
                 </div>
