@@ -204,7 +204,9 @@
   }
 
   .industrial-label {
-    @apply text-xs uppercase tracking-[0.3em] text-primary font-mono;
+    @apply text-primary font-mono uppercase;
+    font-size: 0.57rem;
+    letter-spacing: 0.28em;
   }
 
   .industrial-divider {
