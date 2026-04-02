@@ -13,6 +13,12 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["'DM Sans'", "sans-serif"],
+        mono: ["'IBM Plex Mono'", "monospace"],
+        display: ["'DM Sans'", "sans-serif"],
+        arabic: ["'Tajawal'", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
