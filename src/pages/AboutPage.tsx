@@ -347,7 +347,7 @@ export default function AboutPage() {
         <div className="industrial-container relative z-10">
           <div className="max-w-xl mx-auto text-center">
             <Reveal>
-              <Label text={isAr ? "تواصل معنا" : "Work With Us"} isAr={isAr} />
+              <Label text={isAr ? "تواصل معنا" : "Work With Us"} isAr={isAr} center />
               <h2
                 className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
                 style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}
