@@ -104,7 +104,7 @@ export default function HeroSection() {
             {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
               <span
                 key={b}
-                className="px-3 py-1.5 text-[0.65rem] sm:text-xs font-mono uppercase tracking-wider text-white/60 border border-white/15 bg-white/5"
+                className="px-3 py-1.5 text-[0.65rem] font-mono uppercase tracking-[0.15em] text-white/60 border border-white/15 bg-white/5"
               >
                 {b}
               </span>
