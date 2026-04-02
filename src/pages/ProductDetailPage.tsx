@@ -389,18 +389,19 @@ export default function ProductDetailPage() {
                 {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
               </Link>
 
-              {/* Trust badges — 3 equal columns */}
+              {/* Trust badges — 3 equal columns, dir handles RTL order */}
               <div
                 className="grid grid-cols-3 border-t border-b border-border py-4"
+                dir={isAr ? "rtl" : "ltr"}
                 style={{ gap: "1px", background: "hsl(var(--border))" }}
               >
                 {trustBadges.map(({ Icon, title, sub }, i) => (
-                  <div key={i} className="flex flex-col items-center text-center gap-1 px-2 py-1 bg-background">
-                    <Icon className="w-4 h-4 text-primary mb-0.5" />
-                    <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] leading-tight text-foreground">
+                  <div key={i} className="flex flex-col items-center text-center gap-1.5 px-3 py-2 bg-background">
+                    <Icon className="w-5 h-5 text-primary mb-0.5" />
+                    <span className="font-mono text-[0.58rem] uppercase tracking-[0.1em] leading-snug text-foreground font-semibold">
                       {title}
                     </span>
-                    <span className="font-mono text-[0.44rem] uppercase tracking-[0.1em] text-muted-foreground">
+                    <span className="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-muted-foreground">
                       {sub}
                     </span>
                   </div>
@@ -416,9 +417,10 @@ export default function ProductDetailPage() {
           ╚══════════════════════════════════════╝ */}
       <section className="bg-background border-b border-border">
         <div className="industrial-container">
-          {/* Tab nav */}
+          {/* Tab nav — dir handles RTL tab order automatically */}
           <div
-            className={`flex overflow-x-auto border-b border-border ${isAr ? "flex-row-reverse" : ""}`}
+            className="flex overflow-x-auto border-b border-border"
+            dir={isAr ? "rtl" : "ltr"}
             style={{ scrollbarWidth: "none" }}
           >
             {tabs.map((tab) => (
@@ -574,12 +576,12 @@ export default function ProductDetailPage() {
       {related.length > 0 && (
         <section className="bg-background border-b border-border py-10 md:py-14">
           <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-            <div className="flex items-end justify-between mb-7 rtl:flex-row-reverse">
+            <div className="flex items-end justify-between mb-7">
               <div className="rtl:text-right">
                 <GoldLabel>{t.productDetail.relatedProducts}</GoldLabel>
                 <h2
                   className="font-black uppercase leading-tight tracking-[-0.02em] text-foreground"
-                  style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)" }}
+                  style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}
                 >
                   {isAr ? "منتجات مشابهة" : "You Might Also Like"}
                 </h2>
