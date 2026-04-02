@@ -383,9 +383,9 @@ export default function ProductDetailPage() {
               {/* CTA */}
               <Link
                 to={`/inquiry/${product.slug}?quantity=${quantity}`}
-                className="flex items-center justify-center gap-2.5 w-full bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] py-4 mb-6 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
+                className="industrial-button w-full rtl:flex-row-reverse"
               >
-                <MessageSquare className="w-4 h-4 shrink-0" />
+                <MessageSquare className="w-3.5 h-3.5 shrink-0" />
                 {isAr ? "تواصل معنا للحصول على عرض سعر" : "Contact Us for a Quote"}
               </Link>
 
