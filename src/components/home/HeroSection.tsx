@@ -79,16 +79,17 @@ export default function HeroSection() {
           >
             <Link
               to="/solutions"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-9 sm:py-4 bg-primary text-primary-foreground font-semibold uppercase tracking-[0.15em] text-xs sm:text-sm transition-all duration-300 hover:brightness-110 hover:scale-[1.02]"
+              className="industrial-button w-full sm:w-auto"
             >
               <span>{t("hero.cta")}</span>
               <ArrowRight
-                className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`}
+                className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`}
               />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-7 py-3.5 sm:px-9 sm:py-4 border border-white/30 text-white font-semibold uppercase tracking-[0.15em] text-xs sm:text-sm transition-all duration-300 hover:bg-white/10 hover:border-white/50"
+              className="industrial-button-outline w-full sm:w-auto"
+              style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}
             >
               {t("hero.quote")}
             </Link>

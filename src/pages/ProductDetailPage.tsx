@@ -558,14 +558,14 @@ export default function ProductDetailPage() {
           <div className="flex flex-col sm:flex-row gap-3 rtl:sm:flex-row-reverse">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
+              className="industrial-button w-full sm:w-auto rtl:flex-row-reverse"
             >
               <span>{t.productDetail.requestPricing}</span>
               <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-7 py-3.5 border border-border font-mono text-[0.65rem] uppercase tracking-[0.18em] hover:border-primary transition-colors text-foreground/65"
+              className="industrial-button-outline w-full sm:w-auto"
             >
               {t.productDetail.contactEngineer}
             </Link>

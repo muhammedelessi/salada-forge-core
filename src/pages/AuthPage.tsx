@@ -197,7 +197,7 @@ export default function AuthPage() {
                 className="w-full industrial-button justify-center disabled:opacity-50"
               >
                 {isLoading ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 ) : (
                   isLogin ? c.login : c.signup
                 )}
