@@ -400,7 +400,7 @@ export default function ShopPage() {
             >
               <List
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "list" ? "#fff" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "list" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
               />
             </button>
           </div>
