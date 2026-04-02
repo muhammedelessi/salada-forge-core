@@ -55,12 +55,12 @@ function SpecCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="border border-border p-4 hover:border-primary transition-colors duration-200 bg-background group">
       <p
-        className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
+        className="font-mono text-[0.6rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
         style={{ color: "hsl(var(--primary))", opacity: 0.65 }}
       >
         {label}
       </p>
-      <p className="font-mono text-sm font-bold leading-snug" style={{ color: "hsl(var(--foreground))" }}>
+      <p className="font-mono text-[0.8rem] font-bold leading-snug tracking-[0.05em]" style={{ color: "hsl(var(--foreground))" }}>
         {value}
       </p>
     </div>
