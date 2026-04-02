@@ -660,7 +660,7 @@ export default function HomePage() {
                 {t("cta.title")}
               </h2>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase hover:opacity-90 transition-opacity" style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}>
+                <Link to="/contact" className="industrial-button w-full sm:w-auto">
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
