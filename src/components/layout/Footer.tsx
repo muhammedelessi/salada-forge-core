@@ -126,10 +126,10 @@ export function Footer() {
               © {currentYear} SALADA. {t('footer.rights')}
             </p>
             <div className="flex items-center gap-6 rtl:flex-row-reverse">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
+              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground font-mono">
                 {t('footer.isoCertified')}
               </span>
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-mono">
+              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground font-mono">
                 {t('footer.dnvApproved')}
               </span>
             </div>
