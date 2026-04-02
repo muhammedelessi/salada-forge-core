@@ -161,16 +161,10 @@ export default function HomePage() {
             className="w-full h-full object-cover animate-hero-zoom max-w-full"
           />
           {/* Multi-layer overlay: warm dark tint + vignette */}
-          <div
-            className="absolute inset-0"
-            style={{ background: "rgba(0, 0, 0, 0.65)" }}
-          />
+          <div className="absolute inset-0" style={{ background: "rgba(0, 0, 0, 0.65)" }} />
           {/* warm gold tint layer */}
           <div className="absolute inset-0" style={{ background: "hsl(var(--gold)/0.08)" }} />
         </div>
-
-
-
 
         {/* ── Animated gold scan line ── */}
         <div
@@ -203,7 +197,6 @@ export default function HomePage() {
 
         {/* ── Main centered content ── */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
-
           {/* H1 — white */}
           <h1
             className="animate-fade-up delay-300"
@@ -251,20 +244,34 @@ export default function HomePage() {
             className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}
             style={{ marginBottom: "1.5rem" }}
           >
-            <Link to="/solutions" className="industrial-button w-full sm:w-auto">
+            <Link
+              to="/solutions"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase hover:opacity-90 transition-opacity"
+              style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}
+            >
               <span>{t("hero.cta")}</span>
               <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
             </Link>
             <Link
               to="/contact"
-              className="industrial-button-outline w-full sm:w-auto"
               style={{
-                borderColor: "rgba(255,255,255,0.3)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.75rem 1.75rem",
+                border: "1px solid rgba(255,255,255,0.3)",
                 color: "#ffffff",
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.6875rem",
+                fontWeight: 700,
+                textTransform: "uppercase" as const,
+                letterSpacing: "0.18em",
+                transition: "all 0.3s ease",
+                backdropFilter: "blur(6px)",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.7)";
-                (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
+                (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--gold)/0.7)";
+                (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
@@ -274,7 +281,6 @@ export default function HomePage() {
               {t("hero.quote")}
             </Link>
           </div>
-
         </div>
 
         {/* ── Stats bar — pinned to bottom ── */}
@@ -320,9 +326,9 @@ export default function HomePage() {
           <span
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.65rem",
+              fontSize: "0.45rem",
               textTransform: "uppercase",
-              letterSpacing: "0.25em",
+              letterSpacing: "0.3em",
               color: "#fff",
             }}
           >
@@ -359,13 +365,16 @@ export default function HomePage() {
               </span>
 
               {/* DIVIDER — horizontal on mobile, vertical on desktop */}
-              <div className="w-full h-px md:w-px md:h-[52px] shrink-0" style={{ background: "hsl(var(--primary) / 0.25)" }} />
+              <div
+                className="w-full h-px md:w-px md:h-[52px] shrink-0"
+                style={{ background: "hsl(var(--primary) / 0.25)" }}
+              />
 
               {/* TEXT BLOCK */}
               <div>
                 <span
                   className="font-mono uppercase block text-primary mb-1.5"
-                  style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
+                  style={{ fontSize: "0.6rem", letterSpacing: "0.28em" }}
                 >
                   {t("vision.label")}
                 </span>
@@ -388,10 +397,11 @@ export default function HomePage() {
               </p>
               <Link
                 to="/why-salada"
-                className="industrial-button"
+                className="industrial-button inline-flex items-center gap-2"
+                style={{ fontSize: "0.6rem", padding: "8px 18px" }}
               >
                 <span>{t("nav.whySalada")}</span>
-                <ArrowUpRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                <ArrowUpRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
               </Link>
             </div>
           </div>
@@ -401,19 +411,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           SOLUTIONS
       ════════════════════════════════════ */}
-      <section
-        dir={isAr ? "rtl" : "ltr"}
-        className="bg-background border-b border-border"
-      >
+      <section dir={isAr ? "rtl" : "ltr"} className="bg-background border-b border-border">
         <div className="industrial-container py-12 md:py-16">
           {/* HEADER */}
           <Reveal>
             <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
-                <span
-                  className="font-mono text-[0.65rem] uppercase block text-primary"
-                  style={{ letterSpacing: "0.28em" }}
-                >
+                <span className="font-mono uppercase block text-primary text-base" style={{ letterSpacing: "0.28em" }}>
                   — {t("solutions.label")}
                 </span>
                 <h2
@@ -430,10 +434,17 @@ export default function HomePage() {
               <Link
                 to="/solutions"
                 className="group hidden md:inline-flex items-center gap-2 font-mono uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-                style={{ fontSize: "0.7rem", letterSpacing: "0.18em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
+                style={{
+                  fontSize: "0.6875rem",
+                  letterSpacing: "0.18em",
+                  paddingBottom: "4px",
+                  borderBottom: "1px solid hsl(var(--border))",
+                }}
               >
                 <span>{isAr ? "عرض الكل" : "View All"}</span>
-                <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+                <ArrowRight
+                  className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`}
+                />
               </Link>
             </div>
           </Reveal>
@@ -460,9 +471,15 @@ export default function HomePage() {
                   {/* Dark overlay */}
                   <div
                     className="absolute inset-0 transition-all duration-500"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.25) 100%)" }}
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.25) 100%)",
+                    }}
                   />
-                  <div className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100" style={{ background: "rgba(0,0,0,0.15)" }} />
+                  <div
+                    className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    style={{ background: "rgba(0,0,0,0.15)" }}
+                  />
 
                   {/* Number */}
                   <span
@@ -474,17 +491,26 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="relative z-10 mt-6">
-                    <h3 className="uppercase font-[800] text-white group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
+                    <h3
+                      className="uppercase font-[800] text-white group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize: "0.875rem" }}
+                    >
                       {sol.title}
                     </h3>
-                    <p className="text-white/60 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden" style={{ fontSize: "0.75rem" }}>
+                    <p
+                      className="text-white/60 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-20 overflow-hidden"
+                      style={{ fontSize: "0.75rem" }}
+                    >
                       {sol.desc}
                     </p>
                   </div>
 
                   {/* Arrow */}
                   <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                     <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.7rem", letterSpacing: "0.18em" }}>
+                    <span
+                      className="font-mono uppercase tracking-widest"
+                      style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}
+                    >
                       {isAr ? "اكتشف" : "Explore"}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -499,19 +525,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════
           INDUSTRIES
       ════════════════════════════════════ */}
-      <section
-        dir={isAr ? "rtl" : "ltr"}
-        className="bg-background border-b border-border"
-      >
+      <section dir={isAr ? "rtl" : "ltr"} className="bg-background border-b border-border">
         <div className="industrial-container py-12 md:py-16">
           {/* HEADER */}
           <Reveal>
             <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
-                <span
-                  className="font-mono text-[0.65rem] uppercase block text-primary"
-                  style={{ letterSpacing: "0.28em" }}
-                >
+                <span className="font-mono uppercase block text-primary text-base" style={{ letterSpacing: "0.28em" }}>
                   — {t("industries.label")}
                 </span>
                 <h2
@@ -527,7 +547,7 @@ export default function HomePage() {
               </div>
               <span
                 className="font-mono uppercase text-muted-foreground"
-                style={{ fontSize: "0.65rem", letterSpacing: "0.18em" }}
+                style={{ fontSize: "0.625rem", letterSpacing: "0.18em" }}
               >
                 {String(industries.length).padStart(2, "0")} sectors
               </span>
@@ -552,17 +572,26 @@ export default function HomePage() {
 
                   {/* Text */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
+                    <h3
+                      className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize: "0.875rem" }}
+                    >
                       {ind.name}
                     </h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize: "0.75rem" }}>
+                    <p
+                      className="text-muted-foreground mt-2 leading-relaxed line-clamp-3"
+                      style={{ fontSize: "0.75rem" }}
+                    >
                       {ind.desc}
                     </p>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.7rem", letterSpacing: "0.18em" }}>
+                    <span
+                      className="font-mono uppercase tracking-widest"
+                      style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}
+                    >
                       {t("solutions.learnMore")}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -613,7 +642,10 @@ export default function HomePage() {
 
                   {/* Title */}
                   <div className="mt-6">
-                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300" style={{ fontSize: "0.875rem" }}>
+                    <h3
+                      className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize: "0.875rem" }}
+                    >
                       {w.title}
                     </h3>
                   </div>
@@ -649,31 +681,49 @@ export default function HomePage() {
             <Reveal>
               <span
                 className="font-mono uppercase mb-6 inline-flex justify-center"
-                style={{ fontSize: "0.65rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
+                style={{ fontSize: "0.625rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
               <h2
                 className="uppercase font-black mb-8"
-                style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", letterSpacing: "-0.025em", lineHeight: 1, color: "#ffffff" }}
+                style={{
+                  fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1,
+                  color: "#ffffff",
+                }}
               >
                 {t("cta.title")}
               </h2>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="industrial-button w-full sm:w-auto">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase hover:opacity-90 transition-opacity"
+                  style={{ fontSize: "0.6875rem", padding: "0.75rem 1.75rem", letterSpacing: "0.18em" }}
+                >
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
                 <Link
                   to="/solutions"
-                  className="industrial-button-outline w-full sm:w-auto"
                   style={{
-                    borderColor: "rgba(255,255,255,0.25)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0.75rem 1.75rem",
+                    border: "1px solid rgba(255,255,255,0.25)",
                     color: "#ffffff",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6875rem",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.18em",
+                    transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.6)";
-                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--gold)/0.6)";
+                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
