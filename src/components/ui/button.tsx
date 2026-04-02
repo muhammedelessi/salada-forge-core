@@ -9,15 +9,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground font-bold text-[0.65rem] transition-opacity hover:opacity-[0.88] [&_svg]:w-3.5 [&_svg]:h-3.5",
+        default: "bg-primary text-primary-foreground font-bold transition-opacity hover:opacity-[0.88] [&_svg]:w-3.5 [&_svg]:h-3.5",
         destructive:
-          "bg-destructive text-destructive-foreground font-bold text-[0.65rem] transition-opacity hover:opacity-[0.88] [&_svg]:w-3.5 [&_svg]:h-3.5",
+          "bg-destructive text-destructive-foreground font-bold transition-opacity hover:opacity-[0.88] [&_svg]:w-3.5 [&_svg]:h-3.5",
         outline:
-          "border border-border text-foreground/70 font-medium text-[0.65rem] transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
+          "border border-border text-foreground/70 font-medium transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
         secondary:
-          "border border-border text-foreground/70 font-medium text-[0.65rem] transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
-        ghost: "bg-transparent border-0 text-muted-foreground font-mono text-[0.6rem] uppercase tracking-[0.18em] transition-colors duration-150 hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
-        link: "text-primary underline-offset-4 hover:underline text-[0.65rem] font-medium",
+          "border border-border text-foreground/70 font-medium transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
+        ghost: "bg-transparent border-0 text-muted-foreground font-mono uppercase tracking-[0.18em] transition-colors duration-150 hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
+        link: "text-primary underline-offset-4 hover:underline font-medium",
       },
       size: {
         default: "px-6 py-3",

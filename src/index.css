@@ -267,6 +267,18 @@
   }
 }
 
+@layer base {
+  .font-mono {
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 639px) {
+  .font-mono {
+    font-size: max(0.65rem, 1em);
+  }
+}
+
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary;
