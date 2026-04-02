@@ -1,91 +1,96 @@
-import { useState } from 'react';
-import { Layout } from '@/components/layout/Layout';
-import { Breadcrumb } from '@/components/Breadcrumb';
-import { ChevronDown, Search } from 'lucide-react';
-import { useLanguageStore } from '@/store/languageStore';
-import { translations } from '@/i18n/translations';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { SEOHead } from "@/components/SEOHead";
+import { ChevronDown, Search, ArrowRight, X } from "lucide-react";
+import { useLanguageStore } from "@/store/languageStore";
+import { translations } from "@/i18n/translations";
+import heroPort from "@/assets/hero-port.webp";
 
 export default function FAQPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const seo = usePageSEO("/faq");
+  const [searchQuery, setSearchQuery] = useState("");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { language } = useLanguageStore();
   const t = translations[language];
-  const isRTL = language === 'ar';
+  const isAr = language === "ar";
 
+  // ── FAQ data ──────────────────────────────────────────────────────
   const faqsEn = [
     {
-      category: 'Orders & Shipping',
-      questions: [
+      category: "Orders & Shipping",
+      items: [
         {
-          q: 'What are your shipping options?',
-          a: 'We offer multiple shipping options including ground freight, rail transport, and ocean freight for international orders. Free shipping is available for orders over 37,500 SAR within Saudi Arabia. Delivery times vary based on location and product availability.',
+          q: "What are your shipping options?",
+          a: "We offer multiple shipping options including ground freight, rail transport, and ocean freight for international orders. Free shipping is available for orders over 37,500 SAR within Saudi Arabia. Delivery times vary based on location and product availability.",
         },
         {
-          q: 'How long does delivery take?',
-          a: 'Standard delivery within Saudi Arabia typically takes 3-7 business days. International orders may take 2-6 weeks depending on destination and shipping method. Expedited shipping is available for urgent orders at additional cost.',
+          q: "How long does delivery take?",
+          a: "Standard delivery within Saudi Arabia typically takes 3–7 business days. International orders may take 2–6 weeks depending on destination and shipping method. Expedited shipping is available for urgent orders at additional cost.",
         },
         {
-          q: 'Do you ship internationally?',
-          a: 'Yes, we ship to over 120 countries worldwide. International shipping rates are calculated at checkout based on destination, weight, and dimensions. We handle all customs documentation for hassle-free delivery.',
+          q: "Do you ship internationally?",
+          a: "Yes, we ship to over 120 countries worldwide. International shipping rates are calculated at checkout based on destination, weight, and dimensions. We handle all customs documentation for hassle-free delivery.",
         },
         {
-          q: 'Can I track my order?',
-          a: "Absolutely! Once your order ships, you'll receive a tracking number via email. You can also track your order through our website or by contacting our customer service team.",
-        },
-      ],
-    },
-    {
-      category: 'Products & Quality',
-      questions: [
-        {
-          q: 'Are your containers certified?',
-          a: 'Yes, all our containers meet international standards. Our shipping containers are ISO certified, offshore containers are DNV 2.7-1 certified, and all products comply with relevant industry regulations. Certification documents are provided with each purchase.',
-        },
-        {
-          q: 'What materials are your containers made from?',
-          a: 'Our shipping containers are primarily made from Corten steel, known for its exceptional weathering properties. Storage tanks use 304 or 316 stainless steel. IBC containers feature HDPE inner bottles with steel cage frames. All materials are selected for durability and longevity.',
-        },
-        {
-          q: 'Do you offer customization?',
-          a: 'Yes, we offer extensive customization options including custom paint colors, modifications for doors/windows, insulation, electrical wiring, HVAC systems, and more. Contact our sales team to discuss your specific requirements.',
-        },
-        {
-          q: 'What warranty do you offer?',
-          a: 'We provide a 2-year standard warranty covering manufacturing defects. Extended warranty options are available. Warranty terms vary by product type - please refer to product specifications or contact us for details.',
+          q: "Can I track my order?",
+          a: "Once your order ships, you'll receive a tracking number via email. You can also track your order through our website or by contacting our customer service team.",
         },
       ],
     },
     {
-      category: 'Pricing & Payments',
-      questions: [
+      category: "Products & Quality",
+      items: [
         {
-          q: 'Do you offer bulk discounts?',
-          a: 'Yes, we offer tiered bulk pricing on most products. Discounts start at quantities of 5+ units with increasing savings for larger orders. Volume pricing is displayed on product pages where applicable.',
+          q: "Are your containers certified?",
+          a: "Yes, all our containers meet international standards. Our shipping containers are ISO certified, offshore containers are DNV 2.7-1 certified, and all products comply with relevant industry regulations. Certification documents are provided with each purchase.",
         },
         {
-          q: 'What payment methods do you accept?',
-          a: 'We accept all major credit cards (Visa, MasterCard, mada), bank wire transfers, and company purchase orders for approved accounts. Payment terms of Net 30 are available for qualifying business customers.',
+          q: "What materials are your containers made from?",
+          a: "Our shipping containers are primarily made from Corten steel, known for its exceptional weathering properties. Storage tanks use 304 or 316 stainless steel. IBC containers feature HDPE inner bottles with steel cage frames.",
         },
         {
-          q: 'Can I get a custom quote?',
-          a: 'Absolutely! For large orders, custom configurations, or special requirements, contact our sales team for a personalized quote. We typically respond within 24 business hours.',
+          q: "Do you offer customization?",
+          a: "Yes, we offer extensive customization options including custom paint colors, modifications for doors/windows, insulation, electrical wiring, HVAC systems, and more. Contact our sales team to discuss your specific requirements.",
+        },
+        {
+          q: "What warranty do you offer?",
+          a: "We provide a 2-year standard warranty covering manufacturing defects. Extended warranty options are available. Warranty terms vary by product type — please refer to product specifications or contact us for details.",
         },
       ],
     },
     {
-      category: 'Returns & Support',
-      questions: [
+      category: "Pricing & Payments",
+      items: [
         {
-          q: 'What is your return policy?',
-          a: 'We offer a 30-day return policy for unused products in original condition. Custom or modified containers are non-returnable. Return shipping costs are the responsibility of the customer unless the return is due to our error. Contact customer service to initiate a return.',
+          q: "Do you offer bulk discounts?",
+          a: "Yes, we offer tiered bulk pricing on most products. Discounts start at quantities of 5+ units with increasing savings for larger orders. Volume pricing is displayed on product pages where applicable.",
         },
         {
-          q: 'How do I report a problem with my order?',
-          a: 'Contact our customer service team immediately at Hello@salada.sa or call 050 016 5914. Please have your order number ready and provide photos of any damage or issues. We aim to resolve all concerns within 48 hours.',
+          q: "What payment methods do you accept?",
+          a: "We accept all major credit cards (Visa, MasterCard, mada), bank wire transfers, and company purchase orders for approved accounts. Payment terms of Net 30 are available for qualifying business customers.",
         },
         {
-          q: 'Do you offer technical support?',
-          a: 'Yes, our technical team is available to assist with installation, maintenance, and operational questions. We provide documentation with all products and offer on-site support for complex installations at additional cost.',
+          q: "Can I get a custom quote?",
+          a: "For large orders, custom configurations, or special requirements, contact our sales team for a personalized quote. We typically respond within 24 business hours.",
+        },
+      ],
+    },
+    {
+      category: "Returns & Support",
+      items: [
+        {
+          q: "What is your return policy?",
+          a: "We offer a 30-day return policy for unused products in original condition. Custom or modified containers are non-returnable. Return shipping costs are the responsibility of the customer unless the return is due to our error.",
+        },
+        {
+          q: "How do I report a problem with my order?",
+          a: "Contact our customer service team immediately at Hello@salada.sa or call 050 016 5914. Please have your order number ready and provide photos of any damage or issues. We aim to resolve all concerns within 48 hours.",
+        },
+        {
+          q: "Do you offer technical support?",
+          a: "Yes, our technical team is available to assist with installation, maintenance, and operational questions. We provide documentation with all products and offer on-site support for complex installations at additional cost.",
         },
       ],
     },
@@ -93,186 +98,296 @@ export default function FAQPage() {
 
   const faqsAr = [
     {
-      category: 'الطلبات والشحن',
-      questions: [
+      category: "الطلبات والشحن",
+      items: [
         {
-          q: 'ما هي خيارات الشحن المتاحة لديكم؟',
-          a: 'نوفر خيارات شحن متعددة تشمل الشحن البري والنقل بالسكك الحديدية والشحن البحري للطلبات الدولية. الشحن مجاني للطلبات التي تتجاوز 37,500 ريال سعودي داخل المملكة العربية السعودية. تختلف أوقات التسليم حسب الموقع وتوفر المنتج.',
+          q: "ما هي خيارات الشحن المتاحة لديكم؟",
+          a: "نوفر خيارات شحن متعددة تشمل الشحن البري والنقل بالسكك الحديدية والشحن البحري للطلبات الدولية. الشحن مجاني للطلبات التي تتجاوز 37,500 ريال سعودي داخل المملكة العربية السعودية.",
         },
         {
-          q: 'كم تستغرق مدة التوصيل؟',
-          a: 'التوصيل القياسي داخل المملكة العربية السعودية يستغرق عادة من 3 إلى 7 أيام عمل. الطلبات الدولية قد تستغرق من 2 إلى 6 أسابيع حسب الوجهة وطريقة الشحن. يتوفر الشحن السريع للطلبات العاجلة بتكلفة إضافية.',
+          q: "كم تستغرق مدة التوصيل؟",
+          a: "التوصيل القياسي داخل المملكة يستغرق عادة من 3 إلى 7 أيام عمل. الطلبات الدولية قد تستغرق من 2 إلى 6 أسابيع حسب الوجهة وطريقة الشحن.",
         },
         {
-          q: 'هل تشحنون دولياً؟',
-          a: 'نعم، نشحن إلى أكثر من 120 دولة حول العالم. يتم احتساب أسعار الشحن الدولي عند إتمام الطلب بناءً على الوجهة والوزن والأبعاد. نتولى جميع إجراءات التخليص الجمركي لتوصيل سلس بدون متاعب.',
+          q: "هل تشحنون دولياً؟",
+          a: "نعم، نشحن إلى أكثر من 120 دولة حول العالم. يتم احتساب أسعار الشحن الدولي عند إتمام الطلب بناءً على الوجهة والوزن والأبعاد.",
         },
         {
-          q: 'هل يمكنني تتبع طلبي؟',
-          a: 'بالتأكيد! بمجرد شحن طلبك، ستتلقى رقم التتبع عبر البريد الإلكتروني. يمكنك أيضاً تتبع طلبك من خلال موقعنا الإلكتروني أو بالتواصل مع فريق خدمة العملاء.',
-        },
-      ],
-    },
-    {
-      category: 'المنتجات والجودة',
-      questions: [
-        {
-          q: 'هل حاوياتكم معتمدة؟',
-          a: 'نعم، جميع حاوياتنا تستوفي المعايير الدولية. حاويات الشحن لدينا حاصلة على شهادة ISO، وحاويات العمليات البحرية حاصلة على شهادة DNV 2.7-1، وجميع المنتجات تتوافق مع اللوائح الصناعية ذات الصلة. يتم توفير وثائق الشهادات مع كل عملية شراء.',
-        },
-        {
-          q: 'ما هي المواد المصنوعة منها حاوياتكم؟',
-          a: 'حاويات الشحن لدينا مصنوعة أساساً من فولاذ كورتن، المعروف بخصائصه الاستثنائية في مقاومة العوامل الجوية. خزانات التخزين تستخدم الفولاذ المقاوم للصدأ 304 أو 316. حاويات IBC تتميز بزجاجات داخلية من HDPE مع هياكل أقفاص فولاذية. جميع المواد مختارة للمتانة وطول العمر.',
-        },
-        {
-          q: 'هل تقدمون خيارات التخصيص؟',
-          a: 'نعم، نقدم خيارات تخصيص واسعة تشمل ألوان الطلاء المخصصة، وتعديلات الأبواب والنوافذ، والعزل الحراري، والتمديدات الكهربائية، وأنظمة التكييف، والمزيد. تواصل مع فريق المبيعات لمناقشة متطلباتك الخاصة.',
-        },
-        {
-          q: 'ما هو الضمان الذي تقدمونه؟',
-          a: 'نقدم ضماناً قياسياً لمدة سنتين يغطي عيوب التصنيع. تتوفر خيارات الضمان الممتد. تختلف شروط الضمان حسب نوع المنتج - يرجى الرجوع إلى مواصفات المنتج أو التواصل معنا للحصول على التفاصيل.',
+          q: "هل يمكنني تتبع طلبي؟",
+          a: "بمجرد شحن طلبك ستتلقى رقم التتبع عبر البريد الإلكتروني. يمكنك أيضاً تتبع طلبك من خلال موقعنا أو بالتواصل مع فريق خدمة العملاء.",
         },
       ],
     },
     {
-      category: 'الأسعار والدفع',
-      questions: [
+      category: "المنتجات والجودة",
+      items: [
         {
-          q: 'هل تقدمون خصومات على الكميات؟',
-          a: 'نعم، نقدم أسعاراً متدرجة للكميات الكبيرة على معظم المنتجات. تبدأ الخصومات من كميات 5+ وحدات مع توفير متزايد للطلبات الأكبر. يتم عرض أسعار الجملة في صفحات المنتجات حيثما ينطبق ذلك.',
+          q: "هل حاوياتكم معتمدة؟",
+          a: "نعم، جميع حاوياتنا تستوفي المعايير الدولية. حاويات الشحن حاصلة على شهادة ISO، وحاويات العمليات البحرية حاصلة على شهادة DNV 2.7-1.",
         },
         {
-          q: 'ما هي طرق الدفع المقبولة؟',
-          a: 'نقبل جميع بطاقات الائتمان الرئيسية (فيزا، ماستركارد، مدى)، والتحويلات البنكية، وأوامر الشراء للشركات للحسابات المعتمدة. تتوفر شروط الدفع الآجل (30 يوماً) للعملاء التجاريين المؤهلين.',
+          q: "ما هي المواد المصنوعة منها حاوياتكم؟",
+          a: "حاويات الشحن مصنوعة من فولاذ كورتن. خزانات التخزين تستخدم الفولاذ المقاوم للصدأ 304 أو 316. حاويات IBC تتميز بزجاجات داخلية من HDPE مع هياكل أقفاص فولاذية.",
         },
         {
-          q: 'هل يمكنني الحصول على عرض سعر مخصص؟',
-          a: 'بالتأكيد! للطلبات الكبيرة أو التكوينات المخصصة أو المتطلبات الخاصة، تواصل مع فريق المبيعات للحصول على عرض سعر مخصص. نستجيب عادة خلال 24 ساعة عمل.',
+          q: "هل تقدمون خيارات التخصيص؟",
+          a: "نعم، نقدم خيارات تخصيص واسعة تشمل ألوان الطلاء المخصصة وتعديلات الأبواب والنوافذ والعزل الحراري والتمديدات الكهربائية وأنظمة التكييف والمزيد.",
+        },
+        {
+          q: "ما هو الضمان الذي تقدمونه؟",
+          a: "نقدم ضماناً قياسياً لمدة سنتين يغطي عيوب التصنيع. تتوفر خيارات الضمان الممتد. تختلف شروط الضمان حسب نوع المنتج.",
         },
       ],
     },
     {
-      category: 'الإرجاع والدعم',
-      questions: [
+      category: "الأسعار والدفع",
+      items: [
         {
-          q: 'ما هي سياسة الإرجاع لديكم؟',
-          a: 'نقدم سياسة إرجاع لمدة 30 يوماً للمنتجات غير المستخدمة بحالتها الأصلية. الحاويات المخصصة أو المعدلة غير قابلة للإرجاع. تكاليف شحن الإرجاع على عاتق العميل ما لم يكن الإرجاع بسبب خطأ من جانبنا. تواصل مع خدمة العملاء لبدء عملية الإرجاع.',
+          q: "هل تقدمون خصومات على الكميات؟",
+          a: "نعم، نقدم أسعاراً متدرجة للكميات الكبيرة على معظم المنتجات. تبدأ الخصومات من كميات 5+ وحدات مع توفير متزايد للطلبات الأكبر.",
         },
         {
-          q: 'كيف أبلغ عن مشكلة في طلبي؟',
-          a: 'تواصل مع فريق خدمة العملاء فوراً على Hello@salada.sa أو اتصل على 050 016 5914. يرجى تجهيز رقم طلبك وتقديم صور لأي أضرار أو مشاكل. نهدف إلى حل جميع المخاوف خلال 48 ساعة.',
+          q: "ما هي طرق الدفع المقبولة؟",
+          a: "نقبل جميع بطاقات الائتمان الرئيسية (فيزا، ماستركارد، مدى)، والتحويلات البنكية، وأوامر الشراء للشركات للحسابات المعتمدة.",
         },
         {
-          q: 'هل تقدمون الدعم الفني؟',
-          a: 'نعم، فريقنا الفني متاح للمساعدة في أسئلة التركيب والصيانة والتشغيل. نوفر الوثائق مع جميع المنتجات ونقدم الدعم في الموقع للتركيبات المعقدة بتكلفة إضافية.',
+          q: "هل يمكنني الحصول على عرض سعر مخصص؟",
+          a: "بالتأكيد! للطلبات الكبيرة أو التكوينات المخصصة، تواصل مع فريق المبيعات للحصول على عرض سعر مخصص. نستجيب عادة خلال 24 ساعة عمل.",
+        },
+      ],
+    },
+    {
+      category: "الإرجاع والدعم",
+      items: [
+        {
+          q: "ما هي سياسة الإرجاع لديكم؟",
+          a: "نقدم سياسة إرجاع لمدة 30 يوماً للمنتجات غير المستخدمة بحالتها الأصلية. الحاويات المخصصة أو المعدلة غير قابلة للإرجاع.",
+        },
+        {
+          q: "كيف أبلغ عن مشكلة في طلبي؟",
+          a: "تواصل مع فريق خدمة العملاء فوراً على Hello@salada.sa أو اتصل على 050 016 5914. نهدف إلى حل جميع المخاوف خلال 48 ساعة.",
+        },
+        {
+          q: "هل تقدمون الدعم الفني؟",
+          a: "نعم، فريقنا الفني متاح للمساعدة في أسئلة التركيب والصيانة والتشغيل. نوفر الوثائق مع جميع المنتجات ونقدم الدعم في الموقع للتركيبات المعقدة.",
         },
       ],
     },
   ];
 
-  const faqs = isRTL ? faqsAr : faqsEn;
+  const faqs = isAr ? faqsAr : faqsEn;
 
-  const heroContent = {
-    en: {
-      label: 'Help Center',
-      title: 'Frequently Asked Questions',
-      description: "Find answers to common questions about our products, shipping, and services. Can't find what you're looking for? Contact us.",
-      searchPlaceholder: 'Search questions...',
-      noResults: 'No results found for',
-      clearSearch: 'Clear search',
-      stillQuestions: 'Still have questions?',
-      stillQuestionsDesc: "Our team is here to help. Reach out and we'll get back to you within 24 hours.",
-      contactSupport: 'Contact Support',
-    },
-    ar: {
-      label: 'مركز المساعدة',
-      title: 'الأسئلة الشائعة',
-      description: 'اعثر على إجابات للأسئلة الشائعة حول منتجاتنا والشحن والخدمات. لم تجد ما تبحث عنه؟ تواصل معنا.',
-      searchPlaceholder: 'ابحث في الأسئلة...',
-      noResults: 'لا توجد نتائج لـ',
-      clearSearch: 'مسح البحث',
-      stillQuestions: 'لا تزال لديك أسئلة؟',
-      stillQuestionsDesc: 'فريقنا هنا للمساعدة. تواصل معنا وسنرد عليك خلال 24 ساعة.',
-      contactSupport: 'تواصل مع الدعم',
-    },
+  const ui = {
+    label: isAr ? "مركز المساعدة" : "Help Center",
+    title: isAr ? "الأسئلة الشائعة" : "Frequently Asked Questions",
+    description: isAr
+      ? "اعثر على إجابات للأسئلة الشائعة حول منتجاتنا والشحن والخدمات."
+      : "Find answers to common questions about our products, shipping, and services.",
+    placeholder: isAr ? "ابحث في الأسئلة..." : "Search questions...",
+    noResults: isAr ? "لا توجد نتائج لـ" : "No results for",
+    clear: isAr ? "مسح البحث" : "Clear search",
+    ctaTitle: isAr ? "لا تزال لديك أسئلة؟" : "Still have questions?",
+    ctaDesc: isAr
+      ? "فريقنا هنا للمساعدة. سنرد خلال 24 ساعة."
+      : "Our team is here to help. We'll get back to you within 24 hours.",
+    ctaBtn: isAr ? "تواصل مع الدعم" : "Contact Support",
   };
 
-  const content = heroContent[language];
+  // ── Filter ────────────────────────────────────────────────────────
+  const filtered = faqs
+    .map((cat) => ({
+      ...cat,
+      items: cat.items.filter(
+        (item) =>
+          item.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.a.toLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+    }))
+    .filter((cat) => cat.items.length > 0);
 
-  const filteredFAQs = faqs.map((category) => ({
-    ...category,
-    questions: category.questions.filter(
-      (q) =>
-        q.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.a.toLowerCase().includes(searchQuery.toLowerCase())
-    ),
-  })).filter((category) => category.questions.length > 0);
-
-  let globalIndex = 0;
+  // flat global index for accordion
+  let gIdx = 0;
 
   return (
     <Layout>
-      <Breadcrumb items={[{ label: isRTL ? 'الأسئلة الشائعة' : 'FAQ' }]} />
-      {/* Hero */}
-      <section className="bg-secondary border-b border-border py-16 md:py-24" dir={isRTL ? 'rtl' : 'ltr'}>
-        <div className="industrial-container">
-          <span className="industrial-label mb-4 block">{content.label}</span>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            {content.title}
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mb-8 text-base">
-            {content.description}
-          </p>
+      <SEOHead {...seo} />
 
-          {/* Search */}
-          <div className="max-w-xl relative">
-            <Search className={`absolute ${isRTL ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground`} />
-            <input
-              type="text"
-              placeholder={content.searchPlaceholder}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={`industrial-input ${isRTL ? 'pr-12' : 'pl-12'}`}
-            />
+      {/* ── HERO ─────────────────────────────────────── */}
+      <section className="relative overflow-hidden" style={{ minHeight: "240px" }} dir={isAr ? "rtl" : "ltr"}>
+        <div className="absolute inset-0">
+          <img
+            src={heroPort}
+            alt="FAQ"
+            className="w-full h-full object-cover object-center"
+            style={{ filter: "grayscale(18%) brightness(0.45)" }}
+          />
+          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.6)" }} />
+          <div
+            className="absolute bottom-0 inset-x-0"
+            style={{
+              height: "1.5px",
+              background:
+                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
+            }}
+          />
+        </div>
+
+        <div
+          className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
+          style={{ minHeight: "240px" }}
+        >
+          <div className="max-w-2xl">
+            {/* breadcrumb */}
+            <nav className="flex items-center gap-1.5 mb-4">
+              <Link
+                to="/"
+                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                style={{ color: "rgba(255,255,255,0.32)" }}
+              >
+                {isAr ? "الرئيسية" : "Home"}
+              </Link>
+              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
+              <span
+                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                style={{ color: "hsl(var(--primary))" }}
+              >
+                {isAr ? "الأسئلة الشائعة" : "FAQ"}
+              </span>
+            </nav>
+
+            {/* eyebrow */}
+            <div className="flex items-center gap-2.5 mb-3">
+              <span
+                style={{
+                  width: "1.2rem",
+                  height: "1.5px",
+                  background: "hsl(var(--primary)/0.7)",
+                  display: "block",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                className="font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                style={{ color: "hsl(var(--primary))" }}
+              >
+                {ui.label}
+              </span>
+            </div>
+
+            <h1
+              className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 text-white"
+              style={{ fontSize: "clamp(1.5rem, 4vw, 2.4rem)" }}
+            >
+              {ui.title}
+            </h1>
+
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>
+              {ui.description}
+            </p>
+
+            {/* Search bar */}
+            <div className="relative max-w-lg">
+              <Search
+                className="absolute top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
+                style={{
+                  color: "rgba(255,255,255,0.4)",
+                  left: isAr ? "auto" : "1rem",
+                  right: isAr ? "1rem" : "auto",
+                }}
+              />
+              <input
+                type="text"
+                placeholder={ui.placeholder}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/10 border text-white text-sm py-3 focus:outline-none transition-colors placeholder:text-white/30 backdrop-blur-sm"
+                style={{
+                  borderColor: "rgba(255,255,255,0.2)",
+                  paddingLeft: isAr ? "1rem" : "2.75rem",
+                  paddingRight: isAr ? "2.75rem" : "1rem",
+                }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = "hsl(var(--primary)/0.7)")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute top-1/2 -translate-y-1/2 p-1 hover:opacity-70 transition-opacity"
+                  style={{
+                    left: isAr ? "0.75rem" : "auto",
+                    right: isAr ? "auto" : "0.75rem",
+                    color: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="industrial-section" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* ── FAQ CONTENT ──────────────────────────────── */}
+      <section className="bg-background border-b border-border py-10 md:py-14" dir={isAr ? "rtl" : "ltr"}>
         <div className="industrial-container">
           <div className="max-w-3xl mx-auto">
-            {filteredFAQs.length > 0 ? (
-              filteredFAQs.map((category) => (
-                <div key={category.category} className="mb-12">
-                  <h2 className="text-lg md:text-xl font-bold mb-6 text-primary">
-                    {category.category}
-                  </h2>
-                  <div className="space-y-1">
-                    {category.questions.map((faq) => {
-                      const currentIndex = globalIndex++;
+            {filtered.length > 0 ? (
+              filtered.map((cat) => (
+                <div key={cat.category} className="mb-10 last:mb-0">
+                  {/* Category heading */}
+                  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
+                    <span
+                      style={{
+                        width: "1.2rem",
+                        height: "1.5px",
+                        background: "hsl(var(--primary)/0.6)",
+                        display: "block",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <h2
+                      className="font-mono text-[0.65rem] uppercase tracking-[0.22em] font-bold"
+                      style={{ color: "hsl(var(--primary))" }}
+                    >
+                      {cat.category}
+                    </h2>
+                  </div>
+
+                  {/* Accordion items */}
+                  <div className="space-y-px" style={{ background: "hsl(var(--border))" }}>
+                    {cat.items.map((item) => {
+                      const idx = gIdx++;
+                      const open = openIndex === idx;
                       return (
-                        <div
-                          key={faq.q}
-                          className="border border-border bg-card"
-                        >
+                        <div key={item.q} className="bg-background">
                           <button
-                            onClick={() =>
-                              setOpenIndex(openIndex === currentIndex ? null : currentIndex)
-                            }
-                            className={`w-full flex items-center justify-between p-6 ${isRTL ? 'text-right' : 'text-left'}`}
+                            onClick={() => setOpenIndex(open ? null : idx)}
+                            className="w-full flex items-start justify-between gap-4 px-5 py-4 text-start transition-colors duration-150 hover:bg-secondary/40"
                           >
-                            <span className={`font-medium ${isRTL ? 'pl-4' : 'pr-4'}`}>{faq.q}</span>
+                            <span
+                              className={`text-sm font-semibold leading-snug transition-colors duration-200 ${open ? "text-primary" : "text-foreground"}`}
+                            >
+                              {item.q}
+                            </span>
                             <ChevronDown
-                              className={`w-5 h-5 flex-shrink-0 transition-transform ${
-                                openIndex === currentIndex ? 'rotate-180' : ''
-                              }`}
+                              className={`w-4 h-4 shrink-0 mt-0.5 transition-transform duration-300 ${open ? "rotate-180 text-primary" : "text-muted-foreground"}`}
                             />
                           </button>
-                          {openIndex === currentIndex && (
-                            <div className="px-6 pb-6 text-muted-foreground leading-relaxed">
-                              {faq.a}
+
+                          {/* Answer */}
+                          <div
+                            className="overflow-hidden transition-all duration-300"
+                            style={{ maxHeight: open ? "500px" : "0", opacity: open ? 1 : 0 }}
+                          >
+                            <div className="px-5 pb-5 pt-0">
+                              {/* gold accent line */}
+                              <div
+                                className="h-px mb-3"
+                                style={{ width: "2rem", background: "hsl(var(--primary)/0.4)" }}
+                              />
+                              <p className="text-sm leading-relaxed text-muted-foreground">{item.a}</p>
                             </div>
-                          )}
+                          </div>
                         </div>
                       );
                     })}
@@ -280,15 +395,19 @@ export default function FAQPage() {
                 </div>
               ))
             ) : (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground mb-4">
-                  {content.noResults} "{searchQuery}"
+              <div className="text-center py-16">
+                <p
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-3"
+                  style={{ color: "hsl(var(--muted-foreground))" }}
+                >
+                  {ui.noResults} "{searchQuery}"
                 </p>
                 <button
-                  onClick={() => setSearchQuery('')}
-                  className="text-primary hover:text-accent transition-colors"
+                  onClick={() => setSearchQuery("")}
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
                 >
-                  {content.clearSearch}
+                  {ui.clear}
+                  <X className="w-3.5 h-3.5" />
                 </button>
               </div>
             )}
@@ -296,16 +415,56 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="bg-secondary border-t border-border py-16" dir={isRTL ? 'rtl' : 'ltr'}>
-        <div className="industrial-container text-center">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">{content.stillQuestions}</h2>
-          <p className="text-muted-foreground mb-6">
-            {content.stillQuestionsDesc}
-          </p>
-          <a href="/contact" className="industrial-button">
-            {content.contactSupport}
-          </a>
+      {/* ── CTA ──────────────────────────────────────── */}
+      <section className="relative py-14 md:py-20 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
+        <div className="absolute inset-0">
+          <img
+            src={heroPort}
+            alt=""
+            loading="lazy"
+            className="w-full h-full object-cover"
+            style={{ filter: "grayscale(25%) brightness(0.35)" }}
+          />
+          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />
+        </div>
+
+        <div className="industrial-container relative z-10">
+          <div className="max-w-xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <span
+                style={{ width: "1.2rem", height: "1.5px", background: "hsl(var(--primary)/0.65)", display: "block" }}
+              />
+              <span
+                className="font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                style={{ color: "hsl(var(--primary))" }}
+              >
+                {isAr ? "تواصل معنا" : "Get in Touch"}
+              </span>
+              <span
+                style={{ width: "1.2rem", height: "1.5px", background: "hsl(var(--primary)/0.65)", display: "block" }}
+              />
+            </div>
+
+            <h2
+              className="font-black uppercase leading-tight tracking-[-0.025em] mb-3 text-white"
+              style={{ fontSize: "clamp(1.3rem, 3vw, 2rem)" }}
+            >
+              {ui.ctaTitle}
+            </h2>
+
+            <p className="text-sm leading-relaxed mb-7" style={{ color: "rgba(255,255,255,0.42)" }}>
+              {ui.ctaDesc}
+            </p>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.7rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
+              style={{ minHeight: "44px" }}
+            >
+              {ui.ctaBtn}
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+            </Link>
+          </div>
         </div>
       </section>
     </Layout>
