@@ -179,7 +179,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       <div className={`p-5 ${isAr ? "text-right" : ""}`}>
         {/* Category + SKU row */}
         <div className={`flex items-center justify-between mb-2 ${isAr ? "flex-row-reverse" : ""}`}>
-          <span className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-primary/60">{categoryLabel}</span>
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-primary/60">{categoryLabel}</span>
           <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground/50">
             {product.sku}
           </span>
@@ -201,7 +201,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             to={`/inquiry/${product.slug}`}
             className={cn(
               "inline-flex items-center gap-1.5",
-              "font-mono text-[0.6rem] uppercase tracking-[0.18em] font-700",
+              "font-mono text-[0.6rem] uppercase tracking-[0.15em] font-700",
               "text-primary hover:text-foreground transition-colors duration-200",
               isAr ? "flex-row-reverse" : "",
             )}

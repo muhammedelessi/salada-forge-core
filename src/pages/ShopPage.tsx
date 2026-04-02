@@ -25,7 +25,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -146,7 +146,7 @@ export default function ShopPage() {
     <div dir={isAr ? "rtl" : "ltr"}>
       {/* Categories */}
       <p
-        className="font-mono text-[0.65rem] uppercase tracking-[0.22em] mb-2.5 pb-2 border-b border-border"
+        className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-2.5 pb-2 border-b border-border"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         {t.shop.categories}
@@ -197,7 +197,7 @@ export default function ShopPage() {
 
       {/* Price Range */}
       <p
-        className="font-mono text-[0.65rem] uppercase tracking-[0.22em] mb-2.5 pb-2 border-b border-border"
+        className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-2.5 pb-2 border-b border-border"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         {t.shop.priceRange}
@@ -273,14 +273,14 @@ export default function ShopPage() {
             <nav className="flex items-center gap-1.5 mb-3">
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.16em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.3)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.15)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.16em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t.nav.shop}

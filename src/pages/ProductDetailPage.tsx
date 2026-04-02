@@ -33,7 +33,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
           background: "hsl(var(--primary)/0.6)",
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {children}
       </span>
     </div>
@@ -430,7 +430,7 @@ export default function ProductDetailPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative shrink-0 px-5 py-4 font-mono text-[0.6rem] uppercase tracking-[0.18em] whitespace-nowrap transition-colors duration-200 ${
+                className={`relative shrink-0 px-5 py-4 font-mono text-[0.6rem] uppercase tracking-[0.15em] whitespace-nowrap transition-colors duration-200 ${
                   activeTab === tab.id ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -493,7 +493,7 @@ export default function ProductDetailPage() {
                             (h, i) => (
                               <th
                                 key={i}
-                                className="py-3 px-4 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-start text-muted-foreground border-b border-border"
+                                className="py-3 px-4 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-start text-muted-foreground border-b border-border"
                               >
                                 {h}
                               </th>
