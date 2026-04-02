@@ -19,6 +19,7 @@ export default {
         display: ["'DM Sans'", "sans-serif"],
         arabic: ["'Tajawal'", "sans-serif"],
       },
+      colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
