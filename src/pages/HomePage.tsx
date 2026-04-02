@@ -666,23 +666,14 @@ export default function HomePage() {
                 </Link>
                 <Link
                   to="/solutions"
+                  className="industrial-button-outline w-full sm:w-auto"
                   style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "0.75rem 1.75rem",
-                    border: "1px solid rgba(255,255,255,0.25)",
+                    borderColor: "rgba(255,255,255,0.25)",
                     color: "#ffffff",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.6875rem",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.18em",
-                    transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--gold)/0.6)";
-                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--gold))";
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.6)";
+                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
