@@ -322,7 +322,7 @@ export default function HomePage() {
               fontFamily: "var(--font-mono)",
               fontSize: "0.65rem",
               textTransform: "uppercase",
-              letterSpacing: "0.3em",
+              letterSpacing: "0.25em",
               color: "#fff",
             }}
           >
