@@ -171,7 +171,7 @@ export default function ProductDetailPage() {
           <h1 className="font-black uppercase text-2xl mb-6">{t.product.notFound}</h1>
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-6 py-3"
+            className="industrial-button w-full sm:w-auto"
           >
             {isAr ? "العودة للمتجر" : "Back to Shop"}
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
