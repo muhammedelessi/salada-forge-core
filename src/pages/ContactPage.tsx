@@ -18,7 +18,7 @@ function SectionLabel({ text }: { text: string }) {
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
       />
       <span
-        className="font-mono text-[0.57rem] uppercase tracking-[0.28em]"
+        className="font-mono text-[0.65rem] uppercase tracking-[0.25em]"
         style={{ color: "hsl(var(--primary))" }}
       >
         {text}
@@ -157,14 +157,14 @@ export default function ContactPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Contact"}
@@ -362,7 +362,7 @@ export default function ContactPage() {
 
               <div className="border-t border-border pt-5 text-start">
                 <p
-                  className="font-mono text-[0.57rem] uppercase tracking-[0.25em] mb-4"
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.25em] mb-4"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {isAr ? "روابط سريعة" : "Quick Links"}
@@ -401,7 +401,7 @@ export default function ContactPage() {
               </h2>
             </div>
             <span
-              className="font-mono text-[0.55rem] uppercase tracking-[0.2em] shrink-0"
+              className="font-mono text-[0.65rem] uppercase tracking-[0.2em] shrink-0"
               style={{ color: "hsl(var(--muted-foreground))" }}
             >
               RNNA7850

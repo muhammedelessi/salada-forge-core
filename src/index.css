@@ -205,8 +205,9 @@
 
   .industrial-label {
     @apply text-primary font-mono uppercase;
-    font-size: 0.57rem;
-    letter-spacing: 0.28em;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
   }
 
   .industrial-divider {
@@ -215,7 +216,7 @@
 
   .industrial-button {
     @apply inline-flex items-center justify-center bg-primary text-primary-foreground font-mono font-bold uppercase;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     letter-spacing: 0.18em;
     padding: 0.75rem 1.5rem;
     min-height: 44px;
@@ -229,7 +230,7 @@
 
   .industrial-button-outline {
     @apply inline-flex items-center justify-center border border-border font-mono uppercase;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     padding: 0.75rem 1.5rem;
@@ -249,7 +250,10 @@
   }
 
   .industrial-badge {
-    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary text-xs font-mono uppercase tracking-wider;
+    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary font-mono uppercase;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
   }
 
   .container-pattern {
@@ -260,6 +264,18 @@
       transparent 1px,
       transparent 20px
     );
+  }
+}
+
+@layer base {
+  .font-mono {
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 639px) {
+  .font-mono {
+    font-size: max(0.65rem, 1em);
   }
 }
 

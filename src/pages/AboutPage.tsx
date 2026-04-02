@@ -63,7 +63,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.57rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -129,14 +129,14 @@ export default function AboutPage() {
             <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
               <Link
                 to="/"
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "من نحن" : "About"}
@@ -197,7 +197,7 @@ export default function AboutPage() {
                       {s.value}
                     </div>
                     <div
-                      className="font-mono text-[0.52rem] uppercase tracking-[0.18em]"
+                      className="font-mono text-[0.65rem] uppercase tracking-[0.18em]"
                       style={{ color: "hsl(var(--muted-foreground))" }}
                     >
                       {s.label}
@@ -283,7 +283,7 @@ export default function AboutPage() {
                 {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
                   <span
                     key={b}
-                    className="font-mono text-[0.52rem] uppercase tracking-[0.18em] px-2.5 py-1.5"
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.18em] px-2.5 py-1.5"
                     style={{
                       background: "hsl(var(--primary)/0.07)",
                       border: "1px solid hsl(var(--primary)/0.22)",
@@ -317,7 +317,7 @@ export default function AboutPage() {
                   style={{ background: "linear-gradient(to top, rgba(8,6,2,0.82), transparent)" }}
                 >
                   <p
-                    className="font-mono text-[0.52rem] uppercase tracking-[0.18em]"
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.18em]"
                     style={{ color: "hsl(var(--primary))" }}
                   >
                     {isAr ? "منشأة صلادة — الرياض" : "Salada Facility — Riyadh, KSA"}

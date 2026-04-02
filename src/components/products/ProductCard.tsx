@@ -58,7 +58,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
               className="absolute inset-0 flex items-center justify-center"
               style={{ background: "rgba(8,6,2,0.55)" }}
             >
-              <span className="font-mono text-[0.45rem] uppercase tracking-[0.15em] text-white">
+              <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-white">
                 {t.product.outOfStock}
               </span>
             </div>
@@ -70,7 +70,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           className={`flex flex-col justify-center flex-1 min-w-0 px-4 py-3 border-s border-border ${isAr ? "text-right" : ""}`}
         >
           <span
-            className="block font-mono text-[0.5rem] uppercase tracking-[0.2em] mb-1"
+            className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-1"
             style={{ color: "hsl(var(--primary)/0.6)" }}
           >
             {categoryLabel}
@@ -79,7 +79,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             {product.title}
           </h3>
           <span
-            className="font-mono text-[0.5rem] uppercase tracking-[0.15em]"
+            className="font-mono text-[0.65rem] uppercase tracking-[0.15em]"
             style={{ color: "hsl(var(--muted-foreground)/0.5)" }}
           >
             {product.sku}
@@ -132,7 +132,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         {product.status === "out_of_stock" && (
           <div
             className={cn(
-              "absolute top-3 font-mono text-[0.55rem] uppercase tracking-[0.2em] px-2.5 py-1 bg-destructive text-destructive-foreground",
+              "absolute top-3 font-mono text-[0.65rem] uppercase tracking-[0.2em] px-2.5 py-1 bg-destructive text-destructive-foreground",
               isAr ? "right-3" : "left-3",
             )}
           >
@@ -151,7 +151,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             className={cn(
               "pointer-events-auto inline-flex items-center gap-2 px-4 py-2.5",
               "bg-primary text-primary-foreground",
-              "font-mono text-[0.55rem] uppercase tracking-[0.18em] font-700",
+              "font-mono text-[0.65rem] uppercase tracking-[0.18em] font-700",
               "transition-all duration-200 hover:opacity-90",
               isAr ? "flex-row-reverse" : "",
             )}
@@ -164,7 +164,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             className={cn(
               "pointer-events-auto inline-flex items-center gap-2 px-4 py-2.5",
               "border border-foreground text-foreground",
-              "font-mono text-[0.55rem] uppercase tracking-[0.18em]",
+              "font-mono text-[0.65rem] uppercase tracking-[0.18em]",
               "transition-all duration-200 hover:bg-foreground hover:text-background",
               isAr ? "flex-row-reverse" : "",
             )}
@@ -179,8 +179,8 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       <div className={`p-5 ${isAr ? "text-right" : ""}`}>
         {/* Category + SKU row */}
         <div className={`flex items-center justify-between mb-2 ${isAr ? "flex-row-reverse" : ""}`}>
-          <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-primary/60">{categoryLabel}</span>
-          <span className="font-mono text-[0.5rem] uppercase tracking-[0.15em] text-muted-foreground/50">
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-primary/60">{categoryLabel}</span>
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground/50">
             {product.sku}
           </span>
         </div>
@@ -201,7 +201,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             to={`/inquiry/${product.slug}`}
             className={cn(
               "inline-flex items-center gap-1.5",
-              "font-mono text-[0.6rem] uppercase tracking-[0.18em] font-700",
+              "font-mono text-[0.6rem] uppercase tracking-[0.15em] font-700",
               "text-primary hover:text-foreground transition-colors duration-200",
               isAr ? "flex-row-reverse" : "",
             )}
@@ -214,7 +214,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             to={`/product/${product.slug}`}
             className={cn(
               "inline-flex items-center gap-1",
-              "font-mono text-[0.55rem] uppercase tracking-[0.15em]",
+              "font-mono text-[0.65rem] uppercase tracking-[0.15em]",
               "text-muted-foreground hover:text-primary transition-colors duration-200",
               isAr ? "flex-row-reverse" : "",
             )}

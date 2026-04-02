@@ -66,7 +66,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.57rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -157,14 +157,14 @@ export default function SolutionsPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t("nav.solutions")}
@@ -229,7 +229,7 @@ export default function SolutionsPage() {
                 </div>
                 {/* num badge */}
                 <span
-                  className="absolute top-4 font-mono text-[0.55rem] uppercase tracking-[0.22em]"
+                  className="absolute top-4 font-mono text-[0.65rem] uppercase tracking-[0.15em]"
                   style={{ color: "hsl(var(--primary))", insetInlineStart: "1.25rem" }}
                 >
                   {solution.num}
@@ -287,7 +287,7 @@ export default function SolutionsPage() {
                   style={{ background: "hsl(var(--secondary)/0.2)" }}
                 >
                   <p
-                    className="font-mono text-[0.55rem] uppercase tracking-[0.22em] mb-5"
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-5"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {isAr ? "المنتجات المتوفرة" : "Available Products"}
@@ -320,7 +320,7 @@ export default function SolutionsPage() {
                             {product.title}
                           </p>
                           <p
-                            className="font-mono text-[0.55rem] mt-0.5 uppercase tracking-[0.1em]"
+                            className="font-mono text-[0.65rem] mt-0.5 uppercase tracking-[0.1em]"
                             style={{ color: "hsl(var(--primary)/0.6)" }}
                           >
                             {product.sku}
@@ -362,7 +362,7 @@ export default function SolutionsPage() {
                   }}
                 />
                 <span
-                  className="font-mono text-[0.57rem] uppercase tracking-[0.28em]"
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.25em]"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {t("solutions.label")}

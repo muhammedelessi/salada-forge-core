@@ -320,9 +320,9 @@ export default function HomePage() {
           <span
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.45rem",
+              fontSize: "0.65rem",
               textTransform: "uppercase",
-              letterSpacing: "0.3em",
+              letterSpacing: "0.25em",
               color: "#fff",
             }}
           >
@@ -365,7 +365,7 @@ export default function HomePage() {
               <div>
                 <span
                   className="font-mono uppercase block text-primary mb-1.5"
-                  style={{ fontSize: "0.6rem", letterSpacing: "0.28em" }}
+                  style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
                 >
                   {t("vision.label")}
                 </span>
@@ -411,7 +411,7 @@ export default function HomePage() {
             <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
-                  className="font-mono uppercase block text-primary text-base"
+                  className="font-mono text-[0.65rem] uppercase block text-primary"
                   style={{ letterSpacing: "0.28em" }}
                 >
                   — {t("solutions.label")}
@@ -430,7 +430,7 @@ export default function HomePage() {
               <Link
                 to="/solutions"
                 className="group hidden md:inline-flex items-center gap-2 font-mono uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-                style={{ fontSize: "0.6875rem", letterSpacing: "0.18em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
+                style={{ fontSize: "0.7rem", letterSpacing: "0.18em", paddingBottom: "4px", borderBottom: "1px solid hsl(var(--border))" }}
               >
                 <span>{isAr ? "عرض الكل" : "View All"}</span>
                 <ArrowRight className={`w-3 h-3 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
@@ -484,7 +484,7 @@ export default function HomePage() {
 
                   {/* Arrow */}
                   <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                     <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}>
+                     <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.7rem", letterSpacing: "0.18em" }}>
                       {isAr ? "اكتشف" : "Explore"}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -509,7 +509,7 @@ export default function HomePage() {
             <div className="flex items-end justify-between pb-6 mb-8 md:mb-10 border-b border-border">
               <div>
                 <span
-                  className="font-mono uppercase block text-primary text-base"
+                  className="font-mono text-[0.65rem] uppercase block text-primary"
                   style={{ letterSpacing: "0.28em" }}
                 >
                   — {t("industries.label")}
@@ -527,7 +527,7 @@ export default function HomePage() {
               </div>
               <span
                 className="font-mono uppercase text-muted-foreground"
-                style={{ fontSize: "0.625rem", letterSpacing: "0.18em" }}
+                style={{ fontSize: "0.65rem", letterSpacing: "0.18em" }}
               >
                 {String(industries.length).padStart(2, "0")} sectors
               </span>
@@ -562,7 +562,7 @@ export default function HomePage() {
 
                   {/* Arrow */}
                   <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.6875rem", letterSpacing: "0.18em" }}>
+                    <span className="font-mono uppercase tracking-widest" style={{ fontSize: "0.7rem", letterSpacing: "0.18em" }}>
                       {t("solutions.learnMore")}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -649,7 +649,7 @@ export default function HomePage() {
             <Reveal>
               <span
                 className="font-mono uppercase mb-6 inline-flex justify-center"
-                style={{ fontSize: "0.625rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
+                style={{ fontSize: "0.65rem", letterSpacing: "0.28em", color: "hsl(var(--gold))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
