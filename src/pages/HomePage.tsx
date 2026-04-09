@@ -228,7 +228,6 @@ export default function HomePage() {
               letterSpacing: "-0.01em",
               marginBottom: "1.5rem",
               textAlign: "center",
-              color: "rgba(255,255,255,0.72)",
             }}
           >
             {t("hero.titleHighlight")}
