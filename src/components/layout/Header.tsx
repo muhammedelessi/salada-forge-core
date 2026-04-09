@@ -308,12 +308,13 @@ export function Header() {
 
   /* nav items — Home added */
   const navLinks = [
-    { label: t("nav.about"), href: "/about" },
-    { label: t("nav.whySalada"), href: "/why-salada" },
-    { label: t("nav.solutions"), href: "/solutions", mega: "solutions" },
-    { label: t("nav.industries"), href: "/industries", mega: "industries" },
-    { label: t("nav.shop"), href: "/shop" },
-    { label: t("nav.contact"), href: "/contact" },
+    { label: t('nav.home'),      href: '/home'    
+    { label: t('nav.about'),      href: '/about'                              },
+    { label: t('nav.whySalada'),  href: '/why-salada'                         },
+    { label: t('nav.solutions'),  href: '/solutions',  mega: 'solutions'      },
+    { label: t('nav.industries'), href: '/industries', mega: 'industries'     },
+    { label: t('nav.shop'),       href: '/shop'                               },
+    { label: t('nav.contact'),    href: '/contact'                            },
   ];
 
   /* mega menu data */
