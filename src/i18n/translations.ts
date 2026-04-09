@@ -17,8 +17,10 @@ export const translations = {
     // Hero
     hero: {
       label: "Saudi Manufacturer of Industrial Containers",
-      title: "Industrial Containers, Shipping & Storage Solutions, and",
-      titleHighlight: "Container Parts & Securing Equipment",
+      title:
+        "We are a leading container manufacturer, committed to the highest international quality standards for containers, spare parts & securing equipment.",
+      titleHighlight:
+        "We adopt unified concepts for efficient cargo transport. We provide comprehensive, effective & reliable logistics solutions.",
       description:
         "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       line1:
@@ -642,8 +644,9 @@ export const translations = {
     // Hero
     hero: {
       label: "شركة سعودية لتصنيع الحاويات الصناعية",
-      title: "حاويات صناعية، حلول شحن وتخزين متكاملة، و",
-      titleHighlight: "قطع غيار حاويات ومعدات تثبيت",
+      title: "نحن شركة رائدة في تصنيع الحاويات، نلتزم بأعلى معايير الجودة العالمية وقطع غيار الحاويات ومعدات التثبيت.",
+      titleHighlight:
+        "نعتمد مفاهيم موحدة لضمان نقل البضائع بكفاءة عالية. نقدم لعملائنا حلولاً لوجستية شاملة وفعّالة ومستقرة.",
       description:
         "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
       line1: "نحن شركة رائدة في تصنيع الحاويات، نلتزم بأعلى معايير الجودة العالمية وقطع غيار الحاويات ومعدات التثبيت.",

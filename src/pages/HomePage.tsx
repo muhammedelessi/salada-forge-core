@@ -197,47 +197,42 @@ export default function HomePage() {
 
         {/* Main content */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
-          {/* H1 white */}
-          <h1
-            className="animate-fade-up delay-300"
+          {/* H1 white — line 1 */}
+          <p
+            className="animate-fade-up delay-300 max-w-2xl"
             style={{
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 900,
-              textTransform: "uppercase",
-              lineHeight: 0.93,
-              letterSpacing: "-0.03em",
+              fontSize: "clamp(0.95rem, 2vw, 1.25rem)",
+              fontWeight: 700,
+              lineHeight: 1.55,
+              letterSpacing: "-0.01em",
               color: "#ffffff",
-              marginBottom: "0.25rem",
+              marginBottom: "0.75rem",
+              textAlign: "center",
             }}
           >
             {t("hero.title")}
-          </h1>
+          </p>
 
-          {/* H1 gold */}
-          <h1
-            className="animate-fade-up delay-400 text-primary"
+          {/* Gold divider small */}
+          <div
+            style={{ width: "2.5rem", height: "1.5px", background: "hsl(var(--gold)/0.55)", margin: "0 auto 0.75rem" }}
+          />
+
+          {/* H1 gold — line 2 */}
+          <p
+            className="animate-fade-up delay-400 max-w-2xl text-primary"
             style={{
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              fontWeight: 900,
-              textTransform: "uppercase",
-              lineHeight: 0.93,
-              letterSpacing: "-0.03em",
+              fontSize: "clamp(0.9rem, 1.8vw, 1.1rem)",
+              fontWeight: 600,
+              lineHeight: 1.65,
+              letterSpacing: "-0.01em",
               marginBottom: "1.5rem",
+              textAlign: "center",
+              color: "rgba(255,255,255,0.72)",
             }}
           >
             {t("hero.titleHighlight")}
-          </h1>
-
-          {/* Gold divider */}
-          <div
-            className="animate-fade-up delay-450"
-            style={{
-              width: "3rem",
-              height: "1.5px",
-              background: "hsl(var(--gold)/0.6)",
-              margin: "0 auto 1.5rem",
-            }}
-          />
+          </p>
 
           {/* ── 3 Statement lines ── */}
           <div className="animate-fade-up delay-500 w-full max-w-lg mx-auto mb-8" dir={isAr ? "rtl" : "ltr"}>
