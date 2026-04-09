@@ -112,17 +112,13 @@ export const translations = {
       logisticsDesc:
         "We provide structurally reinforced containers built for frequent handling, stacking, and transportation.",
       construction: "Construction Contractors",
-      constructionDesc:
-        "Reliable on-site storage solutions delivered quickly to meet project timelines.",
+      constructionDesc: "Reliable on-site storage solutions delivered quickly to meet project timelines.",
       government: "Government Projects",
-      governmentDesc:
-        "Saudi-manufactured containers aligned with industrial and operational standards.",
+      governmentDesc: "Saudi-manufactured containers aligned with industrial and operational standards.",
       industrial: "Industrial Facilities",
-      industrialDesc:
-        "Heavy-duty storage solutions suitable for harsh operating environments.",
+      industrialDesc: "Heavy-duty storage solutions suitable for harsh operating environments.",
       storage: "Storage & Warehousing Providers",
-      storageDesc:
-        "Scalable container solutions designed for efficient warehouse and storage operations.",
+      storageDesc: "Scalable container solutions designed for efficient warehouse and storage operations.",
       ctaTitle: "Need Sector-Specific Solutions?",
       ctaDesc:
         "Our team understands the unique requirements of your industry. Get in touch to discuss your operational needs.",
@@ -139,7 +135,8 @@ export const translations = {
       rapidDeployment: "Faster Delivery",
       rapidDeploymentDesc: "Reduced lead times compared to imported containers.",
       nationalCoverage: "Quality Control Process",
-      nationalCoverageDesc: "Each unit undergoes inspection for structural integrity, flooring stability, and coating durability.",
+      nationalCoverageDesc:
+        "Each unit undergoes inspection for structural integrity, flooring stability, and coating durability.",
       compliance: "Custom Engineering Capability",
       complianceDesc: "We adapt container specifications to match project-specific requirements.",
       localSupply: "Industrial Reliability",
@@ -199,6 +196,11 @@ export const translations = {
       specialtyContainers: "Specialty Containers",
       drumsBarrels: "Drums & Barrels",
       modularBuildings: "Modular Buildings",
+      storageContainers: "Storage Containers",
+      landShipping: "Land Shipping Container",
+      isoShipping: "ISO Shipping Container",
+      lashingEquipment: "Lashing Equipment",
+      spareParts: "Spare Parts",
     },
     featured: {
       label: "Featured",
@@ -241,8 +243,10 @@ export const translations = {
       catalog: "Products",
       allProducts: "All Products",
       introTitle: "Our Products",
-      introP1: "We manufacture durable dry and storage containers designed for commercial, industrial, and project-based applications.",
-      introP2: "Each container is built with structural strength, long-term durability, and optional customization based on client requirements.",
+      introP1:
+        "We manufacture durable dry and storage containers designed for commercial, industrial, and project-based applications.",
+      introP2:
+        "Each container is built with structural strength, long-term durability, and optional customization based on client requirements.",
       products: "products",
       clearFilters: "Clear filters",
       categories: "Categories",
@@ -391,23 +395,31 @@ export const translations = {
     about: {
       label: "About Salada",
       title: "About Salada",
-      descP1: "Salada is a Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
-      descP2: "With a focus on industrial quality and local production, we support Saudi Arabia's growing logistics, construction, and industrial sectors.",
+      descP1:
+        "Salada is a Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
+      descP2:
+        "With a focus on industrial quality and local production, we support Saudi Arabia's growing logistics, construction, and industrial sectors.",
       visionLabel: "Our Vision",
       visionTitle: "Our Vision",
-      visionDescription: "To become a trusted Saudi manufacturer of container solutions serving local and regional markets.",
+      visionDescription:
+        "To become a trusted Saudi manufacturer of container solutions serving local and regional markets.",
       missionLabel: "Our Mission",
       missionTitle: "Our Mission",
-      missionDescription: "To deliver durable, reliable, and customizable container products that meet industrial standards and project demands.",
+      missionDescription:
+        "To deliver durable, reliable, and customizable container products that meet industrial standards and project demands.",
       commitmentLabel: "Our Commitment",
       commitmentTitle: "Our Commitment",
-      commitmentDescription: "We are committed to quality manufacturing, fast delivery, and long-term partnerships with our clients.",
+      commitmentDescription:
+        "We are committed to quality manufacturing, fast delivery, and long-term partnerships with our clients.",
       factoryLabel: "Our Manufacturing Facility",
       factoryTitle: "Our Factory",
-      factoryP1: "Salada operates a dedicated manufacturing facility in Saudi Arabia, equipped to produce dry and storage containers with strict quality control standards.",
-      factoryP2: "Our production process includes structural welding, floor reinforcement, corrosion protection, and final inspection to ensure durability and long operational life.",
+      factoryP1:
+        "Salada operates a dedicated manufacturing facility in Saudi Arabia, equipped to produce dry and storage containers with strict quality control standards.",
+      factoryP2:
+        "Our production process includes structural welding, floor reinforcement, corrosion protection, and final inspection to ensure durability and long operational life.",
       partnerCTA: "Ready to Partner with Salada?",
-      partnerDesc: "Join the growing network of Saudi industries that trust Salada for industrial containers, shipping & storage solutions, and securing equipment.",
+      partnerDesc:
+        "Join the growing network of Saudi industries that trust Salada for industrial containers, shipping & storage solutions, and securing equipment.",
       contactUs: "Contact Us",
       viewProducts: "View Solutions",
     },
@@ -628,7 +640,8 @@ export const translations = {
       label: "شركة سعودية لتصنيع الحاويات الصناعية",
       title: "حاويات صناعية، حلول شحن وتخزين متكاملة، و",
       titleHighlight: "قطع غيار حاويات ومعدات تثبيت",
-      description: "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
+      description:
+        "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
       cta: "استكشف الحلول",
       quote: "اطلب عرض سعر",
     },
@@ -704,23 +717,17 @@ export const translations = {
       pageDesc:
         "صلادة تدعم العمليات الحيوية عبر القطاعات الرئيسية في المملكة — نقدم حاويات صناعية وحلول شحن وتخزين وقطع غيار ومعدات تثبيت مبنية على الموثوقية والقدرة على التوسع.",
       introTitle: "القطاعات التي نخدمها",
-      introDesc:
-        "تدعم صلادة قطاعات متعددة في المملكة العربية السعودية ودول الخليج بحلول حاويات مصنعة محلياً.",
+      introDesc: "تدعم صلادة قطاعات متعددة في المملكة العربية السعودية ودول الخليج بحلول حاويات مصنعة محلياً.",
       logistics: "شركات اللوجستيات والشحن",
-      logisticsDesc:
-        "نوفر حاويات معززة هيكلياً مصممة للمناولة المتكررة والتكديس والنقل.",
+      logisticsDesc: "نوفر حاويات معززة هيكلياً مصممة للمناولة المتكررة والتكديس والنقل.",
       construction: "مقاولو البناء",
-      constructionDesc:
-        "حلول تخزين موثوقة في الموقع يتم توصيلها بسرعة لتلبية الجداول الزمنية للمشاريع.",
+      constructionDesc: "حلول تخزين موثوقة في الموقع يتم توصيلها بسرعة لتلبية الجداول الزمنية للمشاريع.",
       government: "المشاريع الحكومية",
-      governmentDesc:
-        "حاويات مصنعة سعودياً متوافقة مع المعايير الصناعية والتشغيلية.",
+      governmentDesc: "حاويات مصنعة سعودياً متوافقة مع المعايير الصناعية والتشغيلية.",
       industrial: "المنشآت الصناعية",
-      industrialDesc:
-        "حلول تخزين شديدة التحمل مناسبة لبيئات التشغيل القاسية.",
+      industrialDesc: "حلول تخزين شديدة التحمل مناسبة لبيئات التشغيل القاسية.",
       storage: "مزودو التخزين والتوزيع",
-      storageDesc:
-        "حلول حاويات قابلة للتوسع مصممة لعمليات المستودعات والتخزين الفعالة.",
+      storageDesc: "حلول حاويات قابلة للتوسع مصممة لعمليات المستودعات والتخزين الفعالة.",
       ctaTitle: "تحتاج حلولاً مخصصة لقطاعك؟",
       ctaDesc: "فريقنا يفهم المتطلبات الفريدة لصناعتك. تواصل معنا لمناقشة احتياجاتك التشغيلية.",
     },
@@ -746,7 +753,8 @@ export const translations = {
     // CTA Section
     cta: {
       title: "جاهز لتعزيز عملياتك؟",
-      description: "تواصل مع فريقنا للحصول على حاويات صناعية وحلول شحن وتخزين متكاملة وقطع غيار ومعدات تثبيت مصممة لاحتياجات عملك.",
+      description:
+        "تواصل مع فريقنا للحصول على حاويات صناعية وحلول شحن وتخزين متكاملة وقطع غيار ومعدات تثبيت مصممة لاحتياجات عملك.",
       getQuote: "اطلب عرض سعر",
       browseCatalog: "استكشف الحلول",
     },
@@ -794,6 +802,11 @@ export const translations = {
       specialtyContainers: "الحاويات المتخصصة",
       drumsBarrels: "براميل التخزين",
       modularBuildings: "المباني الجاهزة",
+      storageContainers: "حاويات التخزين",
+      landShipping: "حاويات الشحن البري",
+      isoShipping: "حاويات شحن ISO",
+      lashingEquipment: "معدات الربط",
+      spareParts: "قطع الغيار",
     },
     featured: {
       label: "الأكثر طلباً",
@@ -894,24 +907,9 @@ export const translations = {
       customization: "التخصيص المتاح",
       requestPricing: "اطلب تسعيراً مخصصاً",
       contactEngineer: "تواصل مع مهندس المبيعات",
-      defaultIdealFor: [
-        "شركات اللوجستيات",
-        "مواقع البناء",
-        "المستودعات الصناعية",
-        "مرافق التخزين الحكومية",
-      ],
-      defaultKeyFeatures: [
-        "هيكل فولاذي معزز",
-        "نظام أرضيات متين",
-        "طلاء مقاوم للعوامل الجوية",
-        "نظام قفل آمن",
-      ],
-      defaultCustomization: [
-        "أبواب إضافية",
-        "أنظمة تهوية",
-        "فواصل داخلية",
-        "خيارات طلاء خاصة",
-      ],
+      defaultIdealFor: ["شركات اللوجستيات", "مواقع البناء", "المستودعات الصناعية", "مرافق التخزين الحكومية"],
+      defaultKeyFeatures: ["هيكل فولاذي معزز", "نظام أرضيات متين", "طلاء مقاوم للعوامل الجوية", "نظام قفل آمن"],
+      defaultCustomization: ["أبواب إضافية", "أنظمة تهوية", "فواصل داخلية", "خيارات طلاء خاصة"],
     },
     cart: {
       title: "التسوق",
@@ -978,8 +976,10 @@ export const translations = {
     about: {
       label: "عن صلادة",
       title: "عن صلادة",
-      descP1: "صلادة — شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
-      descP2: "نسعى من خلال التركيز على الجودة الصناعية والإنتاج المحلي إلى دعم قطاعات اللوجستيات والبناء والصناعة المتنامية في المملكة.",
+      descP1:
+        "صلادة — شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
+      descP2:
+        "نسعى من خلال التركيز على الجودة الصناعية والإنتاج المحلي إلى دعم قطاعات اللوجستيات والبناء والصناعة المتنامية في المملكة.",
       visionLabel: "رؤيتنا",
       visionTitle: "رؤيتنا",
       visionDescription: "أن نكون الشريك السعودي الموثوق في تصنيع حلول الحاويات للأسواق المحلية والإقليمية.",
@@ -991,10 +991,13 @@ export const translations = {
       commitmentDescription: "نلتزم بجودة التصنيع والتسليم السريع وبناء شراكات طويلة الأمد مع عملائنا.",
       factoryLabel: "منشأتنا التصنيعية",
       factoryTitle: "مصنعنا",
-      factoryP1: "تدير صلادة منشأة تصنيع مخصصة في المملكة العربية السعودية، مجهزة لإنتاج الحاويات الجافة وحاويات التخزين وفق معايير صارمة لمراقبة الجودة.",
-      factoryP2: "تشمل عملية الإنتاج لدينا اللحام الهيكلي وتعزيز الأرضيات والحماية من التآكل والفحص النهائي لضمان المتانة وطول العمر التشغيلي.",
+      factoryP1:
+        "تدير صلادة منشأة تصنيع مخصصة في المملكة العربية السعودية، مجهزة لإنتاج الحاويات الجافة وحاويات التخزين وفق معايير صارمة لمراقبة الجودة.",
+      factoryP2:
+        "تشمل عملية الإنتاج لدينا اللحام الهيكلي وتعزيز الأرضيات والحماية من التآكل والفحص النهائي لضمان المتانة وطول العمر التشغيلي.",
       partnerCTA: "جاهز للشراكة مع صلادة؟",
-      partnerDesc: "انضم للشبكة المتنامية من الصناعات السعودية التي تثق بصلادة للحاويات الصناعية وحلول الشحن والتخزين ومعدات التثبيت.",
+      partnerDesc:
+        "انضم للشبكة المتنامية من الصناعات السعودية التي تثق بصلادة للحاويات الصناعية وحلول الشحن والتخزين ومعدات التثبيت.",
       contactUs: "تواصل معنا",
       viewProducts: "عرض الحلول",
     },
