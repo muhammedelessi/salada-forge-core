@@ -17,25 +17,14 @@ function SectionLabel({ text }: { text: string }) {
         className="block shrink-0"
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
       />
-      <span
-        className="font-mono text-[0.65rem] uppercase tracking-[0.25em]"
-        style={{ color: "hsl(var(--primary))" }}
-      >
+      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
   );
 }
 
-function FormField({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
+function FormField({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
       <label
@@ -89,6 +78,25 @@ export default function ContactPage() {
         message: formData.message.trim(),
       });
       if (error) throw error;
+
+      // Send email notification (fire-and-forget, don't block success)
+      supabase.functions
+        .invoke("send-quote-email", {
+          body: {
+            customerName: formData.name.trim(),
+            customerEmail: formData.email.trim(),
+            customerPhone: formData.phone.trim() || undefined,
+            customerCompany: formData.company.trim() || undefined,
+            productTitle: formData.subject || "General Inquiry",
+            productSku: "—",
+            message: formData.message.trim(),
+            language: language,
+          },
+        })
+        .catch((emailError) => {
+          console.error("Email notification failed:", emailError);
+        });
+
       toast.success(t.contact.messageSent);
       setFormData({ name: "", email: "", company: "", phone: "", subject: "", message: "" });
     } catch {
