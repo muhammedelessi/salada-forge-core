@@ -21,6 +21,10 @@ export const translations = {
       titleHighlight: "Container Parts & Securing Equipment",
       description:
         "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
+      line1:
+        "A leading company in container manufacturing, committed to the highest international quality standards for containers, spare parts & securing equipment.",
+      line2: "We adopt unified concepts to ensure efficient cargo transportation.",
+      line3: "We provide our customers with comprehensive, effective, and reliable logistics solutions.",
       cta: "Explore Solutions",
       quote: "Request a Quote",
     },
@@ -642,6 +646,9 @@ export const translations = {
       titleHighlight: "قطع غيار حاويات ومعدات تثبيت",
       description:
         "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
+      line1: "نحن شركة رائدة في تصنيع الحاويات، نلتزم بأعلى معايير الجودة العالمية وقطع غيار الحاويات ومعدات التثبيت.",
+      line2: "نعتمد مفاهيم موحدة لضمان نقل البضائع بكفاءة عالية.",
+      line3: "نقدم لعملائنا حلولاً لوجستية شاملة وفعّالة ومستقرة.",
       cta: "استكشف الحلول",
       quote: "اطلب عرض سعر",
     },
