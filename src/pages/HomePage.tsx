@@ -199,7 +199,7 @@ export default function HomePage() {
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
           {/* H1 white — line 1 */}
           <p
-            className="animate-fade-up delay-300 max-w-2xl"
+            className="animate-fade-up delay-300 max-w-2xl text-primary"
             style={{
               fontSize: "clamp(0.95rem, 2vw, 1.25rem)",
               fontWeight: 700,
