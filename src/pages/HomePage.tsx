@@ -220,7 +220,7 @@ export default function HomePage() {
 
           {/* H1 gold — line 2 */}
           <p
-            className="animate-fade-up delay-400 max-w-2xl text-primary"
+            className="animate-fade-up delay-400 max-w-2xl text-primary-foreground"
             style={{
               fontSize: "clamp(0.9rem, 1.8vw, 1.1rem)",
               fontWeight: 600,
