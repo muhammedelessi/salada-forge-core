@@ -119,6 +119,23 @@ export default function ProductInquiryPage() {
 
       if (error) throw error;
 
+      // Send emails via edge function (fire-and-forget, don't block success)
+      supabase.functions.invoke('send-quote-email', {
+        body: {
+          customerName: formData.name.trim(),
+          customerEmail: formData.email.trim(),
+          customerPhone: formData.phone.trim() || undefined,
+          customerCompany: formData.company.trim() || undefined,
+          productTitle: product.title,
+          productSku: product.sku,
+          quantity: formData.quantity ? parseInt(formData.quantity) : undefined,
+          message: formData.message.trim() || undefined,
+          language,
+        },
+      }).catch((emailError) => {
+        console.error('Email sending failed:', emailError);
+      });
+
       setIsSuccess(true);
       toast.success(
         language === 'ar' 
