@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { Product, ProductSpecification } from '@/types';
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Product, ProductSpecification } from "@/types";
 
 interface DbProduct {
   id: string;
@@ -32,8 +32,8 @@ function parseSpecifications(specs: any): ProductSpecification[] {
   if (!specs) return [];
   if (Array.isArray(specs)) {
     return specs.map((s: any) => ({
-      label: s.label || '',
-      value: s.value || '',
+      label: s.label || "",
+      value: s.value || "",
     }));
   }
   return [];
@@ -45,16 +45,16 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     title: dbProduct.title,
     sku: dbProduct.sku,
     slug: dbProduct.slug,
-    description: dbProduct.description || '',
+    description: dbProduct.description || "",
     price: Number(dbProduct.price),
     compareAtPrice: dbProduct.compare_at_price ? Number(dbProduct.compare_at_price) : undefined,
     category: dbProduct.category,
     subcategory: dbProduct.subcategory || undefined,
-    images: dbProduct.images || ['/placeholder.svg'],
+    images: dbProduct.images || ["/placeholder.svg"],
     specifications: parseSpecifications(dbProduct.specifications),
     variants: Array.isArray(dbProduct.variants) ? dbProduct.variants : [],
     stock: dbProduct.stock,
-    status: (dbProduct.status as 'active' | 'draft' | 'out_of_stock') || 'active',
+    status: (dbProduct.status as "active" | "draft" | "out_of_stock") || "active",
     bulkPricing: Array.isArray(dbProduct.bulk_pricing) ? dbProduct.bulk_pricing : undefined,
     seoTitle: dbProduct.seo_title || undefined,
     seoDescription: dbProduct.seo_description || undefined,
@@ -68,16 +68,16 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
 
 export function useProducts() {
   return useQuery({
-    queryKey: ['products'],
+    queryKey: ["products"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false });
+        .from("products")
+        .select("*")
+        .eq("status", "active")
+        .order("created_at", { ascending: false });
 
       if (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
         throw error;
       }
 
@@ -88,16 +88,12 @@ export function useProducts() {
 
 export function useProduct(slug: string) {
   return useQuery({
-    queryKey: ['product', slug],
+    queryKey: ["product", slug],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('slug', slug)
-        .maybeSingle();
+      const { data, error } = await supabase.from("products").select("*").eq("slug", slug).maybeSingle();
 
       if (error) {
-        console.error('Error fetching product:', error);
+        console.error("Error fetching product:", error);
         throw error;
       }
 
@@ -111,15 +107,12 @@ export function useProduct(slug: string) {
 
 export function useCategories() {
   return useQuery({
-    queryKey: ['product-categories'],
+    queryKey: ["product-categories"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('products')
-        .select('category')
-        .eq('status', 'active');
+      const { data, error } = await supabase.from("products").select("category").eq("status", "active");
 
       if (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
         throw error;
       }
 
@@ -130,12 +123,31 @@ export function useCategories() {
         categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
       });
 
-      // Convert to array format
-      return Object.entries(categoryCounts).map(([id, count]) => ({
+      // Defined sort order
+      const categoryOrder = [
+        "storage-containers",
+        "land-shipping-container",
+        "iso-shipping-container",
+        "lashing-equipment",
+        "spare-parts",
+      ];
+
+      // Convert to array and sort by defined order
+      const allCategories = Object.entries(categoryCounts).map(([id, count]) => ({
         id,
-        name: id.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+        name: id.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
         count,
       }));
+
+      // Sort: known categories first (in order), then any others alphabetically
+      return allCategories.sort((a, b) => {
+        const aIdx = categoryOrder.indexOf(a.id);
+        const bIdx = categoryOrder.indexOf(b.id);
+        if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+        if (aIdx !== -1) return -1;
+        if (bIdx !== -1) return 1;
+        return a.name.localeCompare(b.name);
+      });
     },
   });
 }
