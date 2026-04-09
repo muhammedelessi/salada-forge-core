@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'HelveticaArabic';
-  src: url('@/assets/fonts/HelveticaNeueLTArabic-Bold.ttf') format('truetype');
+  src: url('@/assets/fonts/HelveticaNeueLTArabic-Roman.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
