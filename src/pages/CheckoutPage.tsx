@@ -424,7 +424,7 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  <button type="submit" className="w-full industrial-button mt-8 justify-center">
+                  <button type="submit" className="w-full btn-primary mt-8 justify-center">
                     {t.checkout.continueToPayment}
                   </button>
                 </form>
@@ -570,7 +570,7 @@ export default function CheckoutPage() {
                           placeholder="1234 5678 9012 3456"
                           value={paymentInfo.cardNumber}
                           onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
-                          className="industrial-input font-mono"
+                          className="industrial-input label-text"
                           dir="ltr"
                         />
                       </div>
@@ -595,7 +595,7 @@ export default function CheckoutPage() {
                             placeholder="MM/YY"
                             value={paymentInfo.expiry}
                             onChange={(e) => setPaymentInfo({ ...paymentInfo, expiry: e.target.value })}
-                            className="industrial-input font-mono"
+                            className="industrial-input label-text"
                             dir="ltr"
                           />
                         </div>
@@ -607,7 +607,7 @@ export default function CheckoutPage() {
                             placeholder="123"
                             value={paymentInfo.cvv}
                             onChange={(e) => setPaymentInfo({ ...paymentInfo, cvv: e.target.value })}
-                            className="industrial-input font-mono"
+                            className="industrial-input label-text"
                             dir="ltr"
                           />
                         </div>
@@ -630,7 +630,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className={`flex justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
                           <span className="text-muted-foreground">{bd.accountNumber}</span>
-                          <span className="font-mono font-medium" dir="ltr">{bd.accountNumberValue}</span>
+                          <span className="label-text font-medium" dir="ltr">{bd.accountNumberValue}</span>
                         </div>
                       </div>
                       <p className="mt-4 text-sm text-muted-foreground border-t border-border pt-4">
@@ -643,14 +643,14 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setStep('shipping')}
-                      className="industrial-button-outline flex-1 justify-center"
+                      className="btn-secondary flex-1 justify-center"
                     >
                       {t.checkout.back}
                     </button>
                     <button
                       type="submit"
                       disabled={isProcessing}
-                      className="industrial-button flex-1 justify-center disabled:opacity-50"
+                      className="btn-primary flex-1 justify-center disabled:opacity-50"
                     >
                       {isProcessing ? t.checkout.processing : `${t.checkout.pay} ${formatPrice(getTotal())}`}
                     </button>
@@ -677,7 +677,7 @@ export default function CheckoutPage() {
                           loading="lazy"
                           className="w-full h-full object-cover"
                         />
-                        <span className={`absolute -top-2 ${isRTL() ? '-left-2' : '-right-2'} w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center font-mono`}>
+                        <span className={`absolute -top-2 ${isRTL() ? '-left-2' : '-right-2'} w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center label-text`}>
                           {item.quantity}
                         </span>
                       </div>
@@ -687,7 +687,7 @@ export default function CheckoutPage() {
                           <p className="text-xs text-muted-foreground">{item.selectedVariant.name}</p>
                         )}
                       </div>
-                      <p className="text-sm font-mono">
+                      <p className="text-sm label-text">
                         {formatPrice((item.product.price + (item.selectedVariant?.priceModifier || 0)) * item.quantity)}
                       </p>
                     </div>
@@ -697,29 +697,29 @@ export default function CheckoutPage() {
                 <div className="border-t border-border pt-4 space-y-2">
                   <div className={`flex justify-between text-sm ${isRTL() ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                    <span className="font-mono">{formatPrice(getSubtotal())}</span>
+                    <span className="label-text">{formatPrice(getSubtotal())}</span>
                   </div>
                   {couponDiscount > 0 && (
                     <div className={`flex justify-between text-sm text-primary ${isRTL() ? 'flex-row-reverse' : ''}`}>
                       <span>{t.cart.discount} ({couponCode})</span>
-                      <span className="font-mono">-{formatPrice(couponDiscount)}</span>
+                      <span className="label-text">-{formatPrice(couponDiscount)}</span>
                     </div>
                   )}
                   <div className={`flex justify-between text-sm ${isRTL() ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.shippingLabel}</span>
-                    <span className="font-mono">
+                    <span className="label-text">
                       {getShipping() === 0 ? t.cart.free : formatPrice(getShipping())}
                     </span>
                   </div>
                   <div className={`flex justify-between text-sm ${isRTL() ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.tax}</span>
-                    <span className="font-mono">{formatPrice(getTax())}</span>
+                    <span className="label-text">{formatPrice(getTax())}</span>
                   </div>
                 </div>
 
                 <div className={`flex justify-between items-center pt-4 mt-4 border-t border-border ${isRTL() ? 'flex-row-reverse' : ''}`}>
                   <span className="text-lg font-bold">{t.cart.total}</span>
-                  <span className="text-xl font-bold font-mono text-primary">
+                  <span className="text-xl font-bold label-text text-primary">
                     {formatPrice(getTotal())}
                   </span>
                 </div>

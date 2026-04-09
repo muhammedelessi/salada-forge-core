@@ -15,7 +15,7 @@ export function LanguageSwitcher() {
       title={language === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
     >
       <Globe className="w-4 h-4" />
-      <span className="font-mono uppercase">{language === 'en' ? 'AR' : 'EN'}</span>
+      <span className="label-text uppercase">{language === 'en' ? 'AR' : 'EN'}</span>
     </button>
   );
 }

@@ -188,11 +188,11 @@ function DashboardOverview() {
                 return (
                   <div key={order.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                     <div>
-                      <p className="font-mono text-sm">{order.order_number}</p>
+                      <p className="label-text text-sm">{order.order_number}</p>
                       <p className="text-sm text-muted-foreground">{customerName}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-mono">SAR {Number(order.total).toLocaleString()}</p>
+                      <p className="label-text">SAR {Number(order.total).toLocaleString()}</p>
                       <span className={`text-xs uppercase px-2 py-1 ${
                         order.status === 'delivered' ? 'bg-green-500/20 text-green-500' :
                         order.status === 'shipped' ? 'bg-blue-500/20 text-blue-500' :
@@ -221,9 +221,9 @@ function DashboardOverview() {
                 <div key={product.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                   <div>
                     <p className="text-sm font-medium line-clamp-1">{product.title}</p>
-                    <p className="text-xs text-muted-foreground font-mono">{product.sku}</p>
+                    <p className="text-xs text-muted-foreground label-text">{product.sku}</p>
                   </div>
-                  <span className="text-sm font-mono text-accent">{product.stock} {t('admin.left')}</span>
+                  <span className="text-sm label-text text-accent">{product.stock} {t('admin.left')}</span>
                 </div>
               ))
             )}

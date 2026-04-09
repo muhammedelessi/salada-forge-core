@@ -66,7 +66,7 @@ export function StickyAddToCart({
           {/* Contact Us Button */}
           <Link
             to={`/inquiry/${product.slug}?quantity=${quantity}`}
-            className="industrial-button flex-shrink-0"
+            className="btn-primary flex-shrink-0"
           >
             <MessageSquare className={cn('w-3.5 h-3.5')} />
             {contactLabel}

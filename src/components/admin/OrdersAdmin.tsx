@@ -248,7 +248,7 @@ export function OrdersAdmin() {
         <h1 className="text-2xl font-bold">{c.title}</h1>
         <button 
           onClick={fetchOrders} 
-          className={`industrial-button-outline text-sm py-2 px-4 ${isRTL() ? 'flex-row-reverse' : ''}`}
+          className={`btn-secondary text-sm py-2 px-4 ${isRTL() ? 'flex-row-reverse' : ''}`}
         >
           <RefreshCw className="w-4 h-4" />
           {c.refresh}
@@ -299,7 +299,7 @@ export function OrdersAdmin() {
                 <div className={`flex items-center gap-4 flex-wrap ${isRTL() ? 'flex-row-reverse' : ''}`}>
                   {/* Order Info */}
                   <div className={`flex-1 min-w-[200px] ${isRTL() ? 'text-right' : ''}`}>
-                    <p className="font-mono font-bold">{c.orderNumber} #{order.order_number}</p>
+                    <p className="label-text font-bold">{c.orderNumber} #{order.order_number}</p>
                     <p className="text-sm text-muted-foreground">
                       {order.shipping_address.firstName} {order.shipping_address.lastName}
                     </p>
@@ -338,7 +338,7 @@ export function OrdersAdmin() {
                   </div>
 
                   {/* Total */}
-                  <div className={`font-mono font-bold text-primary ${isRTL() ? 'text-left' : 'text-right'}`}>
+                  <div className={`label-text font-bold text-primary ${isRTL() ? 'text-left' : 'text-right'}`}>
                     {formatPrice(order.total)}
                   </div>
 
@@ -379,7 +379,7 @@ export function OrdersAdmin() {
                                 {item.quantity} x {formatPrice(item.price)}
                               </p>
                             </div>
-                            <p className="font-mono text-sm">{formatPrice(item.price * item.quantity)}</p>
+                            <p className="label-text text-sm">{formatPrice(item.price * item.quantity)}</p>
                           </div>
                         ))}
                       </div>
@@ -388,25 +388,25 @@ export function OrdersAdmin() {
                       <div className="mt-4 pt-4 border-t border-border space-y-1 text-sm">
                         <div className={`flex justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
                           <span className="text-muted-foreground">{c.subtotal}</span>
-                          <span className="font-mono">{formatPrice(order.subtotal)}</span>
+                          <span className="label-text">{formatPrice(order.subtotal)}</span>
                         </div>
                         {order.discount > 0 && (
                           <div className={`flex justify-between text-green-600 ${isRTL() ? 'flex-row-reverse' : ''}`}>
                             <span>{c.discount}</span>
-                            <span className="font-mono">-{formatPrice(order.discount)}</span>
+                            <span className="label-text">-{formatPrice(order.discount)}</span>
                           </div>
                         )}
                         <div className={`flex justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
                           <span className="text-muted-foreground">{c.shipping}</span>
-                          <span className="font-mono">{order.shipping === 0 ? 'Free' : formatPrice(order.shipping)}</span>
+                          <span className="label-text">{order.shipping === 0 ? 'Free' : formatPrice(order.shipping)}</span>
                         </div>
                         <div className={`flex justify-between ${isRTL() ? 'flex-row-reverse' : ''}`}>
                           <span className="text-muted-foreground">{c.tax}</span>
-                          <span className="font-mono">{formatPrice(order.tax)}</span>
+                          <span className="label-text">{formatPrice(order.tax)}</span>
                         </div>
                         <div className={`flex justify-between font-bold pt-2 border-t border-border ${isRTL() ? 'flex-row-reverse' : ''}`}>
                           <span>{c.total}</span>
-                          <span className="font-mono text-primary">{formatPrice(order.total)}</span>
+                          <span className="label-text text-primary">{formatPrice(order.total)}</span>
                         </div>
                       </div>
                     </div>

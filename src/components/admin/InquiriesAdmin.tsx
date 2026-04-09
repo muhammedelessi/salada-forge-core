@@ -255,10 +255,10 @@ export function InquiriesAdmin() {
                       <td className="px-4 py-4">
                         <p className="font-medium line-clamp-1">{inquiry.product_title}</p>
                         {inquiry.product_sku && (
-                          <p className="text-xs text-muted-foreground font-mono">{inquiry.product_sku}</p>
+                          <p className="text-xs text-muted-foreground label-text">{inquiry.product_sku}</p>
                         )}
                       </td>
-                      <td className="px-4 py-4 font-mono">
+                      <td className="px-4 py-4 label-text">
                         {inquiry.quantity || '-'}
                       </td>
                       <td className="px-4 py-4">
@@ -359,12 +359,12 @@ export function InquiriesAdmin() {
                 <div className="bg-muted/50 p-4 space-y-2">
                   <p className="font-medium">{selectedInquiry.product_title}</p>
                   {selectedInquiry.product_sku && (
-                    <p className="text-sm text-muted-foreground font-mono">SKU: {selectedInquiry.product_sku}</p>
+                    <p className="text-sm text-muted-foreground label-text">SKU: {selectedInquiry.product_sku}</p>
                   )}
                   {selectedInquiry.quantity && (
                     <p className="flex items-center gap-2">
                       <Hash className="w-4 h-4 text-muted-foreground" />
-                      {isRTL() ? 'الكمية:' : 'Quantity:'} <span className="font-mono">{selectedInquiry.quantity}</span>
+                      {isRTL() ? 'الكمية:' : 'Quantity:'} <span className="label-text">{selectedInquiry.quantity}</span>
                     </p>
                   )}
                 </div>
@@ -423,7 +423,7 @@ export function InquiriesAdmin() {
                       notes: adminNotes,
                     })}
                     disabled={updateInquiryMutation.isPending}
-                    className="industrial-button"
+                    className="btn-primary"
                   >
                     {updateInquiryMutation.isPending
                       ? (isRTL() ? 'جاري الحفظ...' : 'Saving...')
@@ -431,7 +431,7 @@ export function InquiriesAdmin() {
                   </button>
                   <button
                     onClick={() => setSelectedInquiry(null)}
-                    className="industrial-button-outline"
+                    className="btn-secondary"
                   >
                     {isRTL() ? 'إلغاء' : 'Cancel'}
                   </button>

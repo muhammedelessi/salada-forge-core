@@ -205,7 +205,7 @@ export function CustomersAdmin() {
         <h1 className="text-2xl font-bold">{c.title}</h1>
         <button 
           onClick={fetchCustomers} 
-          className={`industrial-button-outline text-sm py-2 px-4 ${isRTL() ? 'flex-row-reverse' : ''}`}
+          className={`btn-secondary text-sm py-2 px-4 ${isRTL() ? 'flex-row-reverse' : ''}`}
         >
           <RefreshCw className="w-4 h-4" />
           {c.refresh}
@@ -256,7 +256,7 @@ export function CustomersAdmin() {
               <ShoppingBag className="w-5 h-5 text-green-500" />
             </div>
             <div className={isRTL() ? 'text-right' : ''}>
-              <p className="text-2xl font-bold font-mono">
+              <p className="text-2xl font-bold label-text">
                 {formatPrice(customers.reduce((sum, c) => sum + c.totalSpent, 0))}
               </p>
               <p className="text-xs text-muted-foreground">{c.totalSpent}</p>
@@ -313,7 +313,7 @@ export function CustomersAdmin() {
 
                   {/* Total Spent */}
                   <div className={`${isRTL() ? 'text-left' : 'text-right'}`}>
-                    <p className="font-mono font-bold text-primary">{formatPrice(customer.totalSpent)}</p>
+                    <p className="label-text font-bold text-primary">{formatPrice(customer.totalSpent)}</p>
                     <p className="text-xs text-muted-foreground">{c.totalSpent}</p>
                   </div>
 
@@ -344,7 +344,7 @@ export function CustomersAdmin() {
                           className={`flex items-center gap-4 p-3 bg-background rounded border border-border ${isRTL() ? 'flex-row-reverse' : ''}`}
                         >
                           <div className={`flex-1 ${isRTL() ? 'text-right' : ''}`}>
-                            <p className="font-mono text-sm font-medium">
+                            <p className="label-text text-sm font-medium">
                               {c.orderNumber} #{order.order_number}
                             </p>
                             <p className="text-xs text-muted-foreground">
@@ -354,7 +354,7 @@ export function CustomersAdmin() {
                           <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(order.status)}`}>
                             {getStatusLabel(order.status)}
                           </span>
-                          <p className="font-mono font-medium">{formatPrice(order.total)}</p>
+                          <p className="label-text font-medium">{formatPrice(order.total)}</p>
                         </div>
                       ))}
                     </div>

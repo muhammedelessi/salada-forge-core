@@ -241,14 +241,14 @@ export default function FAQPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="label-text text-[0.48rem] uppercase tracking-[0.18em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.48rem] uppercase tracking-[0.18em]"
+                className="label-text text-[0.48rem] uppercase tracking-[0.18em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "الأسئلة الشائعة" : "FAQ"}
@@ -267,7 +267,7 @@ export default function FAQPage() {
                 }}
               />
               <span
-                className="font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                className="label-text text-[0.65rem] uppercase tracking-[0.25em] font-bold"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {ui.label}
@@ -346,7 +346,7 @@ export default function FAQPage() {
                       }}
                     />
                     <h2
-                      className="font-mono text-[0.65rem] uppercase tracking-[0.22em] font-bold"
+                      className="label-text text-[0.65rem] uppercase tracking-[0.22em] font-bold"
                       style={{ color: "hsl(var(--primary))" }}
                     >
                       {cat.category}
@@ -397,14 +397,14 @@ export default function FAQPage() {
             ) : (
               <div className="text-center py-16">
                 <p
-                  className="font-mono text-[0.65rem] uppercase tracking-[0.2em] mb-3"
+                  className="label-text text-[0.65rem] uppercase tracking-[0.2em] mb-3"
                   style={{ color: "hsl(var(--muted-foreground))" }}
                 >
                   {ui.noResults} "{searchQuery}"
                 </p>
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] px-5 py-2.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
+                  className="btn-primary rtl:flex-row-reverse"
                 >
                   {ui.clear}
                   <X className="w-3.5 h-3.5" />
@@ -435,7 +435,7 @@ export default function FAQPage() {
                 style={{ width: "1.2rem", height: "1.5px", background: "hsl(var(--primary)/0.65)", display: "block" }}
               />
               <span
-                className="font-mono text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                className="label-text text-[0.65rem] uppercase tracking-[0.25em] font-bold"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Get in Touch"}
@@ -458,7 +458,7 @@ export default function FAQPage() {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono text-[0.7rem] font-bold uppercase tracking-[0.18em] px-7 py-3.5 hover:opacity-90 transition-opacity rtl:flex-row-reverse"
+              className="btn-primary rtl:flex-row-reverse"
               style={{ minHeight: "44px" }}
             >
               {ui.ctaBtn}

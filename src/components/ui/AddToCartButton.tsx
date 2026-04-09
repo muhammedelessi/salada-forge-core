@@ -86,7 +86,7 @@ export function AddToCartButton({
       onClick={handleAddToCart}
       disabled={isDisabled}
       className={cn(
-        'industrial-button transition-all duration-200',
+        'btn-primary transition-all duration-200',
         isSuccess && 'bg-green-600 hover:bg-green-600',
         isDisabled && 'opacity-50 cursor-not-allowed',
         size === 'lg' && 'py-5 text-base',

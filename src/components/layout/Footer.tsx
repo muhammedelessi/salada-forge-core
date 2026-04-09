@@ -46,7 +46,7 @@ export function Footer() {
                 className="industrial-input flex-1 rtl:text-right"
                 dir="ltr"
               />
-              <button className="industrial-button whitespace-nowrap rtl:flex-row-reverse">
+              <button className="btn-primary whitespace-nowrap rtl:flex-row-reverse">
                 {t("footer.subscribe")}
                 <ArrowRight className="w-4 h-4 ltr:ml-2 rtl:mr-2 rtl:rotate-180" />
               </button>
@@ -118,10 +118,10 @@ export function Footer() {
               © {currentYear} SALADA. {t("footer.rights")}
             </p>
             <div className="flex items-center gap-6 rtl:flex-row-reverse">
-              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground font-mono">
+              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground label-text">
                 {t("footer.isoCertified")}
               </span>
-              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground font-mono">
+              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground label-text">
                 {t("footer.dnvApproved")}
               </span>
             </div>

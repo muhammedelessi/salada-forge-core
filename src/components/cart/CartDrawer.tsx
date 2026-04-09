@@ -44,7 +44,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
             <Link 
               to="/shop" 
               onClick={() => onOpenChange(false)}
-              className="industrial-button"
+              className="btn-primary"
             >
               {t.cart.continueShopping}
             </Link>
@@ -113,7 +113,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-8 h-7 flex items-center justify-center font-mono text-xs">
+                          <span className="w-8 h-7 flex items-center justify-center label-text text-xs">
                             {item.quantity}
                           </span>
                           <button
@@ -124,7 +124,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                           </button>
                         </div>
 
-                        <span className="font-mono text-sm font-medium">{formatPrice(itemTotal)}</span>
+                        <span className="label-text text-sm font-medium">{formatPrice(itemTotal)}</span>
                       </div>
                     </div>
                   </div>
@@ -136,14 +136,14 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
             <div className="border-t border-border pt-4 space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                <span className="font-mono font-bold text-lg">{formatPrice(getSubtotal())}</span>
+                <span className="label-text font-bold text-lg">{formatPrice(getSubtotal())}</span>
               </div>
 
               <div className="space-y-2">
                 <Link
                   to="/checkout"
                   onClick={() => onOpenChange(false)}
-                  className="w-full industrial-button justify-center"
+                  className="w-full btn-primary justify-center"
                 >
                   {t.cart.proceedToCheckout}
                   <ArrowIcon className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
@@ -152,7 +152,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                 <Link
                   to="/cart"
                   onClick={() => onOpenChange(false)}
-                  className="w-full industrial-button-outline justify-center text-center"
+                  className="w-full btn-secondary justify-center text-center"
                 >
                   {t.cart.yourCart}
                 </Link>

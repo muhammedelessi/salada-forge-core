@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'Swiss721BT';
+  src: url('@/assets/fonts/Swiss721BT-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Swiss721BT';
+  src: url('@/assets/fonts/Swiss721BT-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Swiss721BT';
+  src: url('@/assets/fonts/Swiss721BT-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HelveticaArabic';
+  src: url('@/assets/fonts/HelveticaNeueLTArabic-Roman.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HelveticaArabic';
+  src: url('@/assets/fonts/HelveticaNeueLTArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,48 +45,48 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0.8% 25.7%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0.8% 25.7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0.8% 25.7%;
 
-    --primary: 40 90% 50%;
+    --primary: 37.6 67.1% 42.9%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 34.3 25.9% 94.7%;
+    --secondary-foreground: 0 0.8% 25.7%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 34.3 25.9% 94.7%;
+    --muted-foreground: 0 0% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 30 79.5% 43.9%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 40 90% 50%;
+    --border: 36 24.6% 88%;
+    --input: 36 24.6% 88%;
+    --ring: 37.6 67.1% 42.9%;
 
     --radius: 0rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 40 90% 50%;
+    --sidebar-primary: 37.6 67.1% 42.9%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 40 90% 50%;
+    --sidebar-ring: 37.6 67.1% 42.9%;
 
     /* Typography */
-    --font-display: 'DM Sans', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --font-sans: 'Source Sans 3', 'Swiss721BT', sans-serif;
+    --font-display: 'Swiss721BT', sans-serif;
+    --font-body: 'Source Sans 3', 'Swiss721BT', sans-serif;
 
     /* Spacing */
     --section-gap: 6rem;
@@ -65,25 +105,25 @@
   }
 
   .dark {
-    --background: 222 20% 8%;
-    --foreground: 40 15% 92%;
-    --card: 222 18% 11%;
-    --card-foreground: 40 15% 92%;
-    --popover: 222 18% 11%;
-    --popover-foreground: 40 15% 92%;
-    --primary: 40 90% 50%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 222 16% 14%;
-    --secondary-foreground: 40 15% 88%;
-    --muted: 222 16% 14%;
-    --muted-foreground: 220 10% 55%;
+    --background: 0 2.4% 16.1%;
+    --foreground: 34.3 25.9% 94.7%;
+    --card: 20 3% 19.4%;
+    --card-foreground: 34.3 25.9% 94.7%;
+    --popover: 20 3% 19.4%;
+    --popover-foreground: 34.3 25.9% 94.7%;
+    --primary: 37.6 67.1% 42.9%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 20 2.7% 22.2%;
+    --secondary-foreground: 34.3 25.9% 94.7%;
+    --muted: 20 2.7% 22.2%;
+    --muted-foreground: 30 7.8% 59.6%;
     --accent: 222 16% 18%;
     --accent-foreground: 40 15% 92%;
     --destructive: 0 65% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 222 14% 18%;
-    --input: 222 14% 18%;
-    --ring: 40 90% 50%;
+    --border: 12 3.5% 28%;
+    --input: 12 3.5% 28%;
+    --ring: 37.6 67.1% 42.9%;
   }
 }
 
@@ -98,78 +138,128 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-body);
+    font-family: 'Source Sans 3', 'Swiss721BT', sans-serif;
+    font-weight: 300;
     font-size: 0.875rem;
     line-height: 1.7;
+    color: #424141;
   }
 
-  /* RTL — Tajawal for Arabic */
   [dir="rtl"] body,
-  [dir="rtl"] * {
-    font-family: 'Tajawal', sans-serif;
+  [dir="rtl"] {
+    font-family: 'HelveticaArabic', sans-serif;
+    font-weight: 400;
     letter-spacing: 0;
-  }
-
-  [dir="rtl"] p,
-  [dir="rtl"] li,
-  [dir="rtl"] span:not(.font-mono) {
     line-height: 1.8;
-  }
-
-  /* Preserve mono in RTL */
-  [dir="rtl"] .font-mono,
-  [dir="rtl"] *[class*="font-mono"],
-  [dir="rtl"] code,
-  [dir="rtl"] pre,
-  [dir="rtl"] .mono {
-    font-family: 'IBM Plex Mono', monospace;
   }
 
   h1 {
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 4vw, 2.8rem);
     font-weight: 900;
-    line-height: 1.05;
-    @apply tracking-tight;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   h2 {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.5vw, 1.9rem);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
     font-weight: 900;
-    line-height: 1.1;
-    @apply tracking-tight;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   h3 {
     font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 800;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 700;
     line-height: 1.3;
   }
 
   h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 900;
     line-height: 1.3;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Swiss721BT', sans-serif;
+    font-weight: 900;
+    color: #424141;
+  }
+
+  p,
+  li {
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  button, .label-text {
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .stat-number {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
   }
 
   [dir="rtl"] h1,
   [dir="rtl"] h2,
   [dir="rtl"] h3,
-  [dir="rtl"] h4,
-  [dir="rtl"] h5,
-  [dir="rtl"] h6 {
-    font-family: 'Tajawal', sans-serif;
+  [dir="rtl"] h4 {
+    font-family: 'HelveticaArabic', sans-serif;
+    font-weight: 700;
     letter-spacing: 0;
-    line-height: 1.45;
-    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  [dir="rtl"] h1 {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] h2 {
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] h3 {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+
+  [dir="rtl"] p,
+  [dir="rtl"] li,
+  [dir="rtl"] span:not(.label):not(.badge) {
+    font-family: 'HelveticaArabic', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    line-height: 1.9;
+  }
+
+  [dir="rtl"] .btn-primary,
+  [dir="rtl"] .btn-secondary,
+  [dir="rtl"] .btn-ghost-dark,
+  [dir="rtl"] label,
+  [dir="rtl"] .label,
+  [dir="rtl"] .badge {
+    font-family: 'HelveticaArabic', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
   }
 
   code,
   pre,
   .mono {
-    font-family: var(--font-mono);
+    font-family: inherit;
   }
 }
 
@@ -204,45 +294,100 @@
   }
 
   .industrial-label {
-    @apply text-primary font-mono uppercase;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.25em;
+    @apply text-primary label-text uppercase;
   }
 
   .industrial-divider {
     @apply w-full h-px bg-border;
   }
 
-  .industrial-button {
-    @apply inline-flex items-center justify-center bg-primary text-primary-foreground font-mono font-bold uppercase;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    padding: 0.75rem 1.5rem;
-    min-height: 44px;
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.75rem 1.75rem;
+    min-height: 44px;
+    border: none;
+    cursor: pointer;
     transition: opacity 150ms ease;
   }
 
-  .industrial-button:hover {
+  .btn-primary:hover {
     opacity: 0.88;
   }
 
-  .industrial-button-outline {
-    @apply inline-flex items-center justify-center border border-border font-mono uppercase;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    padding: 0.75rem 1.5rem;
-    min-height: 44px;
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    color: hsl(var(--foreground) / 0.7);
+    background: transparent;
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.75rem 1.75rem;
+    min-height: 44px;
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
     transition: border-color 150ms ease, color 150ms ease;
   }
 
-  .industrial-button-outline:hover {
+  .btn-secondary:hover {
     border-color: hsl(var(--primary));
     color: hsl(var(--primary));
+  }
+
+  .btn-ghost-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.75rem 1.75rem;
+    min-height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .btn-ghost-dark:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  [dir="rtl"] .btn-primary svg,
+  [dir="rtl"] .btn-secondary svg,
+  [dir="rtl"] .btn-ghost-dark svg {
+    transform: rotate(180deg);
+  }
+
+  .section-pad {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-pad {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
   }
 
   .industrial-input {
@@ -250,10 +395,7 @@
   }
 
   .industrial-badge {
-    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary font-mono uppercase;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    @apply inline-flex items-center px-3 py-1 bg-primary/10 text-primary label-text uppercase;
   }
 
   .container-pattern {
@@ -268,14 +410,18 @@
 }
 
 @layer base {
-  .font-mono {
-    font-weight: 700;
+  .label-text {
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 }
 
 @media (max-width: 639px) {
-  .font-mono {
-    font-size: max(0.65rem, 1em);
+  .label-text {
+    font-size: max(0.7rem, 1em);
   }
 }
 

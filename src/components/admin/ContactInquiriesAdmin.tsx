@@ -292,7 +292,7 @@ export function ContactInquiriesAdmin() {
                 <button
                   onClick={() => updateNotesMutation.mutate({ id: selectedInquiry.id, notes })}
                   disabled={updateNotesMutation.isPending}
-                  className="mt-2 px-4 py-2 bg-primary text-primary-foreground text-sm hover:bg-primary/90 disabled:opacity-50"
+                  className="mt-2 btn-primary disabled:opacity-50"
                 >
                   {updateNotesMutation.isPending 
                     ? (isRTL() ? 'جاري الحفظ...' : 'Saving...') 

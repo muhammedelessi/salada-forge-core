@@ -17,7 +17,7 @@ function SectionLabel({ text }: { text: string }) {
         className="block shrink-0"
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -28,7 +28,7 @@ function FormField({ label, required, children }: { label: string; required?: bo
   return (
     <div>
       <label
-        className="block font-mono text-[0.65rem] uppercase tracking-[0.18em] mb-2.5"
+        className="block label-text text-[0.65rem] uppercase tracking-[0.18em] mb-2.5"
         style={{ color: "hsl(var(--foreground)/0.7)" }}
       >
         {label}
@@ -93,9 +93,7 @@ export default function ContactPage() {
             language: language,
           },
         })
-        .catch((emailError) => {
-          console.error("Email notification failed:", emailError);
-        });
+        .catch((err) => console.error("Email failed:", err));
 
       toast.success(t.contact.messageSent);
       setFormData({ name: "", email: "", company: "", phone: "", subject: "", message: "" });
@@ -124,7 +122,8 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: t.contact.headquarters,
-      lines: ["أحمد بن محمد العيالي", "RNNA7850, Riyadh, KSA"],
+      lines: isAr?["أحمد بن محمد العيالي", "RNNA7850, Riyadh, KSA"]:
+      ["Ahmed bin Mohammed Al-Ayal", "RNNA7850, Riyadh, KSA"],
     },
     {
       icon: Clock,
@@ -165,14 +164,14 @@ export default function ContactPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Contact"}
@@ -183,8 +182,7 @@ export default function ContactPage() {
               className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
               style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
             >
-              {isAr ? "تواصل " : "Get In "}
-              <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "معنا" : "Touch"}</span>
+              {isAr ? "تواصل معنا" : "Get In Touch"}
             </h1>
             <p
               className="text-[0.8rem] leading-relaxed text-start"
@@ -212,7 +210,7 @@ export default function ContactPage() {
                     <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(var(--primary))" }} />
                   </div>
                   <p
-                    className="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold mb-2"
+                    className="label-text text-[0.65rem] uppercase tracking-[0.2em] font-bold mb-2"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {item.title}
@@ -259,8 +257,7 @@ export default function ContactPage() {
                 className="font-black uppercase leading-tight tracking-[-0.02em] mb-8"
                 style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.7rem)", color: "hsl(var(--foreground))" }}
               >
-                {isAr ? "أرسل لنا " : "Send Us a "}
-                <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "رسالة" : "Message"}</span>
+                {isAr ? "أرسل لنا رسالة" : "Send Us a Message"}
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6" dir={dir}>
@@ -341,7 +338,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="industrial-button w-full sm:w-auto disabled:opacity-50"
+                  className="btn-primary w-full sm:w-auto disabled:opacity-50"
                 >
                   <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
                   <Send className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -361,7 +358,7 @@ export default function ContactPage() {
                   href="https://wa.me/966500165914"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="industrial-button"
+                  className="btn-primary"
                 >
                   <span>{isAr ? "ابدأ المحادثة" : "Start Chat"}</span>
                   <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
@@ -370,7 +367,7 @@ export default function ContactPage() {
 
               <div className="border-t border-border pt-5 text-start">
                 <p
-                  className="font-mono text-[0.65rem] uppercase tracking-[0.25em] mb-4"
+                  className="label-text text-[0.65rem] uppercase tracking-[0.25em] mb-4"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {isAr ? "روابط سريعة" : "Quick Links"}
@@ -409,7 +406,7 @@ export default function ContactPage() {
               </h2>
             </div>
             <span
-              className="font-mono text-[0.65rem] uppercase tracking-[0.2em] shrink-0"
+              className="label-text text-[0.65rem] uppercase tracking-[0.2em] shrink-0"
               style={{ color: "hsl(var(--muted-foreground))" }}
             >
               RNNA7850

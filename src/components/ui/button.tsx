@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono uppercase tracking-[0.18em] text-[0.7rem] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 min-h-[44px]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap label-text uppercase tracking-[0.18em] text-[0.7rem] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 min-h-[44px]",
   {
     variants: {
       variant: {
@@ -16,7 +16,7 @@ const buttonVariants = cva(
           "border border-border text-foreground/70 font-medium transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
         secondary:
           "border border-border text-foreground/70 font-medium transition-[border-color,color] duration-150 hover:border-primary hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
-        ghost: "bg-transparent border-0 text-muted-foreground font-mono uppercase tracking-[0.18em] transition-colors duration-150 hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
+        ghost: "bg-transparent border-0 text-muted-foreground label-text uppercase tracking-[0.18em] transition-colors duration-150 hover:text-primary [&_svg]:w-3.5 [&_svg]:h-3.5",
         link: "text-primary underline-offset-4 hover:underline font-medium",
       },
       size: {

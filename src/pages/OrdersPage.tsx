@@ -336,7 +336,7 @@ export default function OrdersPage() {
           {user && (
             <button
               onClick={handleLogout}
-              className={cn('industrial-button-outline', isRTL() && 'flex-row-reverse')}
+              className={cn('btn-secondary', isRTL() && 'flex-row-reverse')}
             >
               <LogOut className="w-4 h-4" />
               {c.logout}
@@ -375,7 +375,7 @@ export default function OrdersPage() {
               <button
                 type="submit"
                 disabled={guestSearching}
-                className={cn('industrial-button', isRTL() && 'flex-row-reverse')}
+                className={cn('btn-primary', isRTL() && 'flex-row-reverse')}
               >
                 <Search className={cn('w-4 h-4', isRTL() ? 'ml-2' : 'mr-2')} />
                 {guestSearching ? c.searching : c.searchOrder}
@@ -420,7 +420,7 @@ export default function OrdersPage() {
                   {isGuestMode && !user ? c.guestOrderNotFound : c.noOrders}
                 </h2>
                 <p className="text-muted-foreground mb-6">{c.noOrdersDesc}</p>
-                <Link to="/shop" className="industrial-button">
+                <Link to="/shop" className="btn-primary">
                   {c.shopNow}
                 </Link>
               </div>
@@ -440,13 +440,13 @@ export default function OrdersPage() {
                             <span className="text-sm font-medium">{getStatusText(order.status)}</span>
                           </div>
                           <div className={isRTL() ? 'text-right' : ''}>
-                            <p className="font-mono font-bold">{c.orderNumber} #{order.order_number}</p>
+                            <p className="label-text font-bold">{c.orderNumber} #{order.order_number}</p>
                             <p className="text-sm text-muted-foreground">{formatDate(order.created_at)}</p>
                           </div>
                         </div>
                         <div className={cn('flex items-center gap-4', isRTL() && 'flex-row-reverse')}>
                           <div className={isRTL() ? 'text-left' : 'text-right'}>
-                            <p className="font-bold font-mono text-primary">{formatPrice(order.total)}</p>
+                            <p className="font-bold label-text text-primary">{formatPrice(order.total)}</p>
                             <p className="text-sm text-muted-foreground">
                               {order.items.reduce((sum, item) => sum + item.quantity, 0)} {c.items}
                             </p>
@@ -496,7 +496,7 @@ export default function OrdersPage() {
                                   {item.quantity} x {formatPrice(item.price)}
                                 </p>
                               </div>
-                              <p className="font-mono">{formatPrice(item.price * item.quantity)}</p>
+                              <p className="label-text">{formatPrice(item.price * item.quantity)}</p>
                             </div>
                           ))}
                         </div>
@@ -526,27 +526,27 @@ export default function OrdersPage() {
                             <div className="mt-4 space-y-1 text-sm">
                               <div className={cn('flex justify-between', isRTL() && 'flex-row-reverse')}>
                                 <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                                <span className="font-mono">{formatPrice(order.subtotal)}</span>
+                                <span className="label-text">{formatPrice(order.subtotal)}</span>
                               </div>
                               {order.discount > 0 && (
                                 <div className={cn('flex justify-between text-primary', isRTL() && 'flex-row-reverse')}>
                                   <span>{t.cart.discount}</span>
-                                  <span className="font-mono">-{formatPrice(order.discount)}</span>
+                                  <span className="label-text">-{formatPrice(order.discount)}</span>
                                 </div>
                               )}
                               <div className={cn('flex justify-between', isRTL() && 'flex-row-reverse')}>
                                 <span className="text-muted-foreground">{t.cart.shippingLabel}</span>
-                                <span className="font-mono">
+                                <span className="label-text">
                                   {order.shipping === 0 ? t.cart.free : formatPrice(order.shipping)}
                                 </span>
                               </div>
                               <div className={cn('flex justify-between', isRTL() && 'flex-row-reverse')}>
                                 <span className="text-muted-foreground">{t.cart.tax}</span>
-                                <span className="font-mono">{formatPrice(order.tax)}</span>
+                                <span className="label-text">{formatPrice(order.tax)}</span>
                               </div>
                               <div className={cn('flex justify-between font-bold pt-2 border-t border-border', isRTL() && 'flex-row-reverse')}>
                                 <span>{t.cart.total}</span>
-                                <span className="font-mono text-primary">{formatPrice(order.total)}</span>
+                                <span className="label-text text-primary">{formatPrice(order.total)}</span>
                               </div>
                             </div>
                           </div>

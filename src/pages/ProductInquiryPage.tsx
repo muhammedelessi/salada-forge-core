@@ -60,7 +60,7 @@ export default function ProductInquiryPage() {
       <Layout>
         <div className="industrial-container py-24 text-center">
           <h1 className="text-2xl font-bold mb-4">{t.product.notFound}</h1>
-          <Link to="/shop" className="industrial-button">
+          <Link to="/shop" className="btn-primary">
             {t.product.backToShop}
           </Link>
         </div>
@@ -171,10 +171,10 @@ export default function ProductInquiryPage() {
                 : 'Thank you for your interest. Our team will contact you within 24 hours to discuss your inquiry.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/shop" className="industrial-button">
+              <Link to="/shop" className="btn-primary">
                 {language === 'ar' ? 'تصفح المنتجات' : 'Browse Products'}
               </Link>
-              <Link to="/" className="industrial-button-outline">
+              <Link to="/" className="btn-secondary">
                 {language === 'ar' ? 'العودة للرئيسية' : 'Back to Home'}
               </Link>
             </div>
@@ -229,7 +229,7 @@ export default function ProductInquiryPage() {
                   />
                 </div>
                 <h3 className={cn('font-semibold mb-2', isRTL && 'text-right')}>{product.title}</h3>
-                <p className={cn('text-sm text-muted-foreground font-mono mb-4', isRTL && 'text-right')}>
+                <p className={cn('text-sm text-muted-foreground label-text mb-4', isRTL && 'text-right')}>
                   SKU: {product.sku}
                 </p>
                 <p className={cn('text-sm text-muted-foreground line-clamp-3', isRTL && 'text-right')}>
@@ -338,7 +338,7 @@ export default function ProductInquiryPage() {
                   type="submit"
                   disabled={isSubmitting}
                   className={cn(
-                    'industrial-button w-full md:w-auto disabled:opacity-50',
+                    'btn-primary w-full md:w-auto disabled:opacity-50',
                     isRTL && 'flex-row-reverse'
                   )}
                 >

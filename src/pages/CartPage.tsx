@@ -32,7 +32,7 @@ export default function CartPage() {
               <p className="text-muted-foreground mb-8">
                 {t.cart.emptyDesc}
               </p>
-              <Link to="/shop" className="industrial-button">
+              <Link to="/shop" className="btn-primary">
                 {t.cart.continueShopping}
                 <ArrowIcon className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
               </Link>
@@ -91,7 +91,7 @@ export default function CartPage() {
                               >
                                 {item.product.title}
                               </Link>
-                              <p className="text-sm text-muted-foreground font-mono mt-1">
+                              <p className="text-sm text-muted-foreground label-text mt-1">
                                 {item.product.sku}
                               </p>
                               {item.selectedVariant && (
@@ -123,7 +123,7 @@ export default function CartPage() {
                               >
                                 <Minus className="w-3 h-3" />
                               </button>
-                              <span className="w-12 h-8 flex items-center justify-center font-mono text-sm">
+                              <span className="w-12 h-8 flex items-center justify-center label-text text-sm">
                                 {item.quantity}
                               </span>
                               <button
@@ -142,8 +142,8 @@ export default function CartPage() {
 
                             {/* Price */}
                             <div className={isRTL ? 'text-left' : 'text-right'}>
-                              <p className="font-bold font-mono text-lg">{formatPrice(itemTotal)}</p>
-                              <p className="text-sm text-muted-foreground font-mono">
+                              <p className="font-bold label-text text-lg">{formatPrice(itemTotal)}</p>
+                              <p className="text-sm text-muted-foreground label-text">
                                 {formatPrice(itemPrice)} {t.cart.each}
                               </p>
                             </div>
@@ -174,7 +174,7 @@ export default function CartPage() {
                   {couponCode ? (
                     <div className={`flex items-center justify-between bg-primary/10 p-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <div className={isRTL ? 'text-right' : ''}>
-                        <span className="text-sm font-mono text-primary">{couponCode}</span>
+                        <span className="text-sm label-text text-primary">{couponCode}</span>
                         <p className="text-xs text-muted-foreground">{t.cart.applied}</p>
                       </div>
                       <button
@@ -202,7 +202,7 @@ export default function CartPage() {
                         placeholder={t.cart.couponPlaceholder}
                         className="industrial-input flex-1"
                       />
-                      <button type="submit" className="industrial-button px-4">
+                      <button type="submit" className="btn-primary px-4">
                         {t.cart.apply}
                       </button>
                     </form>
@@ -213,34 +213,34 @@ export default function CartPage() {
                 <div className="space-y-3 mb-6">
                   <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.subtotal}</span>
-                    <span className="font-mono">{formatPrice(getSubtotal())}</span>
+                    <span className="label-text">{formatPrice(getSubtotal())}</span>
                   </div>
                   {couponDiscount > 0 && (
                     <div className={`flex justify-between text-primary ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <span>{t.cart.discount}</span>
-                      <span className="font-mono">-{formatPrice(couponDiscount)}</span>
+                      <span className="label-text">-{formatPrice(couponDiscount)}</span>
                     </div>
                   )}
                   <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.shippingLabel}</span>
-                    <span className="font-mono">
+                    <span className="label-text">
                       {getShipping() === 0 ? t.cart.free : formatPrice(getShipping())}
                     </span>
                   </div>
                   <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <span className="text-muted-foreground">{t.cart.tax}</span>
-                    <span className="font-mono">{formatPrice(getTax())}</span>
+                    <span className="label-text">{formatPrice(getTax())}</span>
                   </div>
                 </div>
 
                 <div className={`flex justify-between items-center py-4 border-t border-border mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <span className="text-lg font-bold">{t.cart.total}</span>
-                  <span className="text-2xl font-bold font-mono text-primary">
+                  <span className="text-2xl font-bold label-text text-primary">
                     {formatPrice(getTotal())}
                   </span>
                 </div>
 
-                <Link to="/checkout" className="w-full industrial-button justify-center">
+                <Link to="/checkout" className="w-full btn-primary justify-center">
                   {t.cart.proceedToCheckout}
                   <ArrowIcon className={`w-4 h-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
                 </Link>

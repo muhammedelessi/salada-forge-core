@@ -65,7 +65,7 @@ function MegaMenu({
                   {item.label}
                 </span>
                 <span className="text-[0.7rem] leading-relaxed text-muted-foreground">{item.desc}</span>
-                <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] font-mono uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] label-text uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   View <ArrowUpRight style={{ width: 10, height: 10 }} />
                 </span>
               </Link>
@@ -118,7 +118,7 @@ function MobileDrawer({
       >
         {/* drawer header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-border">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary">
+          <span className="text-xs label-text uppercase tracking-[0.25em] text-primary">
             {isAr ? "القائمة" : "Menu"}
           </span>
           <button
@@ -143,7 +143,7 @@ function MobileDrawer({
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-[0.65rem] font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[0.65rem] label-text text-primary">{String(i + 1).padStart(2, "0")}</span>
                   <span
                     className={cn(
                       "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
@@ -170,12 +170,12 @@ function MobileDrawer({
           <Link
             to="/contact"
             onClick={onClose}
-            className="w-full flex items-center justify-center gap-2 text-[0.65rem] bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] px-5 py-3 hover:opacity-90 transition-opacity"
+            className="w-full btn-primary"
           >
             <span>{isAr ? "اطلب عرض سعر" : "Request a Quote"}</span>
             <ArrowUpRight style={{ width: 14, height: 14 }} />
           </Link>
-          <p className="text-center mt-4 text-[0.65rem] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="text-center mt-4 text-[0.65rem] label-text uppercase tracking-[0.2em] text-muted-foreground">
             ISO Certified · DNV Approved
           </p>
         </div>
@@ -243,7 +243,7 @@ function SearchOverlay({
           />
           <button
             onClick={onClose}
-            className="text-[0.6rem] font-mono uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
+            className="text-[0.6rem] label-text uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
           >
             Esc
           </button>
@@ -412,7 +412,7 @@ export function Header() {
         }}
       >
         <div className="container-xl px-4 md:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-14 md:h-16">
             {/* ── Logo — bigger ── */}
             <Link
               to="/"
@@ -423,7 +423,7 @@ export function Header() {
             </Link>
 
             {/* ── Desktop nav ── */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-4 lg:gap-6">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 const hasMega = Boolean(link.mega);
@@ -437,10 +437,10 @@ export function Header() {
                     <Link
                       to={link.href}
                       className={cn(
-                        "relative flex items-center gap-1 px-3 py-2",
-                        "text-[0.7rem] font-black uppercase tracking-[0.08em]",
-                        "transition-colors duration-200 group",
-                        active ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                        "relative flex items-center gap-1 py-2",
+                        "text-[0.8rem] tracking-[0.05em]",
+                        "transition-colors duration-150 group",
+                        active ? "text-primary font-bold" : "text-foreground font-semibold hover:text-primary",
                       )}
                     >
                       {link.label}
@@ -454,10 +454,10 @@ export function Header() {
                         />
                       )}
                       {/* active underline */}
-                      {active && <span className="absolute bottom-0 inset-x-3 h-px bg-primary" />}
+                      {active && <span className="absolute -bottom-1 inset-x-0 h-[2px] bg-primary" />}
                       {/* hover underline */}
                       {!active && (
-                        <span className="absolute bottom-0 ltr:left-3 rtl:right-3 h-px bg-foreground transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]" />
+                        <span className="absolute -bottom-1 ltr:left-0 rtl:right-0 h-[2px] bg-primary transition-all duration-150 w-0 group-hover:w-full" />
                       )}
                     </Link>
                   </div>
@@ -485,7 +485,8 @@ export function Header() {
               {/* CTA — desktop */}
               <Link
                 to="/contact"
-                className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] text-[0.6rem] px-5 py-2.5 hover:opacity-90 transition-opacity"
+                className="hidden md:inline-flex btn-primary"
+                style={{ fontSize: "0.75rem", fontWeight: 700, padding: "0.6rem 1.25rem", minHeight: "40px" }}
               >
                 {isAr ? "اطلب عرض سعر" : "Get Quote"}
               </Link>

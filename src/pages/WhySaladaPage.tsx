@@ -67,7 +67,7 @@ function Label({ text, isAr, center = false }: { text: string; isAr: boolean; ce
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
       {center && (
@@ -120,7 +120,7 @@ function StrengthCard({
             style={{ background: "hsl(var(--primary)/0.08)" }}
           />
           <span
-            className="absolute top-2 start-2 sm:top-3 sm:start-3 font-mono text-[0.65rem] uppercase tracking-[0.2em]"
+            className="absolute top-2 start-2 sm:top-3 sm:start-3 label-text text-[0.65rem] uppercase tracking-[0.2em]"
             style={{ color: "hsl(var(--primary))" }}
           >
             {item.num}
@@ -212,14 +212,14 @@ export default function WhySaladaPage() {
             <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "لماذا صلادة" : "Why Salada"}
@@ -232,8 +232,7 @@ export default function WhySaladaPage() {
               className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200"
               style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
             >
-              {isAr ? "لماذا " : "Why "}
-              <span style={{ color: "hsl(var(--primary))" }}> {isAr ? "صلادة" : "Salada"}?</span>
+              {isAr ? "لماذا صلادة؟" : "Why Salada?"}
             </h1>
 
             <p
@@ -257,8 +256,7 @@ export default function WhySaladaPage() {
               className="font-black uppercase leading-[0.95] tracking-[-0.02em]"
               style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)", color: "hsl(var(--foreground))" }}
             >
-              {isAr ? "مميزات " : "The Salada "}
-              <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "صلادة" : "Advantage"}</span>
+              {isAr ? "مميزات صلادة" : "The Salada Advantage"}
             </h2>
           </Reveal>
 
@@ -303,7 +301,7 @@ export default function WhySaladaPage() {
               </p>
               <Link
                 to="/contact"
-                className={`inline-flex items-center gap-2 mt-5 font-mono text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
+                className={`inline-flex items-center gap-2 mt-5 label-text text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
@@ -349,22 +347,13 @@ export default function WhySaladaPage() {
                 {t("cta.description")}
               </p>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="industrial-button w-full sm:w-auto">
+                <Link to="/contact" className="btn-primary w-full sm:w-auto">
                   <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link
                   to="/solutions"
-                  className="industrial-button-outline w-full sm:w-auto"
-                  style={{ borderColor: "rgba(255,255,255,0.2)", color: "#fff" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.55)";
-                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.2)";
-                    (e.currentTarget as HTMLElement).style.color = "#fff";
-                  }}
+                  className="btn-ghost-dark w-full sm:w-auto"
                 >
                   {t("cta.browseCatalog")}
                 </Link>

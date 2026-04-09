@@ -14,10 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["'DM Sans'", "sans-serif"],
-        mono: ["'IBM Plex Mono'", "monospace"],
-        display: ["'DM Sans'", "sans-serif"],
-        arabic: ["'Tajawal'", "sans-serif"],
+        sans: ["Source Sans 3", "Swiss721BT", "sans-serif"],
+        display: ["Swiss721BT", "sans-serif"],
+        arabic: ["HelveticaArabic", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

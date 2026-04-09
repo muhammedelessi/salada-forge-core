@@ -622,7 +622,7 @@ export function ProductsAdmin() {
               fetchProducts();
               queryClient.invalidateQueries({ queryKey: ['products'] });
             }}
-            className="industrial-button-outline text-sm py-2 px-3"
+            className="btn-secondary text-sm py-2 px-3"
             title={isArabic ? 'تحديث' : 'Refresh'}
           >
             <RefreshCw className="w-4 h-4" />
@@ -633,7 +633,7 @@ export function ProductsAdmin() {
               setFormData(initialFormData);
               setShowForm(!showForm);
             }}
-            className="industrial-button text-sm py-2 px-4"
+            className="btn-primary text-sm py-2 px-4"
           >
             {showForm ? (
               <>
@@ -712,7 +712,7 @@ export function ProductsAdmin() {
                     type="text"
                     value={formData.sku}
                     onChange={(e) => setFormData({ ...formData, sku: e.target.value.toUpperCase() })}
-                    className="industrial-input font-mono uppercase"
+                    className="industrial-input label-text uppercase"
                     required
                   />
                 </div>
@@ -726,7 +726,7 @@ export function ProductsAdmin() {
                   type="text"
                   value={formData.slug}
                   onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                  className="industrial-input font-mono"
+                  className="industrial-input label-text"
                   placeholder={generateSlug(formData.title) || 'product-slug'}
                 />
               </div>
@@ -796,7 +796,7 @@ export function ProductsAdmin() {
                     className="industrial-input flex-1"
                     placeholder={isArabic ? 'أضف وسم...' : 'Add tag...'}
                   />
-                  <button type="button" onClick={addTag} className="industrial-button-outline px-4">
+                  <button type="button" onClick={addTag} className="btn-secondary px-4">
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
@@ -856,7 +856,7 @@ export function ProductsAdmin() {
                     className="industrial-input flex-1"
                     placeholder="https://..."
                   />
-                  <button type="button" onClick={addImageUrl} className="industrial-button-outline px-4">
+                  <button type="button" onClick={addImageUrl} className="btn-secondary px-4">
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
@@ -929,7 +929,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                    className="industrial-input font-mono"
+                    className="industrial-input label-text"
                     min="0"
                     step="0.01"
                     required
@@ -943,7 +943,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.compare_at_price || ''}
                     onChange={(e) => setFormData({ ...formData, compare_at_price: e.target.value ? Number(e.target.value) : null })}
-                    className="industrial-input font-mono"
+                    className="industrial-input label-text"
                     min="0"
                     step="0.01"
                   />
@@ -967,7 +967,7 @@ export function ProductsAdmin() {
                         type="number"
                         value={bp.minQuantity}
                         onChange={(e) => updateBulkPricing(index, 'minQuantity', Number(e.target.value))}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                         min="1"
                       />
                     </div>
@@ -977,7 +977,7 @@ export function ProductsAdmin() {
                         type="number"
                         value={bp.maxQuantity || ''}
                         onChange={(e) => updateBulkPricing(index, 'maxQuantity', e.target.value ? Number(e.target.value) : undefined)}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                         placeholder={isArabic ? 'غير محدود' : 'Unlimited'}
                       />
                     </div>
@@ -987,7 +987,7 @@ export function ProductsAdmin() {
                         type="number"
                         value={bp.price}
                         onChange={(e) => updateBulkPricing(index, 'price', Number(e.target.value))}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                         min="0"
                         step="0.01"
                       />
@@ -1011,7 +1011,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.stock}
                     onChange={(e) => setFormData({ ...formData, stock: Number(e.target.value) })}
-                    className="industrial-input font-mono"
+                    className="industrial-input label-text"
                     min="0"
                   />
                 </div>
@@ -1039,7 +1039,7 @@ export function ProductsAdmin() {
                   type="number"
                   value={formData.weight || ''}
                   onChange={(e) => setFormData({ ...formData, weight: e.target.value ? Number(e.target.value) : null })}
-                  className="industrial-input font-mono w-48"
+                  className="industrial-input label-text w-48"
                   min="0"
                   step="0.01"
                 />
@@ -1054,7 +1054,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.dimensions.length || ''}
                     onChange={(e) => setFormData({ ...formData, dimensions: { ...formData.dimensions, length: e.target.value ? Number(e.target.value) : undefined } })}
-                    className="industrial-input font-mono w-24"
+                    className="industrial-input label-text w-24"
                     placeholder={isArabic ? 'الطول' : 'L'}
                     min="0"
                     step="0.01"
@@ -1064,7 +1064,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.dimensions.width || ''}
                     onChange={(e) => setFormData({ ...formData, dimensions: { ...formData.dimensions, width: e.target.value ? Number(e.target.value) : undefined } })}
-                    className="industrial-input font-mono w-24"
+                    className="industrial-input label-text w-24"
                     placeholder={isArabic ? 'العرض' : 'W'}
                     min="0"
                     step="0.01"
@@ -1074,7 +1074,7 @@ export function ProductsAdmin() {
                     type="number"
                     value={formData.dimensions.height || ''}
                     onChange={(e) => setFormData({ ...formData, dimensions: { ...formData.dimensions, height: e.target.value ? Number(e.target.value) : undefined } })}
-                    className="industrial-input font-mono w-24"
+                    className="industrial-input label-text w-24"
                     placeholder={isArabic ? 'الارتفاع' : 'H'}
                     min="0"
                     step="0.01"
@@ -1141,7 +1141,7 @@ export function ProductsAdmin() {
                             type="number"
                             value={variant.priceModifier}
                             onChange={(e) => updateVariant(index, 'priceModifier', Number(e.target.value))}
-                            className="industrial-input font-mono"
+                            className="industrial-input label-text"
                           />
                         </div>
                         <div className="flex-1">
@@ -1150,7 +1150,7 @@ export function ProductsAdmin() {
                             type="number"
                             value={variant.stock}
                             onChange={(e) => updateVariant(index, 'stock', Number(e.target.value))}
-                            className="industrial-input font-mono"
+                            className="industrial-input label-text"
                             min="0"
                           />
                         </div>
@@ -1256,7 +1256,7 @@ export function ProductsAdmin() {
           </Tabs>
 
           <div className="flex gap-4 mt-6 pt-6 border-t border-border">
-            <button type="submit" disabled={saving} className="industrial-button">
+            <button type="submit" disabled={saving} className="btn-primary">
               <Save className="w-4 h-4 mr-2" />
               {saving 
                 ? (isArabic ? 'جاري الحفظ...' : 'Saving...')
@@ -1270,7 +1270,7 @@ export function ProductsAdmin() {
                 setEditingProduct(null);
                 setFormData(initialFormData);
               }}
-              className="industrial-button-outline"
+              className="btn-secondary"
             >
               {isArabic ? 'إلغاء' : 'Cancel'}
             </button>
@@ -1334,7 +1334,7 @@ export function ProductsAdmin() {
             {products.length === 0 && (
               <button
                 onClick={() => setShowForm(true)}
-                className="industrial-button text-sm"
+                className="btn-primary text-sm"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 {isArabic ? 'إضافة أول منتج' : 'Add First Product'}
@@ -1396,8 +1396,8 @@ export function ProductsAdmin() {
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 font-mono text-sm">{product.sku}</td>
-                      <td className="p-4 font-mono">
+                      <td className="p-4 label-text text-sm">{product.sku}</td>
+                      <td className="p-4 label-text">
                         SAR {product.price.toLocaleString()}
                         {product.compare_at_price && (
                           <span className="text-xs text-muted-foreground line-through ml-2">
@@ -1405,7 +1405,7 @@ export function ProductsAdmin() {
                           </span>
                         )}
                       </td>
-                      <td className="p-4 font-mono">
+                      <td className="p-4 label-text">
                         <span className={product.stock <= 10 ? 'text-red-500' : ''}>
                           {product.stock}
                         </span>

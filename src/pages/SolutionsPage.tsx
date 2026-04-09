@@ -66,7 +66,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -157,14 +157,14 @@ export default function SolutionsPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t("nav.solutions")}
@@ -217,7 +217,7 @@ export default function SolutionsPage() {
                 
                 {/* watermark */}
                 <div
-                  className="absolute font-mono font-black leading-none pointer-events-none select-none"
+                  className="absolute label-text font-black leading-none pointer-events-none select-none"
                   style={{
                     fontSize: "clamp(5rem, 14vw, 10rem)",
                     color: "rgba(255,255,255,0.04)",
@@ -229,7 +229,7 @@ export default function SolutionsPage() {
                 </div>
                 {/* num badge */}
                 <span
-                  className="absolute top-4 font-mono text-[0.65rem] uppercase tracking-[0.15em]"
+                  className="absolute top-4 label-text text-[0.65rem] uppercase tracking-[0.15em]"
                   style={{ color: "hsl(var(--primary))", insetInlineStart: "1.25rem" }}
                 >
                   {solution.num}
@@ -264,14 +264,14 @@ export default function SolutionsPage() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to={solution.shopLink}
-                    className="industrial-button w-full sm:w-auto"
+                    className="btn-primary w-full sm:w-auto"
                   >
                     <span>{isAr ? "عرض المواصفات" : "View Specifications"}</span>
                     <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                   </Link>
                   <Link
                     to="/contact"
-                    className="industrial-button-outline w-full sm:w-auto"
+                    className="btn-secondary w-full sm:w-auto"
                   >
                     {t("solutions.inquire")}
                   </Link>
@@ -287,7 +287,7 @@ export default function SolutionsPage() {
                   style={{ background: "hsl(var(--secondary)/0.2)" }}
                 >
                   <p
-                    className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-5"
+                    className="label-text text-[0.65rem] uppercase tracking-[0.15em] mb-5"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {isAr ? "المنتجات المتوفرة" : "Available Products"}
@@ -320,7 +320,7 @@ export default function SolutionsPage() {
                             {product.title}
                           </p>
                           <p
-                            className="font-mono text-[0.65rem] mt-0.5 uppercase tracking-[0.1em]"
+                            className="label-text text-[0.65rem] mt-0.5 uppercase tracking-[0.1em]"
                             style={{ color: "hsl(var(--primary)/0.6)" }}
                           >
                             {product.sku}
@@ -362,7 +362,7 @@ export default function SolutionsPage() {
                   }}
                 />
                 <span
-                  className="font-mono text-[0.65rem] uppercase tracking-[0.25em]"
+                  className="label-text text-[0.65rem] uppercase tracking-[0.25em]"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {t("solutions.label")}
@@ -391,23 +391,14 @@ export default function SolutionsPage() {
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/contact"
-                  className="industrial-button w-full sm:w-auto"
+                  className="btn-primary w-full sm:w-auto"
                 >
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </Link>
                 <Link
                   to="/shop"
-                  className="industrial-button-outline w-full sm:w-auto"
-                  style={{ borderColor: "rgba(255,255,255,0.2)", color: "#fff" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.55)";
-                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.2)";
-                    (e.currentTarget as HTMLElement).style.color = "#fff";
-                  }}
+                  className="btn-ghost-dark w-full sm:w-auto"
                 >
                   {isAr ? "استكشف المنتجات" : "Browse Catalog"}
                 </Link>

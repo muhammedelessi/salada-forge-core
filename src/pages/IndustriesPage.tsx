@@ -65,7 +65,7 @@ function Label({ text }: { text: string; isAr?: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -150,14 +150,14 @@ export default function IndustriesPage() {
             <nav className="flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "القطاعات" : "Industries"}
@@ -170,8 +170,7 @@ export default function IndustriesPage() {
               className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
               style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
             >
-              {isAr ? "القطاعات " : "Industries "}
-              <span style={{ color: "hsl(var(--primary))" }}>{isAr ? "التي نخدمها" : "We Serve"}</span>
+              {isAr ? "القطاعات التي نخدمها" : "Industries We Serve"}
             </h1>
 
             <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
@@ -196,7 +195,7 @@ export default function IndustriesPage() {
                 {t("industries.introDesc")}
               </p>
               <span
-                className="font-mono font-black shrink-0"
+                className="label-text font-black shrink-0"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw, 4rem)",
                   color: "hsl(var(--primary)/0.12)",
@@ -288,7 +287,7 @@ export default function IndustriesPage() {
                   }}
                 />
                 <span
-                  className="font-mono text-[0.65rem] uppercase tracking-[0.25em]"
+                  className="label-text text-[0.65rem] uppercase tracking-[0.25em]"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {isAr ? "تواصل معنا" : "Get Started"}
@@ -319,23 +318,14 @@ export default function IndustriesPage() {
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/contact"
-                  className="industrial-button w-full sm:w-auto"
+                  className="btn-primary w-full sm:w-auto"
                 >
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                 </Link>
                 <Link
                   to="/solutions"
-                  className="industrial-button-outline w-full sm:w-auto"
-                  style={{ borderColor: "rgba(255,255,255,0.2)", color: "#fff" }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(var(--primary)/0.55)";
-                    (e.currentTarget as HTMLElement).style.color = "hsl(var(--primary))";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.2)";
-                    (e.currentTarget as HTMLElement).style.color = "#fff";
-                  }}
+                  className="btn-ghost-dark w-full sm:w-auto"
                 >
                   {t("cta.browseCatalog")}
                 </Link>

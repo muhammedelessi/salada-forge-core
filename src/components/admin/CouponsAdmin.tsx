@@ -261,7 +261,7 @@ export function CouponsAdmin() {
             setFormData(initialFormData);
             setShowForm(!showForm);
           }}
-          className="industrial-button text-sm py-2 px-4"
+          className="btn-primary text-sm py-2 px-4"
         >
           {showForm ? (
             <>
@@ -297,7 +297,7 @@ export function CouponsAdmin() {
                 type="text"
                 value={formData.code}
                 onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
-                className="industrial-input font-mono uppercase"
+                className="industrial-input label-text uppercase"
                 placeholder="SAVE20"
                 required
               />
@@ -339,7 +339,7 @@ export function CouponsAdmin() {
                   type="number"
                   value={formData.discount_value}
                   onChange={(e) => setFormData({ ...formData, discount_value: Number(e.target.value) })}
-                  className="industrial-input font-mono pr-12"
+                  className="industrial-input label-text pr-12"
                   min="0"
                   step={formData.discount_type === 'percentage' ? '1' : '0.01'}
                   max={formData.discount_type === 'percentage' ? '100' : undefined}
@@ -358,7 +358,7 @@ export function CouponsAdmin() {
                 type="number"
                 value={formData.min_order_amount}
                 onChange={(e) => setFormData({ ...formData, min_order_amount: Number(e.target.value) })}
-                className="industrial-input font-mono"
+                className="industrial-input label-text"
                 min="0"
                 step="0.01"
               />
@@ -374,7 +374,7 @@ export function CouponsAdmin() {
                 type="number"
                 value={formData.max_uses || ''}
                 onChange={(e) => setFormData({ ...formData, max_uses: e.target.value ? Number(e.target.value) : null })}
-                className="industrial-input font-mono"
+                className="industrial-input label-text"
                 min="1"
                 placeholder={isArabic ? 'غير محدود' : 'Unlimited'}
               />
@@ -419,7 +419,7 @@ export function CouponsAdmin() {
           </div>
 
           <div className="flex gap-4">
-            <button type="submit" disabled={saving} className="industrial-button">
+            <button type="submit" disabled={saving} className="btn-primary">
               <Save className="w-4 h-4 mr-2" />
               {saving 
                 ? (isArabic ? 'جاري الحفظ...' : 'Saving...')
@@ -433,7 +433,7 @@ export function CouponsAdmin() {
                 setEditingCoupon(null);
                 setFormData(initialFormData);
               }}
-              className="industrial-button-outline"
+              className="btn-secondary"
             >
               {isArabic ? 'إلغاء' : 'Cancel'}
             </button>
@@ -454,7 +454,7 @@ export function CouponsAdmin() {
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="industrial-button text-sm"
+            className="btn-primary text-sm"
           >
             <Plus className="w-4 h-4 mr-2" />
             {isArabic ? 'إضافة أول كوبون' : 'Add First Coupon'}
@@ -496,7 +496,7 @@ export function CouponsAdmin() {
                     <tr key={coupon.id} className="border-t border-border hover:bg-muted/50">
                       <td className="p-4">
                         <div className="flex items-center gap-2">
-                          <code className="font-mono font-bold text-primary bg-primary/10 px-2 py-1">
+                          <code className="label-text font-bold text-primary bg-primary/10 px-2 py-1">
                             {coupon.code}
                           </code>
                           <button
@@ -516,7 +516,7 @@ export function CouponsAdmin() {
                         )}
                       </td>
                       <td className="p-4">
-                        <div className="flex items-center gap-1 font-mono font-bold">
+                        <div className="flex items-center gap-1 label-text font-bold">
                           {coupon.discount_type === 'percentage' ? (
                             <Percent className="w-4 h-4 text-primary" />
                           ) : (
@@ -525,7 +525,7 @@ export function CouponsAdmin() {
                           {formatDiscount(coupon)}
                         </div>
                       </td>
-                      <td className="p-4 font-mono text-sm">
+                      <td className="p-4 label-text text-sm">
                         {coupon.min_order_amount && coupon.min_order_amount > 0
                           ? `SAR ${coupon.min_order_amount}`
                           : '-'
@@ -534,7 +534,7 @@ export function CouponsAdmin() {
                       <td className="p-4">
                         <div className="flex items-center gap-1 text-sm">
                           <Users className="w-4 h-4 text-muted-foreground" />
-                          <span className="font-mono">
+                          <span className="label-text">
                             {coupon.used_count}
                             {coupon.max_uses && ` / ${coupon.max_uses}`}
                           </span>

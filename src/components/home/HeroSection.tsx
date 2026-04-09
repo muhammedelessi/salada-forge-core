@@ -43,7 +43,7 @@ export default function HeroSection() {
         <div className={`max-w-2xl ${isAr ? "mr-0 ml-auto" : ""}`}>
           {/* Eyebrow */}
           <span
-            className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-5 sm:mb-6 animate-industrial-fade ${
+            className={`inline-flex items-center gap-2 text-xs label-text uppercase tracking-[0.25em] text-primary mb-5 sm:mb-6 animate-industrial-fade ${
               isAr ? "flex-row-reverse" : ""
             }`}
           >
@@ -79,17 +79,14 @@ export default function HeroSection() {
           >
             <Link
               to="/solutions"
-              className="industrial-button w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto"
             >
               <span>{t("hero.cta")}</span>
-              <ArrowRight
-                className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`}
-              />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
               to="/contact"
-              className="industrial-button-outline w-full sm:w-auto"
-              style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}
+              className="btn-ghost-dark w-full sm:w-auto"
             >
               {t("hero.quote")}
             </Link>
@@ -104,7 +101,7 @@ export default function HeroSection() {
             {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
               <span
                 key={b}
-                className="px-3 py-1.5 text-[0.65rem] font-mono uppercase tracking-[0.15em] text-white/60 border border-white/15 bg-white/5"
+                className="px-3 py-1.5 text-[0.65rem] label-text uppercase tracking-[0.15em] text-white/60 border border-white/15 bg-white/5"
               >
                 {b}
               </span>
@@ -115,7 +112,7 @@ export default function HeroSection() {
 
       {/* ── Scroll cue ── */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-40">
-        <span className="text-[0.65rem] font-mono uppercase tracking-[0.25em] text-white/60">
+        <span className="text-[0.65rem] label-text uppercase tracking-[0.25em] text-white/60">
           Scroll
         </span>
         <ChevronDown className="w-4 h-4 text-primary animate-bounce" />

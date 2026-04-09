@@ -38,7 +38,7 @@ export function ContactButton({
     <Link
       to={`/inquiry/${productSlug}?quantity=${quantity}`}
       className={cn(
-        'industrial-button w-full sm:w-auto',
+        'btn-primary w-full sm:w-auto',
         className
       )}
     >

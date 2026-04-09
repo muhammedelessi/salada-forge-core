@@ -194,7 +194,7 @@ export default function AuthPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full industrial-button justify-center disabled:opacity-50"
+                className="w-full btn-primary justify-center disabled:opacity-50"
               >
                 {isLoading ? (
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />

@@ -221,7 +221,7 @@ export function SettingsAdmin() {
                   type="text"
                   value={storeSettings.taxNumber}
                   onChange={(e) => setStoreSettings({ ...storeSettings, taxNumber: e.target.value })}
-                  className="industrial-input font-mono"
+                  className="industrial-input label-text"
                 />
               </div>
             </div>
@@ -270,7 +270,7 @@ export function SettingsAdmin() {
                   type="text"
                   value={storeSettings.postalCode}
                   onChange={(e) => setStoreSettings({ ...storeSettings, postalCode: e.target.value })}
-                  className="industrial-input font-mono"
+                  className="industrial-input label-text"
                 />
               </div>
             </div>
@@ -291,7 +291,7 @@ export function SettingsAdmin() {
               </p>
             </div>
 
-            <button onClick={handleSaveStore} className="industrial-button">
+            <button onClick={handleSaveStore} className="btn-primary">
               <Save className="w-4 h-4 mr-2" />
               {isArabic ? 'حفظ الإعدادات' : 'Save Settings'}
             </button>
@@ -332,7 +332,7 @@ export function SettingsAdmin() {
                     type="number"
                     value={shippingSettings.freeShippingThreshold}
                     onChange={(e) => setShippingSettings({ ...shippingSettings, freeShippingThreshold: Number(e.target.value) })}
-                    className="industrial-input font-mono w-48"
+                    className="industrial-input label-text w-48"
                   />
                 </div>
               )}
@@ -346,7 +346,7 @@ export function SettingsAdmin() {
                     type="number"
                     value={shippingSettings.standardShippingRate}
                     onChange={(e) => setShippingSettings({ ...shippingSettings, standardShippingRate: Number(e.target.value) })}
-                    className="industrial-input font-mono"
+                    className="industrial-input label-text"
                   />
                 </div>
                 <div>
@@ -357,7 +357,7 @@ export function SettingsAdmin() {
                     type="number"
                     value={shippingSettings.estimatedDeliveryDays}
                     onChange={(e) => setShippingSettings({ ...shippingSettings, estimatedDeliveryDays: Number(e.target.value) })}
-                    className="industrial-input font-mono"
+                    className="industrial-input label-text"
                   />
                 </div>
               </div>
@@ -388,7 +388,7 @@ export function SettingsAdmin() {
                       type="number"
                       value={shippingSettings.expressShippingRate}
                       onChange={(e) => setShippingSettings({ ...shippingSettings, expressShippingRate: Number(e.target.value) })}
-                      className="industrial-input font-mono"
+                      className="industrial-input label-text"
                     />
                   </div>
                   <div>
@@ -399,13 +399,13 @@ export function SettingsAdmin() {
                       type="number"
                       value={shippingSettings.expressDeliveryDays}
                       onChange={(e) => setShippingSettings({ ...shippingSettings, expressDeliveryDays: Number(e.target.value) })}
-                      className="industrial-input font-mono"
+                      className="industrial-input label-text"
                     />
                   </div>
                 </div>
               )}
 
-              <button onClick={handleSaveShipping} className="industrial-button">
+              <button onClick={handleSaveShipping} className="btn-primary">
                 <Save className="w-4 h-4 mr-2" />
                 {isArabic ? 'حفظ الإعدادات' : 'Save Settings'}
               </button>
@@ -448,7 +448,7 @@ export function SettingsAdmin() {
                         type="number"
                         value={taxSettings.taxRate}
                         onChange={(e) => setTaxSettings({ ...taxSettings, taxRate: Number(e.target.value) })}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                         step="0.1"
                       />
                     </div>
@@ -483,7 +483,7 @@ export function SettingsAdmin() {
                 </>
               )}
 
-              <button onClick={handleSaveTax} className="industrial-button">
+              <button onClick={handleSaveTax} className="btn-primary">
                 <Save className="w-4 h-4 mr-2" />
                 {isArabic ? 'حفظ الإعدادات' : 'Save Settings'}
               </button>
@@ -568,7 +568,7 @@ export function SettingsAdmin() {
                         type="text"
                         value={paymentSettings.bankAccountNumber}
                         onChange={(e) => setPaymentSettings({ ...paymentSettings, bankAccountNumber: e.target.value })}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                       />
                     </div>
                     <div>
@@ -579,14 +579,14 @@ export function SettingsAdmin() {
                         type="text"
                         value={paymentSettings.bankIBAN}
                         onChange={(e) => setPaymentSettings({ ...paymentSettings, bankIBAN: e.target.value })}
-                        className="industrial-input font-mono"
+                        className="industrial-input label-text"
                       />
                     </div>
                   </div>
                 </div>
               )}
 
-              <button onClick={handleSavePayment} className="industrial-button">
+              <button onClick={handleSavePayment} className="btn-primary">
                 <Save className="w-4 h-4 mr-2" />
                 {isArabic ? 'حفظ الإعدادات' : 'Save Settings'}
               </button>
@@ -658,7 +658,7 @@ export function SettingsAdmin() {
                     type="number"
                     value={notificationSettings.lowStockThreshold}
                     onChange={(e) => setNotificationSettings({ ...notificationSettings, lowStockThreshold: Number(e.target.value) })}
-                    className="industrial-input font-mono w-48"
+                    className="industrial-input label-text w-48"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
                     {isArabic ? 'سيتم إرسال تنبيه عندما يقل المخزون عن هذا الرقم' : 'Alert will be sent when stock falls below this number'}
@@ -666,7 +666,7 @@ export function SettingsAdmin() {
                 </div>
               )}
 
-              <button onClick={handleSaveNotifications} className="industrial-button">
+              <button onClick={handleSaveNotifications} className="btn-primary">
                 <Save className="w-4 h-4 mr-2" />
                 {isArabic ? 'حفظ الإعدادات' : 'Save Settings'}
               </button>
