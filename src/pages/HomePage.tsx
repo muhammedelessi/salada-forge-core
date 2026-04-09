@@ -294,17 +294,17 @@ export default function HomePage() {
                     {sol.num}
                   </span>
                   <div className="relative z-10 mt-6 px-1">
-                    <h3 className="uppercase font-[800] text-white group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.875rem" }}>
+                    <h3 className="uppercase font-[900] text-white group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize:"0.98rem" }}>
                       {sol.title}
                     </h3>
                     <p className="text-white/70 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-80 group-hover:opacity-100 max-h-20 overflow-hidden"
-                      style={{ fontSize:"0.75rem" }}>
+                      style={{ fontSize:"0.84rem" }}>
                       {sol.desc}
                     </p>
                   </div>
                   <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="uppercase" style={{ fontSize:"0.6875rem", letterSpacing:"0.18em" }}>
+                    <span className="uppercase" style={{ fontSize:"0.75rem", letterSpacing:"0.18em" }}>
                       {isAr ? "اكتشف" : "Explore"}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -346,16 +346,16 @@ export default function HomePage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="mt-6 px-1">
-                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.875rem" }}>
+                    <h3 className="uppercase font-[900] text-foreground group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize:"0.98rem" }}>
                       {ind.name}
                     </h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize:"0.75rem" }}>
+                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize:"0.84rem" }}>
                       {ind.desc}
                     </p>
                   </div>
                   <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="uppercase" style={{ fontSize:"0.6875rem", letterSpacing:"0.18em" }}>
+                    <span className="uppercase" style={{ fontSize:"0.75rem", letterSpacing:"0.18em" }}>
                       {t("solutions.learnMore")}
                     </span>
                     <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
@@ -391,8 +391,8 @@ export default function HomePage() {
                     {w.num}
                   </span>
                   <div className="mt-6">
-                    <h3 className="uppercase font-[800] text-foreground group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.875rem" }}>
+                    <h3 className="uppercase font-[900] text-foreground group-hover:text-primary transition-colors duration-300"
+                      style={{ fontSize:"0.98rem" }}>
                       {w.title}
                     </h3>
                   </div>

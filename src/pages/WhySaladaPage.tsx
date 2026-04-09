@@ -95,16 +95,17 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group border border-border hover:border-primary bg-background transition-all duration-300 h-full ${isAr ? "text-right" : "text-left"}`}
+      className={`group relative border border-border hover:border-primary/50 bg-background transition-all duration-300 h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.1)] ${isAr ? "text-right" : "text-left"}`}
       dir={isAr ? "rtl" : "ltr"}
     >
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       {/*
         Mobile  → row: [square 100px image] [text]
         Desktop → col: [full-width image]   [text below]
       */}
       <div className="flex flex-row sm:flex-col h-full">
         {/* ── Image ── */}
-        <div className="relative overflow-hidden shrink-0 w-[100px] sm:w-full" style={{ aspectRatio: "1/1" }}>
+        <div className="relative overflow-hidden shrink-0 w-[104px] sm:w-full" style={{ aspectRatio: "1/1" }}>
           <img
             src={item.image}
             alt={item.title}
@@ -120,7 +121,7 @@ function StrengthCard({
             style={{ background: "hsl(var(--primary)/0.08)" }}
           />
           <span
-            className="absolute top-2 start-2 sm:top-3 sm:start-3 label-text text-[0.65rem] uppercase tracking-[0.2em]"
+            className="absolute top-2 start-2 sm:top-3 sm:start-3 label-text text-[0.75rem] uppercase tracking-[0.14em]"
             style={{ color: "hsl(var(--primary))" }}
           >
             {item.num}
@@ -130,7 +131,7 @@ function StrengthCard({
         {/* ── Text ── */}
         <div
           className="
-          p-3 sm:p-4
+          p-4 sm:p-5
           flex flex-col justify-center flex-1
           border-s border-s-border sm:border-s-0
           sm:border-t sm:border-t-border
@@ -139,20 +140,20 @@ function StrengthCard({
           <div className="h-px mb-2" style={{ width: "1.25rem", background: "hsl(var(--primary)/0.6)" }} />
           <h3
             className="font-black uppercase tracking-tight leading-snug mb-1.5 group-hover:text-primary transition-colors duration-300"
-            style={{ fontSize: "0.9rem", color: "hsl(var(--foreground))" }}
+            style={{ fontSize: "1rem", color: "hsl(var(--foreground))" }}
           >
             {item.title}
           </h3>
           <p
             className="leading-relaxed hidden sm:block"
-            style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
+            style={{ fontSize: "0.9rem", color: "hsl(var(--muted-foreground))" }}
           >
             {item.desc}
           </p>
           {/* on mobile show shorter desc */}
           <p
             className="leading-relaxed sm:hidden line-clamp-2"
-            style={{ fontSize: "0.72rem", color: "hsl(var(--muted-foreground))" }}
+            style={{ fontSize: "0.82rem", color: "hsl(var(--muted-foreground))" }}
           >
             {item.desc}
           </p>
@@ -261,7 +262,7 @@ export default function WhySaladaPage() {
           </Reveal>
 
           {/* Row 1 — 3 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mb-4 md:mb-5">
             {strengths.slice(0, 3).map((item, i) => (
               <Reveal key={item.num} delay={i * 70}>
                 <StrengthCard item={item} isAr={isAr} />
@@ -270,7 +271,7 @@ export default function WhySaladaPage() {
           </div>
 
           {/* Row 2 — 2 cards centered, same width as row 1 cards */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-5">
             {strengths.slice(3).map((item, i) => (
               <Reveal key={item.num} delay={i * 70 + 210} className="w-full sm:w-[calc(33.333%-11px)]">
                 <StrengthCard item={item} isAr={isAr} />

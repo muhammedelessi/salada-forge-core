@@ -210,7 +210,7 @@ export default function ContactPage() {
                     <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(var(--primary))" }} />
                   </div>
                   <p
-                    className="label-text text-[0.65rem] uppercase tracking-[0.2em] font-bold mb-2"
+                    className="label-text text-[0.75rem] uppercase tracking-[0.16em] font-bold mb-2"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {item.title}
@@ -222,7 +222,7 @@ export default function ContactPage() {
                     {item.lines.map((line, j) => (
                       <p
                         key={j}
-                        className="text-[0.9rem] leading-relaxed font-medium"
+                        className="text-[0.98rem] leading-relaxed font-medium"
                         style={{
                           color: j === 0 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                         }}
@@ -367,7 +367,7 @@ export default function ContactPage() {
 
               <div className="border-t border-border pt-5 text-start">
                 <p
-                  className="label-text text-[0.65rem] uppercase tracking-[0.25em] mb-4"
+                  className="label-text text-[0.75rem] uppercase tracking-[0.18em] mb-4"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {isAr ? "روابط سريعة" : "Quick Links"}
@@ -406,7 +406,7 @@ export default function ContactPage() {
               </h2>
             </div>
             <span
-              className="label-text text-[0.65rem] uppercase tracking-[0.2em] shrink-0"
+              className="label-text text-[0.75rem] uppercase tracking-[0.16em] shrink-0"
               style={{ color: "hsl(var(--muted-foreground))" }}
             >
               RNNA7850

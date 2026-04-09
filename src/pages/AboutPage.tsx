@@ -128,9 +128,9 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {factoryStats.map((s, i) => (
-                  <div key={i} className="p-5 border border-border bg-background transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04]">
+                  <div key={i} className="p-5 md:p-6 border border-border bg-background transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
                     <div className="font-black mb-1 leading-none"
                       style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)", color: "hsl(var(--primary))" }}>
                       {s.value}
@@ -159,21 +159,22 @@ export default function AboutPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {pillars.map((p, i) => (
               <Reveal key={p.num} delay={i * 70}>
-                <div className={`bg-background border border-border p-5 md:p-6 h-full group hover:bg-primary/5 hover:border-primary/40 transition-all duration-300 ${isAr ? "text-right" : ""}`}>
+                <div className={`bg-background border border-border p-5 md:p-6 h-full group hover:bg-primary/5 hover:border-primary/40 transition-all duration-300 shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)] ${isAr ? "text-right" : ""}`}>
+                  <div className="h-[2px] w-0 group-hover:w-10 transition-all duration-300 mb-3" style={{ background: "hsl(var(--primary)/0.65)" }} />
                   <div className="label-text font-black mb-2 leading-none"
                     style={{ fontSize: "1.5rem", color: "hsl(var(--primary))" }}>
                     {p.num}
                   </div>
                   <div className={`h-px mb-3 transition-all duration-400 group-hover:w-8 ${isAr ? "ml-auto mr-0" : ""}`}
                     style={{ width: "1.25rem", background: "hsl(var(--primary))" }} />
-                  <p className="text-[0.75rem] mb-2 font-semibold"
+                  <p className="text-[0.82rem] mb-2 font-semibold"
                     style={{ color: "hsl(var(--primary))", letterSpacing: "0.12em" }}>
                     {p.label}
                   </p>
-                  <p className="text-[0.8rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  <p className="text-[0.9rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {p.desc}
                   </p>
                 </div>
@@ -205,7 +206,7 @@ export default function AboutPage() {
                   ? ["معتمد ISO", "معتمد DNV", "صناعة سعودية"]
                   : ["ISO Certified", "DNV Approved", "Saudi Made"]
                 ).map((b) => (
-                  <span key={b} className="text-[0.72rem] font-semibold px-2.5 py-1.5"
+                  <span key={b} className="text-[0.78rem] font-semibold px-2.5 py-1.5"
                     style={{ background: "hsl(var(--primary)/0.07)", border: "1px solid hsl(var(--primary)/0.22)", color: "hsl(var(--primary))", letterSpacing: "0.08em" }}>
                     {b}
                   </span>
@@ -221,7 +222,7 @@ export default function AboutPage() {
                   style={{ background: "hsl(var(--primary)/0.05)" }} />
                 <div className={`absolute bottom-0 ${isAr ? "right-0" : "left-0"} p-4`}
                   style={{ background: "linear-gradient(to top, rgba(8,6,2,0.82), transparent)" }}>
-                  <p className="label-text text-[0.65rem] uppercase tracking-[0.18em]"
+                  <p className="label-text text-[0.75rem] uppercase tracking-[0.14em]"
                     style={{ color: "hsl(var(--primary))" }}>
                     {isAr ? "منشأة صلادة — الرياض" : "Salada Facility — Riyadh, KSA"}
                   </p>
