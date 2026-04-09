@@ -233,7 +233,7 @@ export default function WhySaladaPage() {
               style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
             >
               {isAr ? "لماذا " : "Why "}
-              <span style={{ color: "hsl(var(--primary))" }}>Salada?</span>
+              <span style={{ color: "hsl(var(--primary))" }}> {isAr ? "صلادة" : "Salada"}?</span>
             </h1>
 
             <p
@@ -349,10 +349,7 @@ export default function WhySaladaPage() {
                 {t("cta.description")}
               </p>
               <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link
-                  to="/contact"
-                  className="industrial-button w-full sm:w-auto"
-                >
+                <Link to="/contact" className="industrial-button w-full sm:w-auto">
                   <span>{t("cta.getQuote")}</span>
                   <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
