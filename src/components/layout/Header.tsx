@@ -1,323 +1,57 @@
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import DarkModeToggle from "@/components/DarkModeToggle";
 import { cn } from "@/lib/utils";
 import saladaLogo from "@/assets/SALADA_LOGO.png";
 
-/* ══════════════════════════════════════
-   MEGA MENU
-══════════════════════════════════════ */
-function MegaMenu({
-  items,
-  isOpen,
-  onClose,
-}: {
-  items: { label: string; desc: string; href: string }[];
-  isOpen: boolean;
-  onClose: () => void;
-}) {
+function MegaMenu({ items, isOpen }: { items: { label: string; desc: string; href: string }[]; isOpen: boolean }) {
+  if (!isOpen) return null;
   return (
-    <div
-      className={cn(
-        "absolute top-full inset-x-0 z-50 overflow-hidden",
-        "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-        isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none",
-      )}
-    >
-      <div
-        className="h-px w-full"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, hsl(var(--primary)/0.5) 30%, hsl(var(--primary)/0.5) 70%, transparent)",
-        }}
-      />
-
-      <div
-        className="border-b border-border"
-        style={{ background: "hsl(var(--background)/0.97)", backdropFilter: "blur(12px)" }}
-      >
-        <div className="container-xl py-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={onClose}
-                className="group p-6 flex flex-col gap-1.5 bg-background hover:bg-primary/5 transition-colors duration-200"
-              >
-                <div
-                  className="h-px mb-2 transition-all duration-300 bg-primary"
-                  style={{ width: "0" }}
-                  ref={(el) => {
-                    if (!el) return;
-                    el.closest("a")!.addEventListener("mouseenter", () => {
-                      el.style.width = "1.5rem";
-                    });
-                    el.closest("a")!.addEventListener("mouseleave", () => {
-                      el.style.width = "0";
-                    });
-                  }}
-                />
-                <span className="text-xs font-black uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
-                  {item.label}
-                </span>
-                <span className="text-[0.7rem] leading-relaxed text-muted-foreground">{item.desc}</span>
-                <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] font-mono uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  View <ArrowUpRight style={{ width: 10, height: 10 }} />
-                </span>
-              </Link>
-            ))}
-          </div>
+    <div className="absolute top-full left-0 right-0 bg-background border-b-2 border-primary/30 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+      <div className="industrial-container py-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 rtl:text-right">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className="group p-4 rounded hover:bg-secondary/80 transition-colors border border-transparent hover:border-border"
+            >
+              <span className="block text-sm font-semibold uppercase tracking-wider group-hover:text-primary transition-colors">
+                {item.label}
+              </span>
+              <span className="block text-xs text-muted-foreground mt-1 leading-relaxed">{item.desc}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-/* ══════════════════════════════════════
-   MOBILE DRAWER
-══════════════════════════════════════ */
-function MobileDrawer({
-  open,
-  onClose,
-  navLinks,
-  isAr,
-  currentPath,
-}: {
-  open: boolean;
-  onClose: () => void;
-  navLinks: { label: string; href: string }[];
-  isAr: boolean;
-  currentPath: string;
-}) {
-  const dir = isAr ? "rtl" : "ltr";
-
-  return (
-    <>
-      {/* backdrop */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-foreground/35 backdrop-blur-sm transition-opacity duration-300",
-          open ? "opacity-100" : "opacity-0 pointer-events-none",
-        )}
-        onClick={onClose}
-      />
-
-      {/* drawer panel */}
-      <div
-        dir={dir}
-        className={cn(
-          "fixed top-0 z-50 h-full w-80 max-w-[90vw] flex flex-col bg-background",
-          "transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-          "ltr:left-0 rtl:right-0 ltr:border-r rtl:border-l border-border",
-          open ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full",
-        )}
-      >
-        {/* drawer header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary">
-            {isAr ? "القائمة" : "Menu"}
-          </span>
-          <button
-            onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 text-muted-foreground transition-colors duration-200"
-            aria-label="Close menu"
-          >
-            <X style={{ width: 18, height: 18 }} />
-          </button>
-        </div>
-
-        {/* nav items */}
-        <nav className="flex-1 overflow-y-auto px-6 py-8">
-          {navLinks.map((link, i) => {
-            const isActive = currentPath === link.href;
-            return (
-              <Link
-                key={link.href}
-                to={link.href}
-                onClick={onClose}
-                className="flex items-center justify-between py-4 border-b border-border group"
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[0.65rem] font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
-                  <span
-                    className={cn(
-                      "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
-                      isActive ? "text-primary" : "text-foreground group-hover:text-primary",
-                    )}
-                  >
-                    {link.label}
-                  </span>
-                </div>
-                <ArrowUpRight
-                  className={cn(
-                    "shrink-0 transition-colors duration-200",
-                    isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary",
-                  )}
-                  style={{ width: 14, height: 14 }}
-                />
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* drawer footer */}
-        <div className="px-6 py-6 border-t border-border">
-          <Link
-            to="/contact"
-            onClick={onClose}
-            className="w-full flex items-center justify-center gap-2 text-[0.65rem] bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] px-5 py-3 hover:opacity-90 transition-opacity"
-          >
-            <span>{isAr ? "اطلب عرض سعر" : "Request a Quote"}</span>
-            <ArrowUpRight style={{ width: 14, height: 14 }} />
-          </Link>
-          <p className="text-center mt-4 text-[0.65rem] font-mono uppercase tracking-[0.2em] text-muted-foreground">
-            ISO Certified · DNV Approved
-          </p>
-        </div>
-      </div>
-    </>
-  );
-}
-
-/* ══════════════════════════════════════
-   SEARCH OVERLAY
-══════════════════════════════════════ */
-function SearchOverlay({
-  open,
-  onClose,
-  navLinks,
-}: {
-  open: boolean;
-  onClose: () => void;
-  navLinks: { label: string; href: string }[];
-}) {
-  const [q, setQ] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const results = q.trim() ? navLinks.filter((l) => l.label.toLowerCase().includes(q.toLowerCase())) : [];
-
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 80);
-    } else setQ("");
-  }, [open]);
-
-  useEffect(() => {
-    const fn = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", fn);
-    return () => window.removeEventListener("keydown", fn);
-  }, [onClose]);
-
-  return (
-    <div
-      className={cn(
-        "fixed inset-0 z-[60] flex items-start justify-center pt-28 px-4",
-        "transition-all duration-300 bg-foreground/50 backdrop-blur-md",
-        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
-      )}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div
-        className={cn(
-          "w-full max-w-xl bg-background border border-border transition-all duration-300",
-          open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0",
-        )}
-      >
-        <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
-          <Search className="text-primary shrink-0" style={{ width: 16, height: 16 }} />
-          <input
-            ref={inputRef}
-            type="text"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search..."
-            className="flex-1 bg-transparent text-sm text-foreground outline-none"
-          />
-          <button
-            onClick={onClose}
-            className="text-[0.6rem] font-mono uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
-          >
-            Esc
-          </button>
-        </div>
-
-        {results.length > 0 && (
-          <div>
-            {results.map((r) => (
-              <Link
-                key={r.href}
-                to={r.href}
-                onClick={() => {
-                  onClose();
-                  setQ("");
-                }}
-                className="flex items-center justify-between px-5 py-3.5 border-b border-border hover:bg-primary/5 transition-colors duration-150"
-              >
-                <span className="text-sm font-semibold text-foreground">{r.label}</span>
-                <ArrowUpRight className="text-primary" style={{ width: 14, height: 14 }} />
-              </Link>
-            ))}
-          </div>
-        )}
-
-        {q && results.length === 0 && <p className="px-5 py-4 text-sm text-muted-foreground">No results for "{q}"</p>}
-      </div>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════
-   HEADER
-══════════════════════════════════════ */
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openMega, setOpenMega] = useState<string | null>(null);
-  const megaTimer = useRef<ReturnType<typeof setTimeout>>();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const megaTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const { t, isRTL } = useLanguageStore();
-  const location = useLocation();
-  const isAr = isRTL();
-  const dir = isAr ? "rtl" : "ltr";
 
   useEffect(() => {
-    setIsMenuOpen(false);
-    setOpenMega(null);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const fn = () => setIsScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
+    if (isSearchOpen) searchRef.current?.focus();
+  }, [isSearchOpen]);
 
-  /* nav items — Home added */
-  const navLinks = [
-    { label: isAr ? "الرئيسية" : "Home", href: "/" },
-    { label: t("nav.solutions"), href: "/solutions", mega: "solutions" },
-    { label: t("nav.shop"), href: "/shop" },
-    { label: t("nav.industries"), href: "/industries", mega: "industries" },
-    { label: t("nav.whySalada"), href: "/why-salada" },
-    { label: t("nav.about"), href: "/about" },
-    { label: t("nav.contact"), href: "/contact" },
-  ];
+  const isAr = isRTL();
 
-  /* mega menu data */
   const solutionsMega = [
     {
       label: isAr ? "حاويات الشحن" : "Shipping Containers",
@@ -379,147 +113,151 @@ export function Header() {
     },
   ];
 
-  const megaData: Record<string, typeof solutionsMega> = {
-    solutions: solutionsMega,
-    industries: industriesMega,
-  };
+  const navLinks = [
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.whySalada"), href: "/why-salada" },
+    { label: t("nav.solutions"), href: "/solutions", mega: "solutions" },
+    { label: t("nav.industries"), href: "/industries", mega: "industries" },
+    { label: t("nav.shop"), href: "/shop" },
+    { label: t("nav.contact"), href: "/contact" },
+  ];
 
   const handleMegaEnter = (key: string) => {
-    clearTimeout(megaTimer.current);
+    clearTimeout(megaTimeoutRef.current);
     setOpenMega(key);
   };
+
   const handleMegaLeave = () => {
-    megaTimer.current = setTimeout(() => setOpenMega(null), 180);
+    megaTimeoutRef.current = setTimeout(() => setOpenMega(null), 200);
   };
 
-  const isActive = (href: string) => (href === "/" ? location.pathname === "/" : location.pathname.startsWith(href));
+  const searchResults = searchQuery.trim()
+    ? navLinks.filter((l) => l.label.toLowerCase().includes(searchQuery.toLowerCase()))
+    : [];
 
   return (
-    <>
-      <header
-        dir={dir}
-        className={cn(
-          "sticky top-0 inset-x-0 z-50",
-          "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-          isScrolled ? "shadow-md" : "",
-        )}
-        style={{
-          background: isScrolled ? "hsl(var(--background)/0.97)" : "hsl(var(--background))",
-          backdropFilter: isScrolled ? "blur(16px)" : "none",
-          borderBottom: "1px solid hsl(var(--border))",
-          paddingTop: "env(safe-area-inset-top)",
-        }}
-      >
-        <div className="container-xl px-4 md:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* ── Logo — bigger ── */}
-            <Link
-              to="/"
-              className={cn("flex items-center shrink-0 hover-lift", isAr ? "pe-1" : "ps-1")}
-              aria-label="Salada — Home"
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out",
+        isScrolled
+          ? "bg-background/98 backdrop-blur-md border-b-2 border-primary/40 shadow-[0_4px_30px_-4px_hsl(var(--primary)/0.25)]"
+          : "bg-background/80 backdrop-blur-sm border-b border-primary/20 shadow-[0_2px_10px_-4px_hsl(var(--primary)/0.1)]",
+      )}
+    >
+      <div className="industrial-container">
+        <div className="flex items-center justify-between h-24 md:h-32 rtl:flex-row-reverse">
+          {/* Logo */}
+          <Link to="/" className="flex items-center hover-lift">
+            <img src={saladaLogo} alt="SALADA Metal Industries" className="h-20 md:h-28 w-auto object-contain" />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6 rtl:flex-row-reverse">
+            {navLinks.map((link) => (
+              <div
+                key={link.href}
+                className="relative"
+                onMouseEnter={() => link.mega && handleMegaEnter(link.mega)}
+                onMouseLeave={() => link.mega && handleMegaLeave()}
+              >
+                <Link
+                  to={link.href}
+                  className="relative text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-medium group inline-flex items-center gap-1 rtl:flex-row-reverse"
+                >
+                  {link.label}
+                  {link.mega && <ChevronDown className="w-3.5 h-3.5" />}
+                  <span className="absolute -bottom-1 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ltr:left-0 rtl:right-0" />
+                </Link>
+              </div>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2 md:gap-3 rtl:flex-row-reverse">
+            {/* Search toggle */}
+            <button
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="flex items-center justify-center w-10 h-10 text-muted-foreground hover:text-primary transition-colors focus-ring rounded"
+              aria-label="Search"
             >
-              <img src={saladaLogo} alt="SALADA Metal Industries" className="h-6 md:h-8 w-auto object-contain" />
-            </Link>
+              <Search className="w-5 h-5" />
+            </button>
 
-            {/* ── Desktop nav ── */}
-            <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
-                const active = isActive(link.href);
-                const hasMega = Boolean(link.mega);
-                return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={() => hasMega && handleMegaEnter(link.mega!)}
-                    onMouseLeave={() => hasMega && handleMegaLeave()}
-                  >
-                    <Link
-                      to={link.href}
-                      className={cn(
-                        "relative flex items-center gap-1 px-3 py-2",
-                        "text-[0.7rem] font-black uppercase tracking-[0.08em]",
-                        "transition-colors duration-200 group",
-                        active ? "text-primary" : "text-muted-foreground hover:text-foreground",
-                      )}
-                    >
-                      {link.label}
-                      {hasMega && (
-                        <ChevronDown
-                          className={cn(
-                            "transition-transform duration-200",
-                            openMega === link.mega ? "rotate-180" : "",
-                          )}
-                          style={{ width: 12, height: 12 }}
-                        />
-                      )}
-                      {/* active underline */}
-                      {active && <span className="absolute bottom-0 inset-x-3 h-px bg-primary" />}
-                      {/* hover underline */}
-                      {!active && (
-                        <span className="absolute bottom-0 ltr:left-3 rtl:right-3 h-px bg-foreground transition-all duration-300 w-0 group-hover:w-[calc(100%-1.5rem)]" />
-                      )}
-                    </Link>
-                  </div>
-                );
-              })}
-            </nav>
+            <LanguageSwitcher />
 
-            {/* ── Right actions ── */}
-            <div className="flex items-center gap-2">
-              {/* Search */}
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="flex items-center justify-center w-9 h-9 text-muted-foreground hover:text-primary transition-colors duration-200"
-                aria-label="Search"
-              >
-                <Search style={{ width: 17, height: 17 }} />
-              </button>
-
-              {/* Dark mode toggle */}
-              <DarkModeToggle />
-
-              {/* Language switcher */}
-              <LanguageSwitcher />
-
-              {/* CTA — desktop */}
-              <Link
-                to="/contact"
-                className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground font-mono font-bold uppercase tracking-[0.18em] text-[0.6rem] px-5 py-2.5 hover:opacity-90 transition-opacity"
-              >
-                {isAr ? "اطلب عرض سعر" : "Get Quote"}
-              </Link>
-
-              {/* Hamburger — mobile */}
-              <button
-                className="md:hidden flex items-center justify-center w-9 h-9 text-foreground transition-colors duration-200"
-                onClick={() => setIsMenuOpen(true)}
-                aria-label="Open menu"
-              >
-                <Menu style={{ width: 20, height: 20 }} />
-              </button>
-            </div>
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden flex items-center justify-center w-10 h-10 focus-ring rounded"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
 
-        {/* ── Mega menus ── */}
-        {Object.entries(megaData).map(([key, items]) => (
-          <div key={key} onMouseEnter={() => handleMegaEnter(key)} onMouseLeave={handleMegaLeave}>
-            <MegaMenu items={items} isOpen={openMega === key} onClose={() => setOpenMega(null)} />
+        {/* Search Bar */}
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-300 border-t border-border",
+            isSearchOpen ? "max-h-20 py-4" : "max-h-0 py-0 border-transparent",
+          )}
+        >
+          <div className="relative">
+            <Search className="absolute top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground ltr:left-4 rtl:right-4" />
+            <input
+              ref={searchRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={isAr ? "ابحث في الموقع..." : "Search the site..."}
+              className="w-full py-3 bg-secondary/50 border border-border text-sm focus:outline-none focus:border-primary transition-colors ltr:pl-12 ltr:pr-4 rtl:pr-12 rtl:pl-4 rtl:text-right"
+            />
           </div>
-        ))}
-      </header>
+          {searchResults.length > 0 && (
+            <div className="absolute left-0 right-0 bg-background border border-border shadow-lg mt-1 z-50">
+              {searchResults.map((r) => (
+                <Link
+                  key={r.href}
+                  to={r.href}
+                  onClick={() => {
+                    setSearchQuery("");
+                    setIsSearchOpen(false);
+                  }}
+                  className="block px-4 py-3 text-sm hover:bg-secondary transition-colors rtl:text-right"
+                >
+                  {r.label}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
 
-      {/* ── Mobile drawer ── */}
-      <MobileDrawer
-        open={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        navLinks={navLinks}
-        isAr={isAr}
-        currentPath={location.pathname}
-      />
+        {/* Mobile Menu */}
+        <div
+          className={cn(
+            "md:hidden border-t border-border overflow-hidden transition-all duration-300",
+            isMenuOpen ? "max-h-[500px] py-6" : "max-h-0 py-0",
+          )}
+        >
+          <nav className="flex flex-col gap-4 rtl:text-right">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-lg uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors animate-slide-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
 
-      {/* ── Search overlay ── */}
-      <SearchOverlay open={isSearchOpen} onClose={() => setIsSearchOpen(false)} navLinks={navLinks} />
-    </>
+      {/* Mega Menus */}
+      <MegaMenu items={solutionsMega} isOpen={openMega === "solutions"} />
+      <MegaMenu items={industriesMega} isOpen={openMega === "industries"} />
+    </header>
   );
 }
