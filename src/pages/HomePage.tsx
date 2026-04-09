@@ -232,43 +232,6 @@ export default function HomePage() {
           >
             {t("hero.titleHighlight")}
           </p>
-
-          {/* ── 3 Statement lines ── */}
-          <div className="animate-fade-up delay-500 w-full max-w-lg mx-auto mb-8" dir={isAr ? "rtl" : "ltr"}>
-            {([t("hero.line1"), t("hero.line2"), t("hero.line3")] as string[]).map((line, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3"
-                style={{
-                  padding: "0.65rem 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.1)",
-                  flexDirection: isAr ? "row-reverse" : "row",
-                }}
-              >
-                <span
-                  className="font-mono font-black shrink-0 mt-0.5"
-                  style={{
-                    fontSize: "0.6rem",
-                    color: "hsl(var(--primary))",
-                    letterSpacing: "0.15em",
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    lineHeight: 1.7,
-                    color: "rgba(255,255,255,0.65)",
-                    textAlign: isAr ? "right" : "left",
-                  }}
-                >
-                  {line}
-                </p>
-              </div>
-            ))}
-          </div>
-
           {/* CTA Buttons */}
           <div
             className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}
