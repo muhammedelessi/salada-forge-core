@@ -25,7 +25,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="font-mono text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="font-mono text-[0.57rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -59,14 +59,16 @@ export default function ShopPage() {
     "specialty-containers": t.categories.specialtyContainers,
     "drums-barrels": t.categories.drumsBarrels,
     "modular-buildings": t.categories.modularBuildings,
-    "spare-parts": language === "ar" ? "قطع الغيار" : "Spare Parts",
-    "lashing-equipment": language === "ar" ? "معدات الربط" : "Lashing Equipment",
-    "iso-shipping-containers": language === "ar" ? "حاويات شحن ISO" : "ISO Shipping Containers",
-    "storage-containers": language === "ar" ? "حاويات التخزين" : "Storage Containers",
+    "spare-parts": t.categories.spareParts || (isAr ? "قطع الغيار" : "Spare Parts"),
+    "lashing-equipment": t.categories.lashingEquipment || (isAr ? "معدات الربط" : "Lashing Equipment"),
+    "iso-shipping-container": t.categories.isoShipping || (isAr ? "حاويات شحن ISO" : "ISO Shipping Container"),
+    "iso-shipping-containers": t.categories.isoShipping || (isAr ? "حاويات شحن ISO" : "ISO Shipping Containers"),
+    "land-shipping-container": t.categories.landShipping || (isAr ? "حاويات الشحن البري" : "Land Shipping Container"),
+    "storage-containers": t.categories.storageContainers || (isAr ? "حاويات التخزين" : "Storage Containers"),
   };
 
   const formatPrice = (price: number) =>
-    new Intl.NumberFormat("ar-SA", {
+    new Intl.NumberFormat(isAr ? "ar-SA" : "en-US", {
       style: "currency",
       currency: "SAR",
       minimumFractionDigits: 0,
@@ -146,7 +148,7 @@ export default function ShopPage() {
     <div dir={isAr ? "rtl" : "ltr"}>
       {/* Categories */}
       <p
-        className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-2.5 pb-2 border-b border-border"
+        className="font-mono text-[0.53rem] uppercase tracking-[0.22em] mb-2.5 pb-2 border-b border-border"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         {t.shop.categories}
@@ -185,7 +187,7 @@ export default function ShopPage() {
             >
               <span className="truncate">{categoryTranslations[cat.id] || cat.name}</span>
               <span
-                className="font-mono text-[0.65rem] shrink-0 ms-2"
+                className="font-mono text-[0.5rem] shrink-0 ms-2"
                 style={{ color: "hsl(var(--muted-foreground)/0.5)" }}
               >
                 {cat.count}
@@ -197,7 +199,7 @@ export default function ShopPage() {
 
       {/* Price Range */}
       <p
-        className="font-mono text-[0.65rem] uppercase tracking-[0.15em] mb-2.5 pb-2 border-b border-border"
+        className="font-mono text-[0.53rem] uppercase tracking-[0.22em] mb-2.5 pb-2 border-b border-border"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         {t.shop.priceRange}
@@ -273,14 +275,14 @@ export default function ShopPage() {
             <nav className="flex items-center gap-1.5 mb-3">
               <Link
                 to="/"
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="font-mono text-[0.46rem] uppercase tracking-[0.16em]"
                 style={{ color: "rgba(255,255,255,0.3)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.15)" }}>/</span>
               <span
-                className="font-mono text-[0.6rem] uppercase tracking-[0.15em]"
+                className="font-mono text-[0.46rem] uppercase tracking-[0.16em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t.nav.shop}
@@ -299,7 +301,7 @@ export default function ShopPage() {
             <div className="flex items-center gap-3 flex-wrap">
               {isLoading ? (
                 <span
-                  className="inline-flex items-center gap-1.5 font-mono text-[0.65rem]"
+                  className="inline-flex items-center gap-1.5 font-mono text-[0.58rem]"
                   style={{ color: "rgba(255,255,255,0.38)" }}
                 >
                   <Loader2 className="w-3 h-3 animate-spin" />
@@ -307,7 +309,7 @@ export default function ShopPage() {
                 </span>
               ) : (
                 <span
-                  className="font-mono text-[0.65rem] uppercase tracking-[0.12em]"
+                  className="font-mono text-[0.58rem] uppercase tracking-[0.12em]"
                   style={{ color: "rgba(255,255,255,0.38)" }}
                 >
                   {filteredProducts.length} {t.shop.products}
@@ -316,7 +318,7 @@ export default function ShopPage() {
               {activeCount > 0 && (
                 <button
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 font-mono text-[0.65rem] uppercase tracking-[0.12em]"
+                  className="inline-flex items-center gap-1 font-mono text-[0.55rem] uppercase tracking-[0.12em]"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {t.shop.clearFilters} <X className="w-2.5 h-2.5" />
@@ -329,7 +331,7 @@ export default function ShopPage() {
 
       {/* ── MOBILE: category tabs ─── */}
       <div
-        className="lg:hidden sticky top-16 md:top-20 z-30 border-b border-border"
+        className="lg:hidden sticky top-0 z-30 border-b border-border"
         style={{ background: "hsl(var(--background))" }}
       >
         {/* Category tabs — horizontal scroll */}
@@ -338,7 +340,7 @@ export default function ShopPage() {
             {/* All */}
             <button
               onClick={() => handleCategoryChange("")}
-              className="px-4 py-3 font-mono text-[0.65rem] uppercase tracking-[0.12em] whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
+              className="px-4 py-3 font-mono text-[0.58rem] uppercase tracking-[0.12em] whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
               style={{
                 borderColor: !activeCategory ? "hsl(var(--primary))" : "transparent",
                 color: !activeCategory ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
@@ -351,7 +353,7 @@ export default function ShopPage() {
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className="px-4 py-3 font-mono text-[0.65rem] uppercase tracking-[0.12em] whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
+                className="px-4 py-3 font-mono text-[0.58rem] uppercase tracking-[0.12em] whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
                 style={{
                   borderColor: activeCategory === cat.id ? "hsl(var(--primary))" : "transparent",
                   color: activeCategory === cat.id ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
@@ -370,7 +372,7 @@ export default function ShopPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="w-full appearance-none border border-border bg-background px-3 py-2 pe-8 font-mono text-[0.65rem] uppercase tracking-[0.1em] focus:outline-none focus:border-primary"
+              className="w-full appearance-none border border-border bg-background px-3 py-2 pe-8 font-mono text-[0.58rem] uppercase tracking-[0.1em] focus:outline-none focus:border-primary"
               style={{ color: "hsl(var(--foreground)/0.7)" }}
             >
               <option value="featured">{t.shop.featured}</option>
@@ -390,7 +392,7 @@ export default function ShopPage() {
             >
               <Grid
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "grid" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "grid" ? "#fff" : "hsl(var(--muted-foreground))" }}
               />
             </button>
             <button
@@ -400,7 +402,7 @@ export default function ShopPage() {
             >
               <List
                 className="w-3.5 h-3.5"
-                style={{ color: viewMode === "list" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
+                style={{ color: viewMode === "list" ? "#fff" : "hsl(var(--muted-foreground))" }}
               />
             </button>
           </div>
@@ -431,7 +433,7 @@ export default function ShopPage() {
             {/* Desktop toolbar */}
             <div className="hidden lg:flex items-center justify-between gap-4 mb-6 pb-5 border-b border-border">
               <span
-                className="font-mono text-[0.65rem] uppercase tracking-[0.15em]"
+                className="font-mono text-[0.58rem] uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--muted-foreground))" }}
               >
                 {filteredProducts.length} {t.shop.products}
@@ -461,7 +463,7 @@ export default function ShopPage() {
                   >
                     <Grid
                       className="w-3.5 h-3.5"
-                      style={{ color: viewMode === "grid" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
+                      style={{ color: viewMode === "grid" ? "#fff" : "hsl(var(--muted-foreground))" }}
                     />
                   </button>
                   <button
@@ -471,7 +473,7 @@ export default function ShopPage() {
                   >
                     <List
                       className="w-3.5 h-3.5"
-                      style={{ color: viewMode === "list" ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))" }}
+                      style={{ color: viewMode === "list" ? "#fff" : "hsl(var(--muted-foreground))" }}
                     />
                   </button>
                 </div>
