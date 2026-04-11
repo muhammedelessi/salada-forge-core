@@ -9,6 +9,9 @@ import { translations } from "@/i18n/translations";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import heroPort from "@/assets/hero-port.webp";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { FormField, fieldShell, inputHeight, textareaMin } from "@/components/forms/ContactFormFields";
 
 function SectionLabel({ text }: { text: string }) {
   return (
@@ -17,36 +20,12 @@ function SectionLabel({ text }: { text: string }) {
         className="block shrink-0"
         style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)" }}
       />
-      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-label-md uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
   );
 }
-
-function FormField({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
-  return (
-    <div>
-      <label
-        className="block label-text text-[0.65rem] uppercase tracking-[0.18em] mb-2.5"
-        style={{ color: "hsl(var(--foreground)/0.7)" }}
-      >
-        {label}
-        {required && <span style={{ color: "hsl(var(--primary))" }}> *</span>}
-      </label>
-      {children}
-    </div>
-  );
-}
-
-const inputCls = `
-  w-full bg-background border border-border
-  px-4 py-3.5 text-[0.85rem]
-  font-[var(--font-body)]
-  text-foreground placeholder:text-muted-foreground
-  focus:outline-none focus:border-primary
-  transition-colors duration-200
-`;
 
 export default function ContactPage() {
   const seo = usePageSEO("/contact");
@@ -67,6 +46,10 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.subject) {
+      toast.error(isAr ? "يرجى اختيار الموضوع." : "Please select a subject.");
+      return;
+    }
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from("contact_inquiries").insert({
@@ -134,6 +117,15 @@ export default function ContactPage() {
     },
   ];
 
+  const subjectOptions = [
+    { value: "quote", label: t.contact.requestQuote },
+    { value: "product", label: t.contact.productInquiry },
+    { value: "order", label: t.contact.orderStatus },
+    { value: "support", label: t.contact.technicalSupport },
+    { value: "partnership", label: t.contact.partnership },
+    { value: "other", label: t.contact.other },
+  ] as const;
+
   return (
     <Layout>
       <SEOHead {...seo} />
@@ -161,31 +153,27 @@ export default function ContactPage() {
           style={{ minHeight: "240px" }}
         >
           <div className="max-w-xl text-start">
-            <nav className="flex items-center gap-1.5 mb-4">
+            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
-                {isAr ? "تواصل معنا" : "Contact"}
+                {t.contact.title}
               </span>
             </nav>
-            <SectionLabel text={t.contact.label} />
-            <h1
-              className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
-              style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
-            >
-              {isAr ? "تواصل معنا" : "Get In Touch"}
+            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] text-start">
+              {t.contact.label}
             </h1>
             <p
-              className="text-[0.8rem] leading-relaxed text-start"
+              className="hero-subtitle leading-relaxed text-start"
               style={{ color: "rgba(255,255,255,0.45)", maxWidth: "34rem" }}
             >
               {t.contact.description}
@@ -200,17 +188,17 @@ export default function ContactPage() {
             {contactItems.map((item) => {
               const Content = (
                 <div
-                  className="border border-border p-5 md:p-6 h-full transition-colors duration-200 hover:border-primary/40 text-start"
+                  className="h-full border border-border p-5 text-start transition-colors duration-200 hover:border-primary/40"
                   style={{ background: "hsl(var(--background))" }}
                 >
                   <div
                     className="flex items-center justify-center w-10 h-10 mb-4"
                     style={{ background: "hsl(var(--primary)/0.1)" }}
                   >
-                    <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(var(--primary))" }} />
+                    <item.icon className="h-5 w-5 shrink-0" style={{ color: "hsl(var(--primary))" }} />
                   </div>
                   <p
-                    className="label-text text-[0.75rem] uppercase tracking-[0.16em] font-bold mb-2"
+                    className="mb-2 text-[0.8rem] font-bold uppercase tracking-wider"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {item.title}
@@ -222,7 +210,7 @@ export default function ContactPage() {
                     {item.lines.map((line, j) => (
                       <p
                         key={j}
-                        className="text-[0.98rem] leading-relaxed font-medium"
+                        className="text-base leading-relaxed font-semibold"
                         style={{
                           color: j === 0 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                         }}
@@ -252,104 +240,130 @@ export default function ContactPage() {
         <div className="industrial-container">
           <div className="grid lg:grid-cols-3 gap-10 md:gap-14 items-start">
             <div className="lg:col-span-2 text-start">
-              <SectionLabel text={t.contact.sendMessage} />
-              <h2
-                className="font-black uppercase leading-tight tracking-[-0.02em] mb-8"
-                style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.7rem)", color: "hsl(var(--foreground))" }}
+              <div
+                className="border border-border p-8"
+                style={{ background: "hsl(var(--secondary)/0.3)" }}
               >
-                {isAr ? "أرسل لنا رسالة" : "Send Us a Message"}
-              </h2>
-
-              <form onSubmit={handleSubmit} className="space-y-6" dir={dir}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField label={t.contact.name} required>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder={isAr ? "أدخل اسمك الكامل" : "Enter your full name"}
-                      className={`${inputCls} text-start`}
-                    />
-                  </FormField>
-                  <FormField label={t.checkout?.email || (isAr ? "البريد الإلكتروني" : "Email")} required>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      dir="ltr"
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="email@example.com"
-                      className={`${inputCls} ${isAr ? "text-end" : "text-start"}`}
-                    />
-                  </FormField>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField label={t.checkout?.company || (isAr ? "الشركة" : "Company")}>
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder={isAr ? "اسم الشركة (اختياري)" : "Company name (optional)"}
-                      className={`${inputCls} text-start`}
-                    />
-                  </FormField>
-                  <FormField label={t.checkout?.phone || (isAr ? "الهاتف" : "Phone")}>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      dir="ltr"
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+966 5X XXX XXXX"
-                      className={`${inputCls} ${isAr ? "text-end" : "text-start"}`}
-                    />
-                  </FormField>
-                </div>
-
-                <FormField label={t.contact.subject} required>
-                  <select
-                    required
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className={`${inputCls} text-start`}
-                  >
-                    <option value="">{t.contact.selectSubject}</option>
-                    <option value="quote">{t.contact.requestQuote}</option>
-                    <option value="product">{t.contact.productInquiry}</option>
-                    <option value="order">{t.contact.orderStatus}</option>
-                    <option value="support">{t.contact.technicalSupport}</option>
-                    <option value="partnership">{t.contact.partnership}</option>
-                    <option value="other">{t.contact.other}</option>
-                  </select>
-                </FormField>
-
-                <FormField label={t.contact.message} required>
-                  <textarea
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder={t.contact.messagePlaceholder}
-                    className={`${inputCls} resize-none text-start`}
-                  />
-                </FormField>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn-primary w-full sm:w-auto disabled:opacity-50"
+                <SectionLabel text={t.contact.sendMessage} />
+                <h2
+                  className="mb-8 font-bold leading-tight tracking-[-0.02em]"
+                  style={{
+                    fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+                    fontWeight: 700,
+                    color: "hsl(var(--foreground))",
+                  }}
                 >
-                  <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
-                  <Send className="w-3.5 h-3.5 rtl:rotate-180" />
-                </button>
-              </form>
+                  {isAr ? "أرسل لنا رسالة" : "Send Us a Message"}
+                </h2>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6" dir={dir}>
+                  <div className="grid min-w-0 gap-6 md:grid-cols-2">
+                    <FormField label={t.contact.name} required>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder={isAr ? "أدخل اسمك الكامل" : "Enter your full name"}
+                        className={`${fieldShell} text-start`}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                    <FormField label={t.checkout?.email || (isAr ? "البريد الإلكتروني" : "Email")} required>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        dir="ltr"
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="email@example.com"
+                        className={`${fieldShell} ${isAr ? "text-end" : "text-start"}`}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                  </div>
+
+                  <div className="grid min-w-0 gap-6 md:grid-cols-2">
+                    <FormField label={t.checkout?.company || (isAr ? "الشركة" : "Company")}>
+                      <input
+                        type="text"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        placeholder={isAr ? "اسم الشركة (اختياري)" : "Company name (optional)"}
+                        className={`${fieldShell} text-start`}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                    <FormField label={t.checkout?.phone || (isAr ? "الهاتف" : "Phone")}>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        dir="ltr"
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+966 5X XXX XXXX"
+                        className={`${fieldShell} ${isAr ? "text-end" : "text-start"}`}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                  </div>
+
+                  <FormField label={t.contact.subject} required>
+                    <Select
+                      value={formData.subject || undefined}
+                      onValueChange={(subject) => setFormData((prev) => ({ ...prev, subject }))}
+                    >
+                      <SelectTrigger
+                        dir={dir}
+                        className={cn(
+                          fieldShell,
+                          "h-auto min-h-[48px] w-full justify-between gap-2 rounded-none px-4 py-3 text-base shadow-none ring-0 ring-offset-0",
+                          "focus:border-primary focus:ring-0 focus:ring-offset-0 data-[state=open]:border-primary",
+                          "disabled:cursor-not-allowed disabled:opacity-50",
+                        )}
+                      >
+                        <SelectValue placeholder={t.contact.selectSubject} />
+                      </SelectTrigger>
+                      <SelectContent
+                        dir={dir}
+                        position="popper"
+                        className="max-h-[min(22rem,var(--radix-select-content-available-height))] w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)] rounded-none border-border bg-background text-foreground shadow-md"
+                      >
+                        {subjectOptions.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value} className="cursor-pointer py-2.5 text-base">
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormField>
+
+                  <FormField label={t.contact.message} required>
+                    <textarea
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder={t.contact.messagePlaceholder}
+                      className={`${fieldShell} text-start`}
+                      style={textareaMin}
+                    />
+                  </FormField>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary inline-flex min-h-[48px] w-full items-center justify-center gap-2 px-10 py-3.5 text-[0.9rem] font-bold disabled:opacity-50 sm:w-auto"
+                  >
+                    <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
+                    <Send className="h-4 w-4 shrink-0 rtl:rotate-180" />
+                  </button>
+                </form>
+              </div>
             </div>
 
             <div className="lg:col-span-1 text-start">
-              <div className="p-5 mb-6 border border-border" style={{ background: "hsl(var(--primary)/0.05)" }}>
+              <div className="mb-6 border border-border p-5" style={{ background: "hsl(var(--primary)/0.05)" }}>
                 <SectionLabel text={isAr ? "واتساب" : "WhatsApp"} />
-                <p className="text-sm mb-4 text-start" style={{ color: "hsl(var(--muted-foreground))" }}>
+                <p className="mb-4 text-start text-[0.9rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
                   {isAr
                     ? "تواصل معنا مباشرة على واتساب للردود السريعة."
                     : "Chat with us directly on WhatsApp for quick responses."}

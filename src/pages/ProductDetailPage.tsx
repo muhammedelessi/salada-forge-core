@@ -33,7 +33,7 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
           background: "hsl(var(--primary)/0.6)",
         }}
       />
-      <span className="label-text text-[0.56rem] uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-label-md uppercase tracking-[0.28em]" style={{ color: "hsl(var(--primary))" }}>
         {children}
       </span>
     </div>
@@ -218,7 +218,7 @@ export default function ProductDetailPage() {
       {/* ╔══════════════════════════════════════╗
           ║  BREADCRUMB                          ║
           ╚══════════════════════════════════════╝ */}
-      <nav className="border-b border-border bg-background" dir={isAr ? "rtl" : "ltr"}>
+      <nav className="page-hero-breadcrumb border-b border-border bg-background" dir={isAr ? "rtl" : "ltr"}>
         <div className="industrial-container py-3">
           <ol className="flex items-center gap-1 flex-wrap">
             {[
@@ -232,13 +232,13 @@ export default function ProductDetailPage() {
                 {item.href ? (
                   <Link
                     to={item.href}
-                    className="label-text text-[0.5rem] uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
+                    className="hero-crumb label-text text-label-md uppercase tracking-[0.14em] text-muted-foreground hover:text-primary transition-colors"
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <span
-                    className="label-text text-[0.5rem] uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
+                    className="hero-crumb label-text text-label-md uppercase tracking-[0.14em] line-clamp-1 max-w-[180px]"
                     style={{ color: "hsl(var(--primary))" }}
                   >
                     {item.label}

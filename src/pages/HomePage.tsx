@@ -140,23 +140,19 @@ export default function HomePage() {
               backdropFilter: "blur(4px)",
             }}
           >
-          <p className="animate-fade-up delay-300 max-w-2xl mx-auto" style={{
-            fontSize: "clamp(1.3rem, 2.8vw, 1.8rem)", fontWeight: 700,
-            lineHeight: 1.5, letterSpacing: "-0.01em",
-            marginBottom: "1rem", textAlign: "center",
-            color: "hsl(var(--primary))", maxWidth: "700px",
-          }}>
+          <p
+            className="home-hero-primary animate-fade-up delay-300 max-w-2xl mx-auto"
+            style={{ marginBottom: "1rem", textAlign: "center", maxWidth: "700px" }}
+          >
             {t("hero.title")}
           </p>
 
           <div style={{ width:"3rem", height:"2px", background:"hsl(var(--gold)/0.55)", margin:"1rem auto", boxShadow: "0 0 14px hsl(var(--gold)/0.45)" }} />
 
-          <p className="animate-fade-up delay-400 max-w-2xl mx-auto" style={{
-            fontSize: "clamp(1rem, 2vw, 1.3rem)", fontWeight: 400,
-            lineHeight: 1.7, letterSpacing: "-0.01em",
-            marginBottom: "2rem", textAlign: "center",
-            color: "rgba(255,255,255,0.75)", maxWidth: "700px",
-          }}>
+          <p
+            className="home-hero-secondary animate-fade-up delay-400 max-w-2xl mx-auto"
+            style={{ marginBottom: "2rem", textAlign: "center", maxWidth: "700px" }}
+          >
             {t("hero.titleHighlight")}
           </p>
 
@@ -189,7 +185,7 @@ export default function HomePage() {
                 >
                   <div style={{
                     fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
-                    fontWeight: 900,
+                    fontWeight: isAr ? 900 : 700,
                     lineHeight: 1,
                     color: "hsl(var(--primary))",
                     textShadow: "0 0 22px hsl(var(--primary) / 0.2)",
@@ -222,34 +218,55 @@ export default function HomePage() {
       </section>
 
       {/* ════════ VISION 2030 ════════ */}
-      <section dir={isAr ? "rtl" : "ltr"} style={{ background:"hsl(var(--background))", borderBottom:"1px solid hsl(var(--border))" }}>
-        <div style={{ background:"hsl(var(--primary)/0.08)", borderTop:"2px solid hsl(var(--primary))", borderBottom:"1px solid hsl(var(--primary)/0.2)" }}
-          className="px-5 py-6 md:px-10 md:py-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-8">
-              <span className="font-black text-primary leading-none shrink-0"
-                style={{ fontSize:"clamp(2.75rem, 6vw, 3.5rem)" }}>2030</span>
-              <div className="w-full h-px md:w-px md:h-[52px] shrink-0"
-                style={{ background:"hsl(var(--primary)/0.25)" }} />
-              <div>
-                <span className="uppercase block text-primary"
-                  style={{ fontSize:"0.75rem", letterSpacing:"0.2em", marginBottom:"0.5rem" }}>
+      <section dir={isAr ? "rtl" : "ltr"} className="w-full bg-background">
+        <div
+          className="w-full"
+          style={{
+            borderTop: "2px solid hsl(var(--primary))",
+            borderBottom: "1px solid hsl(var(--primary)/0.2)",
+            background: "hsl(var(--primary)/0.05)",
+            borderInlineStart: "4px solid hsl(var(--primary))",
+            paddingTop: "3rem",
+            paddingBottom: "3rem",
+          }}
+        >
+          <div className="industrial-container px-5 md:px-10">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-[15%_50%_35%] md:items-stretch md:gap-0">
+              {/* Column 1 — 2030 (+ mobile gold rule) */}
+              <div className="flex min-w-0 flex-col items-start md:items-center md:justify-center md:self-stretch md:border-e md:border-primary/25 md:pe-6 lg:pe-8">
+                <span className="home-vision-year leading-none text-primary [font-size:clamp(2.5rem,8vw,3.5rem)] md:[font-size:clamp(3.5rem,6vw,5rem)]">
+                  2030
+                </span>
+                <div
+                  className="mt-5 h-[2px] w-12 shrink-0 md:hidden"
+                  style={{ background: "hsl(var(--primary))" }}
+                  aria-hidden
+                />
+              </div>
+
+              {/* Column 2 — eyebrow + title */}
+              <div className="min-w-0 md:flex md:flex-col md:justify-center md:ps-6 lg:ps-8">
+                <span className="home-vision-eyebrow block uppercase tracking-widest text-primary" style={{ fontSize: "0.75rem" }}>
                   {t("vision.label")}
                 </span>
-                <h2 className="uppercase font-black text-foreground"
-                  style={{ fontSize:"clamp(1rem, 2.2vw, 1.375rem)", letterSpacing:"-0.02em", lineHeight:1.1 }}>
+                <h2 className="home-vision-title mt-2 uppercase text-foreground" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", lineHeight: 1.15, color: "hsl(var(--foreground))" }}>
                   {t("vision.title")}
                 </h2>
               </div>
-            </div>
-            <div className="max-w-[380px]">
-              <p className="text-muted-foreground" style={{ fontSize:"0.8125rem", lineHeight:1.75, marginBottom:"14px" }}>
-                {t("vision.description")}
-              </p>
-              <Link to="/why-salada" className="btn-primary">
-                <span>{t("nav.whySalada")}</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </Link>
+
+              {/* Column 3 — description + CTA */}
+              <div className="min-w-0 md:flex md:flex-col md:justify-center md:ps-4 lg:ps-6">
+                <p className="home-vision-desc" style={{ fontSize: "0.9rem", lineHeight: 1.8, color: "hsl(var(--muted-foreground))" }}>
+                  {t("vision.description")}
+                </p>
+                <Link
+                  to="/why-salada"
+                  className="btn-primary mt-5 w-full justify-center transition-opacity duration-300 ease-out md:w-auto"
+                >
+                  <span>{t("nav.whySalada")}</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -276,38 +293,51 @@ export default function HomePage() {
               </Link>
             </div>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 text-center items-stretch">
+          <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {solutions.map((sol, i) => (
-              <Reveal key={sol.num} delay={i * 80}>
-                <Link to={sol.href}
-                  className="group relative flex flex-col items-center justify-between border border-border overflow-hidden p-6 md:p-8 transition-all duration-300 hover:border-primary/50 h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_30px_rgba(0,0,0,0.22)]"
-                  style={{ minHeight:"320px" }}>
-                  <img src={sol.image} alt={sol.title} loading="lazy" decoding="async" width={600} height={375}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 max-w-full" />
-                  <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute inset-0 transition-all duration-500"
-                    style={{ background:"linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.25) 100%)" }} />
-                  <div className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                    style={{ background:"rgba(0,0,0,0.15)" }} />
-                  <span className="relative z-10 font-black text-primary/25 group-hover:text-primary/50 transition-colors duration-300 block"
-                    style={{ fontSize:"clamp(1.8rem, 3.5vw, 2.5rem)", lineHeight:1 }}>
+              <Reveal key={sol.num} delay={i * 80} className="h-full min-h-0">
+                <Link
+                  to={sol.href}
+                  className="home-solution-card group relative flex h-full min-h-[260px] w-full flex-col overflow-hidden border border-transparent transition-all duration-300 ease hover:border-primary/50 md:min-h-[280px] lg:min-h-[380px]"
+                >
+                  <img
+                    src={sol.image}
+                    alt={sol.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={375}
+                    className="absolute inset-0 h-full w-full max-w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 z-[1]"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.15) 100%)",
+                    }}
+                  />
+                  <span
+                    className="home-solution-card-num pointer-events-none absolute start-4 top-4 z-[2] select-none"
+                    aria-hidden
+                  >
                     {sol.num}
                   </span>
-                  <div className="relative z-10 mt-6 px-1">
-                    <h3 className="uppercase font-[900] text-white group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.98rem" }}>
-                      {sol.title}
-                    </h3>
-                    <p className="text-white/70 mt-2 leading-relaxed line-clamp-3 transition-all duration-500 opacity-80 group-hover:opacity-100 max-h-20 overflow-hidden"
-                      style={{ fontSize:"0.84rem" }}>
-                      {sol.desc}
-                    </p>
-                  </div>
-                  <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="uppercase" style={{ fontSize:"0.75rem", letterSpacing:"0.18em" }}>
+                  <div className="relative z-[2] mt-auto flex w-full flex-col items-stretch p-6 text-start">
+                    <div
+                      className="mb-3 shrink-0"
+                      style={{
+                        width: "2rem",
+                        height: "2px",
+                        background: "hsl(var(--primary) / 0.7)",
+                      }}
+                      aria-hidden
+                    />
+                    <h3 className="home-solution-card-title">{sol.title}</h3>
+                    <p className="home-solution-card-desc">{sol.desc}</p>
+                    <span className="home-solution-card-explore inline-flex items-center gap-1.5">
                       {isAr ? "اكتشف" : "Explore"}
+                      <ArrowRight className={`h-3 w-3 shrink-0 ${isAr ? "rotate-180" : ""}`} />
                     </span>
-                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
                   </div>
                 </Link>
               </Reveal>
@@ -415,8 +445,10 @@ export default function HomePage() {
         <div className="container-xl relative z-10">
           <div className="max-w-2xl mx-auto text-center">
             <Reveal>
-              <span className="uppercase mb-6 inline-flex justify-center"
-                style={{ fontSize:"0.625rem", letterSpacing:"0.28em", color:"hsl(var(--gold))" }}>
+              <span
+                className="home-cta-eyebrow uppercase mb-6 inline-flex justify-center tracking-[0.28em]"
+                style={{ color: "hsl(var(--gold))" }}
+              >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
               </span>
               <h2 className="uppercase font-black mb-8"

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
-import { cn } from '@/lib/utils';
 
 interface BreadcrumbItem {
   label: string;
@@ -18,14 +17,14 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="bg-secondary/50 border-b border-border py-3"
+      className="page-hero-breadcrumb bg-secondary/50 border-b border-border py-3"
     >
       <div className="industrial-container">
-        <ol className="flex items-center gap-2 text-sm rtl:flex-row-reverse">
+        <ol className="flex items-center gap-2 rtl:flex-row-reverse">
           <li>
             <Link
               to="/"
-              className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+              className="hero-crumb label-text text-label-md text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
             >
               <Home className="w-3.5 h-3.5" />
               <span className="sr-only">{isRTL() ? 'الرئيسية' : 'Home'}</span>
@@ -37,12 +36,12 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
               {item.href ? (
                 <Link
                   to={item.href}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="hero-crumb label-text text-label-md text-muted-foreground hover:text-primary transition-colors"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-foreground font-medium">{item.label}</span>
+                <span className="hero-crumb label-text text-label-md text-foreground font-semibold">{item.label}</span>
               )}
             </li>
           ))}

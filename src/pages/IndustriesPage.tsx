@@ -52,30 +52,11 @@ function Reveal({
   );
 }
 
-/* ── Shared eyebrow label ── */
-function Label({ text }: { text: string; isAr?: boolean }) {
-  return (
-    <div className="flex items-center gap-2.5 mb-3">
-      <span
-        style={{
-          width: "1.25rem",
-          height: "1.5px",
-          background: "hsl(var(--primary)/0.65)",
-          display: "block",
-          flexShrink: 0,
-        }}
-      />
-      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
-        {text}
-      </span>
-    </div>
-  );
-}
-
 export default function IndustriesPage() {
   const seo = usePageSEO("/industries");
   const { t, isRTL } = useLanguageStore();
   const isAr = isRTL();
+  const introDesc = t("industries.introDesc").trim();
 
   const industries = [
     {
@@ -122,7 +103,11 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           HERO — compact
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden" dir={isAr ? "rtl" : "ltr"} style={{ minHeight: "260px" }}>
+      <section
+        className="industries-page-hero relative overflow-hidden"
+        dir={isAr ? "rtl" : "ltr"}
+        style={{ minHeight: "260px" }}
+      >
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -145,35 +130,32 @@ export default function IndustriesPage() {
           className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
           style={{ minHeight: "260px" }}
         >
-          <div className="max-w-xl">
-            {/* breadcrumb */}
-            <nav className="flex items-center gap-1.5 mb-4">
+          <div className={`max-w-xl ${isAr ? "mr-0 ml-auto text-right" : ""}`}>
+            {/* breadcrumb — match About page scale & RTL */}
+            <nav
+              className={`page-hero-breadcrumb mb-4 flex items-center gap-1.5 ${isAr ? "flex-row-reverse justify-end" : ""}`}
+            >
               <Link
                 to="/"
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "القطاعات" : "Industries"}
               </span>
             </nav>
 
-            <Label text={t("industries.label")} isAr={isAr} />
-
-            <h1
-              className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
-              style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
-            >
+            <h1 className="hero-title-primary industries-hero-h1 font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3">
               {isAr ? "القطاعات التي نخدمها" : "Industries We Serve"}
             </h1>
 
-            <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
+            <p className="hero-subtitle industries-hero-lead leading-relaxed" style={{ maxWidth: "36rem" }}>
               {t("industries.pageDesc")}
             </p>
           </div>
@@ -183,31 +165,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           INTRO STRIP
       ════════════════════════════════ */}
-      <section
-        className="border-b border-border py-8 md:py-10"
-        dir={isAr ? "rtl" : "ltr"}
-        style={{ background: "hsl(var(--secondary)/0.3)" }}
-      >
-        <div className="industrial-container">
-          <Reveal>
-            <div className="grid md:grid-cols-[1fr_auto] gap-6 items-center">
-              <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-                {t("industries.introDesc")}
-              </p>
-              <span
-                className="label-text font-black shrink-0"
-                style={{
-                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                  color: "hsl(var(--primary)/0.12)",
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                05
-              </span>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+     
 
       {/* ════════════════════════════════
           INDUSTRIES — number ticker list
@@ -234,16 +192,20 @@ export default function IndustriesPage() {
                     </div>
 
                     {/* Text */}
-                    <div className="flex-1">
-                      <h2
-                        className="font-black uppercase tracking-tight leading-tight mb-1 group-hover:text-primary transition-colors duration-300"
-                        style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.2rem)", color: "hsl(var(--foreground))" }}
-                      >
+                    <div className="min-w-0 flex-1">
+                      <div
+                        className="mb-2 shrink-0"
+                        style={{
+                          width: "1.5rem",
+                          height: "2px",
+                          background: "hsl(var(--primary))",
+                        }}
+                        aria-hidden
+                      />
+                      <h2 className="industry-card-title mb-1 uppercase leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary">
                         {ind.name}
                       </h2>
-                      <p className="text-[0.78rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                        {ind.desc}
-                      </p>
+                      <p className="industry-card-desc">{ind.desc}</p>
                     </div>
 
                     {/* Arrow */}
@@ -262,7 +224,7 @@ export default function IndustriesPage() {
       {/* ════════════════════════════════
           CTA — dark
       ════════════════════════════════ */}
-      <section className="relative py-14 md:py-20 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
+      <section className="industries-cta relative py-14 md:py-20 overflow-hidden" dir={isAr ? "rtl" : "ltr"}>
         <div className="absolute inset-0">
           <img
             src={heroPort}
@@ -287,7 +249,7 @@ export default function IndustriesPage() {
                   }}
                 />
                 <span
-                  className="label-text text-[0.65rem] uppercase tracking-[0.25em]"
+                  className="label-text text-label-md hero-eyebrow-primary uppercase tracking-[0.25em]"
                   style={{ color: "hsl(var(--primary))" }}
                 >
                   {isAr ? "تواصل معنا" : "Get Started"}
@@ -302,16 +264,10 @@ export default function IndustriesPage() {
                 />
               </div>
 
-              <h2
-                className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
-                style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}
-              >
+              <h2 className="industries-cta-title font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4">
                 {t("industries.ctaTitle")}
               </h2>
-              <p
-                className="text-[0.8rem] leading-relaxed mb-7 max-w-md mx-auto"
-                style={{ color: "rgba(255,255,255,0.4)" }}
-              >
+              <p className="industries-cta-desc mb-7 max-w-md mx-auto leading-relaxed">
                 {t("industries.ctaDesc")}
               </p>
 

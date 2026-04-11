@@ -112,8 +112,7 @@ export const translations = {
       pageDesc:
         "Salada supports critical operations across Saudi Arabia's key industries — delivering industrial containers, shipping & storage solutions, and container parts & securing equipment built for reliability and scale.",
       introTitle: "Industries We Serve",
-      introDesc:
-        "Salada supports multiple sectors across Saudi Arabia and GCC with locally manufactured container solutions.",
+      introDesc: "",
       logistics: "Logistics & Freight Companies",
       logisticsDesc:
         "We provide structurally reinforced containers built for frequent handling, stacking, and transportation.",
@@ -727,7 +726,7 @@ export const translations = {
       pageDesc:
         "صلادة تدعم العمليات الحيوية عبر القطاعات الرئيسية في المملكة — نقدم حاويات صناعية وحلول شحن وتخزين وقطع غيار ومعدات تثبيت مبنية على الموثوقية والقدرة على التوسع.",
       introTitle: "القطاعات التي نخدمها",
-      introDesc: "تدعم صلادة قطاعات متعددة في المملكة العربية السعودية ودول الخليج بحلول حاويات مصنعة محلياً.",
+      introDesc: "",
       logistics: "شركات اللوجستيات والشحن",
       logisticsDesc: "نوفر حاويات معززة هيكلياً مصممة للمناولة المتكررة والتكديس والنقل.",
       construction: "مقاولو البناء",

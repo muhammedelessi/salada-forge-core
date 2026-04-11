@@ -53,7 +53,17 @@ function Reveal({
 }
 
 /* ── Shared eyebrow label ── */
-function Label({ text, isAr, center = false }: { text: string; isAr: boolean; center?: boolean }) {
+function Label({
+  text,
+  isAr,
+  center = false,
+  spanClassName = "",
+}: {
+  text: string;
+  isAr: boolean;
+  center?: boolean;
+  spanClassName?: string;
+}) {
   return (
     <div
       className={`flex items-center gap-2.5 mb-3 ${center ? "justify-center" : isAr ? "flex-row-reverse justify-end" : ""}`}
@@ -67,7 +77,10 @@ function Label({ text, isAr, center = false }: { text: string; isAr: boolean; ce
           flexShrink: 0,
         }}
       />
-      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span
+        className={`label-text text-label-md uppercase tracking-[0.25em]${spanClassName ? ` ${spanClassName}` : ""}`}
+        style={{ color: "hsl(var(--primary))" }}
+      >
         {text}
       </span>
       {center && (
@@ -210,34 +223,29 @@ export default function WhySaladaPage() {
         >
           <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
             {/* breadcrumb */}
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+            <nav className={`page-hero-breadcrumb flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
               <Link
                 to="/"
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "لماذا صلادة" : "Why Salada"}
               </span>
             </nav>
 
-            <Label text={t("why.label")} isAr={isAr} />
-
-            <h1
-              className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200"
-              style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
-            >
+            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
               {isAr ? "لماذا صلادة؟" : "Why Salada?"}
             </h1>
 
             <p
-              className="text-[0.8rem] leading-relaxed animate-fade-up delay-300"
+              className="hero-subtitle leading-relaxed animate-fade-up delay-300"
               style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}
             >
               {t("why.pageDesc")}
@@ -302,7 +310,7 @@ export default function WhySaladaPage() {
               </p>
               <Link
                 to="/contact"
-                className={`inline-flex items-center gap-2 mt-5 label-text text-[0.62rem] uppercase tracking-[0.18em] font-bold transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
+                className={`hero-inline-cta inline-flex items-center gap-2 mt-5 label-text text-label-md uppercase tracking-[0.18em] transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Get In Touch"}
@@ -334,7 +342,7 @@ export default function WhySaladaPage() {
         <div className="industrial-container relative z-10">
           <div className="max-w-xl mx-auto text-center">
             <Reveal>
-              <Label text={isAr ? "تواصل معنا" : "Get Started"} isAr={isAr} center />
+              <Label text={isAr ? "تواصل معنا" : "Get Started"} isAr={isAr} center spanClassName="hero-eyebrow-primary" />
               <h2
                 className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
                 style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}

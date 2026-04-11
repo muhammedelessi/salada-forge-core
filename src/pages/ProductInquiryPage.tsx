@@ -9,6 +9,7 @@ import { translations } from '@/i18n/translations';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
+import { FormField, fieldShell, inputHeight, textareaMin } from '@/components/forms/ContactFormFields';
 
 const inquirySchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(255),
@@ -26,6 +27,8 @@ export default function ProductInquiryPage() {
   const { data: product, isLoading } = useProduct(slug || '');
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
+  const isAr = isRTL();
+  const dir = isAr ? 'rtl' : 'ltr';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -238,120 +241,124 @@ export default function ProductInquiryPage() {
               </div>
             </div>
 
-            {/* Inquiry Form */}
-            <div className={cn('lg:col-span-2', isRTL && 'lg:col-start-1 text-right')}>
-              <h2 className="text-xl font-bold mb-6">
-                {language === 'ar' ? 'معلومات التواصل' : 'Contact Information'}
-              </h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      {t.contact.name} *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right', errors.name && 'border-destructive')}
-                      dir={isRTL ? 'rtl' : 'ltr'}
-                    />
-                    {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      {t.checkout.email} *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right', errors.email && 'border-destructive')}
-                      dir="ltr"
-                    />
-                    {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      {t.checkout.company}
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
-                      dir={isRTL ? 'rtl' : 'ltr'}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      {t.checkout.phone}
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className={cn('industrial-input', isRTL && 'text-right')}
-                      dir="ltr"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {language === 'ar' ? 'الكمية المطلوبة' : 'Quantity Needed'}
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={formData.quantity}
-                    onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                    className={cn('industrial-input max-w-[200px]', isRTL && 'text-right')}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {language === 'ar' ? 'ملاحظات إضافية' : 'Additional Notes'}
-                  </label>
-                  <textarea
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={cn('industrial-input resize-none', isRTL && 'text-right')}
-                    placeholder={
-                      language === 'ar'
-                        ? 'أخبرنا عن متطلباتك أو أي تفاصيل إضافية...'
-                        : 'Tell us about your requirements or any additional details...'
-                    }
-                    dir={isRTL ? 'rtl' : 'ltr'}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={cn(
-                    'btn-primary w-full md:w-auto disabled:opacity-50',
-                    isRTL && 'flex-row-reverse'
-                  )}
+            {/* Inquiry Form — same field system as Contact page */}
+            <div className={cn('lg:col-span-2', isRTL && 'lg:col-start-1')}>
+              <div
+                className="border border-border p-8 text-start"
+                style={{ background: 'hsl(var(--secondary)/0.3)' }}
+                dir={dir}
+              >
+                <h2
+                  className="mb-8 font-bold leading-tight tracking-[-0.02em]"
+                  style={{
+                    fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
+                    fontWeight: 700,
+                    color: 'hsl(var(--foreground))',
+                  }}
                 >
-                  {isSubmitting ? (
-                    language === 'ar' ? 'جاري الإرسال...' : 'Submitting...'
-                  ) : (
-                    <>
-                      {language === 'ar' ? 'إرسال الطلب' : 'Submit Inquiry'}
-                      <Send className={cn('w-4 h-4', isRTL ? 'mr-2 rotate-180' : 'ml-2')} />
-                    </>
-                  )}
-                </button>
-              </form>
+                  {language === 'ar' ? 'معلومات التواصل' : 'Contact Information'}
+                </h2>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                  <div className="grid min-w-0 gap-6 md:grid-cols-2">
+                    <FormField label={t.contact.name} required error={errors.name}>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className={cn(
+                          fieldShell,
+                          'text-start',
+                          errors.name && 'border-destructive focus:border-destructive',
+                        )}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                    <FormField label={t.checkout.email} required error={errors.email}>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        dir="ltr"
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className={cn(
+                          fieldShell,
+                          isAr ? 'text-end' : 'text-start',
+                          errors.email && 'border-destructive focus:border-destructive',
+                        )}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                  </div>
+
+                  <div className="grid min-w-0 gap-6 md:grid-cols-2">
+                    <FormField label={t.checkout.company}>
+                      <input
+                        type="text"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className={cn(fieldShell, 'text-start')}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                    <FormField label={t.checkout.phone}>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        dir="ltr"
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className={cn(fieldShell, isAr ? 'text-end' : 'text-start')}
+                        style={inputHeight}
+                      />
+                    </FormField>
+                  </div>
+
+                  <FormField label={language === 'ar' ? 'الكمية المطلوبة' : 'Quantity Needed'}>
+                    <input
+                      type="number"
+                      min={1}
+                      value={formData.quantity}
+                      onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                      className={cn(fieldShell, 'max-w-[12rem] text-start')}
+                      style={inputHeight}
+                    />
+                  </FormField>
+
+                  <FormField label={language === 'ar' ? 'ملاحظات إضافية' : 'Additional Notes'}>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder={
+                        language === 'ar'
+                          ? 'أخبرنا عن متطلباتك أو أي تفاصيل إضافية...'
+                          : 'Tell us about your requirements or any additional details...'
+                      }
+                      className={cn(fieldShell, 'text-start')}
+                      style={textareaMin}
+                    />
+                  </FormField>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary inline-flex min-h-[48px] w-full items-center justify-center gap-2 px-10 py-3.5 text-[0.9rem] font-bold disabled:opacity-50 md:w-auto"
+                  >
+                    {isSubmitting ? (
+                      language === 'ar' ? (
+                        'جاري الإرسال...'
+                      ) : (
+                        'Submitting...'
+                      )
+                    ) : (
+                      <>
+                        <span>{language === 'ar' ? 'إرسال الطلب' : 'Submit Inquiry'}</span>
+                        <Send className="h-4 w-4 shrink-0 rtl:rotate-180" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

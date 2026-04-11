@@ -66,7 +66,7 @@ function Label({ text, isAr }: { text: string; isAr: boolean }) {
           flexShrink: 0,
         }}
       />
-      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span className="label-text text-label-md uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
         {text}
       </span>
     </div>
@@ -154,33 +154,28 @@ export default function SolutionsPage() {
           style={{ minHeight: "260px" }}
         >
           <div className="max-w-xl">
-            <nav className="flex items-center gap-1.5 mb-4">
+            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {t("nav.solutions")}
               </span>
             </nav>
 
-            <Label text={t("solutions.label")} isAr={isAr} />
-
-            <h1
-              className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3"
-              style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}
-            >
+            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3">
               {t("solutions.pageTitle")}
             </h1>
 
-            <p className="text-[0.8rem] leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
+            <p className="hero-subtitle leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
               {t("solutions.pageDesc")}
             </p>
           </div>
@@ -217,7 +212,7 @@ export default function SolutionsPage() {
                 
                 {/* watermark */}
                 <div
-                  className="absolute label-text font-black leading-none pointer-events-none select-none"
+                  className="absolute label-text leading-none pointer-events-none select-none"
                   style={{
                     fontSize: "clamp(5rem, 14vw, 10rem)",
                     color: "rgba(255,255,255,0.04)",

@@ -61,7 +61,7 @@ function MegaMenu({
                     });
                   }}
                 />
-                <span className="text-xs font-black uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
+                <span className="text-xs font-bold uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
                   {item.label}
                 </span>
                 <span className="text-[0.7rem] leading-relaxed text-muted-foreground">{item.desc}</span>
@@ -146,7 +146,7 @@ function MobileDrawer({
                   <span className="text-[0.65rem] label-text text-primary">{String(i + 1).padStart(2, "0")}</span>
                   <span
                     className={cn(
-                      "text-sm font-black uppercase tracking-[0.04em] transition-colors duration-200",
+                      "text-sm font-bold uppercase tracking-[0.04em] transition-colors duration-200",
                       isActive ? "text-primary" : "text-foreground group-hover:text-primary",
                     )}
                   >

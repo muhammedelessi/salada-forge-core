@@ -238,17 +238,17 @@ export default function FAQPage() {
         >
           <div className="max-w-2xl">
             {/* breadcrumb */}
-            <nav className="flex items-center gap-1.5 mb-4">
+            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
               <Link
                 to="/"
-                className="label-text text-[0.48rem] uppercase tracking-[0.18em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.18em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}
               >
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
               <span
-                className="label-text text-[0.48rem] uppercase tracking-[0.18em]"
+                className="hero-crumb label-text text-label-md uppercase tracking-[0.18em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "الأسئلة الشائعة" : "FAQ"}
@@ -267,7 +267,7 @@ export default function FAQPage() {
                 }}
               />
               <span
-                className="label-text text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                className="label-text text-label-md uppercase tracking-[0.25em] font-bold"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {ui.label}
@@ -435,7 +435,7 @@ export default function FAQPage() {
                 style={{ width: "1.2rem", height: "1.5px", background: "hsl(var(--primary)/0.65)", display: "block" }}
               />
               <span
-                className="label-text text-[0.65rem] uppercase tracking-[0.25em] font-bold"
+                className="label-text text-label-md hero-eyebrow-primary uppercase tracking-[0.25em]"
                 style={{ color: "hsl(var(--primary))" }}
               >
                 {isAr ? "تواصل معنا" : "Get in Touch"}

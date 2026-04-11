@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye, ShieldCheck, Target, type LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
@@ -33,11 +33,24 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-function Label({ text, isAr, center }: { text: string; isAr: boolean; center?: boolean }) {
+function Label({
+  text,
+  isAr,
+  center,
+  spanClassName = "",
+}: {
+  text: string;
+  isAr: boolean;
+  center?: boolean;
+  spanClassName?: string;
+}) {
   return (
     <div className={`flex items-center gap-2.5 mb-3 ${center ? "justify-center" : ""} ${isAr && !center ? "flex-row-reverse justify-end" : isAr ? "flex-row-reverse" : ""}`}>
       <span style={{ width: "1.25rem", height: "1.5px", background: "hsl(var(--primary)/0.65)", display: "block", flexShrink: 0 }} />
-      <span className="label-text text-[0.65rem] uppercase tracking-[0.25em]" style={{ color: "hsl(var(--primary))" }}>
+      <span
+        className={`label-text text-label-md uppercase tracking-[0.25em]${spanClassName ? ` ${spanClassName}` : ""}`}
+        style={{ color: "hsl(var(--primary))" }}
+      >
         {text}
       </span>
     </div>
@@ -50,10 +63,10 @@ export default function AboutPage() {
   const t = translations[language];
   const isAr = isRTL();
 
-  const pillars = [
-    { num: "01", label: t.about.visionLabel,     desc: t.about.visionDescription     },
-    { num: "02", label: t.about.missionLabel,    desc: t.about.missionDescription    },
-    { num: "03", label: t.about.commitmentLabel, desc: t.about.commitmentDescription },
+  const pillars: { num: string; label: string; desc: string; Icon: LucideIcon }[] = [
+    { num: "01", label: t.about.visionLabel,     desc: t.about.visionDescription,     Icon: Eye },
+    { num: "02", label: t.about.missionLabel,    desc: t.about.missionDescription,    Icon: Target },
+    { num: "03", label: t.about.commitmentLabel, desc: t.about.commitmentDescription, Icon: ShieldCheck },
   ];
 
   const factoryStats = [
@@ -83,27 +96,23 @@ export default function AboutPage() {
 
         <div className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14" style={{ minHeight: "260px" }}>
           <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            <nav className={`flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              <Link to="/" className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+            <nav className={`page-hero-breadcrumb flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
+              <Link to="/" className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "rgba(255,255,255,0.32)" }}>
                 {isAr ? "الرئيسية" : "Home"}
               </Link>
               <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span className="label-text text-[0.6rem] uppercase tracking-[0.15em]"
+              <span className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
                 style={{ color: "hsl(var(--primary))" }}>
                 {isAr ? "من نحن" : "About"}
               </span>
             </nav>
 
-            <Label text={t.about.label} isAr={isAr} />
-
-            {/* FIX: unified heading — no split span */}
-            <h1 className="font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200"
-              style={{ fontSize: "clamp(1.6rem, 4vw, 2.6rem)", color: "#fff" }}>
+            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
               {isAr ? "عن صلادة" : "About SALADA"}
             </h1>
 
-            <p className="text-[0.8rem] leading-relaxed animate-fade-up delay-300"
+            <p className="hero-subtitle leading-relaxed animate-fade-up delay-300"
               style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
               {t.about.descP1}
             </p>
@@ -159,27 +168,45 @@ export default function AboutPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-            {pillars.map((p, i) => (
-              <Reveal key={p.num} delay={i * 70}>
-                <div className={`bg-background border border-border p-5 md:p-6 h-full group hover:bg-primary/5 hover:border-primary/40 transition-all duration-300 shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)] ${isAr ? "text-right" : ""}`}>
-                  <div className="h-[2px] w-0 group-hover:w-10 transition-all duration-300 mb-3" style={{ background: "hsl(var(--primary)/0.65)" }} />
-                  <div className="label-text font-black mb-2 leading-none"
-                    style={{ fontSize: "1.5rem", color: "hsl(var(--primary))" }}>
-                    {p.num}
+          <div
+            className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4"
+            dir={isAr ? "rtl" : "ltr"}
+          >
+            {pillars.map((p, i) => {
+              const Icon = p.Icon;
+              return (
+                <Reveal key={p.num} delay={i * 70} className="min-h-0">
+                  <div
+                    dir={isAr ? "rtl" : "ltr"}
+                    className="about-pillar-card group flex h-full min-w-0 w-full flex-col items-start border border-border bg-background p-7 text-start transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.03]"
+                  >
+                    <div
+                      className="mb-5 flex h-12 w-12 shrink-0 items-center justify-center transition-colors duration-300 group-hover:bg-primary/[0.18]"
+                      style={{ background: "hsl(var(--primary)/0.1)" }}
+                    >
+                      <Icon className="h-5 w-5 shrink-0" style={{ color: "hsl(var(--primary))" }} aria-hidden />
+                    </div>
+                    <span
+                      className="mb-2 block font-bold"
+                      style={{
+                        fontSize: "0.65rem",
+                        letterSpacing: "0.2em",
+                        color: "hsl(var(--primary)/0.5)",
+                      }}
+                    >
+                      {p.num}
+                    </span>
+                    <h3 className="about-pillar-title">{p.label}</h3>
+                    <div
+                      className="mb-3 w-8 shrink-0"
+                      style={{ height: "2px", background: "hsl(var(--primary))" }}
+                      aria-hidden
+                    />
+                    <p className="about-pillar-desc">{p.desc}</p>
                   </div>
-                  <div className={`h-px mb-3 transition-all duration-400 group-hover:w-8 ${isAr ? "ml-auto mr-0" : ""}`}
-                    style={{ width: "1.25rem", background: "hsl(var(--primary))" }} />
-                  <p className="text-[0.82rem] mb-2 font-semibold"
-                    style={{ color: "hsl(var(--primary))", letterSpacing: "0.12em" }}>
-                    {p.label}
-                  </p>
-                  <p className="text-[0.9rem] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                    {p.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -244,7 +271,7 @@ export default function AboutPage() {
         <div className="industrial-container relative z-10">
           <div className="max-w-xl mx-auto text-center">
             <Reveal>
-              <Label text={isAr ? "تواصل معنا" : "Work With Us"} isAr={isAr} center />
+              <Label text={isAr ? "تواصل معنا" : "Work With Us"} isAr={isAr} center spanClassName="hero-eyebrow-primary" />
               <h2 className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
                 style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}>
                 {t.about.partnerCTA}
