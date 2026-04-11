@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect, useLayoutEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -23,6 +23,12 @@ export default function ShopPage() {
   const [sortBy, setSortBy] = useState<SortOption>("featured");
   const [searchInput, setSearchInput] = useState(searchParams.get("q") || "");
   const [showPriceFilter, setShowPriceFilter] = useState(false);
+  const [filterBarVisible, setFilterBarVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const filterBarInnerRef = useRef<HTMLDivElement>(null);
+  const [filterBarHeight, setFilterBarHeight] = useState(160);
+  /** Ignore scroll-direction logic while layout height animates (avoids hide/show flicker). */
+  const scrollIgnoreUntilRef = useRef(0);
   const productsRef = useRef<HTMLDivElement>(null);
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
@@ -122,6 +128,77 @@ export default function ShopPage() {
   const isLoading  = productsLoading || categoriesLoading;
   const activeCount = [activeCategory, priceRange, searchQuery].filter(Boolean).length;
 
+  const getScrollY = () =>
+    window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop ?? 0;
+
+  /** Real height so we never clip tabs/search; updates when categories or controls wrap. */
+  useLayoutEffect(() => {
+    const el = filterBarInnerRef.current;
+    if (!el) return;
+    const measure = () => {
+      const h = Math.ceil(el.getBoundingClientRect().height);
+      if (h > 0) setFilterBarHeight(h);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [categories.length, isLoading, language, activeCategory, activeCount, showPriceFilter, viewMode]);
+
+  /** After bar show/hide, document height changes — pause direction detection briefly and reset baseline. */
+  useEffect(() => {
+    scrollIgnoreUntilRef.current = Date.now() + 420;
+    const id = requestAnimationFrame(() => {
+      lastScrollY.current = getScrollY();
+    });
+    return () => cancelAnimationFrame(id);
+  }, [filterBarVisible]);
+
+  /** Hide filter bar after leaving hero; show on clear scroll up. */
+  useEffect(() => {
+    lastScrollY.current = getScrollY();
+    let raf = 0;
+    const hideAllowed = () => getScrollY() > 220;
+
+    const applyScroll = () => {
+      const y = Math.max(0, getScrollY());
+      if (Date.now() < scrollIgnoreUntilRef.current) {
+        lastScrollY.current = y;
+        return;
+      }
+      const prev = lastScrollY.current;
+      const delta = y - prev;
+      lastScrollY.current = y;
+
+      if (!hideAllowed()) {
+        setFilterBarVisible(true);
+        return;
+      }
+      /* Hysteresis: ignore tiny jitter from sub-pixel scroll / compositing */
+      if (delta >= 10) setFilterBarVisible(false);
+      else if (delta <= -6) setFilterBarVisible(true);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(applyScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!filterBarVisible) setShowPriceFilter(false);
+  }, [filterBarVisible]);
+
   const pageTitle = activeCategory
     ? categoryTranslations[activeCategory] || activeCategory.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : t.shop.allProducts;
@@ -217,11 +294,15 @@ export default function ShopPage() {
       </section>
 
       {/* ════════════════════════════════════════
-          STICKY FILTER BAR — categories + price + search
+          STICKY FILTER BAR — categories + price + search (hides on scroll down, reappears on scroll up)
           ════════════════════════════════════════ */}
-      <div className="sticky z-30 border-b border-border shadow-sm"
-        style={{ top: "64px", background: "hsl(var(--background))" }}>
-
+      <div
+        className={`sticky z-30 border-border bg-background top-14 md:top-16 transition-[height,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          filterBarVisible ? "border-b shadow-sm" : "border-b-0 shadow-none pointer-events-none overflow-hidden"
+        } ${filterBarVisible && showPriceFilter ? "overflow-visible" : filterBarVisible ? "overflow-hidden" : ""}`}
+        style={{ height: filterBarVisible ? filterBarHeight : 0 }}
+      >
+        <div ref={filterBarInnerRef} className="bg-background">
         {/* ROW 1 — Search + Price + Sort + View — all same height */}
         <div className="industrial-container py-2.5 border-b border-border" dir={isAr ? "rtl" : "ltr"}>
           <div className="flex items-center gap-2">
@@ -366,6 +447,7 @@ export default function ShopPage() {
               ))}
             </div>
           </div>
+        </div>
         </div>
       </div>
 

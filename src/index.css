@@ -83,10 +83,10 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 37.6 67.1% 42.9%;
 
-    /* Typography */
-    --font-sans: 'Source Sans 3', 'Swiss721BT', sans-serif;
+    /* Typography — Swiss721 reserved for logo / display utility only */
+    --font-sans: 'Source Sans 3', sans-serif;
     --font-display: 'Swiss721BT', sans-serif;
-    --font-body: 'Source Sans 3', 'Swiss721BT', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
 
     /* Spacing */
     --section-gap: 6rem;
@@ -138,19 +138,11 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Source Sans 3', 'Swiss721BT', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-weight: 400;
     font-size: 0.875rem;
     line-height: 1.7;
     color: #424141;
-  }
-
-  [dir="rtl"] body,
-  [dir="rtl"] {
-    font-family: 'HelveticaArabic', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.8;
   }
 
   .stat-number {
@@ -163,20 +155,18 @@
     font-weight: 900;
   }
 
-  [dir="rtl"] .btn-primary,
-  [dir="rtl"] .btn-secondary,
-  [dir="rtl"] .btn-ghost-dark,
-  [dir="rtl"] label,
-  [dir="rtl"] .label,
-  [dir="rtl"] .badge {
-    font-family: 'HelveticaArabic', sans-serif;
-    letter-spacing: 0;
-  }
-
   code,
   pre,
-  .mono {
-    font-family: inherit;
+  .mono,
+  .font-mono {
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  [dir="rtl"] code,
+  [dir="rtl"] pre,
+  [dir="rtl"] .mono,
+  [dir="rtl"] .font-mono {
+    font-family: 'HelveticaArabic', sans-serif !important;
   }
 }
 
@@ -491,13 +481,13 @@
   filter: none;
 }
 
-/* Global typography scale — wins over component utility classes */
+/* Global typography scale — wins over component utility classes (LTR: Source Sans 3) */
 h1 {
   font-size: clamp(1.8rem, 4vw, 3rem) !important;
   font-weight: 700 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.025em !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   color: #424141;
 }
 
@@ -506,24 +496,24 @@ h2 {
   font-weight: 700 !important;
   line-height: 1.15 !important;
   letter-spacing: -0.02em !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   color: #424141;
 }
 
 h3 {
   font-size: clamp(1rem, 1.8vw, 1.25rem) !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   color: #424141;
 }
 
 h4,
 h5,
 h6 {
-  font-family: 'Swiss721BT', sans-serif !important;
-  font-weight: 700 !important;
+  font-family: 'Source Sans 3', sans-serif !important;
+  font-weight: 600 !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em !important;
   color: #424141;
@@ -534,11 +524,12 @@ li {
   font-size: clamp(0.875rem, 1.2vw, 1rem) !important;
   font-weight: 400 !important;
   line-height: 1.75 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 .label-text,
 label {
+  font-family: 'Source Sans 3', sans-serif !important;
   font-size: 0.75rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.15em !important;
@@ -546,8 +537,21 @@ label {
 }
 
 nav a {
+  font-family: 'Source Sans 3', sans-serif !important;
   font-size: 0.875rem !important;
   font-weight: 600 !important;
+}
+
+button,
+label,
+a,
+nav a,
+.btn-primary,
+.btn-secondary,
+.btn-ghost-dark,
+.label-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
 }
 
 .sidebar,
@@ -563,14 +567,57 @@ aside {
   letter-spacing: 0.05em !important;
 }
 
+/* Arabic (RTL) — HelveticaArabic */
+[dir="rtl"],
+[dir="rtl"] * {
+  font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 500;
+}
+
+[dir="rtl"] body {
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+
 [dir="rtl"] h1,
-[dir="rtl"] h2,
+[dir="rtl"] h2 {
+  font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 900;
+}
+
 [dir="rtl"] h3,
 [dir="rtl"] h4,
 [dir="rtl"] h5,
 [dir="rtl"] h6 {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 800;
+}
+
+[dir="rtl"] p,
+[dir="rtl"] li {
+  font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 500;
+  font-size: clamp(0.9375rem, 1.28vw, 1.0625rem) !important;
+  line-height: 1.9 !important;
+}
+
+[dir="rtl"] button,
+[dir="rtl"] label,
+[dir="rtl"] a,
+[dir="rtl"] .btn-primary,
+[dir="rtl"] .btn-secondary,
+[dir="rtl"] .btn-ghost-dark,
+[dir="rtl"] .label-text {
+  font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 600;
+}
+
+[dir="rtl"] .btn-primary,
+[dir="rtl"] .btn-secondary,
+[dir="rtl"] .btn-ghost-dark,
+[dir="rtl"] .label,
+[dir="rtl"] .badge {
+  letter-spacing: 0;
 }
 
 [dir="rtl"] h1 {
@@ -589,22 +636,6 @@ aside {
   font-size: clamp(1rem, 1.8vw, 1.25rem) !important;
   line-height: 1.4 !important;
   letter-spacing: 0 !important;
-}
-
-[dir="rtl"] p,
-[dir="rtl"] li {
-  font-size: clamp(0.875rem, 1.2vw, 1rem) !important;
-  line-height: 1.9 !important;
-}
-
-[dir="rtl"] p,
-[dir="rtl"] li,
-[dir="rtl"] span,
-[dir="rtl"] a,
-[dir="rtl"] label,
-[dir="rtl"] button {
-  font-family: 'HelveticaArabic', sans-serif;
-  font-weight: 400;
 }
 
 /*
@@ -627,6 +658,11 @@ nav.page-hero-breadcrumb span.hero-crumb {
   font-weight: 600 !important;
 }
 
+[dir="rtl"] nav.page-hero-breadcrumb a.hero-crumb,
+[dir="rtl"] nav.page-hero-breadcrumb span.hero-crumb {
+  font-size: 1.1875rem !important;
+}
+
 h1.hero-title-primary {
   color: hsl(var(--primary)) !important;
   font-weight: 700 !important;
@@ -639,7 +675,7 @@ h1.hero-title-primary {
 
 [dir="rtl"] h1.hero-title-primary {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 800 !important;
+  font-weight: 900 !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -651,6 +687,7 @@ p.hero-subtitle {
 
 [dir="rtl"] p.hero-subtitle {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 1.0625rem !important;
 }
 
 /* Home (/) hero copy — global `p, li` and `[dir="rtl"] p` use font-size !important; inline styles cannot override */
@@ -665,6 +702,7 @@ p.home-hero-primary,
 
 [dir="rtl"] p.home-hero-primary {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 900 !important;
 }
 
 p.home-hero-secondary,
@@ -678,6 +716,7 @@ p.home-hero-secondary,
 
 [dir="rtl"] p.home-hero-secondary {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: clamp(1.2rem, 2.45vw, 1.65rem) !important;
 }
 
 /* Home — Vision 2030: LTR uses Source Sans at 600/400 so copy is not “Swiss Black” heavy */
@@ -692,7 +731,7 @@ span.home-vision-eyebrow {
 
 span.home-vision-year {
   font-weight: 700 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] span.home-vision-year {
@@ -702,12 +741,12 @@ span.home-vision-year {
 
 h2.home-vision-title {
   font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   letter-spacing: -0.02em !important;
 }
 
 [dir="rtl"] h2.home-vision-title {
-  font-weight: 800 !important;
+  font-weight: 900 !important;
   font-family: 'HelveticaArabic', sans-serif !important;
 }
 
@@ -718,6 +757,7 @@ p.home-vision-desc {
 
 [dir="rtl"] p.home-vision-desc {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 1.0625rem !important;
 }
 
 a.hero-inline-cta.label-text,
@@ -768,12 +808,13 @@ a.home-solution-card h3.home-solution-card-title,
   text-transform: uppercase !important;
   color: #ffffff !important;
   margin: 0 0 0.5rem 0 !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   transition: color 300ms ease !important;
 }
 
 [dir="rtl"] a.home-solution-card h3.home-solution-card-title {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 900 !important;
 }
 
 a.home-solution-card:hover h3.home-solution-card-title,
@@ -792,11 +833,12 @@ a.home-solution-card p.home-solution-card-desc,
   -webkit-line-clamp: 3 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] a.home-solution-card p.home-solution-card-desc {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 0.875rem !important;
 }
 
 a.home-solution-card .home-solution-card-explore,
@@ -807,7 +849,7 @@ a.home-solution-card .home-solution-card-explore,
   letter-spacing: 0.1em !important;
   color: hsl(var(--primary)) !important;
   margin-top: 0.75rem !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] a.home-solution-card .home-solution-card-explore {
@@ -825,12 +867,13 @@ a.home-solution-card .home-solution-card-explore,
   text-align: start !important;
   color: hsl(var(--foreground)) !important;
   margin: 0 0 0.75rem 0 !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
   transition: color 300ms ease !important;
 }
 
 [dir="rtl"] .about-pillar-card h3.about-pillar-title {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 900 !important;
 }
 
 .about-pillar-card:hover h3.about-pillar-title,
@@ -846,11 +889,12 @@ a.home-solution-card .home-solution-card-explore,
   text-align: start !important;
   color: hsl(var(--muted-foreground)) !important;
   margin: 0 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] .about-pillar-card p.about-pillar-desc {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 0.9375rem !important;
 }
 
 /* Industries page (/industries) — typography scale (overrides global h1/h2/p; breadcrumb uses same scale as About via global .page-hero-breadcrumb rules) */
@@ -876,11 +920,12 @@ p.industries-intro-text,
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   max-width: 600px !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] p.industries-intro-text {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 1.0625rem !important;
 }
 
 h2.industry-card-title,
@@ -890,12 +935,12 @@ h2.industry-card-title,
   line-height: 1.35 !important;
   color: hsl(var(--foreground)) !important;
   letter-spacing: -0.005em !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] h2.industry-card-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 800 !important;
+  font-weight: 900 !important;
 }
 
 p.industry-card-desc,
@@ -905,11 +950,12 @@ p.industry-card-desc,
   line-height: 1.7 !important;
   color: hsl(var(--muted-foreground)) !important;
   margin: 0 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] p.industry-card-desc {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 1rem !important;
 }
 
 section.industries-cta .label-text.hero-eyebrow-primary {
@@ -923,12 +969,12 @@ section.industries-cta h2.industries-cta-title {
   line-height: 1.2 !important;
   letter-spacing: -0.015em !important;
   color: #ffffff !important;
-  font-family: 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] section.industries-cta h2.industries-cta-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 800 !important;
+  font-weight: 900 !important;
 }
 
 section.industries-cta p.industries-cta-desc,
@@ -938,11 +984,12 @@ section.industries-cta p.industries-cta-desc,
   line-height: 1.65 !important;
   color: rgba(255, 255, 255, 0.42) !important;
   margin-top: 0 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] section.industries-cta p.industries-cta-desc {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 0.9375rem !important;
 }
 
 section.industries-page-hero p.industries-hero-lead,
@@ -953,87 +1000,21 @@ section.industries-page-hero p.industries-hero-lead,
   color: rgba(255, 255, 255, 0.45) !important;
   max-width: 36rem !important;
   margin: 0 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+  font-family: 'Source Sans 3', sans-serif !important;
 }
 
 [dir="rtl"] section.industries-page-hero p.industries-hero-lead {
   font-family: 'HelveticaArabic', sans-serif !important;
+  font-size: 1rem !important;
 }
 
-/* English (LTR) — lighter weights; RTL uses rules above / [dir="rtl"] blocks */
-html[dir="ltr"] .label-text {
-  font-weight: 500 !important;
-}
-
-html[dir="ltr"] .font-mono {
-  font-weight: 500 !important;
-}
-
-html[dir="ltr"] a.hero-inline-cta.label-text,
-html[dir="ltr"] a.hero-inline-cta {
-  font-weight: 600 !important;
-}
-
-html[dir="ltr"] .label-text.hero-eyebrow-primary {
-  font-weight: 600 !important;
-}
-
-html[dir="ltr"] .home-cta-eyebrow {
-  font-weight: 600 !important;
-}
-
-html[dir="ltr"] nav a,
-html[dir="ltr"] nav a.label-text {
-  font-weight: 600 !important;
-}
-
+/* Tailwind font-black: cap at 700 so LTR stays within Source Sans loaded weights */
 html[dir="ltr"] span.font-black,
 html[dir="ltr"] div.font-black {
   font-weight: 700 !important;
 }
 
-[dir="rtl"] .btn-primary {
-  font-weight: 700 !important;
-}
-
-/* English (LTR): all headings — same as Vision 2030 title (600 + Source Sans 3); RTL unchanged */
-html[dir="ltr"] h1,
-html[dir="ltr"] h2,
-html[dir="ltr"] h3,
-html[dir="ltr"] h4,
-html[dir="ltr"] h5,
-html[dir="ltr"] h6 {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] a.home-solution-card h3.home-solution-card-title {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] .about-pillar-card h3.about-pillar-title {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] h1.hero-title-primary.industries-hero-h1 {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] h2.industry-card-title {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] section.industries-cta h2.industries-cta-title {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
-}
-
-html[dir="ltr"] .product-title,
-html[dir="ltr"] [class*="product"] h3 {
-  font-weight: 600 !important;
-  font-family: 'Source Sans 3', 'Swiss721BT', sans-serif !important;
+html[dir="rtl"] span.font-black,
+html[dir="rtl"] div.font-black {
+  font-weight: 900 !important;
 }

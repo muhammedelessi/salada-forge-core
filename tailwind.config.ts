@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Source Sans 3", "Swiss721BT", "sans-serif"],
+        sans: ["Source Sans 3", "sans-serif"],
         display: ["Swiss721BT", "sans-serif"],
         arabic: ["HelveticaArabic", "sans-serif"],
+        mono: ["Source Sans 3", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
