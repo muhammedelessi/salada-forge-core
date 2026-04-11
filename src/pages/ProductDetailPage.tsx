@@ -43,8 +43,8 @@ function GoldLabel({ children }: { children: React.ReactNode }) {
 function Pill({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex label-text text-[0.52rem] uppercase tracking-[0.18em] px-2.5 py-1 border border-border"
-      style={{ color: "hsl(var(--muted-foreground))" }}
+      className="inline-flex min-w-0 max-w-full flex-wrap items-center justify-center gap-x-1 border border-border px-2.5 py-1.5 text-center text-[0.62rem] font-semibold uppercase leading-snug tracking-[0.12em] text-muted-foreground [overflow-wrap:anywhere] sm:text-[0.68rem] sm:tracking-[0.14em]"
+      style={{ wordBreak: "break-word" }}
     >
       {children}
     </span>
@@ -139,10 +139,13 @@ export default function ProductDetailPage() {
     "specialty-containers": t.categories.specialtyContainers,
     "drums-barrels": t.categories.drumsBarrels,
     "modular-buildings": t.categories.modularBuildings,
-    "spare-parts": isAr ? "قطع الغيار" : "Spare Parts",
-    "lashing-equipment": isAr ? "معدات الربط" : "Lashing Equipment",
-    "iso-shipping-containers": isAr ? "حاويات شحن ISO" : "ISO Shipping Containers",
-    "storage-containers": isAr ? "حاويات التخزين" : "Storage Containers",
+    "spare-parts": t.categories.spareParts,
+    "lashing-equipment": t.categories.lashingEquipment,
+    "iso-shipping-container": t.categories.isoShipping,
+    "iso-shipping-containers": t.categories.isoShipping,
+    "land-shipping-container": t.categories.landShipping,
+    "land-shipping-containers": t.categories.landShipping,
+    "storage-containers": t.categories.storageContainers,
   };
   const getCat = (id: string) => catLabel[id] || id.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -268,8 +271,8 @@ export default function ProductDetailPage() {
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
                   alt={product.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-                  style={{ filter: "grayscale(8%)" }}
+                  className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-500 hover:scale-[1.03]"
+                  style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
                 />
                 {product.status === "out_of_stock" && (
                   <div className="absolute inset-0 flex items-center justify-center bg-foreground/50">
@@ -300,7 +303,13 @@ export default function ProductDetailPage() {
                       }`}
                       style={{ aspectRatio: "1/1" }}
                     >
-                      <img src={img} alt={`view-${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                      <img
+                        src={img}
+                        alt={`view-${i + 1}`}
+                        loading="lazy"
+                        className="h-full w-full min-h-0 !object-cover object-center"
+                        style={{ objectFit: "cover", objectPosition: "center" }}
+                      />
                     </button>
                   ))}
                 </div>

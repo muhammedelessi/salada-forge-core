@@ -54,7 +54,8 @@ export function StickyAddToCart({
                 decoding="async"
                 width={48}
                 height={48}
-                className="w-full h-full object-cover max-w-full"
+                className="h-full w-full max-w-full min-h-0 !object-cover object-center"
+                style={{ objectFit: "cover", objectPosition: "center" }}
               />
             </div>
             <div className="min-w-0">

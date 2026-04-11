@@ -46,7 +46,8 @@ export default function ShopPage() {
     "lashing-equipment":       t.categories.lashingEquipment  || (isAr ? "معدات الربط"        : "Lashing Equipment"),
     "iso-shipping-container":  t.categories.isoShipping       || (isAr ? "حاويات شحن ISO"     : "ISO Shipping Container"),
     "iso-shipping-containers": t.categories.isoShipping       || (isAr ? "حاويات شحن ISO"     : "ISO Shipping Containers"),
-    "land-shipping-container": t.categories.landShipping      || (isAr ? "حاويات الشحن البري" : "Land Shipping Container"),
+    "land-shipping-container":  t.categories.landShipping      || (isAr ? "حاويات الشحن البري" : "Land Shipping Container"),
+    "land-shipping-containers": t.categories.landShipping       || (isAr ? "حاويات الشحن البري" : "Land Shipping Containers"),
     "storage-containers":      t.categories.storageContainers || (isAr ? "حاويات التخزين"     : "Storage Containers"),
   };
 
@@ -337,16 +338,28 @@ export default function ShopPage() {
               </button>
 
               {categories.map((cat) => (
-                <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
-                  className="px-4 py-3 font-medium whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryChange(cat.id)}
+                  type="button"
+                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap border-b-2 px-4 py-3 font-medium transition-colors duration-150"
                   style={{
                     fontSize: "0.95rem",
                     borderColor: activeCategory === cat.id ? "hsl(var(--primary))" : "transparent",
                     color: activeCategory === cat.id ? "hsl(var(--primary))" : "hsl(var(--foreground)/0.65)",
-                  }}>
-                  {categoryTranslations[cat.id] || cat.name}
-                  <span className="ms-1.5"
-                    style={{ fontSize: "0.75rem", color: "hsl(var(--muted-foreground)/0.5)" }}>
+                  }}
+                >
+                  <span className="min-w-0" dir="auto">
+                    {categoryTranslations[cat.id] || cat.name}
+                  </span>
+                  <span
+                    className="inline-flex shrink-0 select-none tabular-nums rounded px-1.5 py-0.5 text-[0.75rem] leading-none [unicode-bidi:isolate]"
+                    dir="ltr"
+                    style={{
+                      color: "hsl(var(--muted-foreground)/0.75)",
+                      background: "hsl(var(--muted) / 0.35)",
+                    }}
+                  >
                     {cat.count}
                   </span>
                 </button>

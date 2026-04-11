@@ -15,6 +15,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   const t = translations[language];
   const isAr = isRTL();
 
+  /** Align category slugs with ShopPage / DB — includes singular `iso-shipping-container` for Arabic */
   const categoryTranslations: Record<string, string> = {
     "shipping-containers": t.categories.shippingContainers,
     "storage-tanks": t.categories.storageTanks,
@@ -22,13 +23,21 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
     "specialty-containers": t.categories.specialtyContainers,
     "drums-barrels": t.categories.drumsBarrels,
     "modular-buildings": t.categories.modularBuildings,
-    "spare-parts": language === "ar" ? "قطع الغيار" : "Spare Parts",
-    "lashing-equipment": language === "ar" ? "معدات الربط" : "Lashing Equipment",
-    "iso-shipping-containers": language === "ar" ? "حاويات ISO" : "ISO Containers",
-    "storage-containers": language === "ar" ? "حاويات التخزين" : "Storage Containers",
+    "spare-parts": t.categories.spareParts,
+    "lashing-equipment": t.categories.lashingEquipment,
+    "iso-shipping-container": t.categories.isoShipping,
+    "iso-shipping-containers": t.categories.isoShipping,
+    "land-shipping-container": t.categories.landShipping,
+    "land-shipping-containers": t.categories.landShipping,
+    "storage-containers": t.categories.storageContainers,
   };
 
   const categoryLabel = categoryTranslations[product.category] || product.category.replace(/-/g, " ");
+
+  const plainDescription = (product.description ?? "")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
   const contactLabel = language === "ar" ? "تواصل معنا" : "Request a Quote";
   const viewLabel = language === "ar" ? "عرض المنتج" : "View Product";
@@ -43,15 +52,15 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       >
         {/* Fixed square image */}
         <div
-          className="relative overflow-hidden shrink-0 bg-secondary"
-          style={{ width: "96px", minWidth: "96px", height: "96px" }}
+          className="relative shrink-0 overflow-hidden bg-secondary"
+          style={{ width: "80px", minWidth: "80px", height: "80px" }}
         >
           <img
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-            style={{ filter: "grayscale(8%)" }}
+            className="h-full w-full !object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
+            style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
           />
           {product.status === "out_of_stock" && (
             <div
@@ -67,29 +76,34 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
 
         {/* Content */}
         <div
-          className={`flex flex-col justify-center flex-1 min-w-0 px-4 py-3 border-s border-border ${isAr ? "text-right" : ""}`}
+          className="flex min-w-0 flex-1 flex-col justify-center border-s border-border px-2.5 py-2 text-start"
         >
           <span
-            className="block label-text text-label-md uppercase tracking-[0.2em] mb-1"
-            style={{ color: "hsl(var(--primary)/0.6)" }}
+            className="mb-0.5 block text-[0.64rem] font-medium uppercase leading-tight sm:text-[0.68rem]"
+            style={{ color: "hsl(var(--primary) / 0.85)", letterSpacing: "0.1em" }}
           >
             {categoryLabel}
           </span>
-          <h3 className="text-[0.82rem] font-bold uppercase tracking-tight leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-200 mb-1">
+          <h3 className="mb-0.5 line-clamp-2 text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary sm:text-[0.82rem]">
             {product.title}
           </h3>
-          <span
-            className="label-text text-label-md uppercase tracking-[0.15em]"
-            style={{ color: "hsl(var(--muted-foreground)/0.5)" }}
-          >
+          {plainDescription ? (
+            <p
+              className="mb-0.5 line-clamp-1 text-[0.64rem] font-normal leading-snug text-muted-foreground/80 [overflow-wrap:anywhere]"
+              style={{ wordBreak: "break-word" }}
+            >
+              {plainDescription}
+            </p>
+          ) : null}
+          <span className="text-[0.6rem] font-medium uppercase tracking-[0.09em] text-muted-foreground/60">
             {product.sku}
           </span>
         </div>
 
         {/* Arrow */}
-        <div className="flex items-center px-3 shrink-0">
+        <div className="flex shrink-0 items-center px-2">
           <ArrowUpRight
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            className="h-3.5 w-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             style={{ color: "hsl(var(--primary))" }}
           />
         </div>
@@ -97,36 +111,20 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
     );
   }
 
-  /* ── DEFAULT variant ── */
+  /* ── DEFAULT variant — dense grid: shorter image, tight copy, one-line teaser ── */
   return (
-    <div className="group border border-border bg-background transition-all duration-300 hover:border-primary">
-      {/* Image block */}
-      <Link to={`/product/${product.slug}`} className="block relative overflow-hidden">
-        <div className="bg-secondary overflow-hidden" style={{ aspectRatio: "4/3" }}>
+    <div className="group border border-border bg-background transition-colors duration-200 hover:border-primary/50">
+      {/* Image block — aspect 5:3; image always fills frame (cover, not contain) */}
+      <Link to={`/product/${product.slug}`} className="relative block overflow-hidden">
+        <div className="overflow-hidden bg-secondary dark:bg-secondary/80" style={{ aspectRatio: "5 / 3" }}>
           <img
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-600 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]"
-            style={{ filter: "grayscale(10%)", transition: "transform .6s cubic-bezier(.16,1,.3,1), filter .6s ease" }}
+            className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+            style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(5%)" }}
           />
         </div>
-
-        {/* Gold accent bar — slides in from left on hover */}
-        <div
-          className="absolute bottom-0 h-px bg-primary transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)]"
-          style={{ width: "0", left: isAr ? "auto" : 0, right: isAr ? 0 : "auto" }}
-          ref={(el) => {
-            if (!el) return;
-            const card = el.closest(".group")!;
-            card.addEventListener("mouseenter", () => {
-              el.style.width = "100%";
-            });
-            card.addEventListener("mouseleave", () => {
-              el.style.width = "0";
-            });
-          }}
-        />
 
         {/* Out of stock badge */}
         {product.status === "out_of_stock" && (
@@ -141,88 +139,70 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         )}
 
         {/* Hover overlay — two action buttons */}
-        <div
-          className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{ background: "hsl(var(--background)/0.82)" }}
-        >
+        <div className="pointer-events-none absolute inset-0 flex flex-wrap items-center justify-center gap-2 bg-background/88 p-2 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100 sm:gap-2.5">
           <Link
             to={`/inquiry/${product.slug}`}
             onClick={(e) => e.stopPropagation()}
             className={cn(
-              "pointer-events-auto inline-flex items-center gap-2 px-4 py-2.5",
+              "pointer-events-auto inline-flex items-center gap-1.5 px-3 py-2",
               "bg-primary text-primary-foreground",
-              "label-text text-label-md uppercase tracking-[0.18em] font-700",
-              "transition-all duration-200 hover:opacity-90",
+              "text-[0.65rem] font-bold uppercase tracking-[0.14em] sm:text-[0.68rem]",
+              "transition-opacity duration-200 hover:opacity-90",
               isAr ? "flex-row-reverse" : "",
             )}
           >
-            <MessageSquare className="w-3.5 h-3.5" />
+            <MessageSquare className="h-3 w-3 shrink-0" />
             {contactLabel}
           </Link>
           <Link
             to={`/product/${product.slug}`}
             className={cn(
-              "pointer-events-auto inline-flex items-center gap-2 px-4 py-2.5",
+              "pointer-events-auto inline-flex items-center gap-1.5 px-3 py-2",
               "border border-foreground text-foreground",
-              "label-text text-label-md uppercase tracking-[0.18em]",
-              "transition-all duration-200 hover:bg-foreground hover:text-background",
+              "text-[0.65rem] font-semibold uppercase tracking-[0.12em] sm:text-[0.68rem]",
+              "transition-colors duration-200 hover:bg-foreground hover:text-background",
               isAr ? "flex-row-reverse" : "",
             )}
           >
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="h-3 w-3 shrink-0" />
             {viewLabel}
           </Link>
         </div>
       </Link>
 
-      {/* Card content */}
-      <div className={`p-5 ${isAr ? "text-right" : ""}`}>
-        {/* Category + SKU row */}
-        <div className={`flex items-center justify-between mb-2 ${isAr ? "flex-row-reverse" : ""}`}>
-          <span className="label-text text-label-md uppercase tracking-[0.15em] text-primary/60">{categoryLabel}</span>
-          <span className="label-text text-label-md uppercase tracking-[0.15em] text-muted-foreground/50">
-            {product.sku}
-          </span>
-        </div>
+      {/* Card copy — logical start: RTL Arabic / LTR English (not centered) */}
+      <div className="px-3 pb-3 pt-3 text-start sm:px-4 sm:pb-3.5 sm:pt-3.5" dir={isAr ? "rtl" : "ltr"}>
+        <p
+          className="mb-1.5 w-full text-[0.64rem] font-medium uppercase leading-tight sm:text-[0.66rem]"
+          style={{ color: "hsl(var(--primary) / 0.9)", letterSpacing: "0.07em" }}
+        >
+          {categoryLabel}
+        </p>
 
-        {/* Title */}
-        <Link to={`/product/${product.slug}`}>
-          <h3 className="text-sm font-bold uppercase tracking-tight leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-200 mb-4">
+        <Link
+          to={`/product/${product.slug}`}
+          className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
+        >
+          <h3 className="w-full text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 line-clamp-2 group-hover:text-primary sm:text-[0.82rem]">
             {product.title}
           </h3>
         </Link>
 
-        {/* Divider */}
-        <div className="h-px bg-border mb-4" />
-
-        {/* CTA row */}
-        <div className={`flex items-center justify-between ${isAr ? "flex-row-reverse" : ""}`}>
-          <Link
-            to={`/inquiry/${product.slug}`}
-            className={cn(
-              "inline-flex items-center gap-1.5",
-              "label-text text-label-md uppercase tracking-[0.15em] font-700",
-              "text-primary hover:text-foreground transition-colors duration-200",
-              isAr ? "flex-row-reverse" : "",
-            )}
+        {plainDescription ? (
+          <p
+            className="mt-1.5 w-full text-[0.68rem] font-normal leading-snug text-muted-foreground/85 line-clamp-1 [overflow-wrap:anywhere]"
+            style={{ wordBreak: "break-word" }}
           >
-            <MessageSquare className="w-3 h-3" />
-            {contactLabel}
-          </Link>
+            {plainDescription}
+          </p>
+        ) : null}
 
-          <Link
-            to={`/product/${product.slug}`}
-            className={cn(
-              "inline-flex items-center gap-1",
-              "label-text text-label-md uppercase tracking-[0.15em]",
-              "text-muted-foreground hover:text-primary transition-colors duration-200",
-              isAr ? "flex-row-reverse" : "",
-            )}
-          >
-            {viewLabel}
-            <ArrowUpRight className="w-3 h-3" />
-          </Link>
-        </div>
+        <p
+          className="mt-1.5 w-full text-[0.58rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground/65"
+          aria-label="SKU"
+        >
+          {product.sku}
+        </p>
       </div>
     </div>
   );
