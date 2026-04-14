@@ -437,7 +437,7 @@ export function Header() {
                     <Link
                       to={link.href}
                       className={cn(
-                        "relative flex items-center gap-1 py-2",
+                        "relative flex items-center gap-1 py-2 nav-link-hover",
                         "text-[0.8rem] tracking-[0.05em]",
                         "transition-colors duration-150 group",
                         active ? "text-primary font-bold" : "text-foreground font-semibold hover:text-primary",
@@ -455,10 +455,7 @@ export function Header() {
                       )}
                       {/* active underline */}
                       {active && <span className="absolute -bottom-1 inset-x-0 h-[2px] bg-primary" />}
-                      {/* hover underline */}
-                      {!active && (
-                        <span className="absolute -bottom-1 ltr:left-0 rtl:right-0 h-[2px] bg-primary transition-all duration-150 w-0 group-hover:w-full" />
-                      )}
+                      {/* hover underline handled by nav-link-hover pseudo element */}
                     </Link>
                   </div>
                 );

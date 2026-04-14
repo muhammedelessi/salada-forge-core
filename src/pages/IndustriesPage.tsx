@@ -176,7 +176,7 @@ export default function IndustriesPage() {
             <Reveal key={ind.id} delay={i * 60}>
               <div
                 id={ind.id}
-                className="group border-b border-border last:border-b-0 transition-all duration-300 hover:bg-primary/5"
+                className="group border-b border-border last:border-b-0 subtle-card-hover hover:bg-primary/5"
               >
                 <div className="flex items-stretch gap-0">
                   {/* Number */}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Product } from "@/types";
 import { ArrowUpRight, MessageSquare } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
@@ -14,6 +14,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
   const isAr = isRTL();
+  const navigate = useNavigate();
 
   /** Align category slugs with ShopPage / DB — includes singular `iso-shipping-container` for Arabic */
   const categoryTranslations: Record<string, string> = {
@@ -59,7 +60,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="h-full w-full !object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
+            className="h-full w-full !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
           />
           {product.status === "out_of_stock" && (
@@ -113,7 +114,19 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
 
   /* ── DEFAULT variant — dense grid: shorter image, tight copy, one-line teaser ── */
   return (
-    <div className="group border border-border bg-background transition-colors duration-200 hover:border-primary/50">
+    <div
+      className="group cursor-pointer border border-border bg-background transition-colors duration-200 hover:border-primary/50"
+      onClick={() => navigate(`/product/${product.slug}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          navigate(`/product/${product.slug}`);
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      aria-label={isAr ? `عرض المنتج ${product.title}` : `View product ${product.title}`}
+    >
       {/* Image block — aspect 5:3; image always fills frame (cover, not contain) */}
       <Link to={`/product/${product.slug}`} className="relative block overflow-hidden">
         <div className="overflow-hidden bg-secondary dark:bg-secondary/80" style={{ aspectRatio: "5 / 3" }}>
@@ -121,7 +134,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             src={product.images[0]}
             alt={product.title}
             loading="lazy"
-            className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+            className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(5%)" }}
           />
         </div>

@@ -295,7 +295,7 @@ export default function SolutionsPage() {
                       <Link
                         key={product.id}
                         to={`/product/${product.slug}`}
-                        className="group border border-border hover:border-primary transition-colors duration-200 bg-background"
+                        className="group border border-border subtle-card-hover hover:border-primary bg-background"
                       >
                         <div className="aspect-square overflow-hidden bg-secondary">
                           {product.images?.[0] && (

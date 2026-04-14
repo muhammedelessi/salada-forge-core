@@ -108,7 +108,7 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group relative border border-border hover:border-primary/50 bg-background transition-all duration-300 h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.1)] ${isAr ? "text-right" : "text-left"}`}
+      className={`group relative border border-border subtle-card-hover hover:border-primary/50 bg-background transition-all duration-300 h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.1)] ${isAr ? "text-right" : "text-left"}`}
       dir={isAr ? "rtl" : "ltr"}
     >
       <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

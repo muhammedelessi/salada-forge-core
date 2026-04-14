@@ -117,6 +117,11 @@ export default function ProductDetailPage() {
   const { language } = useLanguageStore();
   const t = translations[language];
   const isAr = language === "ar";
+  const hideShipping = ["land-shipping-container", "storage-containers", "iso-shipping-container"].includes(
+    product?.category || "",
+  );
+  const warrantyTitle = hideShipping ? (isAr ? "الضمان" : "WARRANTY") : t.productDetail.warranty;
+  const warrantySubText = hideShipping ? (isAr ? "ضمان 10 سنوات" : "10 Years Warranty") : t.productDetail.yearStandard;
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(undefined);
@@ -192,8 +197,8 @@ export default function ProductDetailPage() {
   ];
 
   const trustBadges = [
-    { Icon: Truck, title: t.productDetail.freeShipping, sub: t.productDetail.ordersOver },
-    { Icon: Shield, title: t.productDetail.warranty, sub: t.productDetail.yearStandard },
+    ...(!hideShipping ? [{ Icon: Truck, title: t.productDetail.freeShipping, sub: t.productDetail.ordersOver }] : []),
+    { Icon: Shield, title: warrantyTitle, sub: warrantySubText },
     { Icon: RotateCcw, title: t.productDetail.returnsTitle, sub: t.productDetail.dayPolicy },
   ];
 
@@ -271,8 +276,9 @@ export default function ProductDetailPage() {
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
                   alt={product.title}
-                  className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-500 hover:scale-[1.03]"
-                  style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
+                  className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
+                  style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
+                  title={isAr ? "تكبير الصورة" : "Zoom image"}
                 />
                 {product.status === "out_of_stock" && (
                   <div className="absolute inset-0 flex items-center justify-center bg-foreground/50">
@@ -469,7 +475,9 @@ export default function ProductDetailPage() {
             {activeTab === "shipping" && (
               <div className="grid sm:grid-cols-3 gap-3">
                 {[
-                  { title: t.productDetail.freeShippingOver, desc: t.productDetail.freeShippingDesc },
+                  ...(!hideShipping
+                    ? [{ title: t.productDetail.freeShippingOver, desc: t.productDetail.freeShippingDesc }]
+                    : []),
                   { title: t.productDetail.worldwideDelivery, desc: t.productDetail.worldwideDeliveryDesc },
                   { title: t.productDetail.estimatedDelivery, desc: t.productDetail.estimatedDeliveryDesc },
                 ].map((item, i) => (

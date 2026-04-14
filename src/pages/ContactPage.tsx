@@ -188,7 +188,7 @@ export default function ContactPage() {
             {contactItems.map((item) => {
               const Content = (
                 <div
-                  className="h-full border border-border p-5 text-start transition-colors duration-200 hover:border-primary/40"
+                  className="h-full border border-border p-5 text-start contact-card-hover"
                   style={{ background: "hsl(var(--background))" }}
                 >
                   <div
@@ -394,7 +394,7 @@ export default function ContactPage() {
                   <Link
                     key={lnk.href}
                     to={lnk.href}
-                    className="flex items-center justify-between py-3 border-b border-border group hover:text-primary transition-colors duration-200"
+                    className="flex items-center justify-between py-3 border-b border-border group quick-link-hover"
                     style={{ color: "hsl(var(--foreground)/0.7)", fontSize: "0.8rem", fontWeight: 500 }}
                   >
                     {lnk.label}
