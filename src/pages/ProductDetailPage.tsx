@@ -139,6 +139,35 @@ export default function ProductDetailPage() {
     setSelectedImage(0);
   }, [slug]);
 
+  // ── SEO: set <title> + meta description from localized fields ──
+  useEffect(() => {
+    if (!product) return;
+    const seoTitleAr = product.seoTitleAr?.trim();
+    const seoTitleEn = product.seoTitle?.trim();
+    const titleAr = product.titleAr?.trim();
+    const titleEn = product.title?.trim();
+    const seoDescAr = product.seoDescriptionAr?.trim();
+    const seoDescEn = product.seoDescription?.trim();
+    const descAr = product.descriptionAr?.trim();
+    const descEn = product.description?.trim();
+
+    const finalTitle =
+      (isAr ? seoTitleAr || titleAr : seoTitleEn || titleEn) ||
+      seoTitleEn ||
+      titleEn ||
+      "Salada";
+    const finalDesc = (isAr ? seoDescAr || descAr : seoDescEn || descEn) || seoDescEn || descEn || "";
+
+    document.title = finalTitle;
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    if (finalDesc) meta.content = finalDesc.slice(0, 160);
+  }, [product, isAr]);
+
   const catLabel: Record<string, string> = {
     "shipping-containers": t.categories.shippingContainers,
     "storage-tanks": t.categories.storageTanks,
