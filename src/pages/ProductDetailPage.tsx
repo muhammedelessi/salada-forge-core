@@ -19,6 +19,7 @@ import {
 import { ProductVariant } from "@/types";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
+import { useLocalizedField } from "@/hooks/useLocalizedField";
 
 // ─── Shared micro-components ──────────────────────────────────────
 
