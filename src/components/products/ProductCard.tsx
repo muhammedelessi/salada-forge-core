@@ -41,7 +41,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
 
   const categoryLabel = categoryTranslations[product.category] || product.category.replace(/-/g, " ");
 
-  const plainDescription = (product.description ?? "")
+  const plainDescription = localizedDescription
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
