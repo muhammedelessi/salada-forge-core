@@ -10,6 +10,9 @@ export interface Product {
   subcategory?: string;
   images: string[];
   specifications: ProductSpecification[];
+  /** Raw nested specifications object (e.g. { external, internal, door, capacity }) when
+   *  stored as an object in the DB. Null when stored as an array (use `specifications`). */
+  rawSpecifications?: Record<string, any> | null;
   variants: ProductVariant[];
   stock: number;
   status: 'active' | 'draft' | 'out_of_stock';

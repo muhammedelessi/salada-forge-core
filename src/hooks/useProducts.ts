@@ -68,6 +68,7 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     subcategory: dbProduct.subcategory || undefined,
     images: dbProduct.images || ["/placeholder.svg"],
     specifications: parseSpecifications(dbProduct.specifications),
+    rawSpecifications: parseRawSpecifications(dbProduct.specifications),
     variants: Array.isArray(dbProduct.variants) ? dbProduct.variants : [],
     stock: dbProduct.stock,
     status: (dbProduct.status as "active" | "draft" | "out_of_stock") || "active",

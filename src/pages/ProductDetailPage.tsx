@@ -228,12 +228,9 @@ export default function ProductDetailPage() {
   ];
 
   // ── Nested specs detection (supports both shapes) ──
-  // New shape: specifications is an object with { external, internal, door, capacity, size, type, ... }
+  // New shape: rawSpecifications is an object with { external, internal, door, capacity, ... }
   // Existing shape: specifications is an array of { label, value }
-  // The mapper currently coerces non-arrays to [], so read raw from underlying source if needed.
-  const rawSpecs = (product as unknown as { specifications: unknown }).specifications;
-  const nestedSpecs: Record<string, any> | null =
-    rawSpecs && typeof rawSpecs === "object" && !Array.isArray(rawSpecs) ? (rawSpecs as Record<string, any>) : null;
+  const nestedSpecs: Record<string, any> | null = product.rawSpecifications ?? null;
 
   const dimGroups: { key: "external" | "internal" | "door"; labelKey: keyof (typeof t)["products"] }[] = [
     { key: "external", labelKey: "external_dimensions" },
