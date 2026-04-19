@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Product } from "@/types";
 import { ArrowUpRight, MessageSquare } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
+import { useLocalizedField } from "@/hooks/useLocalizedField";
 import { translations } from "@/i18n/translations";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +16,11 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   const t = translations[language];
   const isAr = isRTL();
   const navigate = useNavigate();
+  const { getField } = useLocalizedField();
+
+  const localizedTitle = getField(product, "title") ?? product.title;
+  const localizedDescription = getField(product, "description") ?? "";
+  const tags = Array.isArray(product.tags) ? product.tags.filter((tg) => tg && tg.trim().length > 0) : [];
 
   /** Align category slugs with ShopPage / DB — includes singular `iso-shipping-container` for Arabic */
   const categoryTranslations: Record<string, string> = {
