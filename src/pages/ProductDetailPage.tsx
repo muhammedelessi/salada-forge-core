@@ -19,6 +19,7 @@ import {
 import { ProductVariant } from "@/types";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
+import { useLocalizedField } from "@/hooks/useLocalizedField";
 
 // ─── Shared micro-components ──────────────────────────────────────
 
@@ -117,6 +118,7 @@ export default function ProductDetailPage() {
   const { language } = useLanguageStore();
   const t = translations[language];
   const isAr = language === "ar";
+  const { getField, getJsonField } = useLocalizedField();
   const hideShipping = ["land-shipping-container", "storage-containers", "iso-shipping-container"].includes(
     product?.category || "",
   );
@@ -136,6 +138,35 @@ export default function ProductDetailPage() {
     window.scrollTo(0, 0);
     setSelectedImage(0);
   }, [slug]);
+
+  // ── SEO: set <title> + meta description from localized fields ──
+  useEffect(() => {
+    if (!product) return;
+    const seoTitleAr = product.seoTitleAr?.trim();
+    const seoTitleEn = product.seoTitle?.trim();
+    const titleAr = product.titleAr?.trim();
+    const titleEn = product.title?.trim();
+    const seoDescAr = product.seoDescriptionAr?.trim();
+    const seoDescEn = product.seoDescription?.trim();
+    const descAr = product.descriptionAr?.trim();
+    const descEn = product.description?.trim();
+
+    const finalTitle =
+      (isAr ? seoTitleAr || titleAr : seoTitleEn || titleEn) ||
+      seoTitleEn ||
+      titleEn ||
+      "Salada";
+    const finalDesc = (isAr ? seoDescAr || descAr : seoDescEn || descEn) || seoDescEn || descEn || "";
+
+    document.title = finalTitle;
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    if (finalDesc) meta.content = finalDesc.slice(0, 160);
+  }, [product, isAr]);
 
   const catLabel: Record<string, string> = {
     "shipping-containers": t.categories.shippingContainers,
@@ -190,6 +221,14 @@ export default function ProductDetailPage() {
 
   const related = allProducts.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
+  // ── Localized fields (fallback to base/English when Arabic empty) ──
+  const localizedTitle = getField(product, "title") ?? product.title;
+  const localizedDescription = getField(product, "description") ?? "";
+  const localizedSeoTitle = getField(product, "seoTitle");
+  const localizedSeoDescription = getField(product, "seoDescription");
+  const localizedKeyFeatures = getJsonField<string>(product, "keyFeatures");
+  const localizedIdealFor = getJsonField<string>(product, "idealFor");
+
   const tabs = [
     { id: "specs" as const, label: t.productDetail.specifications },
     { id: "shipping" as const, label: t.productDetail.shipping },
@@ -205,17 +244,78 @@ export default function ProductDetailPage() {
   const infoBlocks = [
     {
       title: t.productDetail.idealFor,
-      items: product.idealFor?.length ? product.idealFor : t.productDetail.defaultIdealFor,
+      items: localizedIdealFor.length ? localizedIdealFor : t.productDetail.defaultIdealFor,
     },
     {
       title: t.productDetail.keyFeatures,
-      items: product.keyFeatures?.length ? product.keyFeatures : t.productDetail.defaultKeyFeatures,
+      items: localizedKeyFeatures.length ? localizedKeyFeatures : t.productDetail.defaultKeyFeatures,
     },
     {
       title: t.productDetail.customization,
       items: product.customizationOptions?.length ? product.customizationOptions : t.productDetail.defaultCustomization,
     },
   ];
+
+  // ── Nested specs detection (supports both shapes) ──
+  // New shape: rawSpecifications is an object with { external, internal, door, capacity, ... }
+  // Existing shape: specifications is an array of { label, value }
+  const nestedSpecs: Record<string, any> | null = product.rawSpecifications ?? null;
+
+  const dimGroups: { key: "external" | "internal" | "door"; labelKey: keyof (typeof t)["products"] }[] = [
+    { key: "external", labelKey: "external_dimensions" },
+    { key: "internal", labelKey: "internal_dimensions" },
+    { key: "door", labelKey: "door_sizes" },
+  ];
+  const dimSubLabels: Record<string, keyof (typeof t)["products"]> = {
+    length: "length",
+    width: "width",
+    height: "height",
+  };
+  const capacitySubLabels: Record<string, keyof (typeof t)["products"]> = {
+    cubic_volume: "cubic_volume",
+    empty_weight: "empty_weight",
+    load_capacity: "load_capacity",
+    total_weight: "total_weight",
+  };
+
+  const renderNestedDim = (groupKey: "external" | "internal" | "door"): React.ReactNode => {
+    const group = nestedSpecs?.[groupKey];
+    if (!group || typeof group !== "object") return null;
+    const entries = Object.entries(group).filter(
+      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    );
+    if (entries.length === 0) return null;
+    return entries.map(([k, v]) => {
+      const labelKey = dimSubLabels[k];
+      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
+    });
+  };
+
+  const renderCapacity = (): React.ReactNode => {
+    const cap = nestedSpecs?.capacity;
+    if (!cap || typeof cap !== "object") return null;
+    const entries = Object.entries(cap).filter(
+      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    );
+    if (entries.length === 0) return null;
+    return entries.map(([k, v]) => {
+      const labelKey = capacitySubLabels[k];
+      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
+    });
+  };
+
+  const hasNestedSpecsContent =
+    !!nestedSpecs &&
+    (dimGroups.some((g) => {
+      const grp = nestedSpecs[g.key];
+      return grp && typeof grp === "object" && Object.values(grp).some((v) => v != null && String(v).trim() !== "");
+    }) ||
+      (nestedSpecs.capacity &&
+        typeof nestedSpecs.capacity === "object" &&
+        Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "")));
+
 
   // ── NOTE: All RTL is handled via dir="rtl" on wrappers.
   //    Flexbox, text-align, borders all flip automatically.
@@ -233,7 +333,7 @@ export default function ProductDetailPage() {
               { label: isAr ? "الرئيسية" : "Home", href: "/" },
               { label: t.nav.shop, href: "/shop" },
               { label: getCat(product.category), href: `/shop?category=${product.category}` },
-              { label: product.title },
+              { label: localizedTitle },
             ].map((item, i) => (
               <li key={i} className="flex items-center gap-1">
                 {i > 0 && <ChevronRight className="w-3 h-3 shrink-0 text-border rtl:rotate-180" />}
@@ -275,7 +375,7 @@ export default function ProductDetailPage() {
               >
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
-                  alt={product.title}
+                  alt={localizedTitle}
                   className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
                   style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
                   title={isAr ? "تكبير الصورة" : "Zoom image"}
@@ -311,7 +411,7 @@ export default function ProductDetailPage() {
                     >
                       <img
                         src={img}
-                        alt={`view-${i + 1}`}
+                        alt={`${localizedTitle} - ${i + 1}`}
                         loading="lazy"
                         className="h-full w-full min-h-0 !object-cover object-center"
                         style={{ objectFit: "cover", objectPosition: "center" }}
@@ -335,8 +435,40 @@ export default function ProductDetailPage() {
                 className="font-black uppercase leading-tight tracking-[-0.025em] mb-4 text-foreground"
                 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.6rem)" }}
               >
-                {product.title}
+                {localizedTitle}
               </h1>
+
+              {/* Tags — only render if present */}
+              {Array.isArray(product.tags) && product.tags.filter((tg) => tg && tg.trim()).length > 0 && (
+                <div className="mb-4 flex flex-wrap gap-1.5 rtl:justify-end">
+                  {product.tags
+                    .filter((tg) => tg && tg.trim())
+                    .map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center border border-border px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
+              )}
+
+              {/* Material badge — only if material is set */}
+              {product.material && product.material.trim() ? (
+                <div className="mb-4 flex flex-wrap gap-1.5 rtl:justify-end">
+                  <span
+                    className="inline-flex items-center border px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em]"
+                    style={{
+                      borderColor: "hsl(var(--primary)/0.3)",
+                      background: "hsl(var(--primary)/0.06)",
+                      color: "hsl(var(--primary))",
+                    }}
+                  >
+                    {t.products.material}: {product.material}
+                  </span>
+                </div>
+              ) : null}
 
               {/* Pricing callout */}
               <div
@@ -352,8 +484,10 @@ export default function ProductDetailPage() {
                 </p>
               </div>
 
-              {/* Description */}
-              <p className="text-sm leading-relaxed text-muted-foreground mb-6">{product.description}</p>
+              {/* Description — only render if present */}
+              {localizedDescription ? (
+                <p className="text-sm leading-relaxed text-muted-foreground mb-6">{localizedDescription}</p>
+              ) : null}
 
               {/* Variants */}
               {product.variants && product.variants.length > 1 && (
@@ -457,19 +591,69 @@ export default function ProductDetailPage() {
 
           {/* Tab content */}
           <div className="py-8" dir={isAr ? "rtl" : "ltr"}>
-            {/* SPECS — cards grid */}
-            {activeTab === "specs" &&
-              (product.specifications?.length ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                  {product.specifications.map((s, i) => (
-                    <SpecCard key={i} label={s.label} value={s.value} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground py-2 rtl:text-right">
-                  {isAr ? "لا توجد مواصفات متاحة" : "No specifications available"}
-                </p>
-              ))}
+            {/* SPECS — supports nested {external,internal,door,capacity} OR flat [{label,value}] */}
+            {activeTab === "specs" && (
+              <>
+                {hasNestedSpecsContent ? (
+                  <div className="space-y-7">
+                    {/* Section heading */}
+                    <h2 className="label-text text-[0.6rem] uppercase tracking-[0.2em] text-primary">
+                      {t.products.technical_specifications}
+                    </h2>
+
+                    {/* Dimension groups */}
+                    {dimGroups.map((g) => {
+                      const cards = renderNestedDim(g.key);
+                      if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
+                      return (
+                        <div key={g.key}>
+                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                            {t.products[g.labelKey]}
+                          </p>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
+                        </div>
+                      );
+                    })}
+
+                    {/* Capacity */}
+                    {(() => {
+                      const cards = renderCapacity();
+                      if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
+                      return (
+                        <div>
+                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                            {t.products.capacity}
+                          </p>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
+                        </div>
+                      );
+                    })()}
+
+                    {/* Weight + Material — only if data exists */}
+                    {(product.weight || product.material) && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {product.weight ? (
+                          <SpecCard label={t.products.weight} value={`${product.weight} kg`} />
+                        ) : null}
+                        {product.material ? (
+                          <SpecCard label={t.products.material} value={product.material} />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                ) : product.specifications?.length ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {product.specifications.map((s, i) => (
+                      <SpecCard key={i} label={s.label} value={s.value} />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground py-2 rtl:text-right">
+                    {isAr ? "لا توجد مواصفات متاحة" : "No specifications available"}
+                  </p>
+                )}
+              </>
+            )}
 
             {/* SHIPPING — cards */}
             {activeTab === "shipping" && (
