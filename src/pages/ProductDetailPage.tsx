@@ -118,6 +118,7 @@ export default function ProductDetailPage() {
   const { language } = useLanguageStore();
   const t = translations[language];
   const isAr = language === "ar";
+  const { getField, getJsonField } = useLocalizedField();
   const hideShipping = ["land-shipping-container", "storage-containers", "iso-shipping-container"].includes(
     product?.category || "",
   );
