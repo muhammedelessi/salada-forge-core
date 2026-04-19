@@ -64,7 +64,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         >
           <img
             src={product.images[0]}
-            alt={product.title}
+            alt={localizedTitle}
             loading="lazy"
             className="h-full w-full !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
@@ -92,7 +92,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             {categoryLabel}
           </span>
           <h3 className="mb-0.5 line-clamp-2 text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary sm:text-[0.82rem]">
-            {product.title}
+            {localizedTitle}
           </h3>
           {plainDescription ? (
             <p
@@ -131,14 +131,14 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       }}
       role="link"
       tabIndex={0}
-      aria-label={isAr ? `عرض المنتج ${product.title}` : `View product ${product.title}`}
+      aria-label={isAr ? `عرض المنتج ${localizedTitle}` : `View product ${localizedTitle}`}
     >
       {/* Image block — aspect 5:3; image always fills frame (cover, not contain) */}
       <Link to={`/product/${product.slug}`} className="relative block overflow-hidden">
         <div className="overflow-hidden bg-secondary dark:bg-secondary/80" style={{ aspectRatio: "5 / 3" }}>
           <img
             src={product.images[0]}
-            alt={product.title}
+            alt={localizedTitle}
             loading="lazy"
             className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(5%)" }}
@@ -203,9 +203,22 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
         >
           <h3 className="w-full text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 line-clamp-2 group-hover:text-primary sm:text-[0.82rem]">
-            {product.title}
+            {localizedTitle}
           </h3>
         </Link>
+
+        {tags.length > 0 ? (
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {tags.slice(0, 4).map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center border border-border px-1.5 py-0.5 text-[0.55rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground/85"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        ) : null}
 
         {plainDescription ? (
           <p
