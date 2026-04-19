@@ -270,15 +270,21 @@ export type Database = {
           created_at: string
           customization_options: Json | null
           description: string | null
+          description_ar: string | null
           dimensions: Json | null
           featured: boolean | null
           id: string
           ideal_for: Json | null
+          ideal_for_ar: Json | null
           images: string[] | null
           key_features: Json | null
+          key_features_ar: Json | null
+          material: string | null
           price: number
           seo_description: string | null
+          seo_description_ar: string | null
           seo_title: string | null
+          seo_title_ar: string | null
           sku: string
           slug: string
           specifications: Json | null
@@ -287,6 +293,7 @@ export type Database = {
           subcategory: string | null
           tags: string[] | null
           title: string
+          title_ar: string | null
           updated_at: string
           variants: Json | null
           weight: number | null
@@ -298,15 +305,21 @@ export type Database = {
           created_at?: string
           customization_options?: Json | null
           description?: string | null
+          description_ar?: string | null
           dimensions?: Json | null
           featured?: boolean | null
           id?: string
           ideal_for?: Json | null
+          ideal_for_ar?: Json | null
           images?: string[] | null
           key_features?: Json | null
+          key_features_ar?: Json | null
+          material?: string | null
           price: number
           seo_description?: string | null
+          seo_description_ar?: string | null
           seo_title?: string | null
+          seo_title_ar?: string | null
           sku: string
           slug: string
           specifications?: Json | null
@@ -315,6 +328,7 @@ export type Database = {
           subcategory?: string | null
           tags?: string[] | null
           title: string
+          title_ar?: string | null
           updated_at?: string
           variants?: Json | null
           weight?: number | null
@@ -326,15 +340,21 @@ export type Database = {
           created_at?: string
           customization_options?: Json | null
           description?: string | null
+          description_ar?: string | null
           dimensions?: Json | null
           featured?: boolean | null
           id?: string
           ideal_for?: Json | null
+          ideal_for_ar?: Json | null
           images?: string[] | null
           key_features?: Json | null
+          key_features_ar?: Json | null
+          material?: string | null
           price?: number
           seo_description?: string | null
+          seo_description_ar?: string | null
           seo_title?: string | null
+          seo_title_ar?: string | null
           sku?: string
           slug?: string
           specifications?: Json | null
@@ -343,6 +363,7 @@ export type Database = {
           subcategory?: string | null
           tags?: string[] | null
           title?: string
+          title_ar?: string | null
           updated_at?: string
           variants?: Json | null
           weight?: number | null
