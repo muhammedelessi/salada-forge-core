@@ -47,6 +47,14 @@ function parseSpecifications(specs: any): ProductSpecification[] {
   return [];
 }
 
+/** Returns the raw specifications object when it's a non-array object (nested shape),
+ *  or null when it's an array / empty / not an object. Used by the detail page to
+ *  render the new structured specs sections (external/internal/door/capacity). */
+function parseRawSpecifications(specs: any): Record<string, any> | null {
+  if (!specs || typeof specs !== "object" || Array.isArray(specs)) return null;
+  return specs as Record<string, any>;
+}
+
 function mapDbProductToProduct(dbProduct: DbProduct): Product {
   return {
     id: dbProduct.id,
