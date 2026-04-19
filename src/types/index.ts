@@ -12,7 +12,11 @@ export interface Product {
   specifications: ProductSpecification[];
   /** Raw nested specifications object (e.g. { external, internal, door, capacity }) when
    *  stored as an object in the DB. Null when stored as an array (use `specifications`). */
-  rawSpecifications?: Record<string, any> | null;
+  rawSpecifications?: Record<string, unknown> | null;
+  /** Arabic nested specs object from `specifications_ar` when stored as object; UI falls back to `rawSpecifications`. */
+  rawSpecificationsAr?: Record<string, unknown> | null;
+  /** Parsed from DB `specifications_ar` when stored as array; when empty, UI falls back to `specifications`. */
+  specificationsAr?: ProductSpecification[];
   variants: ProductVariant[];
   stock: number;
   status: 'active' | 'draft' | 'out_of_stock';

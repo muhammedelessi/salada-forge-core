@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { useProduct, useProducts } from "@/hooks/useProducts";
@@ -20,6 +20,7 @@ import { ProductVariant } from "@/types";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
+import { getLocalizedProductSpecifications, getLocalizedRawSpecifications } from "@/lib/productSpecifications";
 
 // ─── Shared micro-components ──────────────────────────────────────
 
@@ -204,6 +205,11 @@ export default function ProductDetailPage() {
     if (finalDesc) meta.content = finalDesc.slice(0, 160);
   }, [product, isAr]);
 
+  const displaySpecifications = useMemo(() => {
+    if (!product) return [];
+    return getLocalizedProductSpecifications(product, language);
+  }, [product, language]);
+
   const catLabel: Record<string, string> = {
     "shipping-containers": t.categories.shippingContainers,
     "storage-tanks": t.categories.storageTanks,
@@ -293,9 +299,9 @@ export default function ProductDetailPage() {
   ];
 
   // ── Nested specs detection (supports both shapes) ──
-  // New shape: rawSpecifications is an object with { external, internal, door, capacity, ... }
-  // Existing shape: specifications is an array of { label, value }
-  const nestedSpecs: Record<string, any> | null = product.rawSpecifications ?? null;
+  // New shape: raw object with { external, internal, door, capacity, ... } — localized via specifications_ar
+  // Existing shape: flat [{ label, value }] via displaySpecifications
+  const nestedSpecs: Record<string, unknown> | null = getLocalizedRawSpecifications(product, language);
 
   const dimGroups: { key: "external" | "internal" | "door"; labelKey: keyof (typeof t)["products"] }[] = [
     { key: "external", labelKey: "external_dimensions" },
@@ -627,7 +633,7 @@ export default function ProductDetailPage() {
 
           {/* Tab content */}
           <div className="py-8" dir={isAr ? "rtl" : "ltr"}>
-            {/* SPECS — supports nested {external,internal,door,capacity} OR flat [{label,value}] */}
+            {/* SPECS — nested {external,internal,door,capacity} OR localized flat [{label,value}] */}
             {activeTab === "specs" && (
               <>
                 {hasNestedSpecsContent ? (
@@ -677,9 +683,9 @@ export default function ProductDetailPage() {
                       </div>
                     )}
                   </div>
-                ) : product.specifications?.length ? (
+                ) : displaySpecifications.length ? (
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                    {product.specifications.map((s, i) => (
+                    {displaySpecifications.map((s, i) => (
                       <SpecCard key={i} label={s.label} value={s.value} />
                     ))}
                   </div>

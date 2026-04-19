@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import { Product, ProductSpecification } from "@/types";
 
 interface DbProduct {
@@ -13,49 +14,54 @@ interface DbProduct {
   category: string;
   subcategory: string | null;
   images: string[] | null;
-  specifications: any;
-  variants: any;
+  specifications: Json | null;
+  /** Present when the column exists in Supabase. */
+  specifications_ar?: Json | null;
+  variants: Json | null;
   stock: number;
   status: string;
-  bulk_pricing: any;
+  bulk_pricing: Json | null;
   seo_title: string | null;
   seo_description: string | null;
   created_at: string;
   updated_at: string;
   tags: string[] | null;
-  ideal_for: any;
-  key_features: any;
-  customization_options: any;
+  ideal_for: Json | null;
+  key_features: Json | null;
+  customization_options: Json | null;
   title_ar: string | null;
   description_ar: string | null;
   seo_title_ar: string | null;
   seo_description_ar: string | null;
-  ideal_for_ar: any;
-  key_features_ar: any;
+  ideal_for_ar: Json | null;
+  key_features_ar: Json | null;
   material: string | null;
   weight: number | null;
 }
 
-function parseSpecifications(specs: any): ProductSpecification[] {
-  if (!specs) return [];
-  if (Array.isArray(specs)) {
-    return specs.map((s: any) => ({
-      label: s.label || "",
-      value: s.value || "",
-    }));
-  }
-  return [];
+function isSpecRecord(x: unknown): x is { label?: unknown; value?: unknown } {
+  return typeof x === "object" && x !== null;
 }
 
-/** Returns the raw specifications object when it's a non-array object (nested shape),
- *  or null when it's an array / empty / not an object. Used by the detail page to
- *  render the new structured specs sections (external/internal/door/capacity). */
-function parseRawSpecifications(specs: any): Record<string, any> | null {
+function parseSpecifications(specs: Json | null): ProductSpecification[] {
+  if (!specs || !Array.isArray(specs)) return [];
+  return specs.map((item) => {
+    if (!isSpecRecord(item)) return { label: "", value: "" };
+    return {
+      label: typeof item.label === "string" ? item.label : "",
+      value: typeof item.value === "string" ? item.value : "",
+    };
+  });
+}
+
+/** When `specifications` / `specifications_ar` is a nested object (not an array). */
+function parseRawSpecifications(specs: Json | null): Record<string, unknown> | null {
   if (!specs || typeof specs !== "object" || Array.isArray(specs)) return null;
-  return specs as Record<string, any>;
+  return specs as Record<string, unknown>;
 }
 
 function mapDbProductToProduct(dbProduct: DbProduct): Product {
+  const specsAr = dbProduct.specifications_ar ?? null;
   return {
     id: dbProduct.id,
     title: dbProduct.title,
@@ -69,6 +75,8 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     images: dbProduct.images || ["/placeholder.svg"],
     specifications: parseSpecifications(dbProduct.specifications),
     rawSpecifications: parseRawSpecifications(dbProduct.specifications),
+    specificationsAr: parseSpecifications(specsAr),
+    rawSpecificationsAr: parseRawSpecifications(specsAr),
     variants: Array.isArray(dbProduct.variants) ? dbProduct.variants : [],
     stock: dbProduct.stock,
     status: (dbProduct.status as "active" | "draft" | "out_of_stock") || "active",

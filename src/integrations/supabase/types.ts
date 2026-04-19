@@ -288,6 +288,7 @@ export type Database = {
           sku: string
           slug: string
           specifications: Json | null
+          specifications_ar: Json | null
           status: string
           stock: number
           subcategory: string | null
@@ -323,6 +324,7 @@ export type Database = {
           sku: string
           slug: string
           specifications?: Json | null
+          specifications_ar?: Json | null
           status?: string
           stock?: number
           subcategory?: string | null
@@ -358,6 +360,7 @@ export type Database = {
           sku?: string
           slug?: string
           specifications?: Json | null
+          specifications_ar?: Json | null
           status?: string
           stock?: number
           subcategory?: string | null
