@@ -26,6 +26,14 @@ interface DbProduct {
   ideal_for: any;
   key_features: any;
   customization_options: any;
+  title_ar: string | null;
+  description_ar: string | null;
+  seo_title_ar: string | null;
+  seo_description_ar: string | null;
+  ideal_for_ar: any;
+  key_features_ar: any;
+  material: string | null;
+  weight: number | null;
 }
 
 function parseSpecifications(specs: any): ProductSpecification[] {
@@ -61,6 +69,15 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     idealFor: Array.isArray(dbProduct.ideal_for) ? dbProduct.ideal_for : [],
     keyFeatures: Array.isArray(dbProduct.key_features) ? dbProduct.key_features : [],
     customizationOptions: Array.isArray(dbProduct.customization_options) ? dbProduct.customization_options : [],
+    titleAr: dbProduct.title_ar || undefined,
+    descriptionAr: dbProduct.description_ar || undefined,
+    seoTitleAr: dbProduct.seo_title_ar || undefined,
+    seoDescriptionAr: dbProduct.seo_description_ar || undefined,
+    idealForAr: Array.isArray(dbProduct.ideal_for_ar) ? dbProduct.ideal_for_ar : undefined,
+    keyFeaturesAr: Array.isArray(dbProduct.key_features_ar) ? dbProduct.key_features_ar : undefined,
+    tags: Array.isArray(dbProduct.tags) ? dbProduct.tags : undefined,
+    material: dbProduct.material || undefined,
+    weight: dbProduct.weight != null ? Number(dbProduct.weight) : undefined,
     createdAt: dbProduct.created_at,
     updatedAt: dbProduct.updated_at,
   };

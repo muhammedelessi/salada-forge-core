@@ -19,6 +19,17 @@ export interface Product {
   idealFor?: string[];
   keyFeatures?: string[];
   customizationOptions?: string[];
+  // Arabic localized fields (optional — fall back to base field when empty)
+  titleAr?: string;
+  descriptionAr?: string;
+  seoTitleAr?: string;
+  seoDescriptionAr?: string;
+  idealForAr?: string[];
+  keyFeaturesAr?: string[];
+  // Optional product attributes
+  tags?: string[];
+  material?: string;
+  weight?: number;
   createdAt: string;
   updatedAt: string;
 }
