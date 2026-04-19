@@ -53,17 +53,53 @@ function Pill({ children }: { children: React.ReactNode }) {
 }
 
 function SpecCard({ label, value }: { label: string; value: string }) {
+  // Split values like "2.44M | 8 FEET" into segments for visually balanced display
+  const segments = String(value)
+    .split("|")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
   return (
-    <div className="border border-border p-4 hover:border-primary transition-colors duration-200 bg-background group">
-      <p
-        className="label-text text-[0.5rem] uppercase tracking-[0.2em] mb-2 group-hover:opacity-100"
-        style={{ color: "hsl(var(--primary))", opacity: 0.65 }}
-      >
-        {label}
-      </p>
-      <p className="label-text text-sm font-bold leading-snug" style={{ color: "hsl(var(--foreground))" }}>
-        {value}
-      </p>
+    <div className="relative border border-border bg-background group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden">
+      {/* Gold corner accent — top start (RTL-aware via logical inset) */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-0 start-0 h-[2px] w-6 bg-primary opacity-70 transition-all duration-300 group-hover:w-12 group-hover:opacity-100"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-0 start-0 w-[2px] h-6 bg-primary opacity-70 transition-all duration-300 group-hover:h-12 group-hover:opacity-100"
+      />
+
+      <div className="p-4 sm:p-5">
+        {/* Label */}
+        <p
+          className="label-text text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.22em] mb-2.5 font-semibold transition-colors duration-300"
+          style={{ color: "hsl(var(--primary) / 0.85)" }}
+        >
+          {label}
+        </p>
+
+        {/* Value(s) — split on "|" for metric/imperial pairing */}
+        {segments.length > 1 ? (
+          <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1" dir="ltr">
+            <span className="label-text text-base sm:text-[1.05rem] font-bold leading-none tracking-tight text-foreground">
+              {segments[0]}
+            </span>
+            <span aria-hidden className="inline-block w-px h-3.5 bg-primary/50" />
+            <span className="label-text text-[0.72rem] sm:text-xs font-semibold leading-none tracking-[0.06em] text-muted-foreground/85">
+              {segments.slice(1).join(" | ")}
+            </span>
+          </div>
+        ) : (
+          <p
+            className="label-text text-base sm:text-[1.05rem] font-bold leading-tight tracking-tight text-foreground"
+            dir="ltr"
+          >
+            {value}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
