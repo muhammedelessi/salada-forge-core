@@ -307,7 +307,7 @@ export default function ProductDetailPage() {
               { label: isAr ? "الرئيسية" : "Home", href: "/" },
               { label: t.nav.shop, href: "/shop" },
               { label: getCat(product.category), href: `/shop?category=${product.category}` },
-              { label: product.title },
+              { label: localizedTitle },
             ].map((item, i) => (
               <li key={i} className="flex items-center gap-1">
                 {i > 0 && <ChevronRight className="w-3 h-3 shrink-0 text-border rtl:rotate-180" />}
@@ -349,7 +349,7 @@ export default function ProductDetailPage() {
               >
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
-                  alt={product.title}
+                  alt={localizedTitle}
                   className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
                   style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
                   title={isAr ? "تكبير الصورة" : "Zoom image"}
@@ -385,7 +385,7 @@ export default function ProductDetailPage() {
                     >
                       <img
                         src={img}
-                        alt={`view-${i + 1}`}
+                        alt={`${localizedTitle} - ${i + 1}`}
                         loading="lazy"
                         className="h-full w-full min-h-0 !object-cover object-center"
                         style={{ objectFit: "cover", objectPosition: "center" }}
@@ -409,8 +409,40 @@ export default function ProductDetailPage() {
                 className="font-black uppercase leading-tight tracking-[-0.025em] mb-4 text-foreground"
                 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.6rem)" }}
               >
-                {product.title}
+                {localizedTitle}
               </h1>
+
+              {/* Tags — only render if present */}
+              {Array.isArray(product.tags) && product.tags.filter((tg) => tg && tg.trim()).length > 0 && (
+                <div className="mb-4 flex flex-wrap gap-1.5 rtl:justify-end">
+                  {product.tags
+                    .filter((tg) => tg && tg.trim())
+                    .map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center border border-border px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
+              )}
+
+              {/* Material badge — only if material is set */}
+              {product.material && product.material.trim() ? (
+                <div className="mb-4 flex flex-wrap gap-1.5 rtl:justify-end">
+                  <span
+                    className="inline-flex items-center border px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em]"
+                    style={{
+                      borderColor: "hsl(var(--primary)/0.3)",
+                      background: "hsl(var(--primary)/0.06)",
+                      color: "hsl(var(--primary))",
+                    }}
+                  >
+                    {t.products.material}: {product.material}
+                  </span>
+                </div>
+              ) : null}
 
               {/* Pricing callout */}
               <div
@@ -426,8 +458,10 @@ export default function ProductDetailPage() {
                 </p>
               </div>
 
-              {/* Description */}
-              <p className="text-sm leading-relaxed text-muted-foreground mb-6">{product.description}</p>
+              {/* Description — only render if present */}
+              {localizedDescription ? (
+                <p className="text-sm leading-relaxed text-muted-foreground mb-6">{localizedDescription}</p>
+              ) : null}
 
               {/* Variants */}
               {product.variants && product.variants.length > 1 && (
