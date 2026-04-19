@@ -565,19 +565,69 @@ export default function ProductDetailPage() {
 
           {/* Tab content */}
           <div className="py-8" dir={isAr ? "rtl" : "ltr"}>
-            {/* SPECS — cards grid */}
-            {activeTab === "specs" &&
-              (product.specifications?.length ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                  {product.specifications.map((s, i) => (
-                    <SpecCard key={i} label={s.label} value={s.value} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground py-2 rtl:text-right">
-                  {isAr ? "لا توجد مواصفات متاحة" : "No specifications available"}
-                </p>
-              ))}
+            {/* SPECS — supports nested {external,internal,door,capacity} OR flat [{label,value}] */}
+            {activeTab === "specs" && (
+              <>
+                {hasNestedSpecsContent ? (
+                  <div className="space-y-7">
+                    {/* Section heading */}
+                    <h2 className="label-text text-[0.6rem] uppercase tracking-[0.2em] text-primary">
+                      {t.products.technical_specifications}
+                    </h2>
+
+                    {/* Dimension groups */}
+                    {dimGroups.map((g) => {
+                      const cards = renderNestedDim(g.key);
+                      if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
+                      return (
+                        <div key={g.key}>
+                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                            {t.products[g.labelKey]}
+                          </p>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
+                        </div>
+                      );
+                    })}
+
+                    {/* Capacity */}
+                    {(() => {
+                      const cards = renderCapacity();
+                      if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
+                      return (
+                        <div>
+                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                            {t.products.capacity}
+                          </p>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
+                        </div>
+                      );
+                    })()}
+
+                    {/* Weight + Material — only if data exists */}
+                    {(product.weight || product.material) && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {product.weight ? (
+                          <SpecCard label={t.products.weight} value={`${product.weight} kg`} />
+                        ) : null}
+                        {product.material ? (
+                          <SpecCard label={t.products.material} value={product.material} />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                ) : product.specifications?.length ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {product.specifications.map((s, i) => (
+                      <SpecCard key={i} label={s.label} value={s.value} />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground py-2 rtl:text-right">
+                    {isAr ? "لا توجد مواصفات متاحة" : "No specifications available"}
+                  </p>
+                )}
+              </>
+            )}
 
             {/* SHIPPING — cards */}
             {activeTab === "shipping" && (
