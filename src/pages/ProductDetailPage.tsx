@@ -192,6 +192,14 @@ export default function ProductDetailPage() {
 
   const related = allProducts.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
+  // ── Localized fields (fallback to base/English when Arabic empty) ──
+  const localizedTitle = getField(product, "title") ?? product.title;
+  const localizedDescription = getField(product, "description") ?? "";
+  const localizedSeoTitle = getField(product, "seoTitle");
+  const localizedSeoDescription = getField(product, "seoDescription");
+  const localizedKeyFeatures = getJsonField<string>(product, "keyFeatures");
+  const localizedIdealFor = getJsonField<string>(product, "idealFor");
+
   const tabs = [
     { id: "specs" as const, label: t.productDetail.specifications },
     { id: "shipping" as const, label: t.productDetail.shipping },
@@ -207,17 +215,81 @@ export default function ProductDetailPage() {
   const infoBlocks = [
     {
       title: t.productDetail.idealFor,
-      items: product.idealFor?.length ? product.idealFor : t.productDetail.defaultIdealFor,
+      items: localizedIdealFor.length ? localizedIdealFor : t.productDetail.defaultIdealFor,
     },
     {
       title: t.productDetail.keyFeatures,
-      items: product.keyFeatures?.length ? product.keyFeatures : t.productDetail.defaultKeyFeatures,
+      items: localizedKeyFeatures.length ? localizedKeyFeatures : t.productDetail.defaultKeyFeatures,
     },
     {
       title: t.productDetail.customization,
       items: product.customizationOptions?.length ? product.customizationOptions : t.productDetail.defaultCustomization,
     },
   ];
+
+  // ── Nested specs detection (supports both shapes) ──
+  // New shape: specifications is an object with { external, internal, door, capacity, size, type, ... }
+  // Existing shape: specifications is an array of { label, value }
+  // The mapper currently coerces non-arrays to [], so read raw from underlying source if needed.
+  const rawSpecs = (product as unknown as { specifications: unknown }).specifications;
+  const nestedSpecs: Record<string, any> | null =
+    rawSpecs && typeof rawSpecs === "object" && !Array.isArray(rawSpecs) ? (rawSpecs as Record<string, any>) : null;
+
+  const dimGroups: { key: "external" | "internal" | "door"; labelKey: keyof (typeof t)["products"] }[] = [
+    { key: "external", labelKey: "external_dimensions" },
+    { key: "internal", labelKey: "internal_dimensions" },
+    { key: "door", labelKey: "door_sizes" },
+  ];
+  const dimSubLabels: Record<string, keyof (typeof t)["products"]> = {
+    length: "length",
+    width: "width",
+    height: "height",
+  };
+  const capacitySubLabels: Record<string, keyof (typeof t)["products"]> = {
+    cubic_volume: "cubic_volume",
+    empty_weight: "empty_weight",
+    load_capacity: "load_capacity",
+    total_weight: "total_weight",
+  };
+
+  const renderNestedDim = (groupKey: "external" | "internal" | "door"): React.ReactNode => {
+    const group = nestedSpecs?.[groupKey];
+    if (!group || typeof group !== "object") return null;
+    const entries = Object.entries(group).filter(
+      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    );
+    if (entries.length === 0) return null;
+    return entries.map(([k, v]) => {
+      const labelKey = dimSubLabels[k];
+      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
+    });
+  };
+
+  const renderCapacity = (): React.ReactNode => {
+    const cap = nestedSpecs?.capacity;
+    if (!cap || typeof cap !== "object") return null;
+    const entries = Object.entries(cap).filter(
+      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    );
+    if (entries.length === 0) return null;
+    return entries.map(([k, v]) => {
+      const labelKey = capacitySubLabels[k];
+      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
+    });
+  };
+
+  const hasNestedSpecsContent =
+    !!nestedSpecs &&
+    (dimGroups.some((g) => {
+      const grp = nestedSpecs[g.key];
+      return grp && typeof grp === "object" && Object.values(grp).some((v) => v != null && String(v).trim() !== "");
+    }) ||
+      (nestedSpecs.capacity &&
+        typeof nestedSpecs.capacity === "object" &&
+        Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "")));
+
 
   // ── NOTE: All RTL is handled via dir="rtl" on wrappers.
   //    Flexbox, text-align, borders all flip automatically.
