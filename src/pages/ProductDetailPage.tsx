@@ -522,7 +522,7 @@ export default function ProductDetailPage() {
                       color: "hsl(var(--primary))",
                     }}
                   >
-                    {t.products.material}: {product.material}
+                    {t.products.material}: {localizeMaterial(product.material)}
                   </span>
                 </div>
               ) : null}
