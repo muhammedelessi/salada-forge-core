@@ -89,19 +89,19 @@ function SpecCard({ label, value }: { label: string; value: string }) {
 
         {/* Value(s) — split on "|" for metric/imperial pairing. Wraps on tight widths. */}
         {segments.length > 1 ? (
-          <div className="flex flex-wrap items-baseline gap-x-2 sm:gap-x-3 gap-y-1 min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-3 gap-y-1.5 min-w-0">
             <span
               className="label-text font-extrabold leading-none tracking-tight text-foreground"
-              style={{ fontSize: "clamp(1.05rem, 3.2vw, 1.875rem)" }}
+              style={{ fontSize: "clamp(1.25rem, 3.6vw, 2.125rem)" }}
             >
               {segments[0]}
             </span>
             {segments.slice(1).map((seg, i) => (
               <span key={i} className="flex items-baseline gap-x-2 sm:gap-x-3 shrink-0">
-                <span aria-hidden className="inline-block w-px h-3.5 sm:h-5 bg-primary/50 self-center" />
+                <span aria-hidden className="inline-block w-px h-4 sm:h-5 bg-primary/50 self-center" />
                 <span
                   className="label-text font-bold leading-none tracking-[0.02em] text-foreground/80"
-                  style={{ fontSize: "clamp(0.78rem, 2vw, 1.125rem)" }}
+                  style={{ fontSize: "clamp(0.9rem, 2.2vw, 1.25rem)" }}
                 >
                   {seg}
                 </span>
@@ -111,7 +111,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
         ) : (
           <p
             className="label-text font-extrabold leading-tight tracking-tight text-foreground break-words"
-            style={{ fontSize: "clamp(1.05rem, 3.2vw, 1.875rem)" }}
+            style={{ fontSize: "clamp(1.25rem, 3.6vw, 2.125rem)" }}
             dir={rtl ? "rtl" : "ltr"}
           >
             {value}
