@@ -1,3 +1,6 @@
+/** Raw `specifications` / `specifications_ar` JSON object from Supabase (English or Arabic slice; same shape). */
+export type ProductSpecificationsJson = Record<string, unknown>;
+
 export interface Product {
   id: string;
   title: string;
@@ -12,9 +15,9 @@ export interface Product {
   specifications: ProductSpecification[];
   /** Raw nested specifications object (e.g. { external, internal, door, capacity }) when
    *  stored as an object in the DB. Null when stored as an array (use `specifications`). */
-  rawSpecifications?: Record<string, unknown> | null;
+  rawSpecifications?: ProductSpecificationsJson | null;
   /** Arabic nested specs object from `specifications_ar` when stored as object; UI falls back to `rawSpecifications`. */
-  rawSpecificationsAr?: Record<string, unknown> | null;
+  rawSpecificationsAr?: ProductSpecificationsJson | null;
   /** Parsed from DB `specifications_ar` when stored as array; when empty, UI falls back to `specifications`. */
   specificationsAr?: ProductSpecification[];
   variants: ProductVariant[];

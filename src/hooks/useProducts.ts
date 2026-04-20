@@ -1,7 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Json } from "@/integrations/supabase/types";
-import { Product, ProductSpecification } from "@/types";
+import { Product, ProductSpecification, ProductSpecificationsJson } from "@/types";
+
+/** Ensures JSON columns parse to objects when PostgREST returns a string. */
+function parseSpecificationsColumn(value: Json | null | undefined): Json | null {
+  if (value == null) return null;
+  if (typeof value === "string") {
+    try {
+      return JSON.parse(value) as Json;
+    } catch {
+      return null;
+    }
+  }
+  return value;
+}
 
 interface DbProduct {
   id: string;
@@ -56,13 +69,21 @@ function parseSpecifications(specs: Json | null): ProductSpecification[] {
 }
 
 /** When `specifications` / `specifications_ar` is a nested object (not an array). */
-function parseRawSpecifications(specs: Json | null): Record<string, unknown> | null {
+function parseRawSpecifications(specs: Json | null): ProductSpecificationsJson | null {
   if (!specs || typeof specs !== "object" || Array.isArray(specs)) return null;
-  return specs as Record<string, unknown>;
+  return specs as ProductSpecificationsJson;
+}
+
+/** Read JSON columns from row (snake_case from PostgREST; tolerate camelCase if ever present). */
+function readJsonColumn(row: Record<string, unknown>, snake: string, camel: string): Json | null | undefined {
+  const v = row[snake] ?? row[camel];
+  return v as Json | null | undefined;
 }
 
 function mapDbProductToProduct(dbProduct: DbProduct): Product {
-  const specsAr = dbProduct.specifications_ar ?? null;
+  const row = dbProduct as unknown as Record<string, unknown>;
+  const specsEn = parseSpecificationsColumn(dbProduct.specifications ?? null);
+  const specsAr = parseSpecificationsColumn(readJsonColumn(row, "specifications_ar", "specificationsAr") ?? null);
   return {
     id: dbProduct.id,
     title: dbProduct.title,
@@ -74,8 +95,8 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     category: dbProduct.category,
     subcategory: dbProduct.subcategory || undefined,
     images: dbProduct.images || ["/placeholder.svg"],
-    specifications: parseSpecifications(dbProduct.specifications),
-    rawSpecifications: parseRawSpecifications(dbProduct.specifications),
+    specifications: parseSpecifications(specsEn),
+    rawSpecifications: parseRawSpecifications(specsEn),
     specificationsAr: parseSpecifications(specsAr),
     rawSpecificationsAr: parseRawSpecifications(specsAr),
     variants: (Array.isArray(dbProduct.variants) ? dbProduct.variants : []) as unknown as Product["variants"],

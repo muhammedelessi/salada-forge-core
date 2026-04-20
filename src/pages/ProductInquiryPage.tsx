@@ -6,6 +6,7 @@ import { Send, ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
+import { useLocalizedField } from '@/hooks/useLocalizedField';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
@@ -29,6 +30,7 @@ export default function ProductInquiryPage() {
   const t = translations[language];
   const isAr = isRTL();
   const dir = isAr ? 'rtl' : 'ltr';
+  const { getField } = useLocalizedField();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -71,6 +73,9 @@ export default function ProductInquiryPage() {
     );
   }
 
+  const displayProductTitle = getField(product, 'title') ?? product.title;
+  const displayProductDescription = getField(product, 'description') ?? product.description ?? '';
+
   const validateForm = () => {
     try {
       inquirySchema.parse({
@@ -109,7 +114,7 @@ export default function ProductInquiryPage() {
         .from('product_inquiries')
         .insert({
           product_id: product.id,
-          product_title: product.title,
+          product_title: displayProductTitle,
           product_sku: product.sku,
           customer_name: formData.name.trim(),
           customer_email: formData.email.trim(),
@@ -129,7 +134,7 @@ export default function ProductInquiryPage() {
           customerEmail: formData.email.trim(),
           customerPhone: formData.phone.trim() || undefined,
           customerCompany: formData.company.trim() || undefined,
-          productTitle: product.title,
+          productTitle: displayProductTitle,
           productSku: product.sku,
           quantity: formData.quantity ? parseInt(formData.quantity) : undefined,
           message: formData.message.trim() || undefined,
@@ -220,24 +225,26 @@ export default function ProductInquiryPage() {
                 <h2 className={cn('text-lg font-bold mb-4', isRTL && 'text-right')}>
                   {language === 'ar' ? 'المنتج' : 'Product'}
                 </h2>
-                <div className="aspect-square bg-muted overflow-hidden mb-4">
+                <div className="aspect-square bg-transparent overflow-hidden mb-4 flex items-center justify-center p-2">
                   <img
                     src={product.images[0] || '/placeholder.svg'}
-                    alt={product.title}
+                    alt={displayProductTitle}
                     loading="lazy"
                     decoding="async"
                     width={400}
                     height={400}
-                    className="w-full h-full object-cover max-w-full"
+                    className="max-h-full max-w-full object-contain"
                   />
                 </div>
-                <h3 className={cn('font-semibold mb-2', isRTL && 'text-right')}>{product.title}</h3>
+                <h3 className={cn('font-semibold mb-2', isRTL && 'text-right')}>{displayProductTitle}</h3>
                 <p className={cn('text-sm text-muted-foreground label-text mb-4', isRTL && 'text-right')}>
-                  SKU: {product.sku}
+                  {t.products.sku}: {product.sku}
                 </p>
-                <p className={cn('text-sm text-muted-foreground line-clamp-3', isRTL && 'text-right')}>
-                  {product.description}
-                </p>
+                {displayProductDescription ? (
+                  <p className={cn('text-sm text-muted-foreground line-clamp-3', isRTL && 'text-right')}>
+                    {displayProductDescription}
+                  </p>
+                ) : null}
               </div>
             </div>
 

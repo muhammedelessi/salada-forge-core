@@ -55,19 +55,19 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       <Link
         to={`/product/${product.slug}`}
         dir={isAr ? "rtl" : "ltr"}
-        className="group flex items-stretch border border-border bg-background hover:border-primary transition-colors duration-300"
+        className="group relative flex items-stretch overflow-hidden border border-border bg-background transition-colors duration-300 hover:border-primary hover:bg-primary/10"
       >
         {/* Fixed square image */}
         <div
-          className="relative shrink-0 overflow-hidden bg-secondary"
+          className="relative flex shrink-0 items-center justify-center self-center overflow-hidden bg-transparent p-1"
           style={{ width: "80px", minWidth: "80px", height: "80px" }}
         >
           <img
             src={product.images[0]}
             alt={localizedTitle}
             loading="lazy"
-            className="h-full w-full !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-            style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)" }}
+            className="max-h-full max-w-full object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+            style={{ objectFit: "contain", objectPosition: "center", filter: "grayscale(8%)" }}
           />
           {product.status === "out_of_stock" && (
             <div
@@ -121,7 +121,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   /* ── DEFAULT variant — dense grid: shorter image, tight copy, one-line teaser ── */
   return (
     <div
-      className="group cursor-pointer border border-border bg-background transition-colors duration-200 hover:border-primary/50"
+      className="group relative cursor-pointer overflow-hidden border border-border bg-background transition-colors duration-200 hover:border-primary/60 hover:bg-primary/10"
       onClick={() => navigate(`/product/${product.slug}`)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -133,15 +133,15 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
       tabIndex={0}
       aria-label={isAr ? `عرض المنتج ${localizedTitle}` : `View product ${localizedTitle}`}
     >
-      {/* Image block — aspect 5:3; image always fills frame (cover, not contain) */}
+      {/* Image block — natural aspect ratio; contain so edges are never cropped */}
       <Link to={`/product/${product.slug}`} className="relative block overflow-hidden">
-        <div className="overflow-hidden bg-secondary dark:bg-secondary/80" style={{ aspectRatio: "5 / 3" }}>
+        <div className="flex min-h-[140px] items-center justify-center overflow-hidden bg-transparent p-2 sm:min-h-[160px]">
           <img
             src={product.images[0]}
             alt={localizedTitle}
             loading="lazy"
-            className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-            style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(5%)" }}
+            className="h-auto w-full max-h-[200px] object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.04] sm:max-h-[220px]"
+            style={{ objectFit: "contain", objectPosition: "center", filter: "grayscale(5%)" }}
           />
         </div>
 

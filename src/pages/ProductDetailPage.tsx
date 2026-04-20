@@ -16,11 +16,48 @@ import {
   ArrowRight,
   ChevronRight,
 } from "lucide-react";
-import { ProductVariant } from "@/types";
+import { ProductVariant, type ProductSpecificationsJson } from "@/types";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
 import { getLocalizedProductSpecifications, getLocalizedRawSpecifications } from "@/lib/productSpecifications";
+
+/** Fallback when a JSON key has no translation: `door_width` → `Door Width` */
+function formatSpecKeyLabel(rawKey: string): string {
+  return rawKey
+    .trim()
+    .replace(/_/g, " ")
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ");
+}
+
+const DIMENSION_KEY_ORDER = ["length", "width", "height", "size"] as const;
+const CAPACITY_KEY_ORDER = ["cubic_volume", "empty_weight", "load_capacity", "total_weight"] as const;
+
+function sortEntriesByKeyOrder(entries: [string, unknown][], order: readonly string[]): [string, unknown][] {
+  const rank = (k: string) => {
+    const i = order.indexOf(k);
+    return i === -1 ? order.length : i;
+  };
+  return [...entries].sort((a, b) => {
+    const d = rank(a[0]) - rank(b[0]);
+    if (d !== 0) return d;
+    return a[0].localeCompare(b[0]);
+  });
+}
+
+/** Keys rendered as grouped cards — not root string fields */
+const NESTED_STRUCTURAL_KEYS = new Set(["external", "internal", "door", "capacity"]);
+const ROOT_SPEC_ORDER = ["material", "type", "condition"] as const;
+
+function hasRootStringFields(raw: Record<string, unknown>): boolean {
+  return Object.entries(raw).some(
+    ([k, v]) => !NESTED_STRUCTURAL_KEYS.has(k) && typeof v === "string" && String(v).trim() !== "",
+  );
+}
 
 // ─── Shared micro-components ──────────────────────────────────────
 
@@ -53,18 +90,13 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Spec value text is shown exactly as stored in JSON (no splitting or unit rewriting). */
 function SpecCard({ label, value }: { label: string; value: string }) {
   const { isRTL } = useLanguageStore();
   const rtl = isRTL();
 
-  // Split values like "2.44M | 8 FEET" into segments for visually balanced display
-  const segments = String(value)
-    .split("|")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
   return (
-    <div className="relative border border-border bg-background group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden min-w-0">
+    <div className="relative border border-border bg-background antialiased group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden min-w-0">
       {/* Gold corner accent — top start (RTL-aware via logical inset) */}
       <span
         aria-hidden
@@ -76,47 +108,17 @@ function SpecCard({ label, value }: { label: string; value: string }) {
       />
 
       <div className="p-3 sm:p-5 md:p-6 min-w-0">
-        {/* Label */}
-        <p
-          className="label-text uppercase tracking-[0.18em] sm:tracking-[0.22em] mb-2 sm:mb-3 font-semibold transition-colors duration-300 truncate"
-          style={{
-            color: "hsl(var(--primary) / 0.85)",
-            fontSize: "clamp(0.6rem, 1.6vw, 0.75rem)",
-          }}
-        >
+        <p className="text-[0.8125rem] sm:text-sm font-semibold leading-snug mb-2 sm:mb-3 text-primary [overflow-wrap:anywhere]">
           {label}
         </p>
 
-        {/* Value(s) — split on "|" for metric/imperial pairing. Wraps on tight widths. */}
-        {segments.length > 1 ? (
-          <div className="flex flex-wrap items-baseline gap-x-2.5 sm:gap-x-3 gap-y-1.5 min-w-0">
-            <span
-              className="label-text font-extrabold leading-none tracking-tight text-foreground"
-              style={{ fontSize: "clamp(1.25rem, 3.6vw, 2.125rem)" }}
-            >
-              {segments[0]}
-            </span>
-            {segments.slice(1).map((seg, i) => (
-              <span key={i} className="flex items-baseline gap-x-2 sm:gap-x-3 shrink-0">
-                <span aria-hidden className="inline-block w-px h-4 sm:h-5 bg-primary/50 self-center" />
-                <span
-                  className="label-text font-bold leading-none tracking-[0.02em] text-foreground/80"
-                  style={{ fontSize: "clamp(0.9rem, 2.2vw, 1.25rem)" }}
-                >
-                  {seg}
-                </span>
-              </span>
-            ))}
-          </div>
-        ) : (
-          <p
-            className="label-text font-extrabold leading-tight tracking-tight text-foreground break-words"
-            style={{ fontSize: "clamp(1.25rem, 3.6vw, 2.125rem)" }}
-            dir={rtl ? "rtl" : "ltr"}
-          >
-            {value}
-          </p>
-        )}
+        <p
+          className="label-text font-extrabold leading-tight tracking-tight text-foreground break-words whitespace-pre-wrap"
+          style={{ fontSize: "clamp(1.375rem, 4vw, 2.25rem)" }}
+          dir={rtl ? "rtl" : "ltr"}
+        >
+          {value}
+        </p>
       </div>
     </div>
   );
@@ -311,7 +313,7 @@ export default function ProductDetailPage() {
   // ── Nested specs detection (supports both shapes) ──
   // New shape: raw object with { external, internal, door, capacity, ... } — localized via specifications_ar
   // Existing shape: flat [{ label, value }] via displaySpecifications
-  const nestedSpecs: Record<string, unknown> | null = getLocalizedRawSpecifications(product, language);
+  const nestedSpecs: ProductSpecificationsJson | null = getLocalizedRawSpecifications(product, language);
 
   const dimGroups: { key: "external" | "internal" | "door"; labelKey: keyof (typeof t)["products"] }[] = [
     { key: "external", labelKey: "external_dimensions" },
@@ -322,6 +324,7 @@ export default function ProductDetailPage() {
     length: "length",
     width: "width",
     height: "height",
+    size: "spec_size",
   };
   const capacitySubLabels: Record<string, keyof (typeof t)["products"]> = {
     cubic_volume: "cubic_volume",
@@ -333,13 +336,16 @@ export default function ProductDetailPage() {
   const renderNestedDim = (groupKey: "external" | "internal" | "door"): React.ReactNode => {
     const group = nestedSpecs?.[groupKey];
     if (!group || typeof group !== "object") return null;
-    const entries = Object.entries(group).filter(
-      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    const entries = sortEntriesByKeyOrder(
+      Object.entries(group).filter(
+        ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+      ),
+      DIMENSION_KEY_ORDER,
     );
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = dimSubLabels[k];
-      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabel(k);
       return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
     });
   };
@@ -347,23 +353,43 @@ export default function ProductDetailPage() {
   const renderCapacity = (): React.ReactNode => {
     const cap = nestedSpecs?.capacity;
     if (!cap || typeof cap !== "object") return null;
-    const entries = Object.entries(cap).filter(
-      ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+    const entries = sortEntriesByKeyOrder(
+      Object.entries(cap).filter(
+        ([, v]) => v !== null && v !== undefined && String(v).toString().trim() !== "",
+      ),
+      CAPACITY_KEY_ORDER,
     );
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = capacitySubLabels[k];
-      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabel(k);
       return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
     });
   };
 
-  // Localize material name (e.g. "Steel" -> "فولاذ") via translations.products.materials
-  const localizeMaterial = (raw: string | undefined): string => {
-    if (!raw) return "";
-    const key = raw.trim().toLowerCase();
-    const map = t.products.materials as Record<string, string> | undefined;
-    return (map && map[key]) || raw;
+  /** Root-level string fields from nested JSON (material, type, condition, …) — values verbatim from DB. */
+  const renderRootLevelNestedSpecs = (): React.ReactNode => {
+    if (!nestedSpecs) return null;
+    const entries = Object.entries(nestedSpecs).filter(
+      ([k, v]) => !NESTED_STRUCTURAL_KEYS.has(k) && typeof v === "string" && String(v).trim() !== "",
+    );
+    if (entries.length === 0) return null;
+    const labelForKey = (k: string) => {
+      if (k === "material") return t.products.material;
+      if (k === "type") return t.products.spec_type;
+      if (k === "condition") return t.products.spec_condition;
+      if (k === "size") return t.products.spec_size;
+      return formatSpecKeyLabel(k);
+    };
+    entries.sort((a, b) => {
+      const ia = ROOT_SPEC_ORDER.indexOf(a[0] as (typeof ROOT_SPEC_ORDER)[number]);
+      const ib = ROOT_SPEC_ORDER.indexOf(b[0] as (typeof ROOT_SPEC_ORDER)[number]);
+      const ra = ia === -1 ? 999 : ia;
+      const rb = ib === -1 ? 999 : ib;
+      if (ra !== rb) return ra - rb;
+      return a[0].localeCompare(b[0]);
+    });
+    return entries.map(([k, v]) => <SpecCard key={`root-${k}`} label={labelForKey(k)} value={String(v)} />);
   };
 
   const hasNestedSpecsContent =
@@ -374,7 +400,14 @@ export default function ProductDetailPage() {
     }) ||
       (nestedSpecs.capacity &&
         typeof nestedSpecs.capacity === "object" &&
-        Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "")));
+        Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "")) ||
+      hasRootStringFields(nestedSpecs));
+
+  const materialFromNestedJson =
+    nestedSpecs && typeof nestedSpecs.material === "string" && nestedSpecs.material.trim()
+      ? nestedSpecs.material.trim()
+      : null;
+  const materialBadgeText = materialFromNestedJson ?? (product.material?.trim() || null);
 
   // ── NOTE: All RTL is handled via dir="rtl" on wrappers.
   //    Flexbox, text-align, borders all flip automatically.
@@ -425,18 +458,15 @@ export default function ProductDetailPage() {
           {/* Grid: on mobile stacked, on desktop side-by-side */}
           {/* RTL: CSS grid + dir handles column order automatically */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-14" dir={isAr ? "rtl" : "ltr"}>
-            {/* ── Gallery ─────────────────────── */}
-            <div className="space-y-3">
+            {/* ── Gallery — mobile: slightly taller frame + subtle width bleed so the hero matches the info column visually */}
+            <div className="space-y-3 max-lg:w-[calc(100%+1rem)] max-lg:-mx-2 lg:mx-0 lg:w-full">
               {/* Main image */}
-              <div
-                className="relative overflow-hidden border border-border bg-secondary"
-                style={{ aspectRatio: "4/3" }}
-              >
+              <div className="relative flex min-h-[200px] items-center justify-center overflow-hidden border border-border bg-transparent p-3 sm:min-h-[260px] lg:min-h-[300px]">
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
                   alt={localizedTitle}
-                  className="h-full w-full min-h-0 !object-cover object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
-                  style={{ objectFit: "cover", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
+                  className="max-h-[min(65vh,560px)] w-full object-contain object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
+                  style={{ objectFit: "contain", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
                   title={isAr ? "تكبير الصورة" : "Zoom image"}
                 />
                 {product.status === "out_of_stock" && (
@@ -463,7 +493,7 @@ export default function ProductDetailPage() {
                     <button
                       key={i}
                       onClick={() => setSelectedImage(i)}
-                      className={`overflow-hidden border-2 transition-all duration-200 bg-secondary ${
+                      className={`flex items-center justify-center overflow-hidden border-2 p-1 transition-all duration-200 bg-transparent ${
                         selectedImage === i ? "border-primary" : "border-border hover:border-primary/50"
                       }`}
                       style={{ aspectRatio: "1/1" }}
@@ -472,8 +502,8 @@ export default function ProductDetailPage() {
                         src={img}
                         alt={`${localizedTitle} - ${i + 1}`}
                         loading="lazy"
-                        className="h-full w-full min-h-0 !object-cover object-center"
-                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        className="max-h-full max-w-full object-contain object-center"
+                        style={{ objectFit: "contain", objectPosition: "center" }}
                       />
                     </button>
                   ))}
@@ -513,8 +543,8 @@ export default function ProductDetailPage() {
                 </div>
               )}
 
-              {/* Material badge — only if material is set */}
-              {product.material && product.material.trim() ? (
+              {/* Material badge — prefer raw string from nested JSON when present (same as specs tab) */}
+              {materialBadgeText ? (
                 <div className="mb-4 flex flex-wrap gap-1.5 rtl:justify-end">
                   <span
                     className="inline-flex items-center border px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em]"
@@ -524,7 +554,7 @@ export default function ProductDetailPage() {
                       color: "hsl(var(--primary))",
                     }}
                   >
-                    {t.products.material}: {localizeMaterial(product.material)}
+                    {t.products.material}: {materialBadgeText}
                   </span>
                 </div>
               ) : null}
@@ -654,9 +684,9 @@ export default function ProductDetailPage() {
             {activeTab === "specs" && (
               <>
                 {hasNestedSpecsContent ? (
-                  <div className="space-y-7">
+                  <div className="space-y-8">
                     {/* Section heading */}
-                    <h2 className="label-text text-[0.6rem] uppercase tracking-[0.2em] text-primary">
+                    <h2 className="text-base sm:text-lg font-bold tracking-tight text-primary">
                       {t.products.technical_specifications}
                     </h2>
 
@@ -666,7 +696,7 @@ export default function ProductDetailPage() {
                       if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
                       return (
                         <div key={g.key}>
-                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                          <p className="text-sm sm:text-[0.9375rem] font-semibold text-foreground mb-3 pt-0.5 border-b border-border/80 pb-2 tracking-tight">
                             {String(t.products[g.labelKey])}
                           </p>
                           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
@@ -680,7 +710,7 @@ export default function ProductDetailPage() {
                       if (!cards || (Array.isArray(cards) && cards.length === 0)) return null;
                       return (
                         <div>
-                          <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
+                          <p className="text-sm sm:text-[0.9375rem] font-semibold text-foreground mb-3 pt-0.5 border-b border-border/80 pb-2 tracking-tight">
                             {t.products.capacity}
                           </p>
                           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
@@ -688,17 +718,37 @@ export default function ProductDetailPage() {
                       );
                     })()}
 
-                    {/* Weight + Material — only if data exists */}
-                    {(product.weight || product.material) && (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                        {product.weight ? (
-                          <SpecCard label={t.products.weight} value={`${product.weight} ${t.products.kg_unit}`} />
-                        ) : null}
-                        {product.material ? (
-                          <SpecCard label={t.products.material} value={localizeMaterial(product.material)} />
-                        ) : null}
-                      </div>
-                    )}
+                    {/* material, type, condition, … — verbatim from localized nested JSON */}
+                    {(() => {
+                      const cards = renderRootLevelNestedSpecs();
+                      if (!cards) return null;
+                      return <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>;
+                    })()}
+
+                    {/* Column-only weight/material when not present in nested JSON (legacy products) */}
+                    {(() => {
+                      const jsonHasCapacityValues =
+                        nestedSpecs &&
+                        nestedSpecs.capacity &&
+                        typeof nestedSpecs.capacity === "object" &&
+                        Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "");
+                      const showColumnWeight = product.weight != null && !jsonHasCapacityValues;
+                      const showColumnMaterial = !!(product.material?.trim()) && !materialFromNestedJson;
+                      if (!showColumnWeight && !showColumnMaterial) return null;
+                      return (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                          {showColumnWeight ? (
+                            <SpecCard
+                              label={t.products.weight}
+                              value={`${product.weight} ${t.products.kg_unit}`}
+                            />
+                          ) : null}
+                          {showColumnMaterial ? (
+                            <SpecCard label={t.products.material} value={product.material!.trim()} />
+                          ) : null}
+                        </div>
+                      );
+                    })()}
                   </div>
                 ) : displaySpecifications.length ? (
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">

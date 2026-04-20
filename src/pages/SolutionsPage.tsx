@@ -7,6 +7,8 @@ import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
 import heroPort from "@/assets/hero-port.webp";
 import { useProducts } from "@/hooks/useProducts";
+import { ProductCard } from "@/components/products/ProductCard";
+import { useLocalizedField } from "@/hooks/useLocalizedField";
 
 /* ── Scroll reveal ── */
 function Reveal({
@@ -78,6 +80,7 @@ export default function SolutionsPage() {
   const { t, isRTL } = useLanguageStore();
   const { data: products = [] } = useProducts();
   const isAr = isRTL();
+  const { getField } = useLocalizedField();
 
   const shippingContainers = products.filter((p) => p.category === "iso-shipping-container" && p.status === "active");
   const storageContainers = products.filter((p) => p.category === "storage-containers" && p.status === "active");
@@ -197,7 +200,7 @@ export default function SolutionsPage() {
                 {solution.products[0]?.images?.[0] ? (
                   <img
                     src={solution.products[0].images[0]}
-                    alt={solution.title}
+                    alt={getField(solution.products[0], "title") ?? solution.products[0].title}
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                   />
@@ -261,7 +264,7 @@ export default function SolutionsPage() {
                     to={solution.shopLink}
                     className="btn-primary w-full sm:w-auto"
                   >
-                    <span>{isAr ? "عرض المواصفات" : "View Specifications"}</span>
+                    <span>{t("solutions.viewSpecifications")}</span>
                     <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
                   </Link>
                   <Link
@@ -285,43 +288,22 @@ export default function SolutionsPage() {
                     className="label-text text-[0.65rem] uppercase tracking-[0.15em] mb-5"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
-                    {isAr ? "المنتجات المتوفرة" : "Available Products"}
+                    {t("solutions.availableProducts")}
                     <span className="ms-2" style={{ color: "hsl(var(--primary))" }}>
                       ({solution.products.length})
                     </span>
                   </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                  {/* Same cards as Shop: default grid on lg, compact list on small screens */}
+                  <div className="hidden lg:block">
+                    <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
+                      {solution.products.map((product) => (
+                        <ProductCard key={`${solution.id}-${product.id}`} product={product} variant="default" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-3 lg:hidden">
                     {solution.products.map((product) => (
-                      <Link
-                        key={product.id}
-                        to={`/product/${product.slug}`}
-                        className="group border border-border subtle-card-hover hover:border-primary bg-background"
-                      >
-                        <div className="aspect-square overflow-hidden bg-secondary">
-                          {product.images?.[0] && (
-                            <img
-                              src={product.images[0]}
-                              alt={product.title}
-                              className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-300"
-                              loading="lazy"
-                            />
-                          )}
-                        </div>
-                        <div className="p-2.5">
-                          <p
-                            className="text-[0.72rem] font-bold truncate leading-snug"
-                            style={{ color: "hsl(var(--foreground))" }}
-                          >
-                            {product.title}
-                          </p>
-                          <p
-                            className="label-text text-[0.65rem] mt-0.5 uppercase tracking-[0.1em]"
-                            style={{ color: "hsl(var(--primary)/0.6)" }}
-                          >
-                            {product.sku}
-                          </p>
-                        </div>
-                      </Link>
+                      <ProductCard key={`${solution.id}-${product.id}`} product={product} variant="compact" />
                     ))}
                   </div>
                 </div>
@@ -395,7 +377,7 @@ export default function SolutionsPage() {
                   to="/shop"
                   className="btn-ghost-dark w-full sm:w-auto"
                 >
-                  {isAr ? "استكشف المنتجات" : "Browse Catalog"}
+                  {t("solutions.browseShopCatalog")}
                 </Link>
               </div>
             </Reveal>

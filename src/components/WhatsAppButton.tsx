@@ -5,18 +5,19 @@ const WHATSAPP_NUMBER = '966500165914';
 
 export function WhatsAppButton() {
   const { pathname } = useLocation();
-  const { isRTL } = useLanguageStore();
+  const { isRTL, language } = useLanguageStore();
 
   if (pathname === '/contact') return null;
 
   const url = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const whatsappLabel = language === 'ar' ? 'الدردشة على واتساب' : 'Chat on WhatsApp';
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={whatsappLabel}
       className={`fixed bottom-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 ${isRTL() ? 'left-6' : 'right-6'}`}
     >
       <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
