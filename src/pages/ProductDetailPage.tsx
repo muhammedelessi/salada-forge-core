@@ -86,14 +86,14 @@ function SpecCard({ label, value }: { label: string; value: string }) {
 
         {/* Value(s) — split on "|" for metric/imperial pairing, kept on one line */}
         {segments.length > 1 ? (
-          <div className="flex items-baseline gap-x-2.5 whitespace-nowrap overflow-hidden">
-            <span className="label-text text-xl sm:text-2xl font-bold leading-none tracking-tight text-foreground truncate">
+          <div className="flex items-baseline gap-x-3 whitespace-nowrap overflow-hidden">
+            <span className="label-text text-2xl sm:text-3xl font-extrabold leading-none tracking-tight text-foreground truncate">
               {segments[0]}
             </span>
             {segments.slice(1).map((seg, i) => (
-              <span key={i} className="flex items-baseline gap-x-2.5 shrink-0">
-                <span aria-hidden className="inline-block w-px h-4 bg-primary/50 self-center" />
-                <span className="label-text text-sm sm:text-base font-semibold leading-none tracking-[0.04em] text-muted-foreground/85">
+              <span key={i} className="flex items-baseline gap-x-3 shrink-0">
+                <span aria-hidden className="inline-block w-px h-5 bg-primary/50 self-center" />
+                <span className="label-text text-base sm:text-lg font-bold leading-none tracking-[0.02em] text-foreground/80">
                   {seg}
                 </span>
               </span>
@@ -101,7 +101,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
           </div>
         ) : (
           <p
-            className="label-text text-xl sm:text-2xl font-bold leading-tight tracking-tight text-foreground truncate"
+            className="label-text text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight text-foreground truncate"
             dir={rtl ? "rtl" : "ltr"}
           >
             {value}
