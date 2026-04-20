@@ -297,6 +297,16 @@ export const translations = {
       total_weight: "Total Weight",
       sku: "SKU",
       category: "Category",
+      kg_unit: "kg",
+      materials: {
+        steel: "Steel",
+        "carbon steel": "Carbon Steel",
+        "stainless steel": "Stainless Steel",
+        "corten steel": "Corten Steel",
+        aluminum: "Aluminum",
+        iron: "Iron",
+        wood: "Wood",
+      },
     },
     // Product Detail
     productDetail: {
