@@ -336,7 +336,7 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = dimSubLabels[k];
-      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
       return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
     });
   };
@@ -350,9 +350,17 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = capacitySubLabels[k];
-      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
       return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
     });
+  };
+
+  // Localize material name (e.g. "Steel" -> "فولاذ") via translations.products.materials
+  const localizeMaterial = (raw: string | undefined): string => {
+    if (!raw) return "";
+    const key = raw.trim().toLowerCase();
+    const map = t.products.materials as Record<string, string> | undefined;
+    return (map && map[key]) || raw;
   };
 
   const hasNestedSpecsContent =
@@ -514,7 +522,7 @@ export default function ProductDetailPage() {
                       color: "hsl(var(--primary))",
                     }}
                   >
-                    {t.products.material}: {product.material}
+                    {t.products.material}: {localizeMaterial(product.material)}
                   </span>
                 </div>
               ) : null}
@@ -657,7 +665,7 @@ export default function ProductDetailPage() {
                       return (
                         <div key={g.key}>
                           <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
-                            {t.products[g.labelKey]}
+                            {String(t.products[g.labelKey])}
                           </p>
                           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
                         </div>
@@ -682,10 +690,10 @@ export default function ProductDetailPage() {
                     {(product.weight || product.material) && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {product.weight ? (
-                          <SpecCard label={t.products.weight} value={`${product.weight} kg`} />
+                          <SpecCard label={t.products.weight} value={`${product.weight} ${t.products.kg_unit}`} />
                         ) : null}
                         {product.material ? (
-                          <SpecCard label={t.products.material} value={product.material} />
+                          <SpecCard label={t.products.material} value={localizeMaterial(product.material)} />
                         ) : null}
                       </div>
                     )}

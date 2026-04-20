@@ -297,6 +297,16 @@ export const translations = {
       total_weight: "Total Weight",
       sku: "SKU",
       category: "Category",
+      kg_unit: "kg",
+      materials: {
+        steel: "Steel",
+        "carbon steel": "Carbon Steel",
+        "stainless steel": "Stainless Steel",
+        "corten steel": "Corten Steel",
+        aluminum: "Aluminum",
+        iron: "Iron",
+        wood: "Wood",
+      },
     },
     // Product Detail
     productDetail: {
@@ -921,6 +931,16 @@ export const translations = {
       total_weight: "الوزن الإجمالي",
       sku: "رمز المنتج",
       category: "الفئة",
+      kg_unit: "كجم",
+      materials: {
+        steel: "فولاذ",
+        "carbon steel": "فولاذ كربوني",
+        "stainless steel": "فولاذ مقاوم للصدأ",
+        "corten steel": "فولاذ كورتن",
+        aluminum: "ألمنيوم",
+        iron: "حديد",
+        wood: "خشب",
+      },
     },
     productDetail: {
       home: "الرئيسية",
