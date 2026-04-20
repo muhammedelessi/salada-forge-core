@@ -64,36 +64,45 @@ function SpecCard({ label, value }: { label: string; value: string }) {
     .filter(Boolean);
 
   return (
-    <div className="relative border border-border bg-background group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden">
+    <div className="relative border border-border bg-background group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden min-w-0">
       {/* Gold corner accent — top start (RTL-aware via logical inset) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute top-0 start-0 h-[2px] w-6 bg-primary opacity-70 transition-all duration-300 group-hover:w-12 group-hover:opacity-100"
+        className="pointer-events-none absolute top-0 start-0 h-[2px] w-5 sm:w-6 bg-primary opacity-70 transition-all duration-300 group-hover:w-12 group-hover:opacity-100"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute top-0 start-0 w-[2px] h-6 bg-primary opacity-70 transition-all duration-300 group-hover:h-12 group-hover:opacity-100"
+        className="pointer-events-none absolute top-0 start-0 w-[2px] h-5 sm:h-6 bg-primary opacity-70 transition-all duration-300 group-hover:h-12 group-hover:opacity-100"
       />
 
-      <div className="p-5 sm:p-6">
+      <div className="p-3 sm:p-5 md:p-6 min-w-0">
         {/* Label */}
         <p
-          className="label-text text-[0.65rem] sm:text-[0.72rem] uppercase tracking-[0.22em] mb-3 font-semibold transition-colors duration-300"
-          style={{ color: "hsl(var(--primary) / 0.85)" }}
+          className="label-text uppercase tracking-[0.18em] sm:tracking-[0.22em] mb-2 sm:mb-3 font-semibold transition-colors duration-300 truncate"
+          style={{
+            color: "hsl(var(--primary) / 0.85)",
+            fontSize: "clamp(0.6rem, 1.6vw, 0.75rem)",
+          }}
         >
           {label}
         </p>
 
-        {/* Value(s) — split on "|" for metric/imperial pairing, kept on one line */}
+        {/* Value(s) — split on "|" for metric/imperial pairing. Wraps on tight widths. */}
         {segments.length > 1 ? (
-          <div className="flex items-baseline gap-x-3 whitespace-nowrap overflow-hidden">
-            <span className="label-text text-2xl sm:text-3xl font-extrabold leading-none tracking-tight text-foreground truncate">
+          <div className="flex flex-wrap items-baseline gap-x-2 sm:gap-x-3 gap-y-1 min-w-0">
+            <span
+              className="label-text font-extrabold leading-none tracking-tight text-foreground"
+              style={{ fontSize: "clamp(1.05rem, 3.2vw, 1.875rem)" }}
+            >
               {segments[0]}
             </span>
             {segments.slice(1).map((seg, i) => (
-              <span key={i} className="flex items-baseline gap-x-3 shrink-0">
-                <span aria-hidden className="inline-block w-px h-5 bg-primary/50 self-center" />
-                <span className="label-text text-base sm:text-lg font-bold leading-none tracking-[0.02em] text-foreground/80">
+              <span key={i} className="flex items-baseline gap-x-2 sm:gap-x-3 shrink-0">
+                <span aria-hidden className="inline-block w-px h-3.5 sm:h-5 bg-primary/50 self-center" />
+                <span
+                  className="label-text font-bold leading-none tracking-[0.02em] text-foreground/80"
+                  style={{ fontSize: "clamp(0.78rem, 2vw, 1.125rem)" }}
+                >
                   {seg}
                 </span>
               </span>
@@ -101,7 +110,8 @@ function SpecCard({ label, value }: { label: string; value: string }) {
           </div>
         ) : (
           <p
-            className="label-text text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight text-foreground truncate"
+            className="label-text font-extrabold leading-tight tracking-tight text-foreground break-words"
+            style={{ fontSize: "clamp(1.05rem, 3.2vw, 1.875rem)" }}
             dir={rtl ? "rtl" : "ltr"}
           >
             {value}
