@@ -931,6 +931,16 @@ export const translations = {
       total_weight: "الوزن الإجمالي",
       sku: "رمز المنتج",
       category: "الفئة",
+      kg_unit: "كجم",
+      materials: {
+        steel: "فولاذ",
+        "carbon steel": "فولاذ كربوني",
+        "stainless steel": "فولاذ مقاوم للصدأ",
+        "corten steel": "فولاذ كورتن",
+        aluminum: "ألمنيوم",
+        iron: "حديد",
+        wood: "خشب",
+      },
     },
     productDetail: {
       home: "الرئيسية",
