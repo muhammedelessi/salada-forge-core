@@ -8,6 +8,7 @@ import { Package, Clock, CheckCircle, Truck, XCircle, LogOut, ChevronDown, Chevr
 import { toast } from 'sonner';
 import type { User } from '@supabase/supabase-js';
 import { cn } from '@/lib/utils';
+import { productThumb80BoxClass, productThumbImgClass } from '@/lib/productImageFrame';
 import { OrderTimeline } from '@/components/orders/OrderTimeline';
 
 interface ShippingUpdate {
@@ -482,12 +483,15 @@ export default function OrdersPage() {
                               key={idx}
                               className={cn('flex items-center gap-4', isRTL() && 'flex-row-reverse')}
                             >
-                              <div className="w-16 h-16 bg-muted flex-shrink-0">
+                              <div className={productThumb80BoxClass}>
                                 <img
                                   src={item.image}
                                   alt={item.title}
                                   loading="lazy"
-                                  className="w-full h-full object-cover"
+                                  decoding="async"
+                                  width={80}
+                                  height={80}
+                                  className={productThumbImgClass}
                                 />
                               </div>
                               <div className={cn('flex-1', isRTL() && 'text-right')}>

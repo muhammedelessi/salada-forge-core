@@ -4,6 +4,7 @@ import { useCartStore } from '@/store/cartStore';
 import { Minus, Plus, X, ArrowRight, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
+import { productThumb80BoxClass, productThumbImgClass } from '@/lib/productImageFrame';
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getSubtotal, getShipping, getTax, getTotal, couponCode, couponDiscount, applyCoupon, removeCoupon } = useCartStore();
@@ -69,15 +70,15 @@ export default function CartPage() {
                     >
                       <div className={`flex gap-4 md:gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                         {/* Image */}
-                        <Link
-                          to={`/product/${item.product.slug}`}
-                          className="w-24 h-24 md:w-32 md:h-32 bg-muted flex-shrink-0"
-                        >
+                        <Link to={`/product/${item.product.slug}`} className={productThumb80BoxClass}>
                           <img
                             src={item.product.images[0]}
                             alt={item.product.title}
                             loading="lazy"
-                            className="w-full h-full object-cover"
+                            decoding="async"
+                            width={80}
+                            height={80}
+                            className={productThumbImgClass}
                           />
                         </Link>
 

@@ -9,6 +9,7 @@ import { translations } from '@/i18n/translations';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import type { User } from '@supabase/supabase-js';
+import { productThumb80BoxClass, productThumbImgClass } from '@/lib/productImageFrame';
 
 type CheckoutStep = 'shipping' | 'payment' | 'confirmation';
 type PaymentMethod = 'credit_card' | 'bank_transfer';
@@ -670,12 +671,15 @@ export default function CheckoutPage() {
                       key={`${item.product.id}-${item.selectedVariant?.id || 'default'}`}
                       className={`flex gap-4 ${isRTL() ? 'flex-row-reverse' : ''}`}
                     >
-                      <div className="relative w-16 h-16 bg-muted flex-shrink-0">
+                      <div className={productThumb80BoxClass}>
                         <img
                           src={item.product.images[0]}
                           alt={item.product.title}
                           loading="lazy"
-                          className="w-full h-full object-cover"
+                          decoding="async"
+                          width={80}
+                          height={80}
+                          className={productThumbImgClass}
                         />
                         <span className={`absolute -top-2 ${isRTL() ? '-left-2' : '-right-2'} w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center label-text`}>
                           {item.quantity}

@@ -9,6 +9,7 @@ import heroPort from "@/assets/hero-port.webp";
 import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/products/ProductCard";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
+import { productThumbImgClass } from "@/lib/productImageFrame";
 
 /* ── Scroll reveal ── */
 function Reveal({
@@ -194,22 +195,22 @@ export default function SolutionsPage() {
         return (
           <section key={solution.id} id={solution.id} className="border-b border-border" dir={isAr ? "rtl" : "ltr"}>
             {/* Image + Content */}
-            <div className="grid md:grid-cols-2">
-              {/* Image */}
-              <div className={`relative overflow-hidden ${imgOrder}`} style={{ minHeight: "320px" }}>
+            <div className="grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+              {/* Image — intrinsic aspect; contain so full photo visible (not cropped like object-cover) */}
+              <div
+                className={`relative flex min-h-[280px] items-center justify-center overflow-hidden bg-muted/25 p-4 sm:p-6 md:min-h-[min(72vh,720px)] ${imgOrder}`}
+              >
                 {solution.products[0]?.images?.[0] ? (
                   <img
                     src={solution.products[0].images[0]}
                     alt={getField(solution.products[0], "title") ?? solution.products[0].title}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                    decoding="async"
+                    className={`${productThumbImgClass} h-auto w-auto max-h-[min(70vh,900px)] max-w-full transition-transform duration-700 hover:scale-[1.02]`}
                   />
                 ) : (
-                  <div
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ background: "hsl(var(--secondary))" }}
-                  >
-                    <solution.icon className="w-16 h-16" style={{ color: "hsl(var(--primary)/0.3)" }} />
+                  <div className="flex min-h-[240px] w-full items-center justify-center" style={{ background: "hsl(var(--secondary))" }}>
+                    <solution.icon className="h-16 w-16" style={{ color: "hsl(var(--primary)/0.3)" }} />
                   </div>
                 )}
                 
@@ -295,9 +296,14 @@ export default function SolutionsPage() {
                   </p>
                   {/* Same cards as Shop: default grid on lg, compact list on small screens */}
                   <div className="hidden lg:block">
-                    <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-4 gap-3">
                       {solution.products.map((product) => (
-                        <ProductCard key={`${solution.id}-${product.id}`} product={product} variant="default" />
+                        <ProductCard
+                          key={`${solution.id}-${product.id}`}
+                          product={product}
+                          variant="default"
+                          dense
+                        />
                       ))}
                     </div>
                   </div>

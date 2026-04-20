@@ -4,6 +4,8 @@ import { useCartStore } from '@/store/cartStore';
 import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+import { productThumb80BoxClass, productThumbImgClass } from '@/lib/productImageFrame';
 
 interface CartDrawerProps {
   open: boolean;
@@ -66,7 +68,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                     <Link
                       to={`/product/${item.product.slug}`}
                       onClick={() => onOpenChange(false)}
-                      className="w-20 h-20 bg-muted flex-shrink-0 overflow-hidden"
+                      className={cn(productThumb80BoxClass, "transition-transform duration-300 group-hover:opacity-95")}
                     >
                       <img
                         src={item.product.images[0]}
@@ -75,7 +77,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                         decoding="async"
                         width={80}
                         height={80}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 max-w-full"
+                        className={cn(productThumbImgClass, "transition-transform duration-300 group-hover:scale-[1.03]")}
                       />
                     </Link>
 

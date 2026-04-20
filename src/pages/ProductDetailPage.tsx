@@ -21,6 +21,8 @@ import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
 import { getLocalizedProductSpecifications, getLocalizedRawSpecifications } from "@/lib/productSpecifications";
+import { cn } from "@/lib/utils";
+import { productThumbImgClass } from "@/lib/productImageFrame";
 
 /** Fallback when a JSON key has no translation: `door_width` → `Door Width` */
 function formatSpecKeyLabel(rawKey: string): string {
@@ -461,11 +463,11 @@ export default function ProductDetailPage() {
             {/* ── Gallery — mobile: slightly taller frame + subtle width bleed so the hero matches the info column visually */}
             <div className="space-y-3 max-lg:w-[calc(100%+1rem)] max-lg:-mx-2 lg:mx-0 lg:w-full">
               {/* Main image */}
-              <div className="relative flex min-h-[200px] items-center justify-center overflow-hidden border border-border bg-transparent p-3 sm:min-h-[260px] lg:min-h-[300px]">
+              <div className="group relative flex min-h-[200px] items-center justify-center overflow-hidden border border-border bg-transparent p-3 sm:min-h-[260px] lg:min-h-[300px]">
                 <img
                   src={product.images[selectedImage] || "/placeholder.svg"}
                   alt={localizedTitle}
-                  className="max-h-[min(65vh,560px)] w-full object-contain object-center transition-transform duration-400 ease-out hover:scale-[1.02]"
+                  className="max-h-[min(65vh,560px)] w-full origin-center object-contain object-center transition-transform duration-400 ease-out group-hover:scale-[2]"
                   style={{ objectFit: "contain", objectPosition: "center", filter: "grayscale(8%)", cursor: "zoom-in" }}
                   title={isAr ? "تكبير الصورة" : "Zoom image"}
                 />
@@ -502,8 +504,7 @@ export default function ProductDetailPage() {
                         src={img}
                         alt={`${localizedTitle} - ${i + 1}`}
                         loading="lazy"
-                        className="max-h-full max-w-full object-contain object-center"
-                        style={{ objectFit: "contain", objectPosition: "center" }}
+                        className={cn(productThumbImgClass, "h-full w-full")}
                       />
                     </button>
                   ))}
@@ -908,9 +909,9 @@ export default function ProductDetailPage() {
                 <ProductCard key={p.id} product={p} variant="compact" />
               ))}
             </div>
-            <div className="hidden lg:grid lg:grid-cols-4 gap-4">
+            <div className="hidden gap-3 lg:grid lg:grid-cols-4">
               {related.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <ProductCard key={p.id} product={p} dense />
               ))}
             </div>
           </div>

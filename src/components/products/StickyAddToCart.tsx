@@ -6,6 +6,7 @@ import { translations } from '@/i18n/translations';
 import { useLocalizedField } from '@/hooks/useLocalizedField';
 import { Product, ProductVariant } from '@/types';
 import { cn } from '@/lib/utils';
+import { productThumb80CompactBoxClass, productThumbImgClass } from '@/lib/productImageFrame';
 
 interface StickyAddToCartProps {
   product: Product;
@@ -51,16 +52,15 @@ export function StickyAddToCart({
         <div className="flex items-center justify-between gap-4">
           {/* Product info — DOM order; dir=rtl places this block on the physical right */}
           <div className="flex min-w-0 flex-1 items-center gap-3">
-            <div className="hidden h-12 w-12 shrink-0 items-center justify-center bg-transparent p-0.5 sm:flex">
+            <div className={cn('hidden sm:flex', productThumb80CompactBoxClass)}>
               <img
                 src={product.images[0]}
                 alt={displayTitle}
                 loading="lazy"
                 decoding="async"
-                width={48}
-                height={48}
-                className="max-h-full max-w-full min-h-0 object-contain object-center"
-                style={{ objectFit: 'contain', objectPosition: 'center' }}
+                width={80}
+                height={80}
+                className={productThumbImgClass}
               />
             </div>
             <div className="min-w-0 flex-1 text-start">

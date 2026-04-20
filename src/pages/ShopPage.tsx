@@ -469,10 +469,14 @@ export default function ShopPage() {
           <>
             {/* Desktop */}
             <div className="hidden lg:block">
-              <div className={viewMode === "grid" ? "grid grid-cols-2 xl:grid-cols-3 gap-4" : "flex flex-col gap-3"}>
+              <div className={viewMode === "grid" ? "grid grid-cols-4 gap-3" : "flex flex-col gap-3"}>
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product}
-                    variant={viewMode === "list" ? "compact" : "default"} />
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    variant={viewMode === "list" ? "compact" : "default"}
+                    dense={viewMode === "grid"}
+                  />
                 ))}
               </div>
             </div>

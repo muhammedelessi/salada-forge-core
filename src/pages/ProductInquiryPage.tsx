@@ -8,6 +8,7 @@ import { useLanguageStore } from '@/store/languageStore';
 import { translations } from '@/i18n/translations';
 import { useLocalizedField } from '@/hooks/useLocalizedField';
 import { cn } from '@/lib/utils';
+import { productCardImageFrameClass, productThumbImgClass } from '@/lib/productImageFrame';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
 import { FormField, fieldShell, inputHeight, textareaMin } from '@/components/forms/ContactFormFields';
@@ -225,15 +226,13 @@ export default function ProductInquiryPage() {
                 <h2 className={cn('text-lg font-bold mb-4', isRTL && 'text-right')}>
                   {language === 'ar' ? 'المنتج' : 'Product'}
                 </h2>
-                <div className="aspect-square bg-transparent overflow-hidden mb-4 flex items-center justify-center p-2">
+                <div className={cn(productCardImageFrameClass, 'mb-4 border border-border/60 bg-muted/10')}>
                   <img
                     src={product.images[0] || '/placeholder.svg'}
                     alt={displayProductTitle}
                     loading="lazy"
                     decoding="async"
-                    width={400}
-                    height={400}
-                    className="max-h-full max-w-full object-contain"
+                    className={cn(productThumbImgClass, 'h-full w-full')}
                   />
                 </div>
                 <h3 className={cn('font-semibold mb-2', isRTL && 'text-right')}>{displayProductTitle}</h3>
