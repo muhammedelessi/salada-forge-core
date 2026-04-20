@@ -33,6 +33,7 @@ export interface Product {
   seoDescriptionAr?: string;
   idealForAr?: string[];
   keyFeaturesAr?: string[];
+  customizationOptionsAr?: string[];
   // Optional product attributes
   tags?: string[];
   material?: string;
