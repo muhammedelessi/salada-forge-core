@@ -813,6 +813,17 @@ export default function ProductDetailPage() {
               </div>
             ))}
           </div>
+
+          {/* CTA row */}
+          <div className="flex flex-col sm:flex-row gap-3 rtl:sm:flex-row-reverse">
+            <Link to="/contact" className="btn-primary rtl:flex-row-reverse">
+              <span>{t.productDetail.requestPricing}</span>
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+            </Link>
+            <Link to="/contact" className="btn-secondary text-foreground/65">
+              {t.productDetail.contactEngineer}
+            </Link>
+          </div>
         </div>
       </section>
 
