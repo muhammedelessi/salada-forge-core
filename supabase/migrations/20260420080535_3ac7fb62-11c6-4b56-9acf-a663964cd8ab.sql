@@ -1,0 +1,1 @@
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS customization_options_ar JSONB DEFAULT '[]'::jsonb;

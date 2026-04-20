@@ -287,6 +287,7 @@ export default function ProductDetailPage() {
   const localizedSeoDescription = getField(product, "seoDescription");
   const localizedKeyFeatures = getJsonField<string>(product, "keyFeatures");
   const localizedIdealFor = getJsonField<string>(product, "idealFor");
+  const localizedCustomization = getJsonField<string>(product, "customizationOptions");
 
   const tabs = [
     { id: "specs" as const, label: t.productDetail.specifications },
@@ -311,7 +312,7 @@ export default function ProductDetailPage() {
     },
     {
       title: t.productDetail.customization,
-      items: product.customizationOptions?.length ? product.customizationOptions : t.productDetail.defaultCustomization,
+      items: localizedCustomization.length ? localizedCustomization : t.productDetail.defaultCustomization,
     },
   ];
 

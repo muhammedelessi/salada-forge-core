@@ -269,6 +269,7 @@ export type Database = {
           compare_at_price: number | null
           created_at: string
           customization_options: Json | null
+          customization_options_ar: Json | null
           description: string | null
           description_ar: string | null
           dimensions: Json | null
@@ -305,6 +306,7 @@ export type Database = {
           compare_at_price?: number | null
           created_at?: string
           customization_options?: Json | null
+          customization_options_ar?: Json | null
           description?: string | null
           description_ar?: string | null
           dimensions?: Json | null
@@ -341,6 +343,7 @@ export type Database = {
           compare_at_price?: number | null
           created_at?: string
           customization_options?: Json | null
+          customization_options_ar?: Json | null
           description?: string | null
           description_ar?: string | null
           dimensions?: Json | null

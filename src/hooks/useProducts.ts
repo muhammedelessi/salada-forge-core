@@ -29,6 +29,7 @@ interface DbProduct {
   ideal_for: Json | null;
   key_features: Json | null;
   customization_options: Json | null;
+  customization_options_ar?: Json | null;
   title_ar: string | null;
   description_ar: string | null;
   seo_title_ar: string | null;
@@ -92,6 +93,7 @@ function mapDbProductToProduct(dbProduct: DbProduct): Product {
     seoDescriptionAr: dbProduct.seo_description_ar || undefined,
     idealForAr: (Array.isArray(dbProduct.ideal_for_ar) ? (dbProduct.ideal_for_ar as string[]) : undefined),
     keyFeaturesAr: (Array.isArray(dbProduct.key_features_ar) ? (dbProduct.key_features_ar as string[]) : undefined),
+    customizationOptionsAr: (Array.isArray(dbProduct.customization_options_ar) ? (dbProduct.customization_options_ar as string[]) : undefined),
     tags: Array.isArray(dbProduct.tags) ? dbProduct.tags : undefined,
     material: dbProduct.material || undefined,
     weight: dbProduct.weight != null ? Number(dbProduct.weight) : undefined,
