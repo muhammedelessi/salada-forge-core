@@ -75,10 +75,10 @@ function SpecCard({ label, value }: { label: string; value: string }) {
         className="pointer-events-none absolute top-0 start-0 w-[2px] h-6 bg-primary opacity-70 transition-all duration-300 group-hover:h-12 group-hover:opacity-100"
       />
 
-      <div className="p-4 sm:p-5">
+      <div className="p-5 sm:p-6">
         {/* Label */}
         <p
-          className="label-text text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.22em] mb-2.5 font-semibold transition-colors duration-300"
+          className="label-text text-[0.65rem] sm:text-[0.72rem] uppercase tracking-[0.22em] mb-3 font-semibold transition-colors duration-300"
           style={{ color: "hsl(var(--primary) / 0.85)" }}
         >
           {label}
@@ -86,14 +86,14 @@ function SpecCard({ label, value }: { label: string; value: string }) {
 
         {/* Value(s) — split on "|" for metric/imperial pairing, kept on one line */}
         {segments.length > 1 ? (
-          <div className="flex items-baseline gap-x-2 whitespace-nowrap overflow-hidden">
-            <span className="label-text text-base sm:text-[1.05rem] font-bold leading-none tracking-tight text-foreground truncate">
+          <div className="flex items-baseline gap-x-2.5 whitespace-nowrap overflow-hidden">
+            <span className="label-text text-xl sm:text-2xl font-bold leading-none tracking-tight text-foreground truncate">
               {segments[0]}
             </span>
             {segments.slice(1).map((seg, i) => (
-              <span key={i} className="flex items-baseline gap-x-2 shrink-0">
-                <span aria-hidden className="inline-block w-px h-3 bg-primary/50 self-center" />
-                <span className="label-text text-[0.72rem] sm:text-xs font-semibold leading-none tracking-[0.04em] text-muted-foreground/85">
+              <span key={i} className="flex items-baseline gap-x-2.5 shrink-0">
+                <span aria-hidden className="inline-block w-px h-4 bg-primary/50 self-center" />
+                <span className="label-text text-sm sm:text-base font-semibold leading-none tracking-[0.04em] text-muted-foreground/85">
                   {seg}
                 </span>
               </span>
@@ -101,7 +101,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
           </div>
         ) : (
           <p
-            className="label-text text-base sm:text-[1.05rem] font-bold leading-tight tracking-tight text-foreground truncate"
+            className="label-text text-xl sm:text-2xl font-bold leading-tight tracking-tight text-foreground truncate"
             dir={rtl ? "rtl" : "ltr"}
           >
             {value}
