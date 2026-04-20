@@ -336,7 +336,7 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = dimSubLabels[k];
-      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
       return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
     });
   };
@@ -350,9 +350,17 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = capacitySubLabels[k];
-      const label = labelKey ? t.products[labelKey] : k.replace(/_/g, " ");
+      const label = labelKey ? String(t.products[labelKey]) : k.replace(/_/g, " ");
       return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
     });
+  };
+
+  // Localize material name (e.g. "Steel" -> "فولاذ") via translations.products.materials
+  const localizeMaterial = (raw: string | undefined): string => {
+    if (!raw) return "";
+    const key = raw.trim().toLowerCase();
+    const map = t.products.materials as Record<string, string> | undefined;
+    return (map && map[key]) || raw;
   };
 
   const hasNestedSpecsContent =
