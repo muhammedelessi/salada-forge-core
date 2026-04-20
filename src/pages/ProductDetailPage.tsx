@@ -205,11 +205,7 @@ export default function ProductDetailPage() {
     const descAr = product.descriptionAr?.trim();
     const descEn = product.description?.trim();
 
-    const finalTitle =
-      (isAr ? seoTitleAr || titleAr : seoTitleEn || titleEn) ||
-      seoTitleEn ||
-      titleEn ||
-      "Salada";
+    const finalTitle = (isAr ? seoTitleAr || titleAr : seoTitleEn || titleEn) || seoTitleEn || titleEn || "Salada";
     const finalDesc = (isAr ? seoDescAr || descAr : seoDescEn || descEn) || seoDescEn || descEn || "";
 
     document.title = finalTitle;
@@ -267,10 +263,7 @@ export default function ProductDetailPage() {
         <div className="industrial-container py-24 text-center" dir={isAr ? "rtl" : "ltr"}>
           <p className="label-text text-[0.6rem] uppercase tracking-[0.2em] mb-4 text-muted-foreground">404</p>
           <h1 className="font-black uppercase text-2xl mb-6">{t.product.notFound}</h1>
-          <Link
-            to="/shop"
-            className="btn-primary"
-          >
+          <Link to="/shop" className="btn-primary">
             {isAr ? "العودة للمتجر" : "Back to Shop"}
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
           </Link>
@@ -287,7 +280,6 @@ export default function ProductDetailPage() {
   const localizedSeoDescription = getField(product, "seoDescription");
   const localizedKeyFeatures = getJsonField<string>(product, "keyFeatures");
   const localizedIdealFor = getJsonField<string>(product, "idealFor");
-  const localizedCustomization = getJsonField<string>(product, "customizationOptions");
 
   const tabs = [
     { id: "specs" as const, label: t.productDetail.specifications },
@@ -312,7 +304,7 @@ export default function ProductDetailPage() {
     },
     {
       title: t.productDetail.customization,
-      items: localizedCustomization.length ? localizedCustomization : t.productDetail.defaultCustomization,
+      items: product.customizationOptions?.length ? product.customizationOptions : t.productDetail.defaultCustomization,
     },
   ];
 
@@ -383,7 +375,6 @@ export default function ProductDetailPage() {
       (nestedSpecs.capacity &&
         typeof nestedSpecs.capacity === "object" &&
         Object.values(nestedSpecs.capacity).some((v) => v != null && String(v).trim() !== "")));
-
 
   // ── NOTE: All RTL is handled via dir="rtl" on wrappers.
   //    Flexbox, text-align, borders all flip automatically.
@@ -824,21 +815,6 @@ export default function ProductDetailPage() {
           </div>
 
           {/* CTA row */}
-          <div className="flex flex-col sm:flex-row gap-3 rtl:sm:flex-row-reverse">
-            <Link
-              to="/contact"
-              className="btn-primary rtl:flex-row-reverse"
-            >
-              <span>{t.productDetail.requestPricing}</span>
-              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-            </Link>
-            <Link
-              to="/contact"
-              className="btn-secondary text-foreground/65"
-            >
-              {t.productDetail.contactEngineer}
-            </Link>
-          </div>
         </div>
       </section>
 
