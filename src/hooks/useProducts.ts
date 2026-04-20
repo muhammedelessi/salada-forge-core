@@ -29,6 +29,7 @@ interface DbProduct {
   ideal_for: Json | null;
   key_features: Json | null;
   customization_options: Json | null;
+  customization_options_ar?: Json | null;
   title_ar: string | null;
   description_ar: string | null;
   seo_title_ar: string | null;
