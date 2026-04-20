@@ -665,7 +665,7 @@ export default function ProductDetailPage() {
                       return (
                         <div key={g.key}>
                           <p className="label-text text-[0.58rem] uppercase tracking-[0.18em] mb-2.5 text-muted-foreground">
-                            {t.products[g.labelKey]}
+                            {String(t.products[g.labelKey])}
                           </p>
                           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">{cards}</div>
                         </div>
@@ -690,10 +690,10 @@ export default function ProductDetailPage() {
                     {(product.weight || product.material) && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {product.weight ? (
-                          <SpecCard label={t.products.weight} value={`${product.weight} kg`} />
+                          <SpecCard label={t.products.weight} value={`${product.weight} ${t.products.kg_unit}`} />
                         ) : null}
                         {product.material ? (
-                          <SpecCard label={t.products.material} value={product.material} />
+                          <SpecCard label={t.products.material} value={localizeMaterial(product.material)} />
                         ) : null}
                       </div>
                     )}
