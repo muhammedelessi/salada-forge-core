@@ -796,8 +796,8 @@ export default function ProductDetailPage() {
       {/* ╔══════════════════════════════════════╗
           ║  INFO BLOCKS                         ║
           ╚══════════════════════════════════════╝ */}
-      <section className="border-b border-border py-10 md:py-14 bg-secondary/20">
-        <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
+    <section className="border-b border-border py-10 md:py-14 bg-secondary/20">
+         {/*  <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
           <div
             className="grid grid-cols-1 md:grid-cols-3 mb-8"
             style={{ gap: "1px", background: "hsl(var(--border))" }}
@@ -827,7 +827,7 @@ export default function ProductDetailPage() {
               {t.productDetail.contactEngineer}
             </Link>
           </div>*/}
-        </div>
+        </div>*/}
       </section>
 
       {/* ╔══════════════════════════════════════╗
