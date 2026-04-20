@@ -54,6 +54,9 @@ function Pill({ children }: { children: React.ReactNode }) {
 }
 
 function SpecCard({ label, value }: { label: string; value: string }) {
+  const { isRTL } = useLanguageStore();
+  const rtl = isRTL();
+
   // Split values like "2.44M | 8 FEET" into segments for visually balanced display
   const segments = String(value)
     .split("|")
@@ -81,21 +84,25 @@ function SpecCard({ label, value }: { label: string; value: string }) {
           {label}
         </p>
 
-        {/* Value(s) — split on "|" for metric/imperial pairing */}
+        {/* Value(s) — split on "|" for metric/imperial pairing, kept on one line */}
         {segments.length > 1 ? (
-          <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1" dir="ltr">
-            <span className="label-text text-base sm:text-[1.05rem] font-bold leading-none tracking-tight text-foreground">
+          <div className="flex items-baseline gap-x-2 whitespace-nowrap overflow-hidden">
+            <span className="label-text text-base sm:text-[1.05rem] font-bold leading-none tracking-tight text-foreground truncate">
               {segments[0]}
             </span>
-            <span aria-hidden className="inline-block w-px h-3.5 bg-primary/50" />
-            <span className="label-text text-[0.72rem] sm:text-xs font-semibold leading-none tracking-[0.06em] text-muted-foreground/85">
-              {segments.slice(1).join(" | ")}
-            </span>
+            {segments.slice(1).map((seg, i) => (
+              <span key={i} className="flex items-baseline gap-x-2 shrink-0">
+                <span aria-hidden className="inline-block w-px h-3 bg-primary/50 self-center" />
+                <span className="label-text text-[0.72rem] sm:text-xs font-semibold leading-none tracking-[0.04em] text-muted-foreground/85">
+                  {seg}
+                </span>
+              </span>
+            ))}
           </div>
         ) : (
           <p
-            className="label-text text-base sm:text-[1.05rem] font-bold leading-tight tracking-tight text-foreground"
-            dir="ltr"
+            className="label-text text-base sm:text-[1.05rem] font-bold leading-tight tracking-tight text-foreground truncate"
+            dir={rtl ? "rtl" : "ltr"}
           >
             {value}
           </p>
