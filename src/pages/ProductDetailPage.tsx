@@ -388,6 +388,8 @@ export default function ProductDetailPage() {
       if (k === "condition") return t.products.spec_condition;
       if (k === "size") return t.products.spec_size;
       if (k === "sku") return t.products.sku;
+      if (k === "standard") return t.products.spec_standard;
+      if (k === "application") return t.products.spec_application;
       return formatSpecKeyLabel(k);
     };
     entries.sort((a, b) => {
