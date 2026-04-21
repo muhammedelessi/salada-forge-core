@@ -53,7 +53,9 @@ function sortEntriesByKeyOrder(entries: [string, unknown][], order: readonly str
 
 /** Keys rendered as grouped cards — not root string fields */
 const NESTED_STRUCTURAL_KEYS = new Set(["external", "internal", "door", "capacity"]);
-const ROOT_SPEC_ORDER = ["material", "type", "condition"] as const;
+/** Keys rendered elsewhere (legacy column cards / capacity group) — skip in root-level rendering */
+const ROOT_SPEC_SKIP_KEYS = new Set(["weight"]);
+const ROOT_SPEC_ORDER = ["sku", "material", "type", "condition"] as const;
 
 function hasRootStringFields(raw: Record<string, unknown>): boolean {
   return Object.entries(raw).some(
@@ -373,7 +375,11 @@ export default function ProductDetailPage() {
   const renderRootLevelNestedSpecs = (): React.ReactNode => {
     if (!nestedSpecs) return null;
     const entries = Object.entries(nestedSpecs).filter(
-      ([k, v]) => !NESTED_STRUCTURAL_KEYS.has(k) && typeof v === "string" && String(v).trim() !== "",
+      ([k, v]) =>
+        !NESTED_STRUCTURAL_KEYS.has(k) &&
+        !ROOT_SPEC_SKIP_KEYS.has(k) &&
+        typeof v === "string" &&
+        String(v).trim() !== "",
     );
     if (entries.length === 0) return null;
     const labelForKey = (k: string) => {
@@ -381,6 +387,7 @@ export default function ProductDetailPage() {
       if (k === "type") return t.products.spec_type;
       if (k === "condition") return t.products.spec_condition;
       if (k === "size") return t.products.spec_size;
+      if (k === "sku") return t.products.sku;
       return formatSpecKeyLabel(k);
     };
     entries.sort((a, b) => {
