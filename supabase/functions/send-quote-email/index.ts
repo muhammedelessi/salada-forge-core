@@ -70,6 +70,7 @@ Deno.serve(async (req) => {
 
   try {
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
     const body: QuoteEmailRequest = await req.json();
     const {
       customerName,
@@ -83,8 +84,11 @@ Deno.serve(async (req) => {
       language,
     } = body;
 
-    if (!resendApiKey) {
-      console.error("RESEND_API_KEY is not configured");
+    if (!resendApiKey || !lovableApiKey) {
+      console.error("Email keys are not configured", {
+        hasResend: Boolean(resendApiKey),
+        hasLovable: Boolean(lovableApiKey),
+      });
       return new Response(JSON.stringify({ success: true }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
