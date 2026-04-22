@@ -11,7 +11,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const RESEND_API_URL = "https://api.resend.com/emails";
+const RESEND_GATEWAY_URL = "https://connector-gateway.lovable.dev/resend/emails";
 const DEFAULT_FROM = "Salada <hello@salada.sa>";
 const ADMIN_TO = "Hello@salada.sa";
 
@@ -28,14 +28,16 @@ interface QuoteEmailRequest {
 }
 
 async function sendResendEmail(
+  lovableApiKey: string,
   resendApiKey: string,
   payload: { from: string; to: string[]; subject: string; html: string },
 ) {
-  const response = await fetch(RESEND_API_URL, {
+  const response = await fetch(RESEND_GATEWAY_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${resendApiKey}`,
+      Authorization: `Bearer ${lovableApiKey}`,
+      "X-Connection-Api-Key": resendApiKey,
     },
     body: JSON.stringify(payload),
   });
@@ -68,6 +70,7 @@ Deno.serve(async (req) => {
 
   try {
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
     const body: QuoteEmailRequest = await req.json();
     const {
       customerName,
@@ -81,8 +84,11 @@ Deno.serve(async (req) => {
       language,
     } = body;
 
-    if (!resendApiKey) {
-      console.error("RESEND_API_KEY is not configured");
+    if (!resendApiKey || !lovableApiKey) {
+      console.error("Email keys are not configured", {
+        hasResend: Boolean(resendApiKey),
+        hasLovable: Boolean(lovableApiKey),
+      });
       return new Response(JSON.stringify({ success: true }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -147,13 +153,13 @@ Deno.serve(async (req) => {
 
     try {
       await Promise.all([
-        sendResendEmail(resendApiKey, {
+        sendResendEmail(lovableApiKey, resendApiKey, {
           from: DEFAULT_FROM,
           to: [ADMIN_TO],
           subject: `New Quote Request: ${productTitle} — ${customerName}`,
           html: adminHtml,
         }),
-        sendResendEmail(resendApiKey, {
+        sendResendEmail(lovableApiKey, resendApiKey, {
           from: DEFAULT_FROM,
           to: [customerEmail],
           subject: isAr ? "تأكيد الطلب — Salada" : "Request Confirmation — Salada",
