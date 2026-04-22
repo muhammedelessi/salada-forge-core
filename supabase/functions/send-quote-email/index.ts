@@ -11,7 +11,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const RESEND_API_URL = "https://api.resend.com/emails";
+const RESEND_GATEWAY_URL = "https://connector-gateway.lovable.dev/resend/emails";
 const DEFAULT_FROM = "Salada <hello@salada.sa>";
 const ADMIN_TO = "Hello@salada.sa";
 
@@ -28,14 +28,16 @@ interface QuoteEmailRequest {
 }
 
 async function sendResendEmail(
+  lovableApiKey: string,
   resendApiKey: string,
   payload: { from: string; to: string[]; subject: string; html: string },
 ) {
-  const response = await fetch(RESEND_API_URL, {
+  const response = await fetch(RESEND_GATEWAY_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${resendApiKey}`,
+      Authorization: `Bearer ${lovableApiKey}`,
+      "X-Connection-Api-Key": resendApiKey,
     },
     body: JSON.stringify(payload),
   });
