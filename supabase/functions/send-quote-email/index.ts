@@ -12,7 +12,7 @@ const corsHeaders = {
 };
 
 const RESEND_API_URL = "https://api.resend.com/emails";
-const DEFAULT_FROM = "Salada <onboarding@resend.dev>";
+const DEFAULT_FROM = "Salada <hello@salada.sa>";
 const ADMIN_TO = "Hello@salada.sa";
 
 interface QuoteEmailRequest {
