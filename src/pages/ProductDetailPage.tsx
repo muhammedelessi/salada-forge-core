@@ -36,6 +36,14 @@ function formatSpecKeyLabel(rawKey: string): string {
     .join(" ");
 }
 
+/** Arabic UI: expand common English abbreviations in spec labels/values from JSON/CMS. */
+function localizeSpecDisplayText(text: string, isAr: boolean): string {
+  if (!isAr || !text) return text;
+  return text
+    .replace(/\bKN\b/gi, "كيلو نيوتن")
+    .replace(/\bSwl\b/gi, "حمولة التشغيل الامنة");
+}
+
 const DIMENSION_KEY_ORDER = ["length", "width", "height", "size"] as const;
 const CAPACITY_KEY_ORDER = ["cubic_volume", "empty_weight", "load_capacity", "total_weight"] as const;
 
@@ -94,10 +102,11 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Spec value text is shown exactly as stored in JSON (no splitting or unit rewriting). */
+/** Spec card text follows JSON; Arabic locale expands a few abbreviations via `localizeSpecDisplayText`. */
 function SpecCard({ label, value }: { label: string; value: string }) {
-  const { isRTL } = useLanguageStore();
+  const { isRTL, language } = useLanguageStore();
   const rtl = isRTL();
+  const isAr = language === "ar";
 
   return (
     <div className="relative border border-border bg-background antialiased group transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.35)] overflow-hidden min-w-0">
@@ -113,7 +122,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
 
       <div className="p-3 sm:p-5 md:p-6 min-w-0">
         <p className="text-[0.8125rem] sm:text-sm font-semibold leading-snug mb-2 sm:mb-3 text-primary [overflow-wrap:anywhere]">
-          {label}
+          {localizeSpecDisplayText(label, isAr)}
         </p>
 
         <p
@@ -121,7 +130,7 @@ function SpecCard({ label, value }: { label: string; value: string }) {
           style={{ fontSize: "clamp(1.375rem, 4vw, 2.25rem)" }}
           dir={rtl ? "rtl" : "ltr"}
         >
-          {value}
+          {localizeSpecDisplayText(value, isAr)}
         </p>
       </div>
     </div>
