@@ -153,13 +153,13 @@ Deno.serve(async (req) => {
 
     try {
       await Promise.all([
-        sendResendEmail(resendApiKey, {
+        sendResendEmail(lovableApiKey, resendApiKey, {
           from: DEFAULT_FROM,
           to: [ADMIN_TO],
           subject: `New Quote Request: ${productTitle} — ${customerName}`,
           html: adminHtml,
         }),
-        sendResendEmail(resendApiKey, {
+        sendResendEmail(lovableApiKey, resendApiKey, {
           from: DEFAULT_FROM,
           to: [customerEmail],
           subject: isAr ? "تأكيد الطلب — Salada" : "Request Confirmation — Salada",
