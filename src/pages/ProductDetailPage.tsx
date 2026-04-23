@@ -41,7 +41,11 @@ function localizeSpecDisplayText(text: string, isAr: boolean): string {
   if (!isAr || !text) return text;
   return text
     .replace(/\bKN\b/gi, "كيلو نيوتن")
-    .replace(/\bSwl\b/gi, "حمولة التشغيل الامنة");
+    .replace(/\bSwl\b/gi, "حمولة التشغيل الآمنة")
+    .replace(/\bInstallations?\b/gi, "التركيب")
+    .replace(/\bDimensions\b/gi, "الأبعاد")
+    .replace(/\bDimension\b/gi, "البُعد")
+    .replace(/\bThickness\b/gi, "السماكة");
 }
 
 const DIMENSION_KEY_ORDER = ["length", "width", "height", "size"] as const;
