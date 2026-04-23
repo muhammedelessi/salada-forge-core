@@ -45,7 +45,9 @@ function localizeSpecDisplayText(text: string, isAr: boolean): string {
     .replace(/\bInstallations?\b/gi, "التركيب")
     .replace(/\bDimensions\b/gi, "الأبعاد")
     .replace(/\bDimension\b/gi, "البُعد")
-    .replace(/\bThickness\b/gi, "السماكة");
+    .replace(/\bThickness\b/gi, "السماكة")
+    .replace(/\bLength\b/gi, "الطول")
+    .replace(/\bQuantity\b/gi, "الكمية");
 }
 
 const DIMENSION_KEY_ORDER = ["length", "width", "height", "size"] as const;
