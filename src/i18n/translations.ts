@@ -40,7 +40,6 @@ export const translations = {
     // Stats
     stats: {
       yearsExperience: "Years of Operations",
-      projectsDelivered: "Projects Delivered",
       clientsServed: "Clients Served",
       onTimeDelivery: "On-Time Delivery",
     },
@@ -76,7 +75,7 @@ export const translations = {
       seaSolution:
         "We supply complete maritime infrastructure including containers, lashing systems, port terminal equipment, and heavy-duty marine hardware.",
       seaImpact:
-        "Improved port operational efficiency, zero downtime, and ISO/DNV-compliant equipment across all operations.",
+        "Improved port operational efficiency, zero downtime, and DNV-compliant equipment across all operations.",
       airFreight: "Air Freight Support Solutions",
       airFreightDesc:
         "Specialized containers and storage units for air cargo operations, including ULD support equipment and airport logistics infrastructure.",
@@ -189,7 +188,6 @@ export const translations = {
       tagline:
         "Saudi Manufacturer of Industrial Containers, Integrated Shipping & Storage Solutions, and Container Parts & Securing Equipment.",
       rights: "All rights reserved.",
-      isoCertified: "ISO 9001:2015",
       dnvApproved: "DNV Approved",
     },
     // Categories (kept for shop compatibility)
@@ -206,7 +204,7 @@ export const translations = {
       modularBuildings: "Modular Buildings",
       storageContainers: "Storage Containers",
       landShipping: "Land Shipping Container",
-      isoShipping: "ISO Shipping Container",
+      isoShipping: "Shipping Container",
       lashingEquipment: "Lashing Equipment",
       spareParts: "Spare Parts",
     },
@@ -224,7 +222,7 @@ export const translations = {
       lashing: "Cargo Securing & Lashing Systems",
       lashingDesc: "Twistlocks, turnbuckles, lashing rods, and complete cargo securing systems.",
       container: "Container Infrastructure",
-      containerDesc: "New, refurbished, and ISO-certified shipping containers and storage solutions.",
+      containerDesc: "New and refurbished shipping containers and storage solutions.",
       port: "Port & Terminal Equipment",
       portDesc: "Structural components, handling systems, and operational accessories for ports.",
       hardware: "Maritime Industrial Hardware",
@@ -525,7 +523,7 @@ export const translations = {
           "Yes. Once your order is dispatched, you'll receive tracking information via email. You can also contact our logistics team for real-time updates.",
         certified: "Are your solutions certified?",
         certifiedAnswer:
-          "Yes, all our products meet international standards. Containers are ISO certified, maritime equipment is DNV approved, and all solutions comply with relevant KSA regulations.",
+          "Yes, all our products meet international standards. Maritime equipment is DNV approved, and all solutions comply with relevant KSA regulations.",
         materials: "What materials are used?",
         materialsAnswer:
           "We use premium-grade materials — Corten steel for containers, stainless steel for tanks, and certified components for all cargo securing systems. All materials are selected for durability in the Kingdom's climate.",
@@ -702,7 +700,6 @@ export const translations = {
     // Stats
     stats: {
       yearsExperience: "عاماً من العمليات",
-      projectsDelivered: "مشروع تم تنفيذه",
       clientsServed: "عميل نخدمهم",
       onTimeDelivery: "التسليم في الوقت المحدد",
     },
@@ -735,7 +732,7 @@ export const translations = {
         "تتطلب عمليات الموانئ بنية تحتية موثوقة — من مناولة الحاويات إلى تأمين البضائع — قادرة على تحمل البيئات البحرية القاسية.",
       seaSolution:
         "نوفر بنية تحتية بحرية كاملة تشمل الحاويات وأنظمة الربط ومعدات المحطات المينائية والأجهزة البحرية شديدة التحمل.",
-      seaImpact: "تحسين كفاءة العمليات المينائية، وصفر توقف، ومعدات متوافقة مع ISO/DNV.",
+      seaImpact: "تحسين كفاءة العمليات المينائية، وصفر توقف، ومعدات متوافقة مع DNV.",
       airFreight: "حلول دعم الشحن الجوي",
       airFreightDesc:
         "حاويات متخصصة ووحدات تخزين لعمليات الشحن الجوي بما في ذلك معدات دعم ULD والبنية التحتية اللوجستية للمطارات.",
@@ -837,7 +834,6 @@ export const translations = {
       tagline:
         "شركة سعودية لتصنيع الحاويات الصناعية، وحلول الشحن والتخزين المتكاملة، وقطع غيار الحاويات ومعدات التثبيت.",
       rights: "جميع الحقوق محفوظة.",
-      isoCertified: "ISO 9001:2015",
       dnvApproved: "معتمدون من DNV",
     },
     // Categories
@@ -854,7 +850,7 @@ export const translations = {
       modularBuildings: "المباني الجاهزة",
       storageContainers: "حاويات التخزين",
       landShipping: "حاويات الشحن البري",
-      isoShipping: "حاويات شحن ISO",
+      isoShipping: "حاويات الشحن",
       lashingEquipment: "معدات الربط",
       spareParts: "قطع الغيار",
     },
@@ -871,7 +867,7 @@ export const translations = {
       lashing: "أنظمة تأمين وربط الحمولات",
       lashingDesc: "أقفال الدوران، مفاتيح الشد، قضبان الربط، وأنظمة تأمين الحمولات.",
       container: "البنية التحتية للحاويات",
-      containerDesc: "حاويات شحن جديدة ومجددة ومعتمدة ISO وحلول تخزين.",
+      containerDesc: "حاويات شحن جديدة ومجددة وحلول تخزين.",
       port: "معدات الموانئ والمحطات",
       portDesc: "المكونات الإنشائية وأنظمة المناولة والملحقات التشغيلية للموانئ.",
       hardware: "الأجهزة البحرية الصناعية",
@@ -1141,7 +1137,7 @@ export const translations = {
         trackOrderAnswer: "نعم. بمجرد إرسال طلبك، ستتلقى معلومات التتبع عبر البريد الإلكتروني.",
         certified: "هل حلولكم معتمدة؟",
         certifiedAnswer:
-          "نعم، جميع منتجاتنا تلبي المعايير الدولية. الحاويات حاصلة على شهادة ISO والمعدات البحرية معتمدة DNV.",
+          "نعم، جميع منتجاتنا تلبي المعايير الدولية. والمعدات البحرية معتمدة DNV.",
         materials: "ما هي المواد المستخدمة؟",
         materialsAnswer:
           "نستخدم مواد عالية الجودة — فولاذ كورتن للحاويات وفولاذ مقاوم للصدأ للخزانات ومكونات معتمدة لجميع أنظمة تأمين البضائع.",

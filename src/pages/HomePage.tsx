@@ -74,7 +74,6 @@ export default function HomePage() {
 
   const stats = [
     { value: 10,  suffix: "+",   label: t("stats.yearsExperience")   },
-    { value: 200, suffix: "+",   label: t("stats.projectsDelivered") },
     { value: 50,  suffix: "+",   label: t("stats.clientsServed")     },
     { value: 99,  suffix: ".5%", label: t("stats.onTimeDelivery")    },
   ];
@@ -161,7 +160,7 @@ export default function HomePage() {
               <span>{t("hero.cta")}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-            <Link to="/contact" className="btn-ghost-dark shadow-[0_8px_22px_rgba(0,0,0,0.28)]">
+            <Link to="/contact?type=quote" className="btn-ghost-dark shadow-[0_8px_22px_rgba(0,0,0,0.28)]">
               {t("hero.quote")}
             </Link>
           </div>
@@ -176,10 +175,14 @@ export default function HomePage() {
           backdropFilter: "blur(3px)",
         }}>
           <div className="industrial-container py-1">
-            <div className="grid grid-cols-2 md:grid-cols-4">
-              {stats.map((s, i) => (
+            <div className="grid grid-cols-2 md:grid-cols-3">
+              {stats.map((s, i) => {
+                const isOrphan = i === stats.length - 1 && stats.length % 2 === 1;
+                return (
                 <div key={s.label}
                   className={`group relative py-6 px-3 text-center cursor-default transition-all duration-300 hover:bg-white/[0.05] ${
+                    isOrphan ? "col-span-2 md:col-span-1" : ""
+                  } ${
                     i < stats.length - 1 ? "border-b md:border-b-0 md:border-r border-white/[0.08]" : ""
                   } ${i % 2 === 0 && i < stats.length - 1 ? "border-r md:border-r border-white/[0.08]" : ""}`}
                 >
@@ -206,7 +209,8 @@ export default function HomePage() {
                     className="absolute left-1/2 -translate-x-1/2 bottom-3 h-[2px] w-0 bg-primary/60 transition-all duration-300 group-hover:w-10"
                   />
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

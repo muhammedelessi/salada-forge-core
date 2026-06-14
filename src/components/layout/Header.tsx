@@ -1,81 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Menu, X, Search, ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { cn } from "@/lib/utils";
 import saladaLogo from "@/assets/SALADA_LOGO.png";
-
-/* ══════════════════════════════════════
-   MEGA MENU
-══════════════════════════════════════ */
-function MegaMenu({
-  items,
-  isOpen,
-  onClose,
-}: {
-  items: { label: string; desc: string; href: string }[];
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <div
-      className={cn(
-        "absolute top-full inset-x-0 z-50 overflow-hidden",
-        "transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)]",
-        isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none",
-      )}
-    >
-      <div
-        className="h-px w-full"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, hsl(var(--primary)/0.5) 30%, hsl(var(--primary)/0.5) 70%, transparent)",
-        }}
-      />
-
-      <div
-        className="border-b border-border"
-        style={{ background: "hsl(var(--background)/0.97)", backdropFilter: "blur(12px)" }}
-      >
-        <div className="container-xl py-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={onClose}
-                className="group p-6 flex flex-col gap-1.5 bg-background hover:bg-primary/5 transition-colors duration-200"
-              >
-                <div
-                  className="h-px mb-2 transition-all duration-300 bg-primary"
-                  style={{ width: "0" }}
-                  ref={(el) => {
-                    if (!el) return;
-                    el.closest("a")!.addEventListener("mouseenter", () => {
-                      el.style.width = "1.5rem";
-                    });
-                    el.closest("a")!.addEventListener("mouseleave", () => {
-                      el.style.width = "0";
-                    });
-                  }}
-                />
-                <span className="text-xs font-bold uppercase tracking-[0.05em] text-foreground transition-colors duration-200">
-                  {item.label}
-                </span>
-                <span className="text-[0.7rem] leading-relaxed text-muted-foreground">{item.desc}</span>
-                <span className="inline-flex items-center gap-1 mt-1 text-[0.6rem] label-text uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  View <ArrowUpRight style={{ width: 10, height: 10 }} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ══════════════════════════════════════
    MOBILE DRAWER
@@ -168,7 +98,7 @@ function MobileDrawer({
         {/* drawer footer */}
         <div className="px-6 py-6 border-t border-border">
           <Link
-            to="/contact"
+            to="/contact?type=quote"
             onClick={onClose}
             className="w-full btn-primary"
           >
@@ -176,7 +106,7 @@ function MobileDrawer({
             <ArrowUpRight style={{ width: 14, height: 14 }} />
           </Link>
           <p className="text-center mt-4 text-[0.65rem] label-text uppercase tracking-[0.2em] text-muted-foreground">
-            ISO Certified · DNV Approved
+            DNV Approved
           </p>
         </div>
       </div>
@@ -281,8 +211,6 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openMega, setOpenMega] = useState<string | null>(null);
-  const megaTimer = useRef<ReturnType<typeof setTimeout>>();
   const { t, isRTL } = useLanguageStore();
   const location = useLocation();
   const isAr = isRTL();
@@ -290,7 +218,6 @@ export function Header() {
 
   useEffect(() => {
     setIsMenuOpen(false);
-    setOpenMega(null);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -311,87 +238,12 @@ export function Header() {
     { label: isAr ? "الرئيسية" : "Home", href: "/" },
     { label: t("nav.about"), href: "/about" },
     { label: t("nav.whySalada"), href: "/why-salada" },
-    { label: t("nav.solutions"), href: "/solutions", mega: "solutions" },
-    { label: t("nav.industries"), href: "/industries", mega: "industries" },
+    { label: t("nav.solutions"), href: "/solutions" },
+    { label: t("nav.industries"), href: "/industries" },
     { label: t("nav.shop"), href: "/shop" },
 
     { label: t("nav.contact"), href: "/contact" },
   ];
-
-  /* mega menu data */
-  const solutionsMega = [
-    {
-      label: isAr ? "حاويات الشحن" : "Shipping Containers",
-      desc: isAr ? "حاويات ISO معتمدة بأحجام متعددة" : "ISO-certified containers in multiple sizes",
-      href: "/solutions#shipping-containers",
-    },
-    {
-      label: isAr ? "حاويات التخزين" : "Storage Containers",
-      desc: isAr ? "وحدات تخزين جاهزة للنشر" : "Deployment-ready storage units",
-      href: "/solutions#storage-containers",
-    },
-    {
-      label: t("solutions.landFreight"),
-      desc: isAr ? "دعم النقل البري الكامل" : "Complete ground transport support",
-      href: "/solutions#land",
-    },
-    {
-      label: t("solutions.seaFreight"),
-      desc: isAr ? "البنية التحتية للشحن البحري" : "Maritime cargo infrastructure",
-      href: "/solutions#sea",
-    },
-    {
-      label: t("solutions.airFreight"),
-      desc: isAr ? "حلول دعم الشحن الجوي" : "Air cargo support solutions",
-      href: "/solutions#air",
-    },
-    {
-      label: t("solutions.storage"),
-      desc: isAr ? "حلول تخزين جاهزة" : "Modular storage solutions",
-      href: "/solutions#storage",
-    },
-  ];
-
-  const industriesMega = [
-    {
-      label: t("industries.logistics"),
-      desc: isAr ? "حاويات معززة للشحن والنقل" : "Reinforced containers for freight",
-      href: "/industries#logistics",
-    },
-    {
-      label: t("industries.construction"),
-      desc: isAr ? "حلول تخزين موثوقة في الموقع" : "Reliable on-site storage",
-      href: "/industries#construction",
-    },
-    {
-      label: t("industries.government"),
-      desc: isAr ? "حاويات متوافقة مع المعايير" : "Standards-aligned containers",
-      href: "/industries#government",
-    },
-    {
-      label: t("industries.industrial"),
-      desc: isAr ? "حلول للبيئات القاسية" : "Solutions for harsh environments",
-      href: "/industries#industrial",
-    },
-    {
-      label: t("industries.storage"),
-      desc: isAr ? "حلول تخزين قابلة للتوسع" : "Scalable storage solutions",
-      href: "/industries#storage",
-    },
-  ];
-
-  const megaData: Record<string, typeof solutionsMega> = {
-    solutions: solutionsMega,
-    industries: industriesMega,
-  };
-
-  const handleMegaEnter = (key: string) => {
-    clearTimeout(megaTimer.current);
-    setOpenMega(key);
-  };
-  const handleMegaLeave = () => {
-    megaTimer.current = setTimeout(() => setOpenMega(null), 180);
-  };
 
   const isActive = (href: string) => (href === "/" ? location.pathname === "/" : location.pathname.startsWith(href));
 
@@ -426,14 +278,8 @@ export function Header() {
             <nav className="hidden md:flex items-center gap-4 lg:gap-6">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
-                const hasMega = Boolean(link.mega);
                 return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={() => hasMega && handleMegaEnter(link.mega!)}
-                    onMouseLeave={() => hasMega && handleMegaLeave()}
-                  >
+                  <div key={link.href} className="relative">
                     <Link
                       to={link.href}
                       className={cn(
@@ -444,15 +290,6 @@ export function Header() {
                       )}
                     >
                       {link.label}
-                      {hasMega && (
-                        <ChevronDown
-                          className={cn(
-                            "transition-transform duration-200",
-                            openMega === link.mega ? "rotate-180" : "",
-                          )}
-                          style={{ width: 12, height: 12 }}
-                        />
-                      )}
                       {/* active underline */}
                       {active && <span className="absolute -bottom-1 inset-x-0 h-[2px] bg-primary" />}
                       {/* hover underline handled by nav-link-hover pseudo element */}
@@ -481,7 +318,7 @@ export function Header() {
 
               {/* CTA — desktop */}
               <Link
-                to="/contact"
+                to="/contact?type=quote"
                 className="hidden md:inline-flex btn-primary"
                 style={{ fontSize: "0.75rem", fontWeight: 700, padding: "0.6rem 1.25rem", minHeight: "40px" }}
               >
@@ -499,13 +336,6 @@ export function Header() {
             </div>
           </div>
         </div>
-
-        {/* ── Mega menus ── */}
-        {Object.entries(megaData).map(([key, items]) => (
-          <div key={key} onMouseEnter={() => handleMegaEnter(key)} onMouseLeave={handleMegaLeave}>
-            <MegaMenu items={items} isOpen={openMega === key} onClose={() => setOpenMega(null)} />
-          </div>
-        ))}
       </header>
 
       {/* ── Mobile drawer ── */}

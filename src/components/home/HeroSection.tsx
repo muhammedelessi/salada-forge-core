@@ -85,7 +85,7 @@ export default function HeroSection() {
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
-              to="/contact"
+              to="/contact?type=quote"
               className="btn-ghost-dark w-full sm:w-auto"
             >
               {t("hero.quote")}
@@ -98,7 +98,7 @@ export default function HeroSection() {
               isAr ? "flex-row-reverse" : ""
             }`}
           >
-            {["ISO Certified", "DNV Approved", "Saudi Made"].map((b) => (
+            {["DNV Approved", "Saudi Made"].map((b) => (
               <span
                 key={b}
                 className="px-3 py-1.5 label-text text-label-md uppercase tracking-[0.15em] text-white/60 border border-white/15 bg-white/5"

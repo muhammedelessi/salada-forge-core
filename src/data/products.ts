@@ -1255,7 +1255,7 @@ export const categories = [
   { id: 'spare-parts', name: 'Spare Parts', count: 45 },
   { id: 'lashing-equipment', name: 'Lashing Equipment', count: 1 },
   { id: 'storage-containers', name: 'Storage Containers', count: 8 },
-  { id: 'iso-shipping-container', name: 'ISO Shipping Container', count: 0 },
+  { id: 'iso-shipping-container', name: 'Shipping Container', count: 0 },
   { id: 'land-shipping-container', name: 'Land Shipping Container', count: 3 },
 ];
 

@@ -71,9 +71,8 @@ export default function AboutPage() {
 
   const factoryStats = [
     { value: "10+",  label: isAr ? "سنوات خبرة تصنيعية" : "Years of Manufacturing" },
-    { value: "200+", label: isAr ? "مشروع منجز"          : "Projects Delivered"     },
     { value: "100%", label: isAr ? "صناعة سعودية"        : "Saudi Manufactured"     },
-    { value: "ISO",  label: isAr ? "اعتماد دولي"         : "Internationally Certified" },
+    { value: "DNV",  label: isAr ? "اعتماد دولي"         : "Internationally Certified" },
   ];
 
   return (
@@ -230,8 +229,8 @@ export default function AboutPage() {
               </p>
               <div className={`flex flex-wrap gap-2 ${isAr ? "flex-row-reverse" : ""}`}>
                 {(isAr
-                  ? ["معتمد ISO", "معتمد DNV", "صناعة سعودية"]
-                  : ["ISO Certified", "DNV Approved", "Saudi Made"]
+                  ? ["معتمد DNV", "صناعة سعودية"]
+                  : ["DNV Approved", "Saudi Made"]
                 ).map((b) => (
                   <span key={b} className="text-[0.78rem] font-semibold px-2.5 py-1.5"
                     style={{ background: "hsl(var(--primary)/0.07)", border: "1px solid hsl(var(--primary)/0.22)", color: "hsl(var(--primary))", letterSpacing: "0.08em" }}>

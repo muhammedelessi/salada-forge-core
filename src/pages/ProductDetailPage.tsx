@@ -36,6 +36,22 @@ function formatSpecKeyLabel(rawKey: string): string {
     .join(" ");
 }
 
+/** Arabic labels for JSON spec keys not covered by `t.products` dimension/capacity maps. */
+const AR_SPEC_KEY_LABELS: Record<string, string> = {
+  dimensions: "الأبعاد",
+  dimension: "الأبعاد",
+  thickness: "السماكة",
+  length: "الطول",
+};
+
+function formatSpecKeyLabelLocalized(rawKey: string, isAr: boolean): string {
+  if (isAr) {
+    const norm = rawKey.trim().toLowerCase();
+    if (AR_SPEC_KEY_LABELS[norm]) return AR_SPEC_KEY_LABELS[norm];
+  }
+  return formatSpecKeyLabel(rawKey);
+}
+
 /** Arabic UI: expand common English abbreviations in spec labels/values from JSON/CMS. */
 function localizeSpecDisplayText(text: string, isAr: boolean): string {
   if (!isAr || !text) return text;
@@ -364,7 +380,7 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = dimSubLabels[k];
-      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabel(k);
+      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabelLocalized(k, isAr);
       return <SpecCard key={`${groupKey}-${k}`} label={label} value={String(v)} />;
     });
   };
@@ -381,7 +397,7 @@ export default function ProductDetailPage() {
     if (entries.length === 0) return null;
     return entries.map(([k, v]) => {
       const labelKey = capacitySubLabels[k];
-      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabel(k);
+      const label = labelKey ? String(t.products[labelKey]) : formatSpecKeyLabelLocalized(k, isAr);
       return <SpecCard key={`cap-${k}`} label={label} value={String(v)} />;
     });
   };
@@ -405,7 +421,7 @@ export default function ProductDetailPage() {
       if (k === "sku") return t.products.sku;
       if (k === "standard") return t.products.spec_standard;
       if (k === "application") return t.products.spec_application;
-      return formatSpecKeyLabel(k);
+      return formatSpecKeyLabelLocalized(k, isAr);
     };
     entries.sort((a, b) => {
       const ia = ROOT_SPEC_ORDER.indexOf(a[0] as (typeof ROOT_SPEC_ORDER)[number]);
@@ -643,9 +659,9 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* CTA */}
+              {/* CTA — opens the Request a Quote form with this product pre-selected */}
               <Link
-                to={`/inquiry/${product.slug}?quantity=${quantity}`}
+                to={`/contact?type=quote&product=${product.id}`}
                 className="btn-primary w-full mb-6 rtl:flex-row-reverse"
               >
                 <MessageSquare className="w-4 h-4 shrink-0" />

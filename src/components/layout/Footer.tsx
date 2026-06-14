@@ -119,9 +119,6 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6 rtl:flex-row-reverse">
               <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground label-text">
-                {t("footer.isoCertified")}
-              </span>
-              <span className="text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground label-text">
                 {t("footer.dnvApproved")}
               </span>
             </div>

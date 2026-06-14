@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Product } from "@/types";
-import { ArrowUpRight, MessageSquare } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
 import { translations } from "@/i18n/translations";
@@ -17,9 +17,20 @@ interface ProductCardProps {
   variant?: "default" | "compact";
   /** Tighter copy/padding only; image area (min-height + max-h) unchanged — for 4-column grids */
   dense?: boolean;
+  /** Selection mode — clicking the card toggles selection instead of navigating. */
+  selectable?: boolean;
+  selected?: boolean;
+  onToggleSelect?: (product: Product) => void;
 }
 
-export function ProductCard({ product, variant = "default", dense = false }: ProductCardProps) {
+export function ProductCard({
+  product,
+  variant = "default",
+  dense = false,
+  selectable = false,
+  selected = false,
+  onToggleSelect,
+}: ProductCardProps) {
   const { language, isRTL } = useLanguageStore();
   const t = translations[language];
   const isAr = isRTL();
@@ -54,19 +65,25 @@ export function ProductCard({ product, variant = "default", dense = false }: Pro
     .replace(/\s+/g, " ")
     .trim();
 
-  const contactLabel = language === "ar" ? "تواصل معنا" : "Request a Quote";
-  const viewLabel = language === "ar" ? "عرض المنتج" : "View Product";
-
-  /* ── COMPACT variant — horizontal list item ── */
+  /* ── COMPACT variant — horizontal list item (also used as small selectable row) ── */
   if (variant === "compact") {
-    return (
-      <Link
-        to={`/product/${product.slug}`}
-        dir={isAr ? "rtl" : "ltr"}
-        className="group relative flex items-stretch overflow-hidden border border-border bg-background transition-colors duration-300 hover:border-primary hover:bg-primary/10"
-      >
+    const compactClass = cn(
+      "group relative flex items-stretch overflow-hidden border bg-background transition-colors duration-300",
+      selectable && selected
+        ? "border-primary ring-2 ring-primary/60 bg-primary/10"
+        : "border-border hover:border-primary hover:bg-primary/10",
+      selectable && "cursor-pointer",
+    );
+
+    // Selectable rows (used in the quote drawer) get a larger product image.
+    const compactImageBoxClass = selectable
+      ? "relative flex h-28 w-28 shrink-0 items-center justify-center self-center overflow-hidden bg-transparent p-1.5"
+      : productThumb80CompactBoxClass;
+
+    const compactInner = (
+      <>
         {/* Fixed square image */}
-        <div className={productThumb80CompactBoxClass}>
+        <div className={compactImageBoxClass}>
           <img
             src={product.images[0]}
             alt={localizedTitle}
@@ -87,19 +104,25 @@ export function ProductCard({ product, variant = "default", dense = false }: Pro
         </div>
 
         {/* Content */}
-        <div
-          className="flex min-w-0 flex-1 flex-col justify-center border-s border-border px-2.5 py-2 text-start"
-        >
+        <div className="flex min-w-0 flex-1 flex-col justify-center border-s border-border px-2.5 py-2 text-start">
           <span
             className="mb-0.5 block text-[0.64rem] font-medium uppercase leading-tight sm:text-[0.68rem]"
             style={{ color: "hsl(var(--primary) / 0.85)", letterSpacing: "0.1em" }}
           >
             {categoryLabel}
           </span>
-          <h3 className="mb-0.5 line-clamp-2 text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary sm:text-[0.82rem]">
-            {localizedTitle}
-          </h3>
-          {plainDescription ? (
+          {selectable ? (
+            /* span (not h3) so global heading !important sizes don't apply — large, prominent title */
+            <span className="mb-0.5 line-clamp-1 block text-base font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary">
+              {localizedTitle}
+            </span>
+          ) : (
+            <h3 className="mb-0.5 line-clamp-2 text-[0.78rem] font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary sm:text-[0.82rem]">
+              {localizedTitle}
+            </h3>
+          )}
+          {/* Description hidden on selectable (drawer) cards */}
+          {plainDescription && !selectable ? (
             <p
               className="mb-0.5 line-clamp-1 text-[0.64rem] font-normal leading-snug text-muted-foreground/80 [overflow-wrap:anywhere]"
               style={{ wordBreak: "break-word" }}
@@ -110,36 +133,127 @@ export function ProductCard({ product, variant = "default", dense = false }: Pro
           <span className="text-[0.6rem] font-medium uppercase tracking-[0.09em] text-muted-foreground/60">
             {product.sku}
           </span>
+          {selectable && (
+            <Link
+              to={`/product/${product.slug}`}
+              onClick={(e) => e.stopPropagation()}
+              className="mt-1.5 inline-flex w-fit items-center gap-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-primary hover:underline"
+            >
+              {isAr ? "عرض تفاصيل المنتج" : "View product details"}
+              <ArrowUpRight className="h-3 w-3 shrink-0" />
+            </Link>
+          )}
         </div>
 
-        {/* Arrow */}
+        {/* Trailing icon — selection check (selectable) or navigation arrow */}
         <div className="flex shrink-0 items-center px-2">
-          <ArrowUpRight
-            className="h-3.5 w-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-            style={{ color: "hsl(var(--primary))" }}
-          />
+          {selectable ? (
+            <span
+              className={cn(
+                "flex h-5 w-5 items-center justify-center rounded-full border-2 transition-colors",
+                selected ? "border-primary bg-primary text-primary-foreground" : "border-foreground/30 bg-background",
+              )}
+            >
+              {selected && <Check className="h-3 w-3" />}
+            </span>
+          ) : (
+            <ArrowUpRight
+              className="h-3.5 w-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              style={{ color: "hsl(var(--primary))" }}
+            />
+          )}
         </div>
+      </>
+    );
+
+    if (selectable) {
+      return (
+        <div
+          dir={isAr ? "rtl" : "ltr"}
+          role="button"
+          aria-pressed={selected}
+          tabIndex={0}
+          onClick={() => onToggleSelect?.(product)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onToggleSelect?.(product);
+            }
+          }}
+          aria-label={isAr ? `تحديد المنتج ${localizedTitle}` : `Select product ${localizedTitle}`}
+          className={compactClass}
+        >
+          {compactInner}
+        </div>
+      );
+    }
+
+    return (
+      <Link to={`/product/${product.slug}`} dir={isAr ? "rtl" : "ltr"} className={compactClass}>
+        {compactInner}
       </Link>
     );
   }
 
   /* ── DEFAULT variant — dense grid: shorter image, tight copy, one-line teaser ── */
+  const handleActivate = () => {
+    if (selectable) onToggleSelect?.(product);
+    else navigate(`/product/${product.slug}`);
+  };
+
   return (
     <div
-      className="group relative cursor-pointer overflow-hidden border border-border bg-background transition-colors duration-200 hover:border-primary/60 hover:bg-primary/10"
-      onClick={() => navigate(`/product/${product.slug}`)}
+      className={cn(
+        "group relative cursor-pointer overflow-hidden border bg-background transition-colors duration-200",
+        selectable && selected
+          ? "border-primary ring-2 ring-primary/70 bg-primary/10"
+          : "border-border hover:border-primary/60 hover:bg-primary/10",
+      )}
+      onClick={handleActivate}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          navigate(`/product/${product.slug}`);
+          handleActivate();
         }
       }}
-      role="link"
+      role={selectable ? "button" : "link"}
+      aria-pressed={selectable ? selected : undefined}
       tabIndex={0}
-      aria-label={isAr ? `عرض المنتج ${localizedTitle}` : `View product ${localizedTitle}`}
+      aria-label={
+        selectable
+          ? isAr
+            ? `تحديد المنتج ${localizedTitle}`
+            : `Select product ${localizedTitle}`
+          : isAr
+            ? `عرض المنتج ${localizedTitle}`
+            : `View product ${localizedTitle}`
+      }
     >
+      {/* Selection indicator */}
+      {selectable && (
+        <div
+          className={cn(
+            "pointer-events-none absolute top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors",
+            isAr ? "left-2" : "right-2",
+            selected ? "border-primary bg-primary text-primary-foreground" : "border-foreground/30 bg-background/80",
+          )}
+        >
+          {selected && <Check className="h-3.5 w-3.5" />}
+        </div>
+      )}
+
       {/* Image block — natural aspect ratio; contain so edges are never cropped */}
-      <Link to={`/product/${product.slug}`} className="relative block overflow-hidden">
+      <Link
+        to={`/product/${product.slug}`}
+        className="relative block overflow-hidden"
+        onClick={(e) => {
+          if (selectable) {
+            e.preventDefault();
+            onToggleSelect?.(product);
+          }
+        }}
+        tabIndex={selectable ? -1 : undefined}
+      >
         <div className={productCardImageFrameClass}>
           <img
             src={product.images[0]}
@@ -162,41 +276,6 @@ export function ProductCard({ product, variant = "default", dense = false }: Pro
           </div>
         )}
 
-        {/* Hover overlay — two action buttons */}
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-0 flex flex-wrap items-center justify-center bg-background/88 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100",
-            dense ? "gap-1.5 p-1.5 sm:gap-2" : "gap-2 p-2 sm:gap-2.5",
-          )}
-        >
-          <Link
-            to={`/inquiry/${product.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className={cn(
-              "pointer-events-auto inline-flex items-center gap-1.5",
-              dense ? "px-2 py-1.5 text-[0.58rem] tracking-[0.1em] sm:text-[0.6rem]" : "px-3 py-2 text-[0.65rem] tracking-[0.14em] sm:text-[0.68rem]",
-              "bg-primary text-primary-foreground font-bold uppercase",
-              "transition-opacity duration-200 hover:opacity-90",
-              isAr ? "flex-row-reverse" : "",
-            )}
-          >
-            <MessageSquare className={cn("shrink-0", dense ? "h-2.5 w-2.5" : "h-3 w-3")} />
-            {contactLabel}
-          </Link>
-          <Link
-            to={`/product/${product.slug}`}
-            className={cn(
-              "pointer-events-auto inline-flex items-center gap-1.5",
-              dense ? "px-2 py-1.5 text-[0.56rem] tracking-[0.1em] sm:text-[0.58rem]" : "px-3 py-2 text-[0.65rem] tracking-[0.12em] sm:text-[0.68rem]",
-              "border border-foreground text-foreground font-semibold uppercase",
-              "transition-colors duration-200 hover:bg-foreground hover:text-background",
-              isAr ? "flex-row-reverse" : "",
-            )}
-          >
-            <ArrowUpRight className={cn("shrink-0", dense ? "h-2.5 w-2.5" : "h-3 w-3")} />
-            {viewLabel}
-          </Link>
-        </div>
       </Link>
 
       {/* Card copy — logical start: RTL Arabic / LTR English (not centered) */}
@@ -220,6 +299,13 @@ export function ProductCard({ product, variant = "default", dense = false }: Pro
         <Link
           to={`/product/${product.slug}`}
           className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
+          onClick={(e) => {
+            if (selectable) {
+              e.preventDefault();
+              onToggleSelect?.(product);
+            }
+          }}
+          tabIndex={selectable ? -1 : undefined}
         >
           <h3
             className={cn(

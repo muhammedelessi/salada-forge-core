@@ -93,10 +93,10 @@ export default function SolutionsPage() {
       num: "01",
       icon: Container,
       title: isAr ? "حاويات الشحن" : "Shipping Containers",
-      subtitle: isAr ? "حاويات شحن ISO معتمدة" : "ISO Certified Shipping Containers",
+      subtitle: isAr ? "حاويات شحن معتمدة" : "Certified Shipping Containers",
       description: isAr
-        ? "حاويات شحن ISO معتمدة بأحجام متعددة — 10 أقدام، 20 قدمًا، 40 قدمًا — بارتفاعات قياسية وعالية. مثالية للشحن البري والبحري والتخزين الصناعي."
-        : "ISO-certified shipping containers in multiple sizes — 10ft, 20ft, 40ft — in standard and high-cube configurations. Ideal for land freight, sea freight, and industrial storage.",
+        ? "حاويات شحن معتمدة بأحجام متعددة — 10 أقدام، 20 قدمًا، 40 قدمًا — بارتفاعات قياسية وعالية. مثالية للشحن البري والبحري والتخزين الصناعي."
+        : "Certified shipping containers in multiple sizes — 10ft, 20ft, 40ft — in standard and high-cube configurations. Ideal for land freight, sea freight, and industrial storage.",
       products: shippingContainers,
       shopLink: "/shop?category=iso-shipping-container",
     },

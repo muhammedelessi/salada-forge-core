@@ -44,7 +44,7 @@ export default function FAQPage() {
       items: [
         {
           q: "Are your containers certified?",
-          a: "Yes, all our containers meet international standards. Our shipping containers are ISO certified, offshore containers are DNV 2.7-1 certified, and all products comply with relevant industry regulations. Certification documents are provided with each purchase.",
+          a: "Yes, all our containers meet international standards. Our offshore containers are DNV 2.7-1 certified, and all products comply with relevant industry regulations. Certification documents are provided with each purchase.",
         },
         {
           q: "What materials are your containers made from?",
@@ -123,7 +123,7 @@ export default function FAQPage() {
       items: [
         {
           q: "هل حاوياتكم معتمدة؟",
-          a: "نعم، جميع حاوياتنا تستوفي المعايير الدولية. حاويات الشحن حاصلة على شهادة ISO، وحاويات العمليات البحرية حاصلة على شهادة DNV 2.7-1.",
+          a: "نعم، جميع حاوياتنا تستوفي المعايير الدولية. وحاويات العمليات البحرية حاصلة على شهادة DNV 2.7-1.",
         },
         {
           q: "ما هي المواد المصنوعة منها حاوياتكم؟",
