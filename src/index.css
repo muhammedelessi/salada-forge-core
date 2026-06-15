@@ -22,17 +22,23 @@
   font-display: swap;
 }
 
+/* Arabic 2-weight system (Neue Helvetica Arabic has no real Medium):
+   Roman 55 → Regular/body & labels · Bold 75 → titles & stats.
+   Sub-title hierarchy comes from size/colour, not weight. */
+
+/* Regular / body (400) — Roman 55 */
 @font-face {
   font-family: 'HelveticaArabic';
-  src: url('@/assets/fonts/HelveticaNeueLTArabic-Roman.ttf') format('truetype');
+  src: url('@/assets/fonts/helvetica-neue-lt-arabic-55-roman.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+/* Bold (700) — Bold 75 */
 @font-face {
   font-family: 'HelveticaArabic';
-  src: url('@/assets/fonts/HelveticaNeueLTArabic-Bold.ttf') format('truetype');
+  src: url('@/assets/fonts/helvetica-neue-lt-arabic-75-bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -152,7 +158,7 @@
   }
 
   [dir="rtl"] .stat-number {
-    font-weight: 900;
+    font-weight: 700;
   }
 
   code,
@@ -623,11 +629,12 @@ aside {
   letter-spacing: 0.05em !important;
 }
 
-/* Arabic (RTL) — HelveticaArabic */
+/* Arabic (RTL) — HelveticaArabic — 3-weight system:
+   Bold (700) → titles & stats · Medium (500) → sub-titles & labels · Regular (400) → descriptions/body */
 [dir="rtl"],
 [dir="rtl"] * {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 500;
+  font-weight: 400; /* Regular — default body / descriptions */
 }
 
 [dir="rtl"] body {
@@ -635,37 +642,46 @@ aside {
   line-height: 1.8;
 }
 
+/* Bold — titles (!important to beat the global LTR base typography) */
 [dir="rtl"] h1,
-[dir="rtl"] h2 {
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900;
+  font-weight: 700 !important;
 }
 
-[dir="rtl"] h3,
+/* Regular (Roman) — sub-titles (hierarchy via size/colour, not weight) */
 [dir="rtl"] h4,
 [dir="rtl"] h5,
 [dir="rtl"] h6 {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 800;
+  font-weight: 400 !important;
 }
 
+/* Regular (Roman) — descriptions / body copy */
 [dir="rtl"] p,
 [dir="rtl"] li {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 500;
+  font-weight: 400 !important;
   font-size: clamp(0.9375rem, 1.28vw, 1.0625rem) !important;
   line-height: 1.9 !important;
 }
 
+/* Regular (Roman) — labels, generic buttons & links */
 [dir="rtl"] button,
 [dir="rtl"] label,
 [dir="rtl"] a,
-[dir="rtl"] .btn-primary,
-[dir="rtl"] .btn-secondary,
-[dir="rtl"] .btn-ghost-dark,
 [dir="rtl"] .label-text {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 600;
+  font-weight: 400 !important;
+}
+
+/* Bold — primary call-to-action buttons */
+[dir="rtl"] .btn-primary,
+[dir="rtl"] .btn-secondary,
+[dir="rtl"] .btn-ghost-dark {
+  font-family: 'HelveticaArabic', sans-serif !important;
+  font-weight: 700 !important;
 }
 
 [dir="rtl"] .btn-primary,
@@ -731,7 +747,7 @@ h1.hero-title-primary {
 
 [dir="rtl"] h1.hero-title-primary {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -758,7 +774,7 @@ p.home-hero-primary,
 
 [dir="rtl"] p.home-hero-primary {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
 }
 
 p.home-hero-secondary,
@@ -791,7 +807,7 @@ span.home-vision-year {
 }
 
 [dir="rtl"] span.home-vision-year {
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   font-family: 'HelveticaArabic', sans-serif !important;
 }
 
@@ -802,7 +818,7 @@ h2.home-vision-title {
 }
 
 [dir="rtl"] h2.home-vision-title {
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   font-family: 'HelveticaArabic', sans-serif !important;
 }
 
@@ -844,7 +860,7 @@ a.home-solution-card .home-solution-card-num {
 
 [dir="rtl"] a.home-solution-card .home-solution-card-num {
   font-size: clamp(2rem, 3.5vw, 2.8rem) !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   line-height: 1 !important;
   color: rgba(255, 255, 255, 0.2) !important;
   transition: color 300ms ease !important;
@@ -870,7 +886,7 @@ a.home-solution-card h3.home-solution-card-title,
 
 [dir="rtl"] a.home-solution-card h3.home-solution-card-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
 }
 
 a.home-solution-card:hover h3.home-solution-card-title,
@@ -929,7 +945,7 @@ a.home-solution-card .home-solution-card-explore,
 
 [dir="rtl"] .about-pillar-card h3.about-pillar-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
 }
 
 .about-pillar-card:hover h3.about-pillar-title,
@@ -996,7 +1012,7 @@ h2.industry-card-title,
 
 [dir="rtl"] h2.industry-card-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
 }
 
 p.industry-card-desc,
@@ -1030,7 +1046,7 @@ section.industries-cta h2.industries-cta-title {
 
 [dir="rtl"] section.industries-cta h2.industries-cta-title {
   font-family: 'HelveticaArabic', sans-serif !important;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
 }
 
 section.industries-cta p.industries-cta-desc,
@@ -1072,5 +1088,56 @@ html[dir="ltr"] div.font-black {
 
 html[dir="rtl"] span.font-black,
 html[dir="rtl"] div.font-black {
-  font-weight: 900 !important;
+  font-weight: 700 !important;
+}
+
+/* ───────────────────────────────────────────────
+   Arabic — consistent body & label sizing.
+   Single source of truth that overrides the scattered
+   font-size rules above so similar elements match.
+─────────────────────────────────────────────── */
+
+/* Body copy — slightly larger for readability, uniform everywhere */
+[dir="rtl"] p,
+[dir="rtl"] li {
+  font-size: 1.0625rem !important;
+  line-height: 1.95 !important;
+}
+
+/* Hero lead — one step above body */
+[dir="rtl"] p.hero-subtitle {
+  font-size: 1.1875rem !important;
+}
+
+/* Eyebrows / labels — uniform small size */
+[dir="rtl"] .label-text,
+[dir="rtl"] .label-text.text-label-md,
+[dir="rtl"] .label-text.text-label-meta {
+  font-size: 0.82rem !important;
+}
+
+/* Bold headings — slightly smaller so they sit closer to the larger body text */
+[dir="rtl"] h1,
+[dir="rtl"] h1.hero-title-primary {
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem) !important;
+}
+[dir="rtl"] h2,
+[dir="rtl"] h2.home-vision-title,
+[dir="rtl"] section.industries-cta h2.industries-cta-title {
+  font-size: clamp(1.2rem, 2vw, 1.5rem) !important;
+}
+[dir="rtl"] h3 {
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem) !important;
+}
+
+/* Navbar links — bold (override the global `nav a` weight) */
+header nav a,
+[dir="rtl"] header nav a {
+  font-weight: 700 !important;
+}
+
+/* Shop category tabs — bold (override the global `[dir=rtl] button` weight) */
+.shop-tab,
+[dir="rtl"] .shop-tab {
+  font-weight: 700 !important;
 }

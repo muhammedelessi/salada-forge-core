@@ -5,7 +5,8 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
-import heroPort from "@/assets/hero-port.webp";
+import { PartnerCTA } from "@/components/PartnerCTA";
+import { PageHero } from "@/components/PageHero";
 import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/products/ProductCard";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
@@ -133,58 +134,11 @@ export default function SolutionsPage() {
       <SEOHead {...seo} />
 
       {/* ── HERO ───────────────────────── */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Industrial port solutions"
-            className="w-full h-full object-cover object-center"
-            style={{ filter: "grayscale(18%) brightness(0.45)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
-          <div
-            className="absolute bottom-0 inset-x-0"
-            style={{
-              height: "1.5px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-            }}
-          />
-        </div>
-
-        <div
-          className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
-          dir={isAr ? "rtl" : "ltr"}
-          style={{ minHeight: "260px" }}
-        >
-          <div className="max-w-xl">
-            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
-              <Link
-                to="/"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {t("nav.solutions")}
-              </span>
-            </nav>
-
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3">
-              {t("solutions.pageTitle")}
-            </h1>
-
-            <p className="hero-subtitle leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
-              {t("solutions.pageDesc")}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbLabel={t("nav.solutions")}
+        title={t("solutions.pageTitle")}
+        description={t("solutions.pageDesc")}
+      />
 
       {/* ── MAIN SOLUTIONS ─────────────── */}
       {mainSolutions.map((solution, index) => {
@@ -320,76 +274,11 @@ export default function SolutionsPage() {
       })}
 
       {/* ── CTA ────────────────────────── */}
-      <section className="relative py-14 md:py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Industrial operations"
-            loading="lazy"
-            className="w-full h-full object-cover"
-            style={{ filter: "grayscale(25%) brightness(0.35)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />
-        </div>
-
-        <div className="industrial-container relative z-10">
-          <div className="max-w-xl mx-auto text-center" dir={isAr ? "rtl" : "ltr"}>
-            <Reveal>
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <span
-                  style={{
-                    width: "1.25rem",
-                    height: "1.5px",
-                    background: "hsl(var(--primary)/0.65)",
-                    display: "block",
-                  }}
-                />
-                <span
-                  className="label-text text-[0.65rem] uppercase tracking-[0.25em]"
-                  style={{ color: "hsl(var(--primary))" }}
-                >
-                  {t("solutions.label")}
-                </span>
-                <span
-                  style={{
-                    width: "1.25rem",
-                    height: "1.5px",
-                    background: "hsl(var(--primary)/0.65)",
-                    display: "block",
-                  }}
-                />
-              </div>
-              <h2
-                className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
-                style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}
-              >
-                {t("cta.title")}
-              </h2>
-              <p
-                className="text-[0.8rem] leading-relaxed mb-7 max-w-md mx-auto"
-                style={{ color: "rgba(255,255,255,0.4)" }}
-              >
-                {t("cta.description")}
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                <Link
-                  to="/contact"
-                  className="btn-primary w-full sm:w-auto"
-                >
-                  <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                </Link>
-                <Link
-                  to="/shop"
-                  className="btn-ghost-dark w-full sm:w-auto"
-                >
-                  {t("solutions.browseShopCatalog")}
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <PartnerCTA
+        eyebrow={t("solutions.label")}
+        secondaryTo="/shop"
+        secondaryLabel={t("solutions.browseShopCatalog")}
+      />
     </Layout>
   );
 }

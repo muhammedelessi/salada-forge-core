@@ -6,7 +6,8 @@ import { ArrowRight, Eye, ShieldCheck, Target, type LucideIcon } from "lucide-re
 import { useEffect, useRef, useState } from "react";
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
-import heroPort from "@/assets/hero-port.webp";
+import { PartnerCTA } from "@/components/PartnerCTA";
+import { PageHero } from "@/components/PageHero";
 import lashingImage from "@/assets/divisions-lashing.webp";
 
 function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -80,44 +81,11 @@ export default function AboutPage() {
       <SEOHead {...seo} />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
-        <div className="absolute inset-0">
-          <img src={heroPort} alt="Salada operations" width={1920} height={1080}
-            fetchPriority="high" decoding="sync"
-            className="w-full h-full object-cover object-center max-w-full"
-            style={{ filter: "grayscale(18%) brightness(0.48)" }} />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
-          <div className="absolute bottom-0 inset-x-0" style={{
-            height: "1.5px",
-            background: "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-          }} />
-        </div>
-
-        <div className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14" style={{ minHeight: "260px" }}>
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            <nav className={`page-hero-breadcrumb flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              <Link to="/" className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}>
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}>
-                {isAr ? "من نحن" : "About"}
-              </span>
-            </nav>
-
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
-              {isAr ? "عن صلادة" : "About SALADA"}
-            </h1>
-
-            <p className="hero-subtitle leading-relaxed animate-fade-up delay-300"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
-              {t.about.descP1}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbLabel={isAr ? "من نحن" : "About"}
+        title={isAr ? "عن صلادة" : "About SALADA"}
+        description={t.about.descP1}
+      />
 
       {/* ── INTRO ── */}
       <section className="bg-background border-b border-border py-10 md:py-14">
@@ -136,15 +104,15 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
                 {factoryStats.map((s, i) => (
-                  <div key={i} className="p-5 md:p-6 border border-border bg-background transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
+                  <div key={i} className="flex flex-col items-center justify-center p-4 md:p-6 text-center border border-border bg-background transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.04] shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
                     <div className="font-black mb-1 leading-none"
-                      style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)", color: "hsl(var(--primary))" }}>
+                      style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.7rem)", color: "hsl(var(--primary))" }}>
                       {s.value}
                     </div>
-                    <div className="text-[0.78rem] font-semibold"
-                      style={{ color: "hsl(var(--muted-foreground))", lineHeight: 1.6 }}>
+                    <div className="text-[0.72rem] font-semibold"
+                      style={{ color: "hsl(var(--muted-foreground))", lineHeight: 1.5 }}>
                       {s.label}
                     </div>
                   </div>
@@ -179,28 +147,29 @@ export default function AboutPage() {
                     dir={isAr ? "rtl" : "ltr"}
                     className="about-pillar-card group flex h-full min-w-0 w-full flex-col items-start border border-border bg-background p-7 text-start transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.03]"
                   >
-                    <div
-                      className="mb-5 flex h-12 w-12 shrink-0 items-center justify-center transition-colors duration-300 group-hover:bg-primary/[0.18]"
-                      style={{ background: "hsl(var(--primary)/0.1)" }}
-                    >
-                      <Icon className="h-5 w-5 shrink-0" style={{ color: "hsl(var(--primary))" }} aria-hidden />
+                    {/* Row: [icon] [number + title + underline] */}
+                    <div className="mb-3 flex w-full items-center gap-4">
+                      <div
+                        className="flex h-12 w-12 shrink-0 items-center justify-center transition-colors duration-300 group-hover:bg-primary/[0.18]"
+                        style={{ background: "hsl(var(--primary)/0.1)" }}
+                      >
+                        <Icon className="h-5 w-5 shrink-0" style={{ color: "hsl(var(--primary))" }} aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span
+                          className="mb-1 block font-bold"
+                          style={{ fontSize: "0.65rem", letterSpacing: "0.2em", color: "hsl(var(--primary)/0.5)" }}
+                        >
+                          {p.num}
+                        </span>
+                        <h3 className="about-pillar-title">{p.label}</h3>
+                        <div
+                          className="mt-2 w-8 shrink-0"
+                          style={{ height: "2px", background: "hsl(var(--primary))" }}
+                          aria-hidden
+                        />
+                      </div>
                     </div>
-                    <span
-                      className="mb-2 block font-bold"
-                      style={{
-                        fontSize: "0.65rem",
-                        letterSpacing: "0.2em",
-                        color: "hsl(var(--primary)/0.5)",
-                      }}
-                    >
-                      {p.num}
-                    </span>
-                    <h3 className="about-pillar-title">{p.label}</h3>
-                    <div
-                      className="mb-3 w-8 shrink-0"
-                      style={{ height: "2px", background: "hsl(var(--primary))" }}
-                      aria-hidden
-                    />
                     <p className="about-pillar-desc">{p.desc}</p>
                   </div>
                 </Reveal>
@@ -260,38 +229,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative py-14 md:py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroPort} alt="Industrial operations" loading="lazy" decoding="async" width={1920} height={1080}
-            className="w-full h-full object-cover max-w-full"
-            style={{ filter: "grayscale(25%) brightness(0.35)" }} />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />
-        </div>
-        <div className="industrial-container relative z-10">
-          <div className="max-w-xl mx-auto text-center">
-            <Reveal>
-              <Label text={isAr ? "تواصل معنا" : "Work With Us"} isAr={isAr} center spanClassName="hero-eyebrow-primary" />
-              <h2 className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
-                style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}>
-                {t.about.partnerCTA}
-              </h2>
-              <p className="text-[0.8rem] leading-relaxed mb-7 max-w-md mx-auto"
-                style={{ color: "rgba(255,255,255,0.42)" }}>
-                {t.about.partnerDesc}
-              </p>
-              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-primary w-full sm:w-auto">
-                  <span>{t.about.contactUs}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Link to="/shop" className="btn-ghost-dark w-full sm:w-auto">
-                  {t.about.viewProducts}
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <PartnerCTA
+        eyebrow={isAr ? "تواصل معنا" : "Work With Us"}
+        title={t.about.partnerCTA}
+        description={t.about.partnerDesc}
+        primaryLabel={t.about.contactUs}
+        secondaryLabel={t.about.viewProducts}
+        secondaryTo="/shop"
+      />
     </Layout>
   );
 }

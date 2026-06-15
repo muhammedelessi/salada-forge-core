@@ -5,11 +5,12 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
+import { useIndustries } from "@/hooks/useIndustries";
+import { PartnerCTA } from "@/components/PartnerCTA";
 import heroImage from "@/assets/hero-logistics.webp";
 import seaImage from "@/assets/solutions-sea.webp";
 import storageImage from "@/assets/solutions-storage.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
-import heroPort from "@/assets/hero-port.webp";
 
 /* ── useInView ── */
 function useInView(threshold = 0.12) {
@@ -78,13 +79,12 @@ export default function HomePage() {
     { value: 99,  suffix: ".5%", label: t("stats.onTimeDelivery")    },
   ];
 
-  const industries = [
-    { name: t("industries.logistics"),    desc: t("industries.logisticsDesc"),    href: "/industries#logistics"    },
-    { name: t("industries.construction"), desc: t("industries.constructionDesc"), href: "/industries#construction" },
-    { name: t("industries.government"),   desc: t("industries.governmentDesc"),   href: "/industries#government"   },
-    { name: t("industries.industrial"),   desc: t("industries.industrialDesc"),   href: "/industries#industrial"   },
-    { name: t("industries.storage"),      desc: t("industries.storageDesc"),      href: "/industries#storage"      },
-  ];
+  const { data: industriesData = [] } = useIndustries();
+  const industries = industriesData.map((ind) => ({
+    name: isAr ? ind.nameAr : ind.nameEn,
+    desc: isAr ? ind.descriptionAr : ind.descriptionEn,
+    href: `/industries/${ind.slug}`,
+  }));
 
   const whyItems = [
     { num: "01", title: t("why.onePartner")       },
@@ -438,40 +438,7 @@ export default function HomePage() {
       </section>
 
       {/* ════════ CTA ════════ */}
-      <section className="relative section-pad overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroPort} alt="Industrial port" loading="lazy" decoding="async" width={1920} height={1080}
-            className="w-full h-full object-cover max-w-full"
-            style={{ filter:"grayscale(35%) brightness(0.38)" }} />
-          <div className="absolute inset-0"
-            style={{ background:"linear-gradient(135deg, hsl(var(--ink-100)/0.88), hsl(var(--ink-100)/0.72))" }} />
-        </div>
-        <div className="container-xl relative z-10">
-          <div className="max-w-2xl mx-auto text-center">
-            <Reveal>
-              <span
-                className="home-cta-eyebrow uppercase mb-6 inline-flex justify-center tracking-[0.28em]"
-                style={{ color: "hsl(var(--gold))" }}
-              >
-                {isAr ? "تواصل معنا" : "Get In Touch"}
-              </span>
-              <h2 className="uppercase font-black mb-8"
-                style={{ fontSize:"clamp(1.6rem, 3vw, 2.5rem)", letterSpacing:"-0.025em", lineHeight:1, color:"#ffffff" }}>
-                {t("cta.title")}
-              </h2>
-              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-primary">
-                  <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Link to="/solutions" className="btn-ghost-dark">
-                  {t("cta.browseCatalog")}
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <PartnerCTA />
     </Layout>
   );
 }

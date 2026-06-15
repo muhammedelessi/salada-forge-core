@@ -9,7 +9,7 @@ import { ChevronDown, Grid, List, X, Loader2, Search, SlidersHorizontal } from "
 import { useLanguageStore } from "@/store/languageStore";
 import { translations } from "@/i18n/translations";
 import { Link } from "react-router-dom";
-import heroPort from "@/assets/hero-port.webp";
+import { PageHero } from "@/components/PageHero";
 
 type SortOption = "featured" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 
@@ -209,89 +209,8 @@ export default function ShopPage() {
     <Layout>
       <SEOHead {...seo} />
 
-      {/* ── HERO — same typography shell as About / Why Salada ── */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt={t.shop.catalog}
-            width={1920}
-            height={1080}
-            className="w-full h-full object-cover object-center max-w-full"
-            style={{ filter: "grayscale(18%) brightness(0.48)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
-          <div
-            className="absolute bottom-0 inset-x-0"
-            style={{
-              height: "1.5px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-            }}
-          />
-        </div>
-
-        <div className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14" style={{ minHeight: "260px" }}>
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            <nav className={`page-hero-breadcrumb flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              <Link
-                to="/"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {t.nav.shop}
-              </span>
-            </nav>
-
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
-              {pageTitle}
-            </h1>
-
-            <p
-              className="hero-subtitle leading-relaxed animate-fade-up delay-300 mb-0"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}
-            >
-              {t.shop.introP1}
-            </p>
-
-            <div
-              className={`mt-3 flex flex-wrap items-center gap-3 leading-[1.65] text-base font-normal animate-fade-up delay-300 ${
-                isAr ? "justify-end" : ""
-              }`}
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}
-            >
-              {isLoading ? (
-                <span className="inline-flex items-center gap-1.5">
-                  <Loader2 className="w-3.5 h-3.5 shrink-0 animate-spin" />
-                  {isAr ? "جاري التحميل..." : "Loading..."}
-                </span>
-              ) : (
-                <span>
-                  {filteredProducts.length} {t.shop.products}
-                </span>
-              )}
-              {activeCount > 0 && (
-                <button
-                  type="button"
-                  onClick={clearFilters}
-                  className="inline-flex items-center gap-1 uppercase tracking-[0.12em] underline-offset-2 hover:underline"
-                  style={{ color: "hsl(var(--primary))" }}
-                >
-                  {t.shop.clearFilters}
-                  <X className="w-3 h-3 shrink-0" />
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── HERO ── */}
+      <PageHero breadcrumbLabel={t.nav.shop} title={pageTitle} description={t.shop.introP1} />
 
       {/* ════════════════════════════════════════
           STICKY FILTER BAR — categories + price + search (hides on scroll down, reappears on scroll up)
@@ -409,9 +328,10 @@ export default function ShopPage() {
 
               {/* All */}
               <button onClick={() => handleCategoryChange("")}
-                className="px-4 py-3 font-medium whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
+                className="shop-tab px-4 py-3 font-medium whitespace-nowrap border-b-2 transition-colors duration-150 shrink-0"
                 style={{
                   fontSize: "0.95rem",
+                  fontWeight: 700,
                   borderColor: !activeCategory ? "hsl(var(--primary))" : "transparent",
                   color: !activeCategory ? "hsl(var(--primary))" : "hsl(var(--foreground)/0.65)",
                 }}>
@@ -423,9 +343,10 @@ export default function ShopPage() {
                   key={cat.id}
                   onClick={() => handleCategoryChange(cat.id)}
                   type="button"
-                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap border-b-2 px-4 py-3 font-medium transition-colors duration-150"
+                  className="shop-tab inline-flex shrink-0 items-center gap-2 whitespace-nowrap border-b-2 px-4 py-3 font-medium transition-colors duration-150"
                   style={{
                     fontSize: "0.95rem",
+                    fontWeight: 700,
                     borderColor: activeCategory === cat.id ? "hsl(var(--primary))" : "transparent",
                     color: activeCategory === cat.id ? "hsl(var(--primary))" : "hsl(var(--foreground)/0.65)",
                   }}

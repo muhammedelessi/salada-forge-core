@@ -9,7 +9,7 @@ import { translations } from "@/i18n/translations";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useSearchParams } from "react-router-dom";
 import { useProducts, useCategories } from "@/hooks/useProducts";
-import heroPort from "@/assets/hero-port.webp";
+import { PageHero } from "@/components/PageHero";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -317,57 +317,12 @@ export default function ContactPage() {
     <Layout>
       <SEOHead {...seo} />
 
-      <section className="relative overflow-hidden" dir={dir} style={{ minHeight: "240px" }}>
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Contact Salada"
-            className="w-full h-full object-cover"
-            style={{ filter: "grayscale(18%) brightness(0.45)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.6)" }} />
-          <div
-            className="absolute bottom-0 inset-x-0"
-            style={{
-              height: "1.5px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-            }}
-          />
-        </div>
-        <div
-          className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
-          style={{ minHeight: "240px" }}
-        >
-          <div className="max-w-xl text-start">
-            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
-              <Link
-                to="/"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {t.contact.title}
-              </span>
-            </nav>
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] text-start">
-              {t.contact.label}
-            </h1>
-            <p
-              className="hero-subtitle leading-relaxed text-start"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "34rem" }}
-            >
-              {t.contact.description}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbLabel={t.contact.title}
+        title={t.contact.label}
+        description={t.contact.description}
+        minHeight={240}
+      />
 
       <section className="border-b border-border" dir={dir} style={{ background: "hsl(var(--secondary)/0.3)" }}>
         <div className="industrial-container py-8 md:py-10">

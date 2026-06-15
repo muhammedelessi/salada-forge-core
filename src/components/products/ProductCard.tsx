@@ -39,7 +39,6 @@ export function ProductCard({
 
   const localizedTitle = getField(product, "title") ?? product.title;
   const localizedDescription = getField(product, "description") ?? "";
-  const tags = Array.isArray(product.tags) ? product.tags.filter((tg) => tg && tg.trim().length > 0) : [];
 
   /** Align category slugs with ShopPage / DB — includes singular `iso-shipping-container` for Arabic */
   const categoryTranslations: Record<string, string> = {
@@ -204,7 +203,7 @@ export function ProductCard({
   return (
     <div
       className={cn(
-        "group relative cursor-pointer overflow-hidden border bg-background transition-colors duration-200",
+        "group relative flex h-full cursor-pointer flex-col overflow-hidden border bg-background transition-colors duration-200",
         selectable && selected
           ? "border-primary ring-2 ring-primary/70 bg-primary/10"
           : "border-border hover:border-primary/60 hover:bg-primary/10",
@@ -281,24 +280,24 @@ export function ProductCard({
       {/* Card copy — logical start: RTL Arabic / LTR English (not centered) */}
       <div
         className={cn(
-          "text-start",
+          "flex flex-1 flex-col text-start",
           dense ? "px-2.5 pb-2 pt-2 sm:px-3 sm:pb-2.5 sm:pt-2.5" : "px-3 pb-3 pt-3 sm:px-4 sm:pb-3.5 sm:pt-3.5",
         )}
         dir={isAr ? "rtl" : "ltr"}
       >
-        <p
+        <span
           className={cn(
-            "mb-1.5 w-full font-medium uppercase leading-tight",
-            dense ? "text-[0.58rem] sm:text-[0.6rem]" : "text-[0.64rem] sm:text-[0.66rem]",
+            "block w-full uppercase leading-tight",
+            dense ? "text-[0.92rem] sm:text-[0.98rem]" : "text-[1rem] sm:text-[1.06rem]",
           )}
-          style={{ color: "hsl(var(--primary) / 0.9)", letterSpacing: "0.07em" }}
+          style={{ color: "hsl(var(--primary) / 0.9)", letterSpacing: "0.08em", fontWeight: 700 }}
         >
           {categoryLabel}
-        </p>
+        </span>
 
         <Link
           to={`/product/${product.slug}`}
-          className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
+          className="mt-2 block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
           onClick={(e) => {
             if (selectable) {
               e.preventDefault();
@@ -307,55 +306,43 @@ export function ProductCard({
           }}
           tabIndex={selectable ? -1 : undefined}
         >
-          <h3
+          {/* span (not h3) so the global heading !important sizes don't enlarge it */}
+          <span
             className={cn(
-              "w-full font-bold uppercase leading-snug tracking-tight text-foreground transition-colors duration-200 line-clamp-2 group-hover:text-primary",
-              dense ? "text-[0.7rem] sm:text-[0.74rem]" : "text-[0.78rem] sm:text-[0.82rem]",
+              "block w-full font-bold uppercase tracking-[0.01em] text-foreground transition-colors duration-200 line-clamp-2 group-hover:text-primary",
+              dense ? "text-[0.92rem] sm:text-[0.98rem]" : "text-[1rem] sm:text-[1.06rem]",
             )}
+            style={{ lineHeight: 1.4, fontWeight: 700 }}
           >
             {localizedTitle}
-          </h3>
+          </span>
         </Link>
 
-        {tags.length > 0 ? (
-          <div className={cn("flex flex-wrap gap-1", dense ? "mt-1" : "mt-1.5")}>
-            {tags.slice(0, dense ? 3 : 4).map((tag) => (
-              <span
-                key={tag}
-                className={cn(
-                  "inline-flex items-center border border-border font-semibold uppercase text-muted-foreground/85",
-                  dense
-                    ? "px-1 py-0.5 text-[0.5rem] tracking-[0.08em]"
-                    : "px-1.5 py-0.5 text-[0.55rem] tracking-[0.1em]",
-                )}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
-        {plainDescription ? (
-          <p
+        {/* Bottom row — SKU + Get Quote, pinned to the card bottom */}
+        <div className={cn("mt-auto flex items-center justify-between gap-2", dense ? "pt-3" : "pt-3.5")}>
+          <span
             className={cn(
-              "w-full font-normal leading-snug text-muted-foreground/85 line-clamp-1 [overflow-wrap:anywhere]",
-              dense ? "mt-1 text-[0.6rem]" : "mt-1.5 text-[0.68rem]",
+              "min-w-0 truncate uppercase tracking-[0.09em] text-muted-foreground/80",
+              dense ? "text-[0.62rem]" : "text-[0.68rem]",
             )}
-            style={{ wordBreak: "break-word" }}
+            style={{ fontWeight: 700 }}
+            aria-label="SKU"
           >
-            {plainDescription}
-          </p>
-        ) : null}
-
-        <p
-          className={cn(
-            "w-full font-semibold uppercase tracking-[0.09em] text-muted-foreground/65",
-            dense ? "mt-1 text-[0.52rem]" : "mt-1.5 text-[0.58rem]",
-          )}
-          aria-label="SKU"
-        >
-          {product.sku}
-        </p>
+            {product.sku}
+          </span>
+          <Link
+            to={`/contact?type=quote&product=${product.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className={cn(
+              "shrink-0 inline-flex items-center gap-1.5 bg-primary font-bold uppercase tracking-[0.08em] text-primary-foreground transition-opacity duration-200 hover:opacity-90",
+              dense ? "px-3 py-1.5 text-[0.62rem]" : "px-3.5 py-2 text-[0.66rem]",
+              isAr ? "flex-row-reverse" : "",
+            )}
+          >
+            {isAr ? "اطلب عرض سعر" : "Get Quote"}
+            <ArrowUpRight className="h-3 w-3 shrink-0" />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
+import { PartnerCTA } from "@/components/PartnerCTA";
+import { PageHero } from "@/components/PageHero";
 import heroPort from "@/assets/hero-port.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
 import seaImage from "@/assets/solutions-sea.webp";
@@ -118,7 +120,7 @@ function StrengthCard({
       */}
       <div className="flex flex-row sm:flex-col h-full">
         {/* ── Image ── */}
-        <div className="relative overflow-hidden shrink-0 w-[104px] sm:w-full" style={{ aspectRatio: "1/1" }}>
+        <div className="relative overflow-hidden shrink-0 w-[84px] sm:w-full aspect-square sm:aspect-[16/9]">
           <img
             src={item.image}
             alt={item.title}
@@ -144,29 +146,29 @@ function StrengthCard({
         {/* ── Text ── */}
         <div
           className="
-          p-4 sm:p-5
+          p-3 sm:p-4
           flex flex-col justify-center flex-1
           border-s border-s-border sm:border-s-0
           sm:border-t sm:border-t-border
         "
         >
-          <div className="h-px mb-2" style={{ width: "1.25rem", background: "hsl(var(--primary)/0.6)" }} />
+          <div className="h-px mb-1.5" style={{ width: "1rem", background: "hsl(var(--primary)/0.6)" }} />
           <h3
-            className="font-black uppercase tracking-tight leading-snug mb-1.5 group-hover:text-primary transition-colors duration-300"
-            style={{ fontSize: "1rem", color: "hsl(var(--foreground))" }}
+            className="font-black uppercase tracking-tight leading-snug mb-1 group-hover:text-primary transition-colors duration-300"
+            style={{ fontSize: "0.85rem", color: "hsl(var(--foreground))" }}
           >
             {item.title}
           </h3>
           <p
-            className="leading-relaxed hidden sm:block"
-            style={{ fontSize: "0.9rem", color: "hsl(var(--muted-foreground))" }}
+            className="leading-relaxed hidden sm:block line-clamp-3"
+            style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
           >
             {item.desc}
           </p>
           {/* on mobile show shorter desc */}
           <p
             className="leading-relaxed sm:hidden line-clamp-2"
-            style={{ fontSize: "0.82rem", color: "hsl(var(--muted-foreground))" }}
+            style={{ fontSize: "0.74rem", color: "hsl(var(--muted-foreground))" }}
           >
             {item.desc}
           </p>
@@ -196,63 +198,11 @@ export default function WhySaladaPage() {
       {/* ════════════════════════════════
           HERO — compact with image
       ════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "260px" }}>
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Why choose Salada"
-            width={1920}
-            height={1080}
-            className="w-full h-full object-cover object-center max-w-full"
-            style={{ filter: "grayscale(18%) brightness(0.45)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
-          <div
-            className="absolute bottom-0 inset-x-0"
-            style={{
-              height: "1.5px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-            }}
-          />
-        </div>
-
-        <div
-          className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
-          style={{ minHeight: "260px" }}
-        >
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            {/* breadcrumb */}
-            <nav className={`page-hero-breadcrumb flex items-center gap-1.5 mb-4 ${isAr ? "flex-row-reverse justify-end" : ""}`}>
-              <Link
-                to="/"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {isAr ? "لماذا صلادة" : "Why Salada"}
-              </span>
-            </nav>
-
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
-              {isAr ? "لماذا صلادة؟" : "Why Salada?"}
-            </h1>
-
-            <p
-              className="hero-subtitle leading-relaxed animate-fade-up delay-300"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}
-            >
-              {t("why.pageDesc")}
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbLabel={isAr ? "لماذا صلادة" : "Why Salada"}
+        title={isAr ? "لماذا صلادة؟" : "Why Salada?"}
+        description={t("why.pageDesc")}
+      />
 
       {/* ════════════════════════════════
           STRENGTHS — 3 top + 2 centered below
@@ -324,53 +274,7 @@ export default function WhySaladaPage() {
       {/* ════════════════════════════════
           CTA — dark
       ════════════════════════════════ */}
-      <section className="relative py-14 md:py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt="Industrial operations"
-            loading="lazy"
-            decoding="async"
-            width={1920}
-            height={1080}
-            className="w-full h-full object-cover max-w-full"
-            style={{ filter: "grayscale(25%) brightness(0.35)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.82)" }} />
-        </div>
-
-        <div className="industrial-container relative z-10">
-          <div className="max-w-xl mx-auto text-center">
-            <Reveal>
-              <Label text={isAr ? "تواصل معنا" : "Get Started"} isAr={isAr} center spanClassName="hero-eyebrow-primary" />
-              <h2
-                className="font-black uppercase leading-[0.92] tracking-[-0.025em] mb-4"
-                style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", color: "#fff" }}
-              >
-                {t("cta.title")}
-              </h2>
-              <p
-                className="text-[0.8rem] leading-relaxed mb-7 max-w-md mx-auto"
-                style={{ color: "rgba(255,255,255,0.4)" }}
-              >
-                {t("cta.description")}
-              </p>
-              <div className={`flex flex-wrap gap-3 justify-center ${isAr ? "flex-row-reverse" : ""}`}>
-                <Link to="/contact" className="btn-primary w-full sm:w-auto">
-                  <span>{t("cta.getQuote")}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Link
-                  to="/solutions"
-                  className="btn-ghost-dark w-full sm:w-auto"
-                >
-                  {t("cta.browseCatalog")}
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <PartnerCTA />
     </Layout>
   );
 }
