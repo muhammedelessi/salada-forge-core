@@ -279,7 +279,7 @@ export default function ContactPage() {
       icon: Mail,
       title: t.contact.emailLabel,
       lines: ["Hello@salada.sa"],
-      href: "mailto:Hello@salada.sa",
+      href: `mailto:Hello@salada.sa?subject=${encodeURIComponent(isAr ? "استفسار - صلادة" : "Inquiry - Salada")}`,
       contentDir: "ltr" as const,
     },
     {
@@ -328,39 +328,60 @@ export default function ContactPage() {
         <div className="industrial-container py-8 md:py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {contactItems.map((item) => {
+              const actionLabel = item.href?.startsWith("mailto:")
+                ? isAr
+                  ? "راسلنا"
+                  : "Email us"
+                : item.href?.startsWith("tel:")
+                  ? isAr
+                    ? "اتصل الآن"
+                    : "Call now"
+                  : null;
+
               const Content = (
-                <div
-                  className="h-full border border-border p-5 text-start contact-card-hover"
-                  style={{ background: "hsl(var(--background))" }}
-                >
-                  <div
-                    className="flex items-center justify-center w-10 h-10 mb-4"
-                    style={{ background: "hsl(var(--primary)/0.1)" }}
-                  >
-                    <item.icon className="h-5 w-5 shrink-0" style={{ color: "hsl(var(--primary))" }} />
+                <div className="group relative flex h-full flex-col overflow-hidden border border-border bg-background p-5 text-start transition-all duration-300 hover:border-primary/50 hover:shadow-[0_14px_34px_-16px_rgba(0,0,0,0.18)]">
+                  {/* gold top accent — wipes in on hover */}
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 top-0 h-[2px] origin-center scale-x-0 bg-primary/70 transition-transform duration-300 group-hover:scale-x-100"
+                  />
+                  {/* icon — fills gold on hover */}
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <item.icon className="h-5 w-5 shrink-0" />
                   </div>
-                  <p
-                    className="mb-2 text-[0.8rem] font-bold uppercase tracking-wider"
-                    style={{ color: "hsl(var(--muted-foreground))" }}
-                  >
+                  <p className="mb-2 text-[0.72rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">
                     {item.title}
                   </p>
                   <div
                     dir={item.contentDir ?? dir}
                     className={item.contentDir === "ltr" ? (isAr ? "text-end" : "text-start") : "text-start"}
                   >
+                    {/* span (not <p>) so the global RTL body rules don't override size/weight */}
                     {item.lines.map((line, j) => (
-                      <p
+                      <span
                         key={j}
-                        className="text-base leading-relaxed font-semibold"
+                        className="block leading-relaxed"
                         style={{
+                          fontWeight: j === 0 ? 700 : 400,
+                          fontSize: j === 0 ? "1rem" : "0.85rem",
                           color: j === 0 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                         }}
                       >
                         {line}
-                      </p>
+                      </span>
                     ))}
                   </div>
+
+                  {actionLabel && (
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-primary">
+                      {actionLabel}
+                      <ArrowRight
+                        className={`h-3 w-3 shrink-0 transition-transform duration-200 ${
+                          isAr ? "rotate-180 group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"
+                        }`}
+                      />
+                    </span>
+                  )}
                 </div>
               );
 
