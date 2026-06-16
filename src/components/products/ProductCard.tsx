@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Product } from "@/types";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
 import { useLocalizedField } from "@/hooks/useLocalizedField";
 import { translations } from "@/i18n/translations";
@@ -144,17 +144,24 @@ export function ProductCard({
           )}
         </div>
 
-        {/* Trailing icon — selection check (selectable) or navigation arrow */}
+        {/* Trailing icon — ✕ remove (selected) · empty circle (selectable) · arrow (link) */}
         <div className="flex shrink-0 items-center px-2">
           {selectable ? (
-            <span
-              className={cn(
-                "flex h-5 w-5 items-center justify-center rounded-full border-2 transition-colors",
-                selected ? "border-primary bg-primary text-primary-foreground" : "border-foreground/30 bg-background",
-              )}
-            >
-              {selected && <Check className="h-3 w-3" />}
-            </span>
+            selected ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleSelect?.(product);
+                }}
+                aria-label={isAr ? "إزالة المنتج" : "Remove product"}
+                className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-primary bg-primary text-primary-foreground transition-colors hover:bg-primary/85"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            ) : (
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-foreground/30 bg-background" />
+            )
           ) : (
             <ArrowUpRight
               className="h-3.5 w-3.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
@@ -228,18 +235,31 @@ export function ProductCard({
             : `View product ${localizedTitle}`
       }
     >
-      {/* Selection indicator */}
-      {selectable && (
-        <div
-          className={cn(
-            "pointer-events-none absolute top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors",
-            isAr ? "left-2" : "right-2",
-            selected ? "border-primary bg-primary text-primary-foreground" : "border-foreground/30 bg-background/80",
-          )}
-        >
-          {selected && <Check className="h-3.5 w-3.5" />}
-        </div>
-      )}
+      {/* Selection indicator — clickable ✕ remove button when selected */}
+      {selectable &&
+        (selected ? (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSelect?.(product);
+            }}
+            aria-label={isAr ? "إزالة المنتج" : "Remove product"}
+            className={cn(
+              "absolute top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-primary text-primary-foreground transition-colors hover:bg-primary/85",
+              isAr ? "left-2" : "right-2",
+            )}
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        ) : (
+          <div
+            className={cn(
+              "pointer-events-none absolute top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 border-foreground/30 bg-background/80",
+              isAr ? "left-2" : "right-2",
+            )}
+          />
+        ))}
 
       {/* Image block — natural aspect ratio; contain so edges are never cropped */}
       <Link
@@ -248,6 +268,7 @@ export function ProductCard({
         onClick={(e) => {
           if (selectable) {
             e.preventDefault();
+            e.stopPropagation();
             onToggleSelect?.(product);
           }
         }}
@@ -301,6 +322,7 @@ export function ProductCard({
           onClick={(e) => {
             if (selectable) {
               e.preventDefault();
+              e.stopPropagation();
               onToggleSelect?.(product);
             }
           }}
@@ -330,18 +352,20 @@ export function ProductCard({
           >
             {product.sku}
           </span>
-          <Link
-            to={`/contact?type=quote&product=${product.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className={cn(
-              "shrink-0 inline-flex items-center gap-1.5 bg-primary font-bold uppercase tracking-[0.08em] text-primary-foreground transition-opacity duration-200 hover:opacity-90",
-              dense ? "px-3 py-1.5 text-[0.62rem]" : "px-3.5 py-2 text-[0.66rem]",
-              isAr ? "flex-row-reverse" : "",
-            )}
-          >
-            {isAr ? "اطلب عرض سعر" : "Get Quote"}
-            <ArrowUpRight className="h-3 w-3 shrink-0" />
-          </Link>
+          {!selectable && (
+            <Link
+              to={`/contact?type=quote&product=${product.id}`}
+              onClick={(e) => e.stopPropagation()}
+              className={cn(
+                "shrink-0 inline-flex items-center gap-1.5 bg-primary font-bold uppercase tracking-[0.08em] text-primary-foreground transition-opacity duration-200 hover:opacity-90",
+                dense ? "px-3 py-1.5 text-[0.62rem]" : "px-3.5 py-2 text-[0.66rem]",
+                isAr ? "flex-row-reverse" : "",
+              )}
+            >
+              {isAr ? "اطلب عرض سعر" : "Get Quote"}
+              <ArrowUpRight className="h-3 w-3 shrink-0" />
+            </Link>
+          )}
         </div>
       </div>
     </div>

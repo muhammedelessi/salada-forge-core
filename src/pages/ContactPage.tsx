@@ -515,7 +515,7 @@ export default function ContactPage() {
                           side="right"
                           dir={dir}
                           className={cn(
-                            "flex w-full flex-col gap-0 p-0 sm:max-w-md",
+                            "flex w-full flex-col gap-0 p-0 sm:max-w-2xl",
                             // In Arabic, move the built-in close (X) button to the left.
                             isAr && "[&>button]:left-4 [&>button]:right-auto",
                           )}
@@ -611,12 +611,13 @@ export default function ContactPage() {
                                     : "No matching products."}
                               </p>
                             ) : (
-                              <div className="flex flex-col gap-2">
+                              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
                                 {displayedProducts.map((p) => (
                                   <ProductCard
                                     key={p.id}
                                     product={p}
-                                    variant="compact"
+                                    variant="default"
+                                    dense
                                     selectable
                                     selected={selectedProductIds.includes(p.id)}
                                     onToggleSelect={() => toggleProduct(p.id)}
