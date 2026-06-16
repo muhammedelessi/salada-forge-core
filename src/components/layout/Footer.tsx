@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUp, Mail, Phone, MapPin, Clock, MessageCircle, ShieldCheck, Factory, Target } from "lucide-react";
+import { ArrowUp, Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
 import saladaLogo from "@/assets/SALADA_LOGO.png";
-
-const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=" +
-  encodeURIComponent("شركة صلادة للصناعات المعدنية، أحمد بن محمد العيالي، حي النور، الرياض 14321");
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -34,12 +30,6 @@ export function Footer() {
     { label: isAr ? "سياسة الخصوصية" : "Privacy Policy", href: "/privacy" },
     { label: isAr ? "الشروط والأحكام" : "Terms of Service", href: "/terms" },
     { label: isAr ? "سياسة الاسترجاع" : "Return Policy", href: "/returns" },
-  ];
-
-  const badges = [
-    { Icon: ShieldCheck, label: isAr ? "معتمد DNV" : "DNV Approved" },
-    { Icon: Factory, label: isAr ? "صناعة سعودية 100%" : "100% Saudi Made" },
-    { Icon: Target, label: isAr ? "رؤية 2030" : "Vision 2030" },
   ];
 
   const companyName = isAr ? "شركة صلادة للصناعات المعدنية" : "Salada Metal Industries Co.";
@@ -101,26 +91,22 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span>
+                <span className="text-sm leading-relaxed">
                   {isAr ? "الرياض، حي النور، أحمد بن محمد العيالي" : "Ahmed bin Mohammed Al-Ayal, Al Noor, Riyadh"}
                   <br />
-                  <span dir="ltr">RNNA7850, 14321</span>
-                  <br />
-                  <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    {isAr ? "عرض على الخريطة" : "View on map"}
-                  </a>
+                  <span dir="ltr" className="text-sm">RNNA7850, 14321</span>
                 </span>
               </li>
               <li>
-                <a href="tel:+966500165914" className="flex items-center gap-2.5 transition-colors hover:text-primary">
+                <a href="tel:+966500165914" className="flex items-center gap-2.5 text-sm transition-colors hover:text-primary">
                   <Phone className="h-4 w-4 shrink-0 text-primary" />
-                  <span dir="ltr">050 016 5914</span>
+                  <span dir="ltr" className="text-sm">050 016 5914</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:Hello@salada.sa" className="flex items-center gap-2.5 transition-colors hover:text-primary">
+                <a href="mailto:Hello@salada.sa" className="flex items-center gap-2.5 text-sm transition-colors hover:text-primary">
                   <Mail className="h-4 w-4 shrink-0 text-primary" />
-                  <span dir="ltr">Hello@salada.sa</span>
+                  <span dir="ltr" className="text-sm">Hello@salada.sa</span>
                 </a>
               </li>
               <li>
@@ -128,34 +114,17 @@ export function Footer() {
                   href="https://wa.me/966500165914"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 transition-colors hover:text-primary"
+                  className="flex items-center gap-2.5 text-sm transition-colors hover:text-primary"
                 >
                   <MessageCircle className="h-4 w-4 shrink-0 text-primary" />
-                  <span>{isAr ? "واتساب" : "WhatsApp"}</span>
+                  <span className="text-sm">{isAr ? "واتساب" : "WhatsApp"}</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span>{isAr ? "الأحد – الخميس: 8:00 ص – 6:00 م" : "Sun – Thu: 8:00 AM – 6:00 PM"}</span>
+                <span className="text-sm leading-relaxed">{isAr ? "الأحد – الخميس: 8:00 ص – 6:00 م" : "Sun – Thu: 8:00 AM – 6:00 PM"}</span>
               </li>
             </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Trust badges */}
-      <div className="border-t border-border">
-        <div className="industrial-container py-5">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {badges.map(({ Icon, label }) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-2 border border-border bg-background/40 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
-              >
-                <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />
-                {label}
-              </span>
-            ))}
           </div>
         </div>
       </div>
@@ -183,15 +152,22 @@ export function Footer() {
           </div>
 
           {/* copyright + registration */}
-          <div className="flex flex-col gap-1 border-t border-border pt-4 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between rtl:md:flex-row-reverse">
-            <p>
-              © {currentYear} {companyName}. {t("footer.rights")}
-            </p>
-            <p dir={isAr ? "rtl" : "ltr"}>
-              {isAr ? "السجل التجاري" : "CR"}: 1010462762
-              <span className="mx-2 opacity-40">|</span>
-              {isAr ? "الرقم الضريبي" : "VAT"}: 311664613200003
-            </p>
+          <div className="flex flex-col gap-2.5 border-t border-border pt-4 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
+            {/* span (not <p>) so the global RTL body-size rule doesn't enlarge it */}
+            <span className="block text-start leading-relaxed">
+              <span dir="ltr">© {currentYear}</span> {companyName}. {t("footer.rights")}
+            </span>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-start">
+              <span className="inline-flex items-center gap-1.5">
+                {isAr ? "السجل التجاري" : "CR"}
+                <span dir="ltr" className="tracking-wide text-foreground/75">1010462762</span>
+              </span>
+              <span className="h-3 w-px shrink-0 bg-border" aria-hidden />
+              <span className="inline-flex items-center gap-1.5">
+                {isAr ? "الرقم الضريبي" : "VAT"}
+                <span dir="ltr" className="tracking-wide text-foreground/75">311664613200003</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

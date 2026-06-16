@@ -13,7 +13,6 @@ import heroImage from "@/assets/hero-logistics.webp";
 import seaImage from "@/assets/solutions-sea.webp";
 import storageImage from "@/assets/solutions-storage.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
-import vision2030 from "@/assets/vision-2030.svg";
 
 /** Industry icon name (from DB) → Lucide component. */
 const INDUSTRY_ICONS: Record<string, LucideIcon> = { Ship, HardHat, Landmark, Factory, Warehouse };
@@ -244,23 +243,6 @@ export default function HomePage() {
 
       {/* ════════ VISION 2030 ════════ */}
       <section dir={isAr ? "rtl" : "ltr"} className="relative w-full overflow-hidden border-y-2 border-primary bg-background">
-        {/* Vision 2030 emblem (replaces the old big "2030" watermark; swap this file for the official logo if desired) */}
-        <img
-          src={vision2030}
-          alt={t("vision.label")}
-          aria-hidden
-          className="pointer-events-none absolute top-1/2 hidden -translate-y-1/2 select-none opacity-90 lg:block ltr:right-6 xl:ltr:right-16 rtl:left-6 xl:rtl:left-16"
-          style={{ width: "clamp(15rem, 22vw, 22rem)", height: "auto" }}
-        />
-        {/* subtle emblem on small screens */}
-        <img
-          src={vision2030}
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute -bottom-8 select-none opacity-[0.12] lg:hidden ltr:right-0 rtl:left-0"
-          style={{ width: "min(60vw, 18rem)", height: "auto" }}
-        />
-
         <div
           className="industrial-container relative z-10 py-12 md:py-16"
           style={{ background: "linear-gradient(90deg, hsl(var(--primary)/0.06), transparent 70%)" }}
