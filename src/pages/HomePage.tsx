@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Ship, HardHat, Landmark, Factory, Warehouse, Check, Target } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -7,10 +8,15 @@ import { usePageSEO } from "@/hooks/usePageSEO";
 import { useLanguageStore } from "@/store/languageStore";
 import { useIndustries } from "@/hooks/useIndustries";
 import { PartnerCTA } from "@/components/PartnerCTA";
+import { Testimonials } from "@/components/home/Testimonials";
 import heroImage from "@/assets/hero-logistics.webp";
 import seaImage from "@/assets/solutions-sea.webp";
 import storageImage from "@/assets/solutions-storage.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
+import vision2030 from "@/assets/vision-2030.svg";
+
+/** Industry icon name (from DB) → Lucide component. */
+const INDUSTRY_ICONS: Record<string, LucideIcon> = { Ship, HardHat, Landmark, Factory, Warehouse };
 
 /* ── useInView ── */
 function useInView(threshold = 0.12) {
@@ -84,6 +90,7 @@ export default function HomePage() {
     name: isAr ? ind.nameAr : ind.nameEn,
     desc: isAr ? ind.descriptionAr : ind.descriptionEn,
     href: `/industries/${ind.slug}`,
+    Icon: (ind.icon && INDUSTRY_ICONS[ind.icon]) || Ship,
   }));
 
   const whyItems = [
@@ -155,6 +162,20 @@ export default function HomePage() {
             {t("hero.titleHighlight")}
           </p>
 
+          {/* Advantage check points (moved from the Salada Advantage section) */}
+          <div className="animate-fade-up delay-500 mb-7 flex flex-wrap justify-center gap-x-5 gap-y-2">
+            {whyItems.map((w) => (
+              <span
+                key={w.title}
+                className="inline-flex items-center gap-1.5 text-sm"
+                style={{ color: "rgba(255,255,255,0.82)" }}
+              >
+                <Check className="h-4 w-4 shrink-0" style={{ color: "hsl(var(--gold))" }} aria-hidden />
+                {w.title}
+              </span>
+            ))}
+          </div>
+
           <div className={`animate-fade-up delay-600 flex flex-wrap gap-3 justify-center items-center ${isAr ? "flex-row-reverse" : ""}`}>
             <Link to="/solutions" className="btn-primary shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
               <span>{t("hero.cta")}</span>
@@ -222,56 +243,65 @@ export default function HomePage() {
       </section>
 
       {/* ════════ VISION 2030 ════════ */}
-      <section dir={isAr ? "rtl" : "ltr"} className="w-full bg-background">
+      <section dir={isAr ? "rtl" : "ltr"} className="relative w-full overflow-hidden border-y-2 border-primary bg-background">
+        {/* Vision 2030 emblem (replaces the old big "2030" watermark; swap this file for the official logo if desired) */}
+        <img
+          src={vision2030}
+          alt={t("vision.label")}
+          aria-hidden
+          className="pointer-events-none absolute top-1/2 hidden -translate-y-1/2 select-none opacity-90 lg:block ltr:right-6 xl:ltr:right-16 rtl:left-6 xl:rtl:left-16"
+          style={{ width: "clamp(15rem, 22vw, 22rem)", height: "auto" }}
+        />
+        {/* subtle emblem on small screens */}
+        <img
+          src={vision2030}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -bottom-8 select-none opacity-[0.12] lg:hidden ltr:right-0 rtl:left-0"
+          style={{ width: "min(60vw, 18rem)", height: "auto" }}
+        />
+
         <div
-          className="w-full"
-          style={{
-            borderTop: "2px solid hsl(var(--primary))",
-            borderBottom: "1px solid hsl(var(--primary)/0.2)",
-            background: "hsl(var(--primary)/0.05)",
-            borderInlineStart: "4px solid hsl(var(--primary))",
-            paddingTop: "3rem",
-            paddingBottom: "3rem",
-          }}
+          className="industrial-container relative z-10 py-12 md:py-16"
+          style={{ background: "linear-gradient(90deg, hsl(var(--primary)/0.06), transparent 70%)" }}
         >
-          <div className="industrial-container px-5 md:px-10">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-[15%_50%_35%] md:items-stretch md:gap-0">
-              {/* Column 1 — 2030 (+ mobile gold rule) */}
-              <div className="flex min-w-0 flex-col items-start md:items-center md:justify-center md:self-stretch md:border-e md:border-primary/25 md:pe-6 lg:pe-8">
-                <span className="home-vision-year leading-none text-primary [font-size:clamp(2.5rem,8vw,3.5rem)] md:[font-size:clamp(3.5rem,6vw,5rem)]">
-                  2030
-                </span>
-                <div
-                  className="mt-5 h-[2px] w-12 shrink-0 md:hidden"
-                  style={{ background: "hsl(var(--primary))" }}
-                  aria-hidden
-                />
-              </div>
+          <div className="max-w-2xl">
+            {/* eyebrow badge */}
+            <span className="mb-4 inline-flex items-center gap-2 border border-primary/30 bg-primary/10 px-3 py-1.5 text-primary">
+              <Target className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="home-vision-eyebrow uppercase tracking-widest" style={{ fontSize: "0.72rem" }}>
+                {t("vision.label")}
+              </span>
+            </span>
 
-              {/* Column 2 — eyebrow + title */}
-              <div className="min-w-0 md:flex md:flex-col md:justify-center md:ps-6 lg:ps-8">
-                <span className="home-vision-eyebrow block uppercase tracking-widest text-primary" style={{ fontSize: "0.75rem" }}>
-                  {t("vision.label")}
-                </span>
-                <h2 className="home-vision-title mt-2 uppercase text-foreground" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", lineHeight: 1.15, color: "hsl(var(--foreground))" }}>
-                  {t("vision.title")}
-                </h2>
-              </div>
+            <h2
+              className="home-vision-title uppercase text-foreground"
+              style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", lineHeight: 1.15 }}
+            >
+              {t("vision.title")}
+            </h2>
 
-              {/* Column 3 — description + CTA */}
-              <div className="min-w-0 md:flex md:flex-col md:justify-center md:ps-4 lg:ps-6">
-                <p className="home-vision-desc" style={{ fontSize: "0.9rem", lineHeight: 1.8, color: "hsl(var(--muted-foreground))" }}>
-                  {t("vision.description")}
-                </p>
-                <Link
-                  to="/why-salada"
-                  className="btn-primary mt-5 w-full justify-center transition-opacity duration-300 ease-out md:w-auto"
-                >
-                  <span>{t("nav.whySalada")}</span>
-                  <ArrowUpRight className="w-3 h-3" />
-                </Link>
-              </div>
+            <p className="home-vision-desc mt-4 max-w-xl" style={{ fontSize: "0.92rem", lineHeight: 1.85, color: "hsl(var(--muted-foreground))" }}>
+              {t("vision.description")}
+            </p>
+
+            {/* alignment check points */}
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+              {(isAr
+                ? ["محتوى محلي", "تصنيع سعودي 100%", "نمو القطاع الصناعي"]
+                : ["Local Content", "100% Saudi Manufacturing", "Industrial Growth"]
+              ).map((p) => (
+                <span key={p} className="inline-flex items-center gap-1.5 text-sm text-foreground/80">
+                  <Check className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+                  {p}
+                </span>
+              ))}
             </div>
+
+            <Link to="/why-salada" className="btn-primary mt-7 w-full justify-center sm:w-auto">
+              <span>{t("nav.whySalada")}</span>
+              <ArrowUpRight className="h-3 w-3 rtl:rotate-180" />
+            </Link>
           </div>
         </div>
       </section>
@@ -369,30 +399,33 @@ export default function HomePage() {
               </span>
             </div>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 text-center items-stretch">
+          <div className="flex flex-wrap justify-center gap-5">
             {industries.map((ind, i) => (
-              <Reveal key={ind.href} delay={i * 80}>
+              <Reveal key={ind.href} delay={i * 80} className="w-full sm:w-[calc(50%_-_0.625rem)] lg:w-[calc((100%_-_2.5rem)/3)]">
                 <Link to={ind.href}
-                  className="group relative flex flex-col items-center justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.04] h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
-                  <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="font-black text-primary/25 group-hover:text-primary/50 transition-colors duration-300 block"
-                    style={{ fontSize:"clamp(1.8rem, 3.5vw, 2.5rem)", lineHeight:1 }}>
+                  className="group relative flex h-full flex-col overflow-hidden border border-border bg-background p-6 md:p-7 text-start transition-all duration-300 hover:border-primary/50 hover:shadow-[0_14px_34px_-16px_rgba(0,0,0,0.18)]">
+                  {/* gold top accent on hover */}
+                  <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] origin-center scale-x-0 bg-primary/70 transition-transform duration-300 group-hover:scale-x-100" />
+                  {/* number watermark */}
+                  <span aria-hidden className="pointer-events-none absolute top-3 font-black text-primary/[0.07] ltr:right-4 rtl:left-4"
+                    style={{ fontSize:"3rem", lineHeight:1 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="mt-6 px-1">
-                    <h3 className="uppercase font-[900] text-foreground group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.98rem" }}>
-                      {ind.name}
-                    </h3>
-                    <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-3" style={{ fontSize:"0.84rem" }}>
-                      {ind.desc}
-                    </p>
+                  {/* icon */}
+                  <div className="mb-5 flex h-12 w-12 shrink-0 items-center justify-center bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <ind.Icon className="h-6 w-6" />
                   </div>
-                  <div className="flex items-center justify-center gap-1.5 mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="uppercase" style={{ fontSize:"0.75rem", letterSpacing:"0.18em" }}>
-                      {t("solutions.learnMore")}
-                    </span>
-                    <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
+                  <h3 className="uppercase font-[900] text-foreground group-hover:text-primary transition-colors duration-300"
+                    style={{ fontSize:"1rem" }}>
+                    {ind.name}
+                  </h3>
+                  {/* description — same style as the Customer Feedback comment text */}
+                  <span className="mt-2 block text-foreground line-clamp-3" style={{ fontWeight: 400, fontSize: "1rem", lineHeight: 1.7 }}>
+                    {ind.desc}
+                  </span>
+                  <div className="mt-auto flex items-center gap-1.5 pt-5 text-primary" style={{ fontSize:"0.72rem", letterSpacing:"0.15em" }}>
+                    <span className="uppercase">{t("solutions.learnMore")}</span>
+                    <ArrowRight className={`w-3 h-3 transition-transform duration-300 ${isAr ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`} />
                   </div>
                 </Link>
               </Reveal>
@@ -401,41 +434,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════ WHY SALADA ════════ */}
-      <section className="section-pad border-b border-border bg-background">
-        <div className="industrial-container" dir={isAr ? "rtl" : "ltr"}>
-          <Reveal className="mb-8 md:mb-10">
-            <span className={`uppercase text-primary inline-flex items-center gap-2 mb-4 ${isAr ? "flex-row-reverse" : ""}`}
-              style={{ fontSize:"0.75rem", letterSpacing:"0.2em" }}>
-              <span className="w-4 h-px bg-primary" />
-              {t("why.label")}
-            </span>
-            <h2 className="uppercase font-black mt-2 text-foreground"
-              style={{ fontSize:"clamp(1.6rem, 3vw, 2.5rem)", letterSpacing:"-0.025em", lineHeight:1 }}>
-              {t("why.title")}
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 text-center items-stretch">
-            {whyItems.map((w, i) => (
-              <Reveal key={w.title} delay={i * 80}>
-                <div className="group relative flex flex-col items-center justify-between border border-border bg-background p-6 md:p-8 transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.04] h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
-                  <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="font-black text-primary/25 group-hover:text-primary/50 transition-colors duration-300 block"
-                    style={{ fontSize:"clamp(1.8rem, 3.5vw, 2.5rem)", lineHeight:1 }}>
-                    {w.num}
-                  </span>
-                  <div className="mt-6">
-                    <h3 className="uppercase font-[900] text-foreground group-hover:text-primary transition-colors duration-300"
-                      style={{ fontSize:"0.98rem" }}>
-                      {w.title}
-                    </h3>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ════════ TESTIMONIALS ════════ */}
+      <Testimonials />
 
       {/* ════════ CTA ════════ */}
       <PartnerCTA />

@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      testimonials: {
+        Row: {
+          author_ar: string
+          author_en: string
+          avatar_url: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          quote_ar: string
+          quote_en: string
+          rating: number
+          role_ar: string | null
+          role_en: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          author_ar: string
+          author_en: string
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          quote_ar: string
+          quote_en: string
+          rating?: number
+          role_ar?: string | null
+          role_en?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          author_ar?: string
+          author_en?: string
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          quote_ar?: string
+          quote_en?: string
+          rating?: number
+          role_ar?: string | null
+          role_en?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       industries: {
         Row: {
           created_at: string

@@ -5,8 +5,11 @@ import { cn } from "@/lib/utils";
 import heroPort from "@/assets/hero-port.webp";
 
 interface PageHeroProps {
-  /** Current-page label shown after "Home /" in the breadcrumb. */
+  /** Current-page label shown last in the breadcrumb. */
   breadcrumbLabel: string;
+  /** Optional intermediate crumb (e.g. "Industries") rendered between Home and the current label. */
+  parentLabel?: string;
+  parentHref?: string;
   title: string;
   description?: string;
   image?: string;
@@ -18,6 +21,8 @@ interface PageHeroProps {
 /** Shared dark page hero: background image + breadcrumb + title + subtitle. */
 export function PageHero({
   breadcrumbLabel,
+  parentLabel,
+  parentHref,
   title,
   description,
   image = heroPort,
@@ -61,11 +66,23 @@ export function PageHero({
             <Link
               to="/"
               className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-              style={{ color: "rgba(255,255,255,0.32)" }}
+              style={{ color: "rgba(255,255,255,0.9)" }}
             >
               {isAr ? "الرئيسية" : "Home"}
             </Link>
-            <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
+            <span style={{ color: "rgba(255,255,255,0.7)" }}>/</span>
+            {parentLabel && parentHref ? (
+              <>
+                <Link
+                  to={parentHref}
+                  className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
+                  style={{ color: "rgba(255,255,255,0.9)" }}
+                >
+                  {parentLabel}
+                </Link>
+                <span style={{ color: "rgba(255,255,255,0.7)" }}>/</span>
+              </>
+            ) : null}
             <span
               className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
               style={{ color: "hsl(var(--primary))" }}
@@ -74,12 +91,15 @@ export function PageHero({
             </span>
           </nav>
 
-          <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3">
+          <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em]">
             {title}
           </h1>
 
+          {/* gold accent bar */}
+          <span aria-hidden className="mb-4 block h-[3px] w-12 bg-primary" />
+
           {description ? (
-            <p className="hero-subtitle leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}>
+            <p className="hero-subtitle leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", maxWidth: "36rem" }}>
               {description}
             </p>
           ) : null}

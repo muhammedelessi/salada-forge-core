@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -110,17 +110,21 @@ function StrengthCard({
 }) {
   return (
     <div
-      className={`group relative border border-border subtle-card-hover hover:border-primary/50 bg-background transition-all duration-300 h-full shadow-[0_1px_0_hsl(var(--border))] hover:shadow-[0_10px_24px_rgba(0,0,0,0.1)] ${isAr ? "text-right" : "text-left"}`}
+      className={`group relative overflow-hidden border border-border bg-background transition-all duration-300 h-full hover:border-primary/50 hover:shadow-[0_14px_34px_-16px_rgba(0,0,0,0.18)] ${isAr ? "text-right" : "text-left"}`}
       dir={isAr ? "rtl" : "ltr"}
     >
-      <div className="absolute top-0 inset-x-0 h-[2px] bg-primary/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* gold top accent — wipes in on hover */}
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 z-10 h-[2px] origin-center scale-x-0 bg-primary/70 transition-transform duration-300 group-hover:scale-x-100"
+      />
       {/*
-        Mobile  → row: [square 100px image] [text]
-        Desktop → col: [full-width image]   [text below]
+        Mobile  → row: [square image] [text]
+        Desktop → col: [full-width image] [text below]
       */}
-      <div className="flex flex-row sm:flex-col h-full">
+      <div className="flex h-full flex-row sm:flex-col">
         {/* ── Image ── */}
-        <div className="relative overflow-hidden shrink-0 w-[84px] sm:w-full aspect-square sm:aspect-[16/9]">
+        <div className="relative shrink-0 overflow-hidden aspect-square w-[92px] sm:aspect-[16/10] sm:w-full">
           <img
             src={item.image}
             alt={item.title}
@@ -128,47 +132,36 @@ function StrengthCard({
             decoding="async"
             width={400}
             height={400}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04] max-w-full"
-            style={{ filter: "grayscale(12%) brightness(0.9)" }}
+            className="absolute inset-0 h-full w-full max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+            style={{ filter: "grayscale(14%) brightness(0.85)" }}
           />
           <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ background: "hsl(var(--primary)/0.08)" }}
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(8,6,2,0.42), transparent 62%)" }}
           />
-          <span
-            className="absolute top-2 start-2 sm:top-3 sm:start-3 label-text text-[0.75rem] uppercase tracking-[0.14em]"
-            style={{ color: "hsl(var(--primary))" }}
-          >
-            {item.num}
-          </span>
         </div>
 
         {/* ── Text ── */}
-        <div
-          className="
-          p-3 sm:p-4
-          flex flex-col justify-center flex-1
-          border-s border-s-border sm:border-s-0
-          sm:border-t sm:border-t-border
-        "
-        >
-          <div className="h-px mb-1.5" style={{ width: "1rem", background: "hsl(var(--primary)/0.6)" }} />
+        <div className="relative flex flex-1 flex-col justify-center border-s border-s-border p-3.5 sm:border-s-0 sm:border-t sm:border-t-border sm:p-5">
+          {/* faded number watermark */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute top-1.5 select-none font-black leading-none text-primary/[0.08] ltr:right-3 rtl:left-3"
+            style={{ fontSize: "2.6rem" }}
+          >
+            {item.num}
+          </span>
+
+          <div className="relative mb-2 h-[2px] w-7" style={{ background: "hsl(var(--primary)/0.7)" }} />
           <h3
-            className="font-black uppercase tracking-tight leading-snug mb-1 group-hover:text-primary transition-colors duration-300"
-            style={{ fontSize: "0.85rem", color: "hsl(var(--foreground))" }}
+            className="relative mb-1.5 font-black uppercase leading-snug tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary"
+            style={{ fontSize: "0.98rem" }}
           >
             {item.title}
           </h3>
           <p
-            className="leading-relaxed hidden sm:block line-clamp-3"
-            style={{ fontSize: "0.78rem", color: "hsl(var(--muted-foreground))" }}
-          >
-            {item.desc}
-          </p>
-          {/* on mobile show shorter desc */}
-          <p
-            className="leading-relaxed sm:hidden line-clamp-2"
-            style={{ fontSize: "0.74rem", color: "hsl(var(--muted-foreground))" }}
+            className="relative leading-relaxed text-muted-foreground line-clamp-2 sm:line-clamp-3"
+            style={{ fontSize: "0.84rem", lineHeight: 1.7 }}
           >
             {item.desc}
           </p>
@@ -245,27 +238,27 @@ export default function WhySaladaPage() {
       <section className="border-b border-border py-10 md:py-14 bg-background">
         <div className="industrial-container">
           <Reveal>
-            <div className={isAr ? "text-right" : ""}>
+            <div
+              className={`relative max-w-3xl border-primary/55 ps-5 sm:ps-7 ${isAr ? "border-e-2 text-right" : "border-s-2"}`}
+              dir={isAr ? "rtl" : "ltr"}
+            >
+              {/* decorative quote glyph */}
+              <Quote
+                aria-hidden
+                className="pointer-events-none absolute -top-2 h-12 w-12 text-primary/[0.1] ltr:right-0 rtl:left-0 rtl:-scale-x-100"
+              />
               <Label text={isAr ? "باختصار" : "In Short"} isAr={isAr} />
               <p
-                className="leading-relaxed"
+                className="relative leading-relaxed"
                 style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
+                  fontSize: "clamp(1rem, 1.7vw, 1.2rem)",
                   color: "hsl(var(--foreground))",
                   fontWeight: 500,
-                  maxWidth: "42rem",
+                  lineHeight: 1.85,
                 }}
               >
                 {t("why.supportingText")}
               </p>
-              <Link
-                to="/contact"
-                className={`hero-inline-cta inline-flex items-center gap-2 mt-5 label-text text-label-md uppercase tracking-[0.18em] transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {isAr ? "تواصل معنا" : "Get In Touch"}
-                <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
-              </Link>
             </div>
           </Reveal>
         </div>

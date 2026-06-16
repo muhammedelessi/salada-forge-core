@@ -1,8 +1,22 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowRight, Loader2 } from "lucide-react";
+import {
+  ArrowRight,
+  Loader2,
+  Ruler,
+  ShieldCheck,
+  Truck,
+  Wrench,
+  Ship,
+  HardHat,
+  Landmark,
+  Factory,
+  Warehouse,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
+import { PageHero } from "@/components/PageHero";
 import { useLanguageStore } from "@/store/languageStore";
 import { useIndustry } from "@/hooks/useIndustries";
 import heroPort from "@/assets/hero-port.webp";
@@ -84,6 +98,8 @@ function Label({
   );
 }
 
+const INDUSTRY_ICONS: Record<string, LucideIcon> = { Ship, HardHat, Landmark, Factory, Warehouse };
+
 export default function IndustryDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { t, isRTL } = useLanguageStore();
@@ -116,113 +132,142 @@ export default function IndustryDetailPage() {
   const name = isAr ? industry.nameAr : industry.nameEn;
   const description = isAr ? industry.descriptionAr : industry.descriptionEn;
   const explanation = isAr ? industry.explanationAr : industry.explanationEn;
+  const Icon = (industry.icon && INDUSTRY_ICONS[industry.icon]) || Factory;
+
+  // Generic capabilities Salada brings to every sector (bilingual).
+  const capabilities = [
+    {
+      Icon: Ruler,
+      title: isAr ? "تصنيع حسب المواصفات" : "Built to Specification",
+      desc: isAr
+        ? "مصمّمة حسب أبعادك ومتطلبات التحميل بدقة."
+        : "Engineered to your exact dimensions and load requirements.",
+    },
+    {
+      Icon: ShieldCheck,
+      title: isAr ? "فولاذ شديد التحمّل" : "Heavy-Duty Steel",
+      desc: isAr
+        ? "هياكل مقاومة للتآكل تتحمّل أصعب بيئات التشغيل."
+        : "Corrosion-resistant builds that endure the toughest environments.",
+    },
+    {
+      Icon: Truck,
+      title: isAr ? "تسليم في الموعد" : "On-Time Delivery",
+      desc: isAr
+        ? "توريد موثوق على مستوى المملكة يبقي عملياتك مستمرة."
+        : "Reliable nationwide supply that keeps your operations moving.",
+    },
+    {
+      Icon: Wrench,
+      title: isAr ? "دعم ما بعد البيع" : "After-Sales Support",
+      desc: isAr
+        ? "خدمة وصيانة متجاوبة تدعم كل وحدة نسلّمها."
+        : "Responsive service and maintenance backing every unit.",
+    },
+  ];
 
   return (
     <Layout>
       <SEOHead title={`${name} | Salada`} description={description} path={`/industries/${id}`} />
 
-      {/* ════════════════════════════════
-          HERO — compact with image (matches Why Salada / Industries)
-      ════════════════════════════════ */}
-      <section className="relative overflow-hidden" dir={isAr ? "rtl" : "ltr"} style={{ minHeight: "260px" }}>
-        <div className="absolute inset-0">
-          <img
-            src={heroPort}
-            alt={name}
-            width={1920}
-            height={1080}
-            className="w-full h-full object-cover object-center max-w-full"
-            style={{ filter: "grayscale(18%) brightness(0.45)" }}
-          />
-          <div className="absolute inset-0" style={{ background: "rgba(8,6,2,0.58)" }} />
-          <div
-            className="absolute bottom-0 inset-x-0"
-            style={{
-              height: "1.5px",
-              background:
-                "linear-gradient(to right, transparent, hsl(var(--primary)/0.45) 25%, hsl(var(--primary)/0.45) 75%, transparent)",
-            }}
-          />
-        </div>
-
-        <div
-          className="industrial-container relative z-10 flex flex-col justify-center py-10 md:py-14"
-          style={{ minHeight: "260px" }}
-        >
-          <div className={`max-w-xl ${isAr ? "text-right ml-auto mr-0" : ""}`}>
-            {/* breadcrumb */}
-            <nav className="page-hero-breadcrumb flex items-center gap-1.5 mb-4">
-              <Link
-                to="/"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "الرئيسية" : "Home"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <Link
-                to="/industries"
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
-              >
-                {isAr ? "القطاعات" : "Industries"}
-              </Link>
-              <span style={{ color: "rgba(255,255,255,0.18)" }}>/</span>
-              <span
-                className="hero-crumb label-text text-label-md uppercase tracking-[0.15em]"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                {name}
-              </span>
-            </nav>
-
-            <h1 className="hero-title-primary font-black uppercase leading-[0.93] tracking-[-0.025em] mb-3 animate-fade-up delay-200">
-              {name}
-            </h1>
-
-            <p
-              className="hero-subtitle leading-relaxed animate-fade-up delay-300"
-              style={{ color: "rgba(255,255,255,0.45)", maxWidth: "36rem" }}
-            >
-              {description}
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* HERO — shared component (Home / Industries / name) */}
+      <PageHero
+        breadcrumbLabel={name}
+        parentLabel={isAr ? "القطاعات" : "Industries"}
+        parentHref="/industries"
+        title={name}
+        description={description}
+      />
 
       {/* ════════════════════════════════
-          HOW WE SERVE — detailed explanation
+          OVERVIEW — explanation + capabilities (RTL-aware, logical alignment)
       ════════════════════════════════ */}
-      {explanation ? (
-        <section className="bg-background border-b border-border py-10 md:py-14" dir={isAr ? "rtl" : "ltr"}>
-          <div className="industrial-container">
-            <Reveal>
-              <div className={isAr ? "text-right" : ""}>
-                <Label text={isAr ? "كيف نخدم هذا القطاع" : "How We Serve This Industry"} isAr={isAr} />
+      <section className="bg-background border-b border-border section-pad" dir={isAr ? "rtl" : "ltr"}>
+        <div className="industrial-container">
+          <div className="grid items-start gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+            {/* Lead + explanation */}
+            <Reveal className="min-w-0">
+              <div className="text-start">
+                <div className="mb-5 flex items-center gap-4">
+                  <span
+                    aria-hidden
+                    className="flex h-14 w-14 shrink-0 items-center justify-center bg-primary/10 text-primary"
+                  >
+                    <Icon className="h-7 w-7" />
+                  </span>
+                  <Label text={isAr ? "كيف نخدم هذا القطاع" : "How We Serve This Industry"} isAr={isAr} />
+                </div>
+
                 <p
-                  className="leading-relaxed"
-                  style={{
-                    fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
-                    color: "hsl(var(--foreground))",
-                    fontWeight: 500,
-                    maxWidth: "42rem",
-                  }}
+                  className="mb-5 leading-snug text-foreground"
+                  style={{ fontSize: "clamp(1.15rem, 2vw, 1.5rem)", fontWeight: 700, maxWidth: "40rem" }}
                 >
-                  {explanation}
+                  {description}
                 </p>
-                <Link
-                  to="/industries"
-                  className={`hero-inline-cta inline-flex items-center gap-2 mt-5 label-text text-label-md uppercase tracking-[0.18em] transition-colors duration-200 hover:opacity-75 ${isAr ? "flex-row-reverse" : ""}`}
+
+                {explanation ? (
+                  <p
+                    className="leading-relaxed text-muted-foreground"
+                    style={{ fontSize: "clamp(0.92rem, 1.4vw, 1.05rem)", lineHeight: 1.85, maxWidth: "42rem" }}
+                  >
+                    {explanation}
+                  </p>
+                ) : null}
+
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <Link to="/contact?type=quote" className="btn-primary w-full sm:w-auto">
+                    <span>{t("cta.getQuote")}</span>
+                    <ArrowRight className={`h-3.5 w-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  </Link>
+                  <Link
+                    to="/industries"
+                    className="hero-inline-cta inline-flex items-center gap-2 label-text text-label-md uppercase tracking-[0.18em] transition-colors duration-200 hover:opacity-75"
+                    style={{ color: "hsl(var(--primary))" }}
+                  >
+                    {isAr ? "كل القطاعات" : "All Industries"}
+                    <ArrowRight className={`h-3.5 w-3.5 ${isAr ? "rotate-180" : ""}`} />
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Capabilities card */}
+            <Reveal delay={120} className="min-w-0">
+              <div className="border border-border bg-secondary/30 p-6 md:p-7">
+                <span
+                  className="mb-5 block label-text text-label-md uppercase tracking-[0.22em] text-start"
                   style={{ color: "hsl(var(--primary))" }}
                 >
-                  {isAr ? "كل القطاعات" : "All Industries"}
-                  <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
+                  {isAr ? "ما الذي نقدّمه" : "What We Provide"}
+                </span>
+                <ul className="flex flex-col gap-5">
+                  {capabilities.map((cap) => (
+                    <li key={cap.title} className="flex items-start gap-3.5 text-start">
+                      <span
+                        aria-hidden
+                        className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center border border-primary/30 bg-primary/10 text-primary"
+                      >
+                        <cap.Icon className="h-4 w-4" />
+                      </span>
+                      <div className="min-w-0">
+                        <span className="block text-foreground" style={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                          {cap.title}
+                        </span>
+                        <span
+                          className="mt-0.5 block text-muted-foreground"
+                          style={{ fontWeight: 400, fontSize: "0.82rem", lineHeight: 1.6 }}
+                        >
+                          {cap.desc}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           </div>
-        </section>
-      ) : null}
+        </div>
+      </section>
 
       {/* ════════════════════════════════
           CTA — dark (shared)

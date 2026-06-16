@@ -401,10 +401,17 @@ export default function ShopPage() {
                 ))}
               </div>
             </div>
-            {/* Mobile */}
-            <div className="flex flex-col gap-3 lg:hidden">
+            {/* Mobile — mirrors desktop: grid view = default cards (2-col), list view = compact liner card */}
+            <div
+              className={`lg:hidden ${viewMode === "grid" ? "grid grid-cols-2 gap-3" : "flex flex-col gap-3"}`}
+            >
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} variant="compact" />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  variant={viewMode === "list" ? "compact" : "default"}
+                  dense={viewMode === "grid"}
+                />
               ))}
             </div>
           </>

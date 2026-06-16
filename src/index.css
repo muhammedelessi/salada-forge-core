@@ -726,34 +726,38 @@ nav a.label-text.text-label-md {
 /* ── Page hero: larger breadcrumbs, primary headline (no duplicate white title) ── */
 nav.page-hero-breadcrumb a.hero-crumb,
 nav.page-hero-breadcrumb span.hero-crumb {
-  font-size: 1.125rem !important;
+  font-size: 0.72rem !important;
   font-weight: 600 !important;
+  letter-spacing: 0.22em !important;
 }
 
 [dir="rtl"] nav.page-hero-breadcrumb a.hero-crumb,
 [dir="rtl"] nav.page-hero-breadcrumb span.hero-crumb {
-  font-size: 1.1875rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
 }
 
 h1.hero-title-primary {
-  color: hsl(var(--primary)) !important;
-  font-weight: 700 !important;
-  font-size: clamp(1.35rem, 3.8vw, 2.1rem) !important;
-  line-height: 1.15 !important;
-  letter-spacing: 0.04em !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.015em !important;
   text-transform: uppercase !important;
-  margin-bottom: 0.65rem !important;
+  margin-bottom: 0.85rem !important;
 }
 
 [dir="rtl"] h1.hero-title-primary {
   font-family: 'HelveticaArabic', sans-serif !important;
   font-weight: 700 !important;
-  letter-spacing: 0.02em !important;
+  letter-spacing: 0 !important;
+  line-height: 1.18 !important;
 }
 
 p.hero-subtitle {
-  font-size: 1rem !important;
-  line-height: 1.65 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
   font-weight: 400 !important;
 }
 
@@ -1117,9 +1121,12 @@ html[dir="rtl"] div.font-black {
 }
 
 /* Bold headings — slightly smaller so they sit closer to the larger body text */
-[dir="rtl"] h1,
-[dir="rtl"] h1.hero-title-primary {
+[dir="rtl"] h1 {
   font-size: clamp(1.45rem, 2.6vw, 1.85rem) !important;
+}
+/* Page hero title — Arabic scale */
+[dir="rtl"] h1.hero-title-primary {
+  font-size: clamp(1.4rem, 2.8vw, 1.95rem) !important;
 }
 [dir="rtl"] h2,
 [dir="rtl"] h2.home-vision-title,
