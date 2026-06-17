@@ -9,6 +9,7 @@ import { translations } from "@/i18n/translations";
 import { supabase } from "@/integrations/supabase/client";
 import { Link, useSearchParams } from "react-router-dom";
 import { useProducts, useCategories } from "@/hooks/useProducts";
+import type { Product } from "@/types";
 import { PageHero } from "@/components/PageHero";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -175,15 +176,25 @@ export default function ContactPage() {
   }, [formData, selectedProductIds, productNotListed, customProduct]);
 
   const searchQuery = productSearch.trim().toLowerCase();
-  const filteredProducts = (products || []).filter((p) => {
-    if (drawerCategory && p.category !== drawerCategory) return false;
-    if (!searchQuery) return true;
-    return (
-      productTitle(p).toLowerCase().includes(searchQuery) ||
-      p.sku.toLowerCase().includes(searchQuery) ||
-      p.category.toLowerCase().includes(searchQuery)
-    );
-  });
+  // Size in feet parsed from title/slug/sku (e.g. "40FT" → 40); unknown sizes sort last.
+  const feetOf = (p: Product) => {
+    const m = `${p.title} ${p.slug} ${p.sku}`.match(/(\d+)\s*ft/i);
+    return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+  };
+  const FEET_SORTED_CATEGORIES = ["storage-containers", "land-shipping-container", "iso-shipping-container"];
+
+  const filteredProducts = (products || [])
+    .filter((p) => {
+      if (drawerCategory && p.category !== drawerCategory) return false;
+      if (!searchQuery) return true;
+      return (
+        productTitle(p).toLowerCase().includes(searchQuery) ||
+        p.sku.toLowerCase().includes(searchQuery) ||
+        p.category.toLowerCase().includes(searchQuery)
+      );
+    })
+    // Container categories: order by size (feet), smallest first.
+    .sort((a, b) => (FEET_SORTED_CATEGORIES.includes(drawerCategory) ? feetOf(a) - feetOf(b) : 0));
   const selectedProducts = (products || []).filter((p) => selectedProductIds.includes(p.id));
   // The "show selected" button switches the drawer list to only the chosen products.
   const displayedProducts = showSelectedOnly ? selectedProducts : filteredProducts;

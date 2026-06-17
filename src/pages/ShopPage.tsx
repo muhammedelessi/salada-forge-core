@@ -84,11 +84,26 @@ export default function ShopPage() {
       const range = priceRanges.find((r) => r.id === priceRange);
       if (range) filtered = filtered.filter((p) => p.price >= range.min && p.price < range.max);
     }
+    // Size in feet parsed from the title/slug/sku (e.g. "40FT" → 40); unknown sizes sort last.
+    const feet = (p: (typeof filtered)[number]) => {
+      const m = `${p.title} ${p.slug} ${p.sku}`.match(/(\d+)\s*ft/i);
+      return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER;
+    };
     switch (sortBy) {
       case "price-asc":  filtered.sort((a, b) => a.price - b.price); break;
       case "price-desc": filtered.sort((a, b) => b.price - a.price); break;
       case "name-asc":   filtered.sort((a, b) => a.title.localeCompare(b.title)); break;
       case "name-desc":  filtered.sort((a, b) => b.title.localeCompare(a.title)); break;
+      default:
+        // Default order: container categories sorted by size (feet), smallest first.
+        if (
+          activeCategory === "storage-containers" ||
+          activeCategory === "land-shipping-container" ||
+          activeCategory === "iso-shipping-container"
+        ) {
+          filtered.sort((a, b) => feet(a) - feet(b));
+        }
+        break;
     }
     return filtered;
   }, [products, activeCategory, searchQuery, sortBy, priceRange]);
