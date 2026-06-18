@@ -13,6 +13,7 @@ import heroImage from "@/assets/hero-logistics.webp";
 import seaImage from "@/assets/solutions-sea.webp";
 import storageImage from "@/assets/solutions-storage.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
+import landFreightImage from "@/assets/solutions-land-freight.jpg";
 
 /** Industry icon name (from DB) → Lucide component. */
 const INDUSTRY_ICONS: Record<string, LucideIcon> = { Ship, HardHat, Landmark, Factory, Warehouse };
@@ -72,7 +73,7 @@ export default function HomePage() {
   const isAr = isRTL();
 
   const solutions = [
-    { num: "01", href: "/solutions#land",    title: t("solutions.landFreight"), desc: t("solutions.landFreightDesc"), image: lashingImage },
+    { num: "01", href: "/solutions#land",    title: t("solutions.landFreight"), desc: t("solutions.landFreightDesc"), image: landFreightImage },
     { num: "02", href: "/solutions#sea",     title: t("solutions.seaFreight"),  desc: t("solutions.seaFreightDesc"), image: seaImage     },
     { num: "03", href: "/solutions#air",     title: t("solutions.airFreight"),  desc: t("solutions.airFreightDesc"), image: heroImage    },
     { num: "04", href: "/solutions#storage", title: t("solutions.storage"),     desc: t("solutions.storageDesc"),    image: storageImage },

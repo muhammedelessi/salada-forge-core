@@ -9,7 +9,9 @@ import { PartnerCTA } from "@/components/PartnerCTA";
 import { PageHero } from "@/components/PageHero";
 import heroPort from "@/assets/hero-port.webp";
 import lashingImage from "@/assets/divisions-lashing.webp";
-import seaImage from "@/assets/solutions-sea.webp";
+import logisticsImage from "@/assets/hero-logistics.webp";
+import storageImage from "@/assets/solutions-storage.webp";
+import landFreightImage from "@/assets/solutions-land-freight.jpg";
 
 /* ── Scroll reveal ── */
 function Reveal({
@@ -177,11 +179,16 @@ export default function WhySaladaPage() {
   const isAr = isRTL();
 
   const strengths = [
-    { num: "01", title: t("why.onePartner"), desc: t("why.onePartnerDesc"), image: lashingImage },
-    { num: "02", title: t("why.rapidDeployment"), desc: t("why.rapidDeploymentDesc"), image: seaImage },
-    { num: "03", title: t("why.nationalCoverage"), desc: t("why.nationalCoverageDesc"), image: heroPort },
-    { num: "04", title: t("why.compliance"), desc: t("why.complianceDesc"), image: lashingImage },
-    { num: "05", title: t("why.localSupply"), desc: t("why.localSupplyDesc"), image: seaImage },
+    // 01 Saudi Manufacturing Advantage — local supply / inventory readiness
+    { num: "01", title: t("why.onePartner"), desc: t("why.onePartnerDesc"), image: storageImage },
+    // 02 Faster Delivery — road transport
+    { num: "02", title: t("why.rapidDeployment"), desc: t("why.rapidDeploymentDesc"), image: landFreightImage },
+    // 03 Quality Control Process — container handling / inspection
+    { num: "03", title: t("why.nationalCoverage"), desc: t("why.nationalCoverageDesc"), image: logisticsImage },
+    // 04 Custom Engineering Capability — large-scale container operations
+    { num: "04", title: t("why.compliance"), desc: t("why.complianceDesc"), image: heroPort },
+    // 05 Industrial Reliability — heavy-duty steel / rugged
+    { num: "05", title: t("why.localSupply"), desc: t("why.localSupplyDesc"), image: lashingImage },
   ];
 
   return (
