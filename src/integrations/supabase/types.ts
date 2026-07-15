@@ -14,102 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      testimonials: {
-        Row: {
-          author_ar: string
-          author_en: string
-          avatar_url: string | null
-          created_at: string
-          id: string
-          is_active: boolean
-          quote_ar: string
-          quote_en: string
-          rating: number
-          role_ar: string | null
-          role_en: string | null
-          sort_order: number
-          updated_at: string
-        }
-        Insert: {
-          author_ar: string
-          author_en: string
-          avatar_url?: string | null
-          created_at?: string
-          id?: string
-          is_active?: boolean
-          quote_ar: string
-          quote_en: string
-          rating?: number
-          role_ar?: string | null
-          role_en?: string | null
-          sort_order?: number
-          updated_at?: string
-        }
-        Update: {
-          author_ar?: string
-          author_en?: string
-          avatar_url?: string | null
-          created_at?: string
-          id?: string
-          is_active?: boolean
-          quote_ar?: string
-          quote_en?: string
-          rating?: number
-          role_ar?: string | null
-          role_en?: string | null
-          sort_order?: number
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      industries: {
-        Row: {
-          created_at: string
-          description_ar: string
-          description_en: string
-          explanation_ar: string | null
-          explanation_en: string | null
-          icon: string | null
-          id: string
-          is_active: boolean
-          name_ar: string
-          name_en: string
-          slug: string
-          sort_order: number
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          description_ar: string
-          description_en: string
-          explanation_ar?: string | null
-          explanation_en?: string | null
-          icon?: string | null
-          id?: string
-          is_active?: boolean
-          name_ar: string
-          name_en: string
-          slug: string
-          sort_order?: number
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          description_ar?: string
-          description_en?: string
-          explanation_ar?: string | null
-          explanation_en?: string | null
-          icon?: string | null
-          id?: string
-          is_active?: boolean
-          name_ar?: string
-          name_en?: string
-          slug?: string
-          sort_order?: number
-          updated_at?: string
-        }
-        Relationships: []
-      }
       categories: {
         Row: {
           created_at: string
@@ -241,6 +145,54 @@ export type Database = {
           start_date?: string | null
           updated_at?: string
           used_count?: number
+        }
+        Relationships: []
+      }
+      industries: {
+        Row: {
+          created_at: string
+          description_ar: string
+          description_en: string
+          explanation_ar: string | null
+          explanation_en: string | null
+          icon: string | null
+          id: string
+          is_active: boolean
+          name_ar: string
+          name_en: string
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description_ar: string
+          description_en: string
+          explanation_ar?: string | null
+          explanation_en?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          name_ar: string
+          name_en: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description_ar?: string
+          description_en?: string
+          explanation_ar?: string | null
+          explanation_en?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          name_ar?: string
+          name_en?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
